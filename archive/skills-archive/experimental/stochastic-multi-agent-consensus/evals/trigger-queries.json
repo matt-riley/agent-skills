@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Poll 7 agents on these options and give me the consensus ranking.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use stochastic consensus to see what 10 agents think about choosing Postgres, SQLite, or D1 for a small internal tool.",
+    "should_trigger": true
+  },
+  {
+    "query": "Spawn 5 agents to independently analyze whether we should ship this change behind a feature flag this week or delay two weeks for more testing, then tell me the vote split.",
+    "should_trigger": true
+  },
+  {
+    "query": "Have three agents debate this architecture choice together.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a structured prompt contract with failure conditions.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what consensus means.",
+    "should_trigger": false
+  }
+]

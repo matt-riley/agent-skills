@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Repository Adapters'
+  short_description: 'Implement or modify database repository adapters. Use when adding repository methods, changing queries, or mapping DB errors to domain errors. Covers the pattern of domain interfaces backed by DB-specific implementations.'
+policy:
+  allow_implicit_invocation: true

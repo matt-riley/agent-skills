@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Code Generation'
+  short_description: "Run and troubleshoot project code generation after detecting the repository's generator contract. Use when changing schema/query/template inputs that feed a generator, or before building/testing if generated output might be stale."
+policy:
+  allow_implicit_invocation: true

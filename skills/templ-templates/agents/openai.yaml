@@ -1,0 +1,5 @@
+interface:
+  display_name: 'templ Templates'
+  short_description: "Edit and troubleshoot server-side HTML templates (.templ files for Go's templ framework), including regeneration and handler wiring. Use when changing UI components, layouts, or page templates."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+[
+  { "query": "Audit my GitHub profile and tell me how to make it look more professional.", "should_trigger": true },
+  { "query": "Set up community health files and issue templates for this repo.", "should_trigger": true },
+  { "query": "We're creating a company .github repo with org defaults and an org profile page.", "should_trigger": true },
+  { "query": "Check these meta descriptions for truncation and rewrite them if needed.", "should_trigger": false },
+  { "query": "Diagnose this failing GitHub Actions run.", "should_trigger": false }
+]

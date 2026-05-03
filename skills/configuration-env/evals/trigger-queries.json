@@ -1,0 +1,30 @@
+[
+  {
+    "query": "The server will not start locally; help me verify the env vars and .env setup.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need to bootstrap a new developer environment from .env.example and validate it safely.",
+    "should_trigger": true
+  },
+  {
+    "query": "Production behaves differently from local. Please review env loading order and config risks.",
+    "should_trigger": true
+  },
+  {
+    "query": "My Worker's D1 binding is missing from wrangler config, but there is no schema or migration change.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up Docker Compose for local Postgres.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a secrets manager from scratch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain the theory behind environment variables.",
+    "should_trigger": false
+  }
+]

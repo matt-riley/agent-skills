@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Reverse Prompt'
+  short_description: 'Sharpen or rewrite a rough request into a repository-grounded brief before research, planning, or implementation. Use when the user explicitly asks for a better prompt, a sharper request, a repo-grounded brief, or a contract-shaped execution brief before the next phase.'
+policy:
+  allow_implicit_invocation: true

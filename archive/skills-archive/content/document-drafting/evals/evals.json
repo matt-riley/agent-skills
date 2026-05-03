@@ -1,0 +1,120 @@
+{
+  "skill_name": "document-drafting",
+  "evals": [
+    {
+      "id": "proposal-outline-first",
+      "prompt": "I need to write a proposal for adding a rate-limiting feature to our API. I have some rough notes but no structure yet.",
+      "expected_behavior": "Confirms document type and audience, proposes a section outline, and waits for agreement before drafting body content.",
+      "assertions": [
+        "Confirms or asks about the intended audience",
+        "Proposes a section outline before writing body content",
+        "Does not front-load a full draft without outline confirmation"
+      ],
+      "files": []
+    },
+    {
+      "id": "rfc-structure",
+      "prompt": "Help me write an RFC for introducing a new caching layer. The audience is internal engineers who already know the current architecture.",
+      "expected_behavior": "Scopes the document type as RFC, acknowledges the known-audience context, and proposes an RFC-appropriate section structure (motivation, proposal, alternatives, drawbacks) before drafting.",
+      "assertions": [
+        "Identifies the document type as RFC",
+        "Proposes a section structure appropriate for an RFC",
+        "Does not draft body sections before outline is confirmed"
+      ],
+      "files": []
+    },
+    {
+      "id": "adr-decision-framing",
+      "prompt": "Draft an ADR for our decision to switch from PostgreSQL to SQLite for local developer environments.",
+      "expected_behavior": "Scopes the document type as an ADR/decision doc, proposes standard ADR sections (context, decision, consequences/tradeoffs), and confirms the framing before filling in body content.",
+      "assertions": [
+        "Identifies the document type as ADR or decision doc",
+        "Proposes sections covering context, decision, and consequences",
+        "Does not conflate the decision doc with a migration plan or implementation task list"
+      ],
+      "files": []
+    },
+    {
+      "id": "migration-guide-vs-plan",
+      "prompt": "Write a migration guide for upgrading from v1 to v2 of our SDK.",
+      "expected_behavior": "Treats this as an audience-facing prose guide (what changed, how to update code, examples), not a task breakdown with owners and dependencies. Proposes guide sections before drafting.",
+      "assertions": [
+        "Frames the output as prose guidance for SDK consumers, not a task plan",
+        "Does not produce an owner/dependency breakdown",
+        "Proposes section structure before writing body content"
+      ],
+      "files": []
+    },
+    {
+      "id": "fresh-reader-pass",
+      "prompt": "We have a complete draft of an RFC. Do a final review pass before I send it out.",
+      "expected_behavior": "Recognizes that no draft was attached and asks the user to provide the RFC content before proceeding with a review pass.",
+      "assertions": [
+        "Does not attempt a review pass without the actual draft content",
+        "Asks the user to share or paste the RFC draft",
+        "Does not fabricate or assume draft content"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-readability",
+      "prompt": "This README is already written. Can you do a readability audit and tell me the Flesch score?",
+      "expected_behavior": "Defers to readability-check rather than handling the readability audit itself.",
+      "assertions": [
+        "Recognizes this is a readability audit, not a drafting task",
+        "Suggests or defers to readability-check"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-metadata-check",
+      "prompt": "Is my npm package description too long? Does it fit within the npm character limit?",
+      "expected_behavior": "Defers to metadata-check rather than treating this as a document drafting request.",
+      "assertions": [
+        "Recognizes this is a metadata string review, not document drafting",
+        "Suggests or defers to metadata-check"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-reverse-prompt",
+      "prompt": "I have a vague ask. Can you rewrite it into a sharper, more actionable prompt?",
+      "expected_behavior": "Defers to reverse-prompt rather than drafting a document.",
+      "assertions": [
+        "Recognizes this is prompt sharpening, not document drafting",
+        "Suggests or defers to reverse-prompt"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-prompt-contracts",
+      "prompt": "Before we implement this feature, define the GOAL, CONSTRAINTS, FORMAT, and FAILURE conditions as a task contract.",
+      "expected_behavior": "Defers to prompt-contracts rather than drafting a document.",
+      "assertions": [
+        "Recognizes this is a task contract definition, not document drafting",
+        "Suggests or defers to prompt-contracts"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-workflow-contracts",
+      "prompt": "Create a stable planner handoff artifact for this implementation so reviewers can approve the plan.",
+      "expected_behavior": "Defers to workflow-contracts rather than treating this as a document drafting task.",
+      "assertions": [
+        "Recognizes this is a structured workflow handoff artifact, not a prose document",
+        "Suggests or defers to workflow-contracts"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-plan-review-migration",
+      "prompt": "Write a migration plan with owners, task dependencies, rollout phases, and acceptance criteria for the DB upgrade.",
+      "expected_behavior": "Recognizes this is a structured task plan, not a migration guide, and defers to plan-review.",
+      "assertions": [
+        "Distinguishes between a migration plan (task breakdown) and a migration guide (audience-facing prose)",
+        "Suggests or defers to plan-review for the task breakdown"
+      ],
+      "files": []
+    }
+  ]
+}

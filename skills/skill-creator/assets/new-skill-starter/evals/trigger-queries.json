@@ -1,0 +1,18 @@
+[
+  {
+    "query": "Help me <primary task this skill owns>.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need <adjacent in-scope variant>.",
+    "should_trigger": true
+  },
+  {
+    "query": "Explain <broad concept> in general.",
+    "should_trigger": false
+  },
+  {
+    "query": "Use an existing skill to solve this right now instead of creating a reusable workflow.",
+    "should_trigger": false
+  }
+]

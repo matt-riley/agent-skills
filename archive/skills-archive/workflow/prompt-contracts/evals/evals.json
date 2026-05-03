@@ -1,0 +1,29 @@
+{
+  "skill_name": "prompt-contracts",
+  "evals": [
+    {
+      "id": "contract-before-auth-refactor",
+      "prompt": "Before we touch this auth refactor, write a prompt contract with goal, constraints, format, and failure conditions, then tell me how you would validate it.",
+      "expected_behavior": "Produces a structured four-part contract, keeps the clauses concrete and testable, and explains how the failure conditions or success criteria would be verified.",
+      "assertions": [
+        "Uses GOAL, CONSTRAINTS, FORMAT, and FAILURE explicitly",
+        "Keeps the clauses concrete and testable",
+        "Mentions validation or verification against the contract",
+        "Avoids turning the answer into implementation work only"
+      ],
+      "files": []
+    },
+    {
+      "id": "definition-of-done",
+      "prompt": "What does done look like for this rollout plan? I want a structured contract, not code.",
+      "expected_behavior": "Recognizes that the user wants a contract-only deliverable and returns a definition of done structured around the four contract sections.",
+      "assertions": [
+        "Treats the task as contract authoring rather than implementation",
+        "Defines explicit failure conditions",
+        "Provides a durable definition of done",
+        "Keeps the format structured rather than free-form"
+      ],
+      "files": []
+    }
+  ]
+}

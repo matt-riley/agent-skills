@@ -1,0 +1,29 @@
+{
+  "skill_name": "stochastic-multi-agent-consensus",
+  "evals": [
+    {
+      "id": "database-option-poll",
+      "prompt": "Poll 5 agents on whether we should use Postgres, SQLite, or D1 for this internal tool, then tell me the consensus, main disagreement, and the most interesting outlier.",
+      "expected_behavior": "Uses independent multi-agent polling with an aggregatable schema and reports consensus, disagreement, and outliers separately.",
+      "assertions": [
+        "Uses independent polling rather than multi-round debate",
+        "Defines or implies a structured aggregation output",
+        "Reports consensus and disagreement separately",
+        "Mentions an outlier or high-variance idea"
+      ],
+      "files": []
+    },
+    {
+      "id": "feature-flag-vote",
+      "prompt": "What do 7 agents think about shipping this behind a feature flag? Give me the vote split and the strongest case on each side.",
+      "expected_behavior": "Treats the task as a binary poll with independent samples and aggregates the split plus the strongest arguments from each side.",
+      "assertions": [
+        "Frames the task as independent multi-agent sampling",
+        "Returns a vote split or equivalent tally",
+        "Summarizes the strongest case on each side",
+        "Avoids presenting the result as a single-agent opinion"
+      ],
+      "files": []
+    }
+  ]
+}

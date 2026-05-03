@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Database Migrations'
+  short_description: "Create, apply, inspect, and recover database schema migrations after detecting the repository's migration contract. Use when changing persistent schema, adding indexes/constraints, or troubleshooting migration state."
+policy:
+  allow_implicit_invocation: true

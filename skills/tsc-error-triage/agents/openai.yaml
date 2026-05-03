@@ -1,0 +1,5 @@
+interface:
+  display_name: 'TSC Error Triage'
+  short_description: 'Diagnose and resolve TypeScript compiler errors by finding the smallest root-cause fix before editing call sites.'
+policy:
+  allow_implicit_invocation: true

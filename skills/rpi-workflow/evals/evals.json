@@ -1,0 +1,27 @@
+{
+  "skill_name": "rpi-workflow",
+  "evals": [
+    {
+      "id": "non-trivial-change",
+      "prompt": "Use a research -> plan -> implement -> validate workflow for this non-trivial change and keep context disciplined.",
+      "expected_behavior": "The response sequences the work into phases, keeps research read-only, and requires validation before completion.",
+      "assertions": [
+        "Mentions the phased RPI-V flow explicitly.",
+        "Keeps research read-only before implementation.",
+        "Mentions validation before completion."
+      ],
+      "files": []
+    },
+    {
+      "id": "phase-boundaries",
+      "prompt": "I want to work one phase at a time and preserve artifacts between phases. What is the workflow?",
+      "expected_behavior": "The response explains artifact persistence, phase boundaries, and phase-specific verification instead of blurring the steps together.",
+      "assertions": [
+        "Mentions artifact persistence or checkpoints.",
+        "Mentions one phase at a time.",
+        "Mentions verification per phase."
+      ],
+      "files": []
+    }
+  ]
+}

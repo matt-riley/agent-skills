@@ -1,0 +1,43 @@
+{
+  "skill_name": "skill-creator",
+  "evals": [
+    {
+      "id": "new-skill-package",
+      "prompt": "Help me create a new skill, including frontmatter, references, eval files, and validation guidance.",
+      "expected_behavior": "The response explains the standard skill shape, frontmatter, progressive disclosure, eval schemas, no-script-by-default guidance, and offers a concrete starter scaffold with target-skill validation guidance.",
+      "assertions": [
+        "Mentions frontmatter and when-to-use descriptions.",
+        "Mentions references or evals and progressive disclosure.",
+        "Mentions scripts as selective rather than default.",
+        "Points to or provides a starter scaffold with SKILL.md, references, and eval files.",
+        "Separates catalog-wide validation from target-skill eval commands.",
+        "Uses the new skill path rather than hardcoded skill-creator eval paths when describing validation."
+      ],
+      "files": []
+    },
+    {
+      "id": "upgrade-existing-skill",
+      "prompt": "Update an existing skill so it has better metadata, examples, and trigger coverage.",
+      "expected_behavior": "The response covers frontmatter metadata, example coverage, trigger and anti-trigger wording, evals, validation tooling, and iteration based on real execution.",
+      "assertions": [
+        "Mentions metadata or versioning.",
+        "Mentions examples in SKILL.md or representative prompts in support files.",
+        "Mentions trigger wording or anti-triggers.",
+        "Mentions evals and validation tooling.",
+        "Mentions iterative improvement using real tasks."
+      ],
+      "files": []
+    },
+    {
+      "id": "surface-selection",
+      "prompt": "I have reusable workflow guidance. Should this be a skill, instructions, an agent, or an extension?",
+      "expected_behavior": "The response compares nearby customization surfaces before assuming the answer is a skill and recommends the minimal useful package when a skill is appropriate.",
+      "assertions": [
+        "Compares the skill option against at least one nearby surface such as instructions, agents, extensions, or MCP.",
+        "Mentions deciding whether the guidance belongs in a skill before drafting content.",
+        "Mentions keeping the package minimal unless references, evals, scripts, or assets clearly add value."
+      ],
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Cloudflare D1 Migrations'
+  short_description: 'Use when a repository uses Cloudflare D1 and the task is to create, inspect, apply, baseline, or recover schema migrations or schema state across local, preview, or remote databases; do not use for binding-only setup or config drift, or for runtime query tuning.'
+policy:
+  allow_implicit_invocation: true

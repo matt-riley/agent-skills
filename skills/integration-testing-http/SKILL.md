@@ -1,0 +1,91 @@
+---
+name: integration-testing-http
+description: Run and extend end-to-end HTTP integration tests for a server. Use when
+  changing handlers, middleware, request/response shapes, authentication, or API
+  contracts. This is a specialist overlay on top of the broader testing workflow.
+license: Proprietary
+compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash plus repository test commands for
+  HTTP integration coverage.
+metadata:
+  owner: mattriley
+  version: 1.0.0
+  maturity: draft
+---
+
+# Integration testing (HTTP)
+
+## Use this skill when
+
+- Adding or changing HTTP handlers, middleware, auth enforcement, or request/response shapes.
+- Adding end-to-end test coverage for an endpoint contract (status codes, validation, side effects).
+- Debugging integration-test failures specific to HTTP behaviour rather than domain logic.
+
+## Do not use this skill when
+
+- The failure is clearly at the unit-test layer (use `testing-workflows`).
+- The change is to the OpenAPI spec only with no handler work (use `http-api-openapi`).
+- Compile errors come from stale generated code (run `code-generation` first).
+
+## Inputs to gather
+
+- The endpoint(s) being asserted and their documented status codes.
+- Whether auth is required and the shape of the token/cookie under test.
+- The integration-test runner entrypoint for this repository and its DB bootstrap.
+
+## First move
+
+- Run the targeted integration test with `-v` and read the real request/response output before proposing fixes.
+
+## Catalog position
+
+- Start with `testing-workflows` for the default test/debug loop.
+- Use this when the main risk is HTTP behaviour: endpoint contracts, auth enforcement, validation, or response shapes.
+- Pair with `http-api-openapi` when handler changes and spec changes must stay in sync.
+
+## Run
+
+```bash
+make test-integration
+# or targeted:
+go test -v -run TestE2E ./path/to/server/pkg/
+```
+
+## What integration tests must assert
+
+For every endpoint touched, verify:
+
+| Concern            | What to assert                                       |
+| ------------------ | ---------------------------------------------------- |
+| Status codes       | Happy path + all documented error cases              |
+| Auth               | Unauthenticated → 401; invalid token → 401 or 403    |
+| Request validation | Missing/invalid fields → 400 with error body         |
+| Response schema    | Required fields present, correct types               |
+| Side effects       | DB state, events, or derived data match expectations |
+
+## Adding tests for a new or changed endpoint
+
+1. Update the OpenAPI spec and validate it.
+2. Add integration tests covering:
+   - Successful request (happy path)
+   - Auth failure (missing token + invalid token, if the endpoint requires auth)
+   - Input validation failure (malformed or missing required fields)
+   - Edge cases specific to the endpoint's logic
+3. Run `make test-integration` — all must pass before merging.
+
+## Guardrails
+
+- Integration tests use a real or in-memory DB — do not mock the DB layer in integration tests.
+- Each test or suite must start from a clean, isolated state — never share mutable state between tests.
+- Tests must be order-independent; never rely on execution order.
+- Assert auth enforcement explicitly for every endpoint that requires it.
+
+## Debugging failures
+
+1. If compile errors appear in generated packages → `make generate`, then retry.
+2. Run with `-v` to see full request/response output for the failing test.
+3. If DB-related failures occur → verify the test DB is initialised and migrations are applied.
+
+## Support files
+
+- Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
+- Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

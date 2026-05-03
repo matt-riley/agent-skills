@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Review the current implementation and tell me if it is ready to merge.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run an implementation review with named reviewers and block until every reviewer approves.",
+    "should_trigger": true
+  },
+  {
+    "query": "I finished the changes; stress-test the diff for regressions, missing validation, and rollout risk.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create an implementation plan for a feature.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain how pull request reviews work in general.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write new code for the feature instead of reviewing it.",
+    "should_trigger": false
+  }
+]

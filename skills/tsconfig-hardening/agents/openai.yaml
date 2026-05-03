@@ -1,0 +1,5 @@
+interface:
+  display_name: 'TSConfig Hardening'
+  short_description: 'Tighten and rationalize TypeScript configuration safely, especially when enabling stricter compiler checks incrementally.'
+policy:
+  allow_implicit_invocation: true

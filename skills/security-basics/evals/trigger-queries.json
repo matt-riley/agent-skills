@@ -1,0 +1,26 @@
+[
+  {
+    "query": "I am touching authentication and logging code; apply the security guardrails before I ship this.",
+    "should_trigger": true
+  },
+  {
+    "query": "Quick security pass on this request handling and sensitive endpoint change.",
+    "should_trigger": true
+  },
+  {
+    "query": "I changed cookies, CORS, and auth. Please look for privacy/security footguns.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a full threat model document for the company.",
+    "should_trigger": false
+  },
+  {
+    "query": "Implement a whole auth system from scratch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review a feature plan rather than code or security-sensitive behaviour.",
+    "should_trigger": false
+  }
+]

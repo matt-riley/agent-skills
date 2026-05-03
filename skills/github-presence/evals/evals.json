@@ -1,0 +1,38 @@
+{
+  "skill_name": "github-presence",
+  "evals": [
+    {
+      "id": "personal-profile-recruiter-focused",
+      "prompt": "I want to set up my GitHub profile to look good for recruiters. My username is 'jchen-dev'. I'm a full-stack developer at a fintech startup, working mostly with React, Node.js, and PostgreSQL. I want to seem professional but approachable.",
+      "expected_behavior": "Recognizes this as profile-mode GitHub presence work, accounts for personal profile surfaces, and includes README, bio, and pinned-repository guidance tailored to recruiter-facing positioning.",
+      "assertions": [
+        "Treats the task as GitHub profile work rather than repository-only work",
+        "Accounts for the personal profile README surface",
+        "Includes bio and pinned-repository recommendations"
+      ],
+      "files": []
+    },
+    {
+      "id": "organization-defaults",
+      "prompt": "We're setting up our company's GitHub org. We need default community health files, issue templates, and a good org profile page in a .github repository.",
+      "expected_behavior": "Recognizes org-defaults mode, recommends the shared .github repository surfaces, and includes both templates and org profile guidance.",
+      "assertions": [
+        "Distinguishes org-wide defaults from a single repository",
+        "Includes community health files and templates",
+        "Mentions the organization profile README surface"
+      ],
+      "files": []
+    },
+    {
+      "id": "repo-open-source-polish",
+      "prompt": "I just open-sourced a Python CLI tool called 'taskflow'. The repo has a basic README and a LICENSE but nothing else. Can you make it look professional?",
+      "expected_behavior": "Handles this as repository-mode GitHub presence work, audits README and community-file gaps, and recommends repo-surface improvements tailored to a small open-source project.",
+      "assertions": [
+        "Treats the task as repository presentation and health-file work",
+        "Identifies missing README-adjacent and community-health surfaces",
+        "Does not confuse the repo task with profile optimization"
+      ],
+      "files": []
+    }
+  ]
+}

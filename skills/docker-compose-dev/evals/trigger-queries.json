@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Spin up the app plus database locally with Docker Compose so I can reproduce production-like behavior.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me bring up the compose stack and verify the service is healthy.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need a local multi-service environment instead of mocks. Use the repo compose workflow.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a Kubernetes deployment manifest.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what containers are.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add a database migration for a new table.",
+    "should_trigger": false
+  }
+]

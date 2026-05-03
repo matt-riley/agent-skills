@@ -1,0 +1,26 @@
+[
+  {
+    "query": "This repo uses forward-only migrations. I need to add an index and want the safe apply/recovery workflow.",
+    "should_trigger": true
+  },
+  {
+    "query": "Please help me troubleshoot a migration that is stuck halfway through.",
+    "should_trigger": true
+  },
+  {
+    "query": "I changed persistent schema and need to create and apply the migration the way this repo expects.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a brand new database schema from scratch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Backfill existing rows but do not change schema or migration files.",
+    "should_trigger": false
+  },
+  {
+    "query": "Tune a slow SQL query without changing schema.",
+    "should_trigger": false
+  }
+]

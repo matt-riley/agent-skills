@@ -1,0 +1,27 @@
+{
+  "skill_name": "testing-workflows",
+  "evals": [
+    {
+      "id": "debug-test-failure",
+      "prompt": "My Go tests are failing after a generated-code change. What is the right debugging sequence?",
+      "expected_behavior": "The response starts with generation freshness, then isolates the failing test path, then checks integration/database concerns as needed.",
+      "assertions": [
+        "Mentions generation before deeper debugging when relevant.",
+        "Mentions isolating a specific test or package.",
+        "Mentions DB or integration setup for integration failures."
+      ],
+      "files": []
+    },
+    {
+      "id": "new-feature-test-expectations",
+      "prompt": "I added a new feature in domain, repository, and HTTP layers. What test coverage should I expect?",
+      "expected_behavior": "The response maps expectations across domain/service, repository, and HTTP layers with order-independent test discipline.",
+      "assertions": [
+        "Mentions multiple test layers.",
+        "Mentions order-independent or isolated tests.",
+        "Mentions new features require tests before merge."
+      ],
+      "files": []
+    }
+  ]
+}

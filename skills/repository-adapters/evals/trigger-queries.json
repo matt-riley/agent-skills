@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Add a new repository method in the DB adapter and map DB errors to domain errors correctly.",
+    "should_trigger": true
+  },
+  {
+    "query": "I changed a query and need to keep the adapter aligned with the domain interface.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me modify the repository adapter without leaking DB-specific details into the domain layer.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a new database schema migration.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write an HTTP handler for this endpoint.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain repository patterns in abstract terms only.",
+    "should_trigger": false
+  }
+]

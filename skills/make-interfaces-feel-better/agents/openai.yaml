@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Make Interfaces Feel Better'
+  short_description: 'Polish existing interfaces when the UI feels off through better radius, shadows, typography, motion, and micro-interactions.'
+policy:
+  allow_implicit_invocation: true

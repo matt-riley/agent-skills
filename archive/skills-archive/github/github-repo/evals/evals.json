@@ -1,0 +1,38 @@
+{
+  "skill_name": "github-repo",
+  "evals": [
+    {
+      "id": "python-cli-open-source-polish",
+      "prompt": "I just open-sourced a Python CLI tool called 'taskflow' that helps manage task pipelines. The repo has a basic README and a LICENSE but nothing else. Can you make it look professional? Here's what it does: it reads YAML task definitions and runs them in dependency order with parallel execution. Main audience is DevOps engineers. We use pytest for testing and ruff for linting.",
+      "expected_behavior": "Recognizes this as a repository-quality and health-file task, audits the current repo state, and recommends README plus community-file improvements tailored to a Python CLI for DevOps engineers.",
+      "assertions": [
+        "Routes to github-repo rather than github-profile",
+        "Identifies missing README-adjacent and community-health surfaces",
+        "Tailors recommendations to a Python CLI repository"
+      ],
+      "files": []
+    },
+    {
+      "id": "org-github-repo-defaults",
+      "prompt": "We're setting up our company's GitHub org (called 'acme-dev'). We need default community health files, issue templates, and a nice org profile page. We build developer tools — our main products are an API gateway and a monitoring SDK. We have about 15 public repos.",
+      "expected_behavior": "Handles this as an organization-wide repository-health setup task, recommends org-level .github defaults plus profile surfaces, and scopes the work to reusable repository standards.",
+      "assertions": [
+        "Accounts for organization-level .github repository setup",
+        "Includes community health files and template recommendations",
+        "Recognizes that org profile work can be part of a broader repository-quality setup"
+      ],
+      "files": []
+    },
+    {
+      "id": "react-library-audit",
+      "prompt": "Review my repo and tell me what I'm missing. It's a React component library called 'ui-primitives'. We have a README with install instructions and a basic API reference, a LICENSE (MIT), and a CI workflow. No other community files or templates.",
+      "expected_behavior": "Produces a repository-quality audit focused on missing community files, templates, metadata, and polish needed for a React component library.",
+      "assertions": [
+        "Performs an audit rather than only generating boilerplate",
+        "Identifies missing community files and issue or PR template surfaces",
+        "Tailors the guidance to a React component library"
+      ],
+      "files": []
+    }
+  ]
+}
