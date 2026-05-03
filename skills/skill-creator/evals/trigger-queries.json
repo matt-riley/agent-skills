@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Create a new skill for working with Cloudflare D1 migrations and include evals.",
+    "should_trigger": true
+  },
+  {
+    "query": "Update an existing skill so it has better metadata, examples, and trigger coverage.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me build a skill package with references, optional scripts, and a validation plan.",
+    "should_trigger": true
+  },
+  {
+    "query": "Tighten this skill's description, anti-triggers, and example prompts so it routes better.",
+    "should_trigger": true
+  },
+  {
+    "query": "Should this reusable workflow live in a skill, instructions, an agent, or an extension?",
+    "should_trigger": true
+  },
+  {
+    "query": "Use an existing skill to solve a task right now instead of creating one.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add this rule to copilot-instructions.md so it always applies everywhere.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain the history of agent tooling in general.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review an implementation diff rather than authoring a skill.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a named specialist agent for reviewing PRs.",
+    "should_trigger": false
+  }
+]

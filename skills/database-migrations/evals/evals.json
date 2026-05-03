@@ -1,0 +1,27 @@
+{
+  "skill_name": "database-migrations",
+  "evals": [
+    {
+      "id": "new-migration",
+      "prompt": "I need to add a new unique index and want the safe migration workflow.",
+      "expected_behavior": "The response identifies the migration tool, outlines create/apply/rollback steps, and calls out schema-change checklist items.",
+      "assertions": [
+        "Mentions locating the repo migration tool.",
+        "Mentions create and rollback/apply steps.",
+        "Mentions invariants or checklist items for schema changes."
+      ],
+      "files": []
+    },
+    {
+      "id": "migration-state-debug",
+      "prompt": "A migration is in a weird state in development. What should I inspect first?",
+      "expected_behavior": "The response focuses on migration state, tool-specific history/status, and safe recovery rather than ad hoc schema edits.",
+      "assertions": [
+        "Mentions migration state/history.",
+        "Mentions safe recovery or rollback.",
+        "Does not recommend manual schema drift as the first fix."
+      ],
+      "files": []
+    }
+  ]
+}

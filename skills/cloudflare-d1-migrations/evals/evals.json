@@ -1,0 +1,82 @@
+{
+  "skill_name": "cloudflare-d1-migrations",
+  "evals": [
+    {
+      "id": "local-first-migration",
+      "prompt": "This Workers repo uses Cloudflare D1. I need to add a migration, validate it against the persisted local dev database, then promote it safely. What should I inspect and what command sequence should I expect?",
+      "expected_behavior": "The response anchors on Wrangler D1 config, uses the D1 migration commands in local-first order, and treats D1 migrations as forward-only.",
+      "assertions": [
+        "Mentions inspecting the D1 binding plus migrations_dir or migrations_table from Wrangler config.",
+        "Mentions wrangler d1 migrations create/list/apply with --local before --remote, including --persist-to when local persistence matters.",
+        "States that D1 should use corrective forward migrations rather than down migrations or editing applied files."
+      ],
+      "files": []
+    },
+    {
+      "id": "preview-and-custom-ledger",
+      "prompt": "This Cloudflare Workers repo has two D1 databases. The one I need has a preview_database_id, a custom migrations_dir, and a custom migrations_table. I want the safe promotion order for a new migration.",
+      "expected_behavior": "The response identifies the exact D1 contract first, uses the custom migration settings, and promotes through preview before remote when that preview database exists.",
+      "assertions": [
+        "Mentions identifying the exact binding or database_name instead of assuming the only D1 database in the repo.",
+        "Mentions preview_database_id plus custom migrations_dir or migrations_table from Wrangler config.",
+        "Mentions list or apply commands in local then preview then remote order, or explicitly states that preview comes before remote when configured."
+      ],
+      "files": []
+    },
+    {
+      "id": "remote-drift-recovery",
+      "prompt": "A Cloudflare D1 migration looks half-applied remotely while local dev still works. What should I inspect before I repair anything?",
+      "expected_behavior": "The response checks D1's migration ledger and schema, captures a recovery point, and prefers forward recovery over rewriting history.",
+      "assertions": [
+        "Mentions comparing repo migration files with the remote D1 migrations ledger such as d1_migrations or the configured migrations_table.",
+        "Mentions export or time-travel information before destructive repair.",
+        "Treats repair as a new corrective forward migration or explicit restore, not an edit to an applied migration."
+      ],
+      "files": []
+    },
+    {
+      "id": "sqlite-import-pitfalls",
+      "prompt": "I have an existing SQLite dump to import into Cloudflare D1, but I do not want to break future migrations. What are the safe steps and common pitfalls?",
+      "expected_behavior": "The response prefers keeping migration history aligned, calls out D1-specific dump cleanup, and uses Wrangler import/export workflows.",
+      "assertions": [
+        "Prefers running existing migrations first and then a data-only import, or creating an explicit baseline that matches the imported schema before later migrations continue.",
+        "Mentions removing BEGIN TRANSACTION and COMMIT plus the _cf_KV table definition from imported SQL dumps.",
+        "Mentions a D1-specific import/export caveat such as wrangler d1 execute --file, statement length limits, foreign-key ordering, or virtual tables."
+      ],
+      "files": []
+    },
+    {
+      "id": "runtime-bug-not-migration",
+      "prompt": "My Worker has a D1 prepared statement bug at runtime, but schema and migration files are unchanged. How should I debug it?",
+      "expected_behavior": "The response recognizes this is not a migration or schema-state task and avoids prescribing the D1 migration workflow.",
+      "assertions": [
+        "States that this is not a migration or schema-state problem when schema and migration files are unchanged.",
+        "Does not prescribe wrangler d1 migrations create or apply as the main path.",
+        "Focuses on runtime or query debugging rather than the D1 migration ledger."
+      ],
+      "files": []
+    },
+    {
+      "id": "binding-drift-not-migration",
+      "prompt": "The Worker is failing because the D1 binding name and preview_database_id in wrangler.jsonc are wrong, but there is still no migration or schema change. What workflow should I use?",
+      "expected_behavior": "The response routes away from the D1 migration workflow because the problem is config drift rather than schema state.",
+      "assertions": [
+        "States that this is binding or configuration drift rather than a migration or schema-state task.",
+        "Does not prescribe wrangler d1 migrations create or apply as the main fix.",
+        "Redirects toward Wrangler or environment configuration work rather than ledger or schema repair."
+      ],
+      "files": []
+    },
+    {
+      "id": "no-preview-configured",
+      "prompt": "This Worker has one D1 database and no preview_database_id in wrangler config. I need to add a migration, validate it locally, then promote it safely. What order should I use?",
+      "expected_behavior": "The response keeps the workflow environment-aware and does not invent preview steps when no preview database is configured.",
+      "assertions": [
+        "Mentions confirming the D1 binding and whether preview exists in Wrangler config before choosing commands.",
+        "Does not require a preview apply step when no preview database is configured.",
+        "Uses local inspection or apply before remote inspection or apply."
+      ],
+      "files": []
+    }
+  ]
+}

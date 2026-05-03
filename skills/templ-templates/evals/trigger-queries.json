@@ -1,0 +1,26 @@
+[
+  {
+    "query": "I changed a .templ file; help me regenerate and verify the handler wiring.",
+    "should_trigger": true
+  },
+  {
+    "query": "Troubleshoot this server-side templ component and keep the Go wiring in sync.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need to edit a page template and confirm the generated output is correct.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write React JSX for a client-side component.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain HTML templating in abstract terms.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add an OpenAPI endpoint schema.",
+    "should_trigger": false
+  }
+]

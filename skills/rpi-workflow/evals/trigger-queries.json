@@ -1,0 +1,26 @@
+[
+  {
+    "query": "This is a non-trivial refactor; use a research-plan-implement-validate workflow.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need a disciplined RPI-V pass on this feature, with artifacts and validation at each phase.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use a phased workflow so we can research first, then plan, then implement in controlled steps.",
+    "should_trigger": true
+  },
+  {
+    "query": "Just fix this one-line typo right now.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what project management is.",
+    "should_trigger": false
+  },
+  {
+    "query": "Do an implementation review of the current diff only.",
+    "should_trigger": false
+  }
+]

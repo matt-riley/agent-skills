@@ -1,0 +1,27 @@
+{
+  "skill_name": "templ-templates",
+  "evals": [
+    {
+      "id": "templ-edit-flow",
+      "prompt": "I changed a .templ page component. What workflow should I follow to regenerate and verify the app?",
+      "expected_behavior": "The response identifies the template location, regeneration step, handler wiring checks, and verification steps.",
+      "assertions": [
+        "Mentions locating `.templ` files.",
+        "Mentions regeneration.",
+        "Mentions handler wiring or verification."
+      ],
+      "files": []
+    },
+    {
+      "id": "templ-troubleshooting",
+      "prompt": "The generated template code and the rendered page are out of sync after my change. What should I inspect?",
+      "expected_behavior": "The response focuses on template source, generation, and Go wiring instead of generic frontend debugging alone.",
+      "assertions": [
+        "Mentions source template and generated output relationship.",
+        "Mentions Go handler wiring or route integration.",
+        "Mentions common pitfalls or invariants."
+      ],
+      "files": []
+    }
+  ]
+}

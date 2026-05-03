@@ -1,0 +1,58 @@
+{
+  "skill_name": "writing-and-editing",
+  "evals": [
+    {
+      "id": "draft-proposal-outline-first",
+      "prompt": "I need to write a proposal for adding rate limiting to our API. I have rough notes but no structure yet.",
+      "expected_behavior": "Classifies this as draft mode, confirms audience or asks for it, and proposes an outline before drafting body content.",
+      "assertions": [
+        "Treats the task as document drafting rather than readability or metadata review",
+        "Confirms or asks about the intended audience",
+        "Proposes an outline before drafting body sections"
+      ],
+      "files": []
+    },
+    {
+      "id": "readability-audit-mode",
+      "prompt": "This README is already written. Can you run a readability audit and tell me the Flesch score?",
+      "expected_behavior": "Classifies the task as readability-audit mode and reports that a Flesch Reading Ease score plus evidence-based prose feedback are the right outputs.",
+      "assertions": [
+        "Recognizes this as a readability audit rather than a drafting task",
+        "Mentions a Flesch Reading Ease score",
+        "Does not broaden into a plan or prompt rewrite"
+      ],
+      "files": []
+    },
+    {
+      "id": "metadata-audit-mode",
+      "prompt": "Review these repo descriptions and taglines for clarity and truncation fit.",
+      "expected_behavior": "Classifies the task as metadata-audit mode, reviews the strings as short audience-facing fields, and provides concise rewrites when needed.",
+      "assertions": [
+        "Recognizes the task as short-string review",
+        "Mentions truncation or surface fit",
+        "Provides concrete rewrites instead of vague advice"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-plan-review",
+      "prompt": "Create and approval-gate an implementation plan for the migration before anyone edits code.",
+      "expected_behavior": "Routes to plan-review rather than treating the request as writing-and-editing work.",
+      "assertions": [
+        "Recognizes that a reviewer-gated implementation plan belongs to plan-review",
+        "Does not treat the plan request as a normal document drafting task"
+      ],
+      "files": []
+    },
+    {
+      "id": "boundary-reverse-prompt",
+      "prompt": "Rewrite this vague request into a repository-grounded execution brief with clear constraints and checks.",
+      "expected_behavior": "Routes to reverse-prompt rather than handling the request as a reader-facing writing task.",
+      "assertions": [
+        "Recognizes that prompt or execution-brief shaping belongs to reverse-prompt",
+        "Does not pretend the request is a normal document or prose audit"
+      ],
+      "files": []
+    }
+  ]
+}

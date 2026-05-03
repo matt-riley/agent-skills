@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Git Worktrees'
+  short_description: 'Set up and manage isolated git worktrees for parallel tasks, agent lanes, and safer branch isolation. Use when worktree setup or recovery is the real need, not generic planning or implementation guidance.'
+policy:
+  allow_implicit_invocation: true

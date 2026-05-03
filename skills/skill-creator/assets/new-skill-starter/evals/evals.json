@@ -1,0 +1,26 @@
+{
+  "skill_name": "example-skill",
+  "evals": [
+    {
+      "id": "primary-happy-path",
+      "prompt": "Help me <primary task this skill owns>.",
+      "expected_behavior": "The response follows the skill's main workflow, respects its boundaries, and names the right validation step.",
+      "assertions": [
+        "Mentions the core workflow this skill owns.",
+        "Mentions the right validation step.",
+        "Stays inside the intended skill boundary."
+      ],
+      "files": []
+    },
+    {
+      "id": "adjacent-in-scope-variant",
+      "prompt": "I need <adjacent in-scope variant>.",
+      "expected_behavior": "The response still activates the skill because the distinguishing in-scope condition is present.",
+      "assertions": [
+        "Names the condition that keeps the request in scope.",
+        "Avoids broadening into a nearby skill or always-on instruction surface."
+      ],
+      "files": []
+    }
+  ]
+}

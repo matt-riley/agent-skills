@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Run the tests for this Go project and help me debug the failure in the right order.",
+    "should_trigger": true
+  },
+  {
+    "query": "I changed repositories and handlers; what tests should I add before merging?",
+    "should_trigger": true
+  },
+  {
+    "query": "The suite is failing after a schema change. Use the project testing workflow to narrow it down.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design an entirely new test framework.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain TDD in theory only.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review a finished implementation diff.",
+    "should_trigger": false
+  }
+]

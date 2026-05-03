@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Implementation Review'
+  short_description: 'Review completed code changes, diffs, and implementation revisions for the current target repo or workspace. Use when the user asks for code review, implementation review, merge-readiness review, named reviewers, or unanimous approval before work is considered done. This is finished-code review, not plan drafting or automatic feedback execution.'
+policy:
+  allow_implicit_invocation: true

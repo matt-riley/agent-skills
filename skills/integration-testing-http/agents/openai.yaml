@@ -1,0 +1,5 @@
+interface:
+  display_name: 'HTTP Integration Testing'
+  short_description: 'Run and extend end-to-end HTTP integration tests for a server. Use when changing handlers, middleware, request/response shapes, authentication, or API contracts. This is a specialist overlay on top of the broader testing workflow.'
+policy:
+  allow_implicit_invocation: true

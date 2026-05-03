@@ -1,0 +1,18 @@
+[
+  { "query": "Help me draft a proposal for adding a new API to the platform.", "should_trigger": true },
+  { "query": "Write a technical spec for the authentication redesign.", "should_trigger": true },
+  { "query": "I need an RFC for the new caching layer.", "should_trigger": true },
+  { "query": "Help me write the README for this library.", "should_trigger": true },
+  { "query": "Draft an ADR for switching from PostgreSQL to SQLite.", "should_trigger": true },
+  { "query": "Write a migration guide for upgrading from v1 to v2.", "should_trigger": true },
+  { "query": "I have rough notes for an onboarding doc, help me structure them.", "should_trigger": true },
+  { "query": "Help me turn these scattered notes into a structured decision doc.", "should_trigger": true },
+  { "query": "The structure of this RFC is hard to follow. Help me reorganize it with clearer sections.", "should_trigger": true },
+  { "query": "Review this README for readability and give me a Flesch score.", "should_trigger": false },
+  { "query": "Check if my package description is too long.", "should_trigger": false },
+  { "query": "Rewrite this vague prompt into something more actionable.", "should_trigger": false },
+  { "query": "Define the success criteria and failure conditions for this task.", "should_trigger": false },
+  { "query": "Create a planner handoff artifact for this implementation.", "should_trigger": false },
+  { "query": "Write a migration plan with owners, task dependencies, and acceptance criteria.", "should_trigger": false },
+  { "query": "Create a stable review-outcome artifact for the PR we just finished.", "should_trigger": false }
+]

@@ -1,0 +1,38 @@
+{
+  "skill_name": "cloudflare-d1-query-tuning",
+  "evals": [
+    {
+      "id": "slow-query-no-schema",
+      "prompt": "Tune a slow D1 query without changing schema or migration files.",
+      "expected_behavior": "The response treats the task as runtime D1 query tuning, inspects the exact D1 binding and environment first, and focuses on query or adapter rewrites instead of schema changes.",
+      "assertions": [
+        "Mentions inspecting the exact D1 binding or Wrangler config before tuning.",
+        "Mentions reproducing the slow path or using EXPLAIN QUERY PLAN / wrangler d1 execute.",
+        "Avoids recommending schema, index, or migration changes as part of the tuning workflow."
+      ],
+      "files": []
+    },
+    {
+      "id": "n-plus-one-rewrite",
+      "prompt": "This Worker does N+1 D1 lookups in a loop. I need a better query path without changing migrations.",
+      "expected_behavior": "The response identifies the access-pattern problem and recommends a set-based rewrite that stays within the no-schema constraint.",
+      "assertions": [
+        "Mentions N+1 or repeated round trips as the performance issue.",
+        "Suggests a set-based query, join, batch, or query consolidation rather than row-by-row follow-up lookups.",
+        "Keeps the focus on the D1 query or adapter layer."
+      ],
+      "files": []
+    },
+    {
+      "id": "schema-needed-redirect",
+      "prompt": "This D1 query is slow and EXPLAIN QUERY PLAN still shows a wide scan. The only real fix looks like a new index, but I was asked not to change schema.",
+      "expected_behavior": "The response respects the no-schema constraint, says the real fix is out of scope, and redirects to the migration workflow instead of pretending a query-only change solved it.",
+      "assertions": [
+        "States plainly that the no-schema constraint blocks the real fix.",
+        "Redirects index or schema work to cloudflare-d1-migrations.",
+        "Does not present a schema change as part of the current tuning workflow."
+      ],
+      "files": []
+    }
+  ]
+}

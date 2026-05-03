@@ -1,0 +1,27 @@
+{
+  "skill_name": "ci-images",
+  "evals": [
+    {
+      "id": "release-readiness-check",
+      "prompt": "I updated generated code and release automation. Validate the local CI equivalents and tell me if the image release is safe to publish.",
+      "expected_behavior": "The response identifies the local CI-equivalent commands to run, checks generated artifacts and tests, and states the release-readiness outcome with any blockers.",
+      "assertions": [
+        "Mentions generation freshness before release.",
+        "Mentions tests or CI-equivalent checks.",
+        "Calls out image tagging or release publish expectations."
+      ],
+      "files": []
+    },
+    {
+      "id": "stale-generated-output",
+      "prompt": "CI says generated output is stale just before a container release. What should happen next?",
+      "expected_behavior": "The response explains that generation must be rerun and committed before release, and does not recommend publishing from a stale or dirty state.",
+      "assertions": [
+        "Says stale generated output blocks release readiness.",
+        "Says the working tree should be checked before publish.",
+        "Does not recommend publishing immediately without fixes."
+      ],
+      "files": []
+    }
+  ]
+}

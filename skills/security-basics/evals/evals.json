@@ -1,0 +1,27 @@
+{
+  "skill_name": "security-basics",
+  "evals": [
+    {
+      "id": "auth-and-logging-review",
+      "prompt": "I changed auth handling and structured logs. What security checks should I apply before merging?",
+      "expected_behavior": "The response checks secrets handling, logging hygiene, endpoint exposure, input trust, and cookies/CORS where relevant.",
+      "assertions": [
+        "Mentions secrets or auth token handling.",
+        "Mentions log or PII or credential scrubbing.",
+        "Mentions endpoint exposure or CORS/cookie safety."
+      ],
+      "files": []
+    },
+    {
+      "id": "sensitive-endpoint",
+      "prompt": "I added a metrics endpoint and changed proxy headers. What should I be careful about?",
+      "expected_behavior": "The response warns about trust boundaries, spoofable headers, and protecting sensitive endpoints.",
+      "assertions": [
+        "Mentions trust of forwarded headers or proxy boundary.",
+        "Mentions protection of metrics/admin/debug endpoints.",
+        "Includes a concrete security checklist-style response."
+      ],
+      "files": []
+    }
+  ]
+}

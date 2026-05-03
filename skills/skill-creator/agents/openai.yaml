@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Skill Creator'
+  short_description: 'Create or upgrade a local skill in the current `skills/` catalog when the user wants a new skill, needs better metadata, examples, or trigger coverage on an existing skill, or wants tighter validation and support-file layout for a reusable catalog asset.'
+policy:
+  allow_implicit_invocation: true

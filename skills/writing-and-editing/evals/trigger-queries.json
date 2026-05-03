@@ -1,0 +1,9 @@
+[
+  { "query": "Help me draft a proposal for adding a new API to the platform.", "should_trigger": true },
+  { "query": "Write a technical spec for the authentication redesign.", "should_trigger": true },
+  { "query": "Run a readability pass on this README and give me a Flesch score.", "should_trigger": true },
+  { "query": "Check these page titles and descriptions for truncation and clarity.", "should_trigger": true },
+  { "query": "Create a rollout plan with reviewers before anyone starts implementing.", "should_trigger": false },
+  { "query": "Rewrite this rough feature request into a repo-grounded prompt I can reuse.", "should_trigger": false },
+  { "query": "Audit my GitHub profile and tell me which repos to pin.", "should_trigger": false }
+]

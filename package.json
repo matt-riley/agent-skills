@@ -1,0 +1,30 @@
+{
+  "name": "@mattriley/agent-skills",
+  "version": "0.1.0",
+  "license": "GPL-3.0-only",
+  "description": "Reusable Agent Skills catalog for Copilot, Pi, Codex, and Gemini.",
+  "keywords": [
+    "pi-package",
+    "agent-skills",
+    "copilot",
+    "codex",
+    "gemini",
+    "pi"
+  ],
+  "files": [
+    "skills",
+    "_shared",
+    "scripts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "validate": "python _shared/validate-skills.py skills",
+    "link:user": "bash scripts/link-user-skills.sh"
+  },
+  "pi": {
+    "skills": [
+      "./skills"
+    ]
+  }
+}

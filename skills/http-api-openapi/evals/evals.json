@@ -1,0 +1,27 @@
+{
+  "skill_name": "http-api-openapi",
+  "evals": [
+    {
+      "id": "new-endpoint-sync",
+      "prompt": "I am adding a new authenticated HTTP endpoint. What must stay in sync with the OpenAPI spec?",
+      "expected_behavior": "The response identifies the handler, request/response schema, auth requirements, and invariants for keeping implementation and spec aligned.",
+      "assertions": [
+        "Mentions both handler and OpenAPI/spec changes.",
+        "Mentions auth or error shape alignment.",
+        "Mentions invariants or anti-patterns for drift."
+      ],
+      "files": []
+    },
+    {
+      "id": "spec-drift-debug",
+      "prompt": "The code and OpenAPI document are drifting apart after a recent endpoint change. How should I fix it?",
+      "expected_behavior": "The response uses a source-of-truth-driven workflow and does not treat the code/spec as unrelated surfaces.",
+      "assertions": [
+        "Mentions source of truth.",
+        "Mentions verifying both implementation and contract.",
+        "Avoids hand-wavy advice that ignores one side of the contract."
+      ],
+      "files": []
+    }
+  ]
+}

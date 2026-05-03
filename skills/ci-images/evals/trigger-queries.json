@@ -1,0 +1,26 @@
+[
+  {
+    "query": "I changed generation and Docker tags; can you tell me if CI and image publishing are ready?",
+    "should_trigger": true
+  },
+  {
+    "query": "Before I cut a release, run the local equivalents of the CI checks and verify image tags.",
+    "should_trigger": true
+  },
+  {
+    "query": "Please sanity-check this container release workflow and make sure stale generated code will not break CI.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write me a Dockerfile for a Go app.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what CI means in software delivery.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up docker compose for local development.",
+    "should_trigger": false
+  }
+]

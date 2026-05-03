@@ -1,0 +1,27 @@
+{
+  "skill_name": "code-generation",
+  "evals": [
+    {
+      "id": "regenerate-before-test",
+      "prompt": "I edited query files and templates. What should happen before I run tests?",
+      "expected_behavior": "The response says generation should happen before build/test, identifies likely generation commands, and warns against editing generated files by hand.",
+      "assertions": [
+        "Says generation should run before tests.",
+        "Mentions generator commands or make generate.",
+        "Warns not to edit generated files directly."
+      ],
+      "files": []
+    },
+    {
+      "id": "generated-diff-check",
+      "prompt": "Generated files changed unexpectedly after regeneration. How should I verify the diff?",
+      "expected_behavior": "The response tells the user to inspect the diff/stat and trace the change back to generator inputs rather than patching generated output manually.",
+      "assertions": [
+        "Mentions inspecting git diff or diff stat.",
+        "Suggests checking generator inputs/config.",
+        "Does not recommend hand-editing generated output."
+      ],
+      "files": []
+    }
+  ]
+}

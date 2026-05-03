@@ -1,0 +1,38 @@
+{
+  "skill_name": "configuration-env",
+  "evals": [
+    {
+      "id": "bootstrap-env",
+      "prompt": "I have a .env.example and a failing local startup. Walk me through the safest config validation path.",
+      "expected_behavior": "The response explains the config source order, recommends starting from .env.example, and validates with a build/start plus health-check style loop.",
+      "assertions": [
+        "Mentions .env.example as documentation/template rather than runtime source of truth.",
+        "Mentions failing fast on missing required config.",
+        "Mentions a health check or start command validation loop."
+      ],
+      "files": []
+    },
+    {
+      "id": "production-secrets",
+      "prompt": "Can I just use a .env file in production for this service?",
+      "expected_behavior": "The response says production should prefer real environment variables or a secrets manager and warns against committing or relying on .env files in production.",
+      "assertions": [
+        "Discourages .env files in production.",
+        "Mentions environment variables or a secrets manager.",
+        "Mentions not committing secrets."
+      ],
+      "files": []
+    },
+    {
+      "id": "worker-d1-binding-drift",
+      "prompt": "My Worker's D1 binding is missing from wrangler config, but there is no schema or migration change.",
+      "expected_behavior": "The response treats this as runtime configuration drift, inspects the Wrangler config for the `d1_databases` binding, and keeps D1 migration workflow out of scope unless investigation reveals actual schema-state drift.",
+      "assertions": [
+        "Treats the problem as binding/config repair rather than schema or migration work.",
+        "Mentions `wrangler.toml`, `wrangler.json`, or `wrangler.jsonc` and the `d1_databases` entry.",
+        "Redirects away from `cloudflare-d1-migrations` unless schema-state drift is discovered."
+      ],
+      "files": []
+    }
+  ]
+}

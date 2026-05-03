@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Writing and Editing'
+  short_description: 'Draft structured documents, audit multi-paragraph prose for readability, and review short audience-facing metadata strings. Use when the work is primarily writing, editing, or copy quality rather than planning, repo presentation, or prompt execution.'
+policy:
+  allow_implicit_invocation: true

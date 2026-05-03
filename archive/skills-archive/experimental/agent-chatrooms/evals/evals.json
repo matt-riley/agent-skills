@@ -1,0 +1,29 @@
+{
+  "skill_name": "agent-chatrooms",
+  "evals": [
+    {
+      "id": "architecture-debate",
+      "prompt": "Use an agent chatroom to pressure-test whether we should split a monolith into services. I want three distinct roles, at most two rounds, and a final recommendation.",
+      "expected_behavior": "Uses a multi-agent debate workflow with distinct roles, a bounded round structure, and a synthesis that calls out agreement, disagreement, and the recommended action.",
+      "assertions": [
+        "Uses a debate or chatroom workflow rather than independent polling",
+        "Mentions distinct participant roles",
+        "Mentions a bounded round structure or early convergence",
+        "Produces a final synthesis or recommendation"
+      ],
+      "files": []
+    },
+    {
+      "id": "review-pressure-test",
+      "prompt": "Have an architect, a security reviewer, and a pragmatist debate whether we should ship the new billing worker to all users immediately or release it behind a feature flag first, then tell me the strongest disagreement that remains.",
+      "expected_behavior": "Preserves the requested roles, treats the task as a multi-perspective debate, and reports the most important remaining disagreement alongside a synthesis.",
+      "assertions": [
+        "Keeps the user-specified roles",
+        "Frames the work as multi-round or explicitly interactive discussion",
+        "Surfaces the strongest disagreement separately from the recommendation",
+        "Avoids presenting the task as a simple solo opinion"
+      ],
+      "files": []
+    }
+  ]
+}

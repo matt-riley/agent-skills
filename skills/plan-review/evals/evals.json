@@ -1,0 +1,27 @@
+{
+  "skill_name": "plan-review",
+  "evals": [
+    {
+      "id": "approval-gated-plan",
+      "prompt": "Create and review an implementation plan with named reviewers, and do not move to implementation until everyone approves.",
+      "expected_behavior": "The response drafts or updates the plan, gathers repo context, uses the reviewer prompt consistently, and blocks implementation until unanimous approval.",
+      "assertions": [
+        "Mentions plan artifact or plan revision.",
+        "Mentions reviewer set or unanimous approval.",
+        "States implementation should wait for approval."
+      ],
+      "files": []
+    },
+    {
+      "id": "strong-plan-criteria",
+      "prompt": "Review this plan for feasibility, validation coverage, and scope discipline.",
+      "expected_behavior": "The response checks repo fit, validation commands, risks, and scope boundaries rather than only rephrasing the plan.",
+      "assertions": [
+        "Mentions validation strategy.",
+        "Mentions scope or risk control.",
+        "Focuses on executable plan quality."
+      ],
+      "files": []
+    }
+  ]
+}

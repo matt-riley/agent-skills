@@ -1,0 +1,26 @@
+[
+  {
+    "query": "I changed an HTTP handler and need the OpenAPI contract updated or regenerated the way this repo expects.",
+    "should_trigger": true
+  },
+  {
+    "query": "This service is code-first; help me keep the endpoint behavior and generated OpenAPI spec in sync.",
+    "should_trigger": true
+  },
+  {
+    "query": "I am adding a new authenticated API route. Make sure the contract, auth rules, and error responses match.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a generic REST API tutorial.",
+    "should_trigger": false
+  },
+  {
+    "query": "Generate a client SDK from this spec only.",
+    "should_trigger": false
+  },
+  {
+    "query": "Tune a database repository query.",
+    "should_trigger": false
+  }
+]

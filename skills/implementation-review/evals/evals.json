@@ -1,0 +1,27 @@
+{
+  "skill_name": "implementation-review",
+  "evals": [
+    {
+      "id": "review-with-panel",
+      "prompt": "Please review this implementation with named reviewers and do not consider it done until every reviewer approves.",
+      "expected_behavior": "The response identifies the review target, gathers validation context, uses the reviewer panel consistently, and blocks completion until all required reviewers approve.",
+      "assertions": [
+        "Mentions reviewer set or approval gate.",
+        "Mentions validation status before approval.",
+        "Treats requested changes as blocking."
+      ],
+      "files": []
+    },
+    {
+      "id": "review-focus",
+      "prompt": "Do a code review focused on correctness and regression risk, not style nitpicks.",
+      "expected_behavior": "The response scopes the review to material issues such as correctness, validation gaps, rollout safety, and regressions.",
+      "assertions": [
+        "Focuses on materially important issues.",
+        "Avoids style nitpicks as the primary output.",
+        "Mentions validation or rollout safety."
+      ],
+      "files": []
+    }
+  ]
+}

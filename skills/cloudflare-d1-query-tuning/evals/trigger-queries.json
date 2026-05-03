@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Tune a slow D1 query without changing schema or migration files.",
+    "should_trigger": true
+  },
+  {
+    "query": "This Worker does N+1 D1 lookups in a loop and I need to rewrite the query path without touching migrations.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rewrite this Cloudflare D1 pagination query so it stops over-fetching, but keep the same result shape.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a new index to this D1 table and promote the migration safely.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the missing preview_database_id in wrangler.jsonc so the Worker boots again.",
+    "should_trigger": false
+  },
+  {
+    "query": "Change a Postgres repository adapter query without touching the domain interface.",
+    "should_trigger": false
+  }
+]

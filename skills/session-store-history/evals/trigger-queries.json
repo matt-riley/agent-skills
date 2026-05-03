@@ -1,0 +1,26 @@
+[
+  {
+    "query": "What did I work on last week?",
+    "should_trigger": true
+  },
+  {
+    "query": "Have I worked on auth token refresh before?",
+    "should_trigger": true
+  },
+  {
+    "query": "Which session created PR #42?",
+    "should_trigger": true
+  },
+  {
+    "query": "Search this repo for AuthService and show me the implementation.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the failing auth tests right now.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain how session databases work in general.",
+    "should_trigger": false
+  }
+]

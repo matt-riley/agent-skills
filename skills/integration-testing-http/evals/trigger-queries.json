@@ -1,0 +1,26 @@
+[
+  {
+    "query": "I changed an HTTP handler and need to extend the end-to-end integration tests.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run the HTTP integration tests and help me debug a failing middleware/auth case.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add coverage for a changed API contract in the server integration suite.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a unit test for a pure function.",
+    "should_trigger": false
+  },
+  {
+    "query": "Design a brand new API without tests.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review implementation approval workflow.",
+    "should_trigger": false
+  }
+]

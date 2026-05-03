@@ -1,0 +1,5 @@
+interface:
+  display_name: 'CI Images'
+  short_description: 'Validate CI checks locally and manage Docker image publishing workflows. Use when changing build inputs (generated code, formatting, tests), preparing a release, or verifying that image tags are correct.'
+policy:
+  allow_implicit_invocation: true

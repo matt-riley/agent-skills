@@ -1,0 +1,27 @@
+{
+  "skill_name": "docker-compose-dev",
+  "evals": [
+    {
+      "id": "compose-startup",
+      "prompt": "I want a local stack with the app and its database using docker compose. What is the workflow?",
+      "expected_behavior": "The response gives a compose-oriented bring-up flow, mentions common operations, and includes a health/verification step.",
+      "assertions": [
+        "Mentions compose bring-up commands or equivalent operations.",
+        "Mentions verification of service health.",
+        "Mentions troubleshooting or invariants for the stack."
+      ],
+      "files": []
+    },
+    {
+      "id": "compose-debug",
+      "prompt": "The compose stack starts but the app cannot reach the database. What should I check?",
+      "expected_behavior": "The response focuses on compose service health, networking, env/config, and service logs rather than generic app debugging only.",
+      "assertions": [
+        "Mentions compose-level debugging such as logs or service status.",
+        "Mentions the database/backend dependency explicitly.",
+        "Includes a concrete next-step checklist."
+      ],
+      "files": []
+    }
+  ]
+}

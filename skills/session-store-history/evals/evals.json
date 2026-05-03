@@ -1,0 +1,38 @@
+{
+  "skill_name": "session-store-history",
+  "evals": [
+    {
+      "id": "recent-work-summary",
+      "prompt": "What did I work on recently in my Go repos?",
+      "expected_behavior": "The response uses session-store history workflow, searches with repo and time awareness, and returns evidence-backed recent sessions rather than generic memory.",
+      "assertions": [
+        "Mentions querying the `session_store` database.",
+        "Mentions recent sessions or turns ordered by timestamp.",
+        "Promises evidence-backed findings instead of answering from memory."
+      ],
+      "files": []
+    },
+    {
+      "id": "conceptual-history-recall",
+      "prompt": "Have I solved token refresh problems before?",
+      "expected_behavior": "The response expands the concept into related auth terms, searches broadly before narrowing, and cites the evidence surface it will use.",
+      "assertions": [
+        "Mentions query expansion with related terms or synonyms.",
+        "Mentions broad-to-narrow search behavior.",
+        "Mentions turns, checkpoints, refs, or files as evidence surfaces."
+      ],
+      "files": []
+    },
+    {
+      "id": "ref-tracing-request",
+      "prompt": "Which session was tied to PR #42?",
+      "expected_behavior": "The response routes to structured ref lookup first instead of broad free-text search and names the session/ref linkage it will inspect.",
+      "assertions": [
+        "Mentions `session_refs` or ref-based lookup.",
+        "Keeps the task scoped to historical tracing rather than implementation.",
+        "Mentions returning the linked session with supporting context."
+      ],
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Create a plan for this change and do not consider it final until the reviewers approve it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review and harden my implementation plan with named reviewer models.",
+    "should_trigger": true
+  },
+  {
+    "query": "I am in plan mode; make sure the plan is executable and approval-gated.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review the finished code diff.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what project planning means.",
+    "should_trigger": false
+  },
+  {
+    "query": "Implement the feature now instead of planning it.",
+    "should_trigger": false
+  }
+]

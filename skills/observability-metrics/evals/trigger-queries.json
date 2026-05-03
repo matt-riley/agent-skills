@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Validate the /health and /metrics endpoints after I changed observability code.",
+    "should_trigger": true
+  },
+  {
+    "query": "I added a metric and need to confirm it appears locally without exposing sensitive data.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me debug why the health endpoint is okay but metrics or logs look wrong.",
+    "should_trigger": true
+  },
+  {
+    "query": "Explain Prometheus from first principles.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up Docker Compose for local development.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a new logging framework.",
+    "should_trigger": false
+  }
+]

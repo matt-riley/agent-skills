@@ -1,0 +1,26 @@
+[
+  {
+    "query": "I changed sqlc queries and templ files; run the repo's generation workflow before I test.",
+    "should_trigger": true
+  },
+  {
+    "query": "Does this repo commit generated protobuf output or regenerate it in CI? Then do the right thing.",
+    "should_trigger": true
+  },
+  {
+    "query": "The build is failing in generated packages; figure out whether generation is stale first.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a new protobuf schema from scratch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what code generation is.",
+    "should_trigger": false
+  },
+  {
+    "query": "Run the unit tests for this handwritten bug; no generator-backed files changed.",
+    "should_trigger": false
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "skill_name": "observability-metrics",
+  "evals": [
+    {
+      "id": "metrics-validation",
+      "prompt": "I added a metric and changed observability auth. What should I validate locally?",
+      "expected_behavior": "The response checks health/metrics behavior, security exposure, and metric-specific validation steps.",
+      "assertions": [
+        "Mentions health or metrics endpoint validation.",
+        "Mentions security or sensitive endpoint protection.",
+        "Mentions verifying the new metric itself."
+      ],
+      "files": []
+    },
+    {
+      "id": "observability-debug",
+      "prompt": "The service is up but my observability output looks wrong. What should I inspect first?",
+      "expected_behavior": "The response uses endpoint checks, logs, and troubleshooting steps specific to observability rather than generic debugging only.",
+      "assertions": [
+        "Mentions troubleshooting health/metrics/logging.",
+        "Mentions local validation commands such as curl.",
+        "Keeps focus on observability surfaces."
+      ],
+      "files": []
+    }
+  ]
+}
