@@ -1,5 +1,5 @@
 {
-  "name": "@mattriley/agent-skills",
+  "name": "@matt-riley/agent-skills",
   "version": "0.1.0",
   "license": "GPL-3.0-only",
   "description": "Reusable Agent Skills catalog for Copilot, Pi, Codex, and Gemini.",

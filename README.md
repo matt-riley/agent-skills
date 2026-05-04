@@ -55,13 +55,13 @@ This repo's link script sets up both user-level paths for convenience.
 Pi can use this repo directly as a package:
 
 ```bash
-pi install /home/mattriley/Documents/projects/personal/agent-skills
+pi install /absolute/path/to/agent-skills
 ```
 
-Or from a cloned checkout elsewhere:
+For example, from any cloned checkout:
 
 ```bash
-pi install /absolute/path/to/agent-skills
+pi install "$(pwd)"
 ```
 
 Because `package.json` declares:
