@@ -1,14 +1,12 @@
 ---
 name: http-api-openapi
-description: Keep HTTP behavior and OpenAPI contracts in sync after detecting whether
-  the repository is spec-first, code-first, or hybrid. Use when adding or changing
-  endpoints, request/response schemas, authentication requirements, or error shapes.
+description: Keep HTTP behavior and OpenAPI contracts in sync after detecting spec-first, code-first, or hybrid ownership. Use when endpoints, schemas, auth, or error shapes change.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash plus the repository HTTP/OpenAPI generation
   or validation tooling.
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
+  version: 1.2.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -64,7 +62,7 @@ Determine the repo's contract flow before editing anything: spec-first, code-fir
 - If the repo has no OpenAPI contract for this surface, do not invent one unless the user asks for that design decision; document the gap instead.
 - When handler changes also affect generated clients/server stubs, coordinate with the code-generation workflow rather than patching generated artifacts directly.
 
-## Verification
+## Validation
 
 - The repo's spec validation or generation step succeeds.
 - Handler behavior, tests, and contract artifacts agree on auth, schemas, and status codes.

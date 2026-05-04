@@ -1,8 +1,10 @@
 ---
 name: github-actions-failure-triage
 description: Diagnose and minimally fix failing GitHub Actions runs in repositories already using GitHub Actions.
+license: Proprietary
+compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes access to GitHub Actions run evidence or workflow logs.
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   category: ci
   audience: general-coding-agent
   maturity: stable
@@ -104,10 +106,7 @@ Do not collect secret values. Only confirm whether the expected names, scopes, a
 - If workflow files changed, run workflow linting such as `actionlint` when available.
 - Re-check the exact failing workflow, job, or check when practical instead of relying only on generic local validation.
 - If no change is made, provide a precise evidence-backed explanation of the root cause or blocker.
-- Before considering the skill package complete, confirm that:
-  - `SKILL.md` has the required frontmatter and sections
-  - every support file is linked directly from this file
-  - the next action is obvious within a few seconds of reading it
+- If rerun or check access is unavailable, state the limitation and provide the exact evidence-backed next action for someone with access.
 
 ## Examples
 

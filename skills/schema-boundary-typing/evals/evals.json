@@ -1,0 +1,26 @@
+{
+  "skill_name": "schema-boundary-typing",
+  "evals": [
+    {
+      "id": "schema-boundary",
+      "prompt": "Add validation for an untrusted webhook payload in a TypeScript service.",
+      "expected_behavior": "Finds the boundary, reuses existing validator patterns, keeps input unknown until validation, derives or maps types, and tests invalid payloads.",
+      "assertions": [
+        "Validates at the first rejectable boundary",
+        "Reuses existing schema tools or a simple guard before adding dependencies",
+        "Runs typecheck and invalid-input tests"
+      ],
+      "files": []
+    },
+    {
+      "id": "internal-type-boundary",
+      "prompt": "Clean up this internal domain type alias; no external input is involved.",
+      "expected_behavior": "Does not apply schema-boundary guidance when there is no untrusted boundary.",
+      "assertions": [
+        "Identifies no runtime boundary",
+        "Avoids adding schema validation unnecessarily"
+      ],
+      "files": []
+    }
+  ]
+}

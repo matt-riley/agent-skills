@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Tighten this TypeScript config safely and enable stricter checks incrementally.",
+    "should_trigger": true
+  },
+  {
+    "query": "Clean up the tsconfig extends chain and make module resolution predictable.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me enable noUncheckedIndexedAccess without breaking the whole repo at once.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix one TypeScript compiler error in a source file.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add compile-time tests for API inference.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix a Babel runtime build problem with no tsconfig changes.",
+    "should_trigger": false
+  }
+]

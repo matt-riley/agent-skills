@@ -1,0 +1,27 @@
+{
+  "skill_name": "reverse-prompt",
+  "evals": [
+    {
+      "id": "rewrite-return",
+      "prompt": "Improve this prompt only: fix the flaky auth tests in this repo.",
+      "expected_behavior": "Returns a faithful repo-grounded brief with goal, scope, assumptions, deliverable, validation, and next phase without starting implementation.",
+      "assertions": [
+        "Does not silently execute when prompt-only intent is explicit",
+        "Keeps assumptions and blockers explicit",
+        "Includes validation and recommended next phase"
+      ],
+      "files": []
+    },
+    {
+      "id": "rewrite-proceed",
+      "prompt": "Sharpen this prompt, then use the improved brief to move into planning: add a new skill for cache debugging.",
+      "expected_behavior": "First rewrites the request, then proceeds only into the requested next phase.",
+      "assertions": [
+        "Decides rewrite-and-proceed rather than return-only",
+        "Does not invent new requirements",
+        "Hands off to planning rather than immediate coding if planning was requested"
+      ],
+      "files": []
+    }
+  ]
+}

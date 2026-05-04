@@ -6,7 +6,7 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents; works best with workspace plan artifacts, reviewer loops, and repo-local instruction files.
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
+  version: 1.2.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -97,6 +97,13 @@ metadata:
 - **Must not** turn this into finished-code review or merge-readiness review.
 - **Should** call out risky migrations, coordination dependencies, or rollout hazards directly in the plan.
 - **Before finishing:** confirm reviewer status matches the latest round, the plan is approved or explicitly blocked, and the next step is stated.
+
+## Validation
+
+- Confirm the plan artifact reflects the latest reviewed revision.
+- Confirm required reviewer status is current: approved, blocked by requested changes, or advisory-only.
+- Confirm validation commands, success criteria, open assumptions, and the next implementation step are explicit.
+- If named reviewers or model-based approval is unavailable in the current harness, state that limitation instead of fabricating approval.
 
 ## Output checklist
 

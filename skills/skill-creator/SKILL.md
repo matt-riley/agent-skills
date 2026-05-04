@@ -1,14 +1,11 @@
 ---
 name: skill-creator
-description: Create or upgrade a local skill in the current `skills/` catalog
-  when the user wants a new skill, needs better metadata, examples, or
-  trigger coverage on an existing skill, or wants tighter validation and
-  support-file layout for a reusable catalog asset.
+description: Create or upgrade a reusable skill in the current skills catalog. Use when adding a skill, improving metadata/examples/evals, tightening trigger boundaries, or deciding if guidance belongs in a skill.
 license: Proprietary
 compatibility: Agent Skills spec format; usable by terminal-based AI coding agents.
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
+  version: 1.2.0 # x-release-please-version
   maturity: stable
 ---
 
@@ -100,13 +97,14 @@ metadata:
 
 ## Validation
 
-- Run `python _shared/validate-skills.py skills` from the catalog root after editing `skills/`.
+- Run `python _shared/validate-skills.py skills` from the catalog root after editing `skills/`; this also checks release metadata alignment, OpenAI metadata sync, support-file links, stable-skill trigger coverage, and shell-script syntax.
 - If you changed trigger wording, anti-triggers, or frontmatter description in `skill-creator` itself, run `python _shared/run-trigger-evals.py skills/skill-creator/evals/trigger-queries.json`.
 - If you changed workflow guidance, guardrails, or support-file load conditions in `skill-creator` itself, run `python _shared/run-functional-evals.py skills/skill-creator/evals/evals.json`.
 - When delivering or documenting a new skill scaffold, give the target-skill commands explicitly, for example:
   - `python _shared/validate-skills.py skills`
   - `python _shared/run-trigger-evals.py skills/<new-skill-name>/evals/trigger-queries.json`
   - `python _shared/run-functional-evals.py skills/<new-skill-name>/evals/evals.json`
+  - add `--static` to either eval command when you only need fixture validation and the Copilot CLI is unavailable
 - Re-read `skills/README.md` alongside the changed skill to confirm the boundary does not overlap ambiguously with nearby skills.
 
 ## Examples

@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 import yaml
@@ -73,6 +74,76 @@ def validate_inter_skill_links(skill_path, body, skill_names, errors):
         target = m.group(1)
         if target not in skill_names:
             fail(errors, f'{skill_path}: inter-skill link refers to missing skill {target!r}')
+def validate_openai_metadata(skill_dir, fm, errors):
+    path = skill_dir / 'agents' / 'openai.yaml'
+    if not path.exists():
+        return
+    try:
+        data = yaml.safe_load(path.read_text()) or {}
+    except Exception as exc:
+        fail(errors, f'{path}: invalid YAML: {exc}')
+        return
+    short = (data.get('interface') or {}).get('short_description')
+    if short != fm.get('description'):
+        fail(errors, f'{path}: interface.short_description must match SKILL.md description')
+    allow = (data.get('policy') or {}).get('allow_implicit_invocation')
+    if allow is not True:
+        fail(errors, f'{path}: policy.allow_implicit_invocation must be true for active catalog skills')
+
+
+def validate_release_metadata(skill_path, skill_name, fm, manifest, release_packages, errors):
+    key = f'skills/{skill_name}'
+    if key not in release_packages and key not in manifest:
+        return
+    if 'license' not in fm:
+        fail(errors, f'{skill_path}: release-managed skills must include license')
+    meta = fm.get('metadata')
+    if not isinstance(meta, dict):
+        fail(errors, f'{skill_path}: release-managed skills must include metadata')
+        return
+    version = meta.get('version')
+    if not version:
+        fail(errors, f'{skill_path}: release-managed skills must include metadata.version')
+    if key in manifest and version != manifest[key]:
+        fail(errors, f'{skill_path}: metadata.version {version!r} must match .release-please-manifest.json {manifest[key]!r}')
+    if not meta.get('maturity'):
+        fail(errors, f'{skill_path}: release-managed skills must include metadata.maturity')
+
+
+def validate_support_links(skill_dir, skill_path, body, errors):
+    linked = set(re.findall(r'`((?:references|scripts|assets)/[^`]+)`', body))
+    linked.update(re.findall(r'\]\(((?:references|scripts|assets)/[^)]+)\)', body))
+    linked_text = '\n'.join(linked) + '\n' + body
+    for support_file in sorted(skill_dir.rglob('*')):
+        if not support_file.is_file():
+            continue
+        rel = support_file.relative_to(skill_dir).as_posix()
+        if rel in ('SKILL.md', 'README.md') or rel.startswith(('agents/', 'evals/')):
+            continue
+        parent_links = []
+        for parent in support_file.relative_to(skill_dir).parents:
+            parent_rel = parent.as_posix()
+            if parent_rel in ('.', 'references', 'assets', 'scripts'):
+                continue
+            parent_links.append(parent_rel + '/')
+        if rel not in linked_text and not any(parent in linked_text for parent in parent_links):
+            fail(errors, f'{skill_path}: support file is not linked from SKILL.md: {rel}')
+
+
+def validate_stable_trigger_evals(skill_path, skill_dir, fm, errors):
+    maturity = (fm.get('metadata') or {}).get('maturity')
+    if maturity == 'stable' and not (skill_dir / 'evals' / 'trigger-queries.json').exists():
+        fail(errors, f'{skill_path}: stable skills must include trigger evals')
+
+
+def validate_scripts(skill_dir, errors):
+    for script in sorted((skill_dir / 'scripts').glob('*.sh')) if (skill_dir / 'scripts').exists() else []:
+        proc = subprocess.run(['bash', '-n', str(script)], text=True, capture_output=True)
+        if proc.returncode != 0:
+            detail = proc.stderr.strip() or f'exit {proc.returncode}'
+            fail(errors, f'{script}: bash syntax check failed: {detail}')
+
+
 def validate_readme(root, skill_names, errors):
     readme = root / 'README.md'
     if not readme.exists():
@@ -108,6 +179,13 @@ def main():
     if not skill_dirs:
         fail(errors, f'No skill directories found under {root}')
     skill_names = {d.name for d in skill_dirs}
+    catalog_root = root.parent if root.name == 'skills' else root
+    manifest_path = catalog_root / '.release-please-manifest.json'
+    config_path = catalog_root / 'release-please-config.json'
+    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    release_packages = set()
+    if config_path.exists():
+        release_packages = set((json.loads(config_path.read_text()).get('packages') or {}).keys())
     for skill_dir in skill_dirs:
         skill_name = skill_dir.name
         skill_path = skill_dir / 'SKILL.md'
@@ -135,6 +213,11 @@ def main():
             fail(errors, f'{skill_path}: allowed-tools must be a string')
         validate_canonical_headings(skill_path, body, errors)
         validate_inter_skill_links(skill_path, body, skill_names, errors)
+        validate_openai_metadata(skill_dir, fm, errors)
+        validate_release_metadata(skill_path, skill_name, fm, manifest, release_packages, errors)
+        validate_support_links(skill_dir, skill_path, body, errors)
+        validate_stable_trigger_evals(skill_path, skill_dir, fm, errors)
+        validate_scripts(skill_dir, errors)
         # Also validate inter-skill links inside authored support markdown under the skill.
         for support_md in sorted(skill_dir.rglob('*.md')):
             if support_md == skill_path:
@@ -150,6 +233,8 @@ def main():
             validate_trigger_queries(trigger_file, errors)
         if evals_file.exists():
             validate_evals(evals_file, skill_name, errors)
+        if trigger_file.exists() != evals_file.exists():
+            fail(errors, f'{skill_dir}: trigger and functional eval files should be added together')
         for rel in re.findall(r'`((?:references|scripts|assets)/[^`]+)`', body):
             rel_path = rel.split()[0]
             if '*' in rel_path:

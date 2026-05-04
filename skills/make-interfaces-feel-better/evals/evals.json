@@ -1,0 +1,26 @@
+{
+  "skill_name": "make-interfaces-feel-better",
+  "evals": [
+    {
+      "id": "ui-polish-existing",
+      "prompt": "Polish an existing card component that feels flat and misaligned.",
+      "expected_behavior": "Inspects existing styles, preserves the visual system, maps changes to concrete polish principles, and avoids new dependencies.",
+      "assertions": [
+        "Separates detail polish from broad redesign",
+        "Uses existing tokens/utilities before adding patterns",
+        "Reports concrete before/after changes"
+      ],
+      "files": []
+    },
+    {
+      "id": "ui-polish-boundary",
+      "prompt": "Make this modal screen-reader accessible and fix keyboard focus traps.",
+      "expected_behavior": "Does not treat accessibility compliance as visual feel polish.",
+      "assertions": [
+        "Acknowledges accessibility is the primary task",
+        "Does not focus on radius/shadows/motion as the main solution"
+      ],
+      "files": []
+    }
+  ]
+}

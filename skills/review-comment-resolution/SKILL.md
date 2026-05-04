@@ -5,7 +5,7 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes access to the repository, review-comment context, git, and a way to inspect branch checks or workflow runs.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: stable
 ---
 
@@ -71,6 +71,7 @@ metadata:
 - **Must not** dismiss reviewer concerns casually; keep evidence for any comment you choose not to fix.
 - **Must not** mix unrelated cleanup into the review-comment fix batch.
 - **Must not** force-push, merge, or resolve/dismiss comments unless the surrounding workflow clearly calls for it.
+- **Must** state the limitation and stop after local validation/commit guidance when the current harness cannot push or inspect checks.
 - **Should** prefer the smallest change that addresses the real concern rather than the literal wording of a comment if the wording is imprecise.
 - **Should** keep accepted and rejected comment reasoning easy to summarize after the push.
 

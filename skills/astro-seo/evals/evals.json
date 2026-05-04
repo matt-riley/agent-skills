@@ -1,0 +1,26 @@
+{
+  "skill_name": "astro-seo",
+  "evals": [
+    {
+      "id": "astro-seo-audit",
+      "prompt": "Audit the SEO on this Astro site and propose the first changes.",
+      "expected_behavior": "Confirms Astro config/site origin first, audits technical SEO surfaces, and separates metadata copy review from implementation.",
+      "assertions": [
+        "Reads astro.config/package setup before proposing canonical or sitemap work",
+        "Checks metadata, structured data, OG, sitemap/robots/RSS, and indexing surfaces",
+        "Mentions writing-and-editing only for generated short strings or prose follow-up"
+      ],
+      "files": []
+    },
+    {
+      "id": "astro-seo-boundary",
+      "prompt": "Check these title tags and descriptions for truncation and rewrite weak ones.",
+      "expected_behavior": "Routes the copy-only task away from Astro technical SEO.",
+      "assertions": [
+        "Does not treat copy-only metadata review as an Astro SEO implementation task",
+        "Recommends writing-and-editing metadata-audit mode"
+      ],
+      "files": []
+    }
+  ]
+}

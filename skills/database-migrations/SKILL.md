@@ -8,7 +8,7 @@ compatibility: Agent Skills-compatible coding agents with file and shell tools; 
   or make targets.
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
+  version: 1.2.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -66,7 +66,7 @@ Inspect the repo contract before suggesting commands or file edits. Determine wh
 - Respect dialect and environment differences; SQLite-safe SQL is not automatically Postgres-safe, and local state is not automatically preview/prod state.
 - If the repo packages or embeds migration files at build/runtime, make sure new files are included in that packaging flow.
 
-## Verification
+## Validation
 
 - Migration status/history shows the expected applied or pending state.
 - Any required code generation or schema-dependent checks have been re-run.

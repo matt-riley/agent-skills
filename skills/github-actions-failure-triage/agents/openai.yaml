@@ -1,5 +1,6 @@
 interface:
-  display_name: 'GitHub Actions Failure Triage'
-  short_description: 'Diagnose and minimally fix failing GitHub Actions runs in repositories already using GitHub Actions.'
+  display_name: GitHub Actions Failure Triage
+  short_description: Diagnose and minimally fix failing GitHub Actions runs in repositories
+    already using GitHub Actions.
 policy:
   allow_implicit_invocation: true

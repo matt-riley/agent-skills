@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Configuration & Environment'
-  short_description: 'Configure an application safely via environment variables, .env files, and repo-owned runtime config such as Wrangler bindings. Use when the server will not start, behavior differs between environments, or when bootstrapping a new deployment environment. This is an operational guardrail, not a substitute for full security review or multi-service bootstrap guidance.'
+  display_name: Configuration & Environment
+  short_description: Configure applications safely through environment variables,
+    .env files, and repo-owned runtime config such as Wrangler bindings. Use for startup
+    failures, environment drift, or deployment bootstrap.
 policy:
   allow_implicit_invocation: true

@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Address the open PR review comments, push fixes, and wait for CI.",
+    "should_trigger": true
+  },
+  {
+    "query": "Resolve reviewer feedback on this branch but only fix valid comments.",
+    "should_trigger": true
+  },
+  {
+    "query": "Go through these review threads, update the code, and tell me what you did not fix.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this diff and tell me if it is ready to merge.",
+    "should_trigger": false
+  },
+  {
+    "query": "Summarize the review comments without changing code.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix a bug reported in an issue, not a PR review.",
+    "should_trigger": false
+  }
+]

@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Testing Workflows'
-  short_description: 'Run, debug, and extend tests for a Go project (unit + integration), including code generation prerequisites. Use when changing domain logic, repositories, HTTP handlers, or migrations, or when tests are failing unexpectedly.'
+  display_name: Testing Workflows
+  short_description: Run, debug, and extend tests for Go projects, including generation
+    prerequisites. Use when domain logic, repositories, HTTP handlers, migrations,
+    or unexpected test failures need coverage.
 policy:
   allow_implicit_invocation: true

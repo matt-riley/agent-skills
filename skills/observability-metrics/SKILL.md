@@ -1,14 +1,12 @@
 ---
 name: observability-metrics
-description: Validate and operate application observability endpoints (/health, /metrics)
-  and logging behavior. Use when adding metrics, changing observability auth, debugging
-  production-like issues, or verifying a deployment is healthy.
+description: Validate and operate application /health, /metrics, and logging behavior. Use when adding metrics, changing observability auth, debugging production-like issues, or verifying deployment health.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, curl, and local access to health/metrics
   endpoints or logs.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -43,7 +41,7 @@ metadata:
 | `GET /health`  | Liveness/readiness check              | Public                           |
 | `GET /metrics` | Prometheus-format operational metrics | Optional — protect in production |
 
-## Validate locally (server must be running)
+## Validation
 
 ```bash
 curl -i http://localhost:<PORT>/health

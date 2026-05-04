@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Reverse-prompt this rough request into a repo-grounded execution brief.",
+    "should_trigger": true
+  },
+  {
+    "query": "Before you start, sharpen my prompt and define success criteria.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rewrite this ask into a contract-shaped brief I can reuse.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement the feature now using the details above.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a phased implementation plan with reviewer approval.",
+    "should_trigger": false
+  },
+  {
+    "query": "Edit this README for clarity.",
+    "should_trigger": false
+  }
+]

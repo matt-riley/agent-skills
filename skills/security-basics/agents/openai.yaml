@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Security Basics'
-  short_description: 'Apply security and privacy guardrails to application code. Use when touching authentication, request handling, sensitive endpoint exposure, logging, or anything that could leak data or allow unauthorised access.'
+  display_name: Security Basics
+  short_description: Apply security and privacy guardrails to application code. Use
+    when touching authentication, request handling, sensitive endpoint exposure, logging,
+    or anything that could leak data or allow unauthorised access.
 policy:
   allow_implicit_invocation: true

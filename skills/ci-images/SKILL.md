@@ -8,7 +8,7 @@ compatibility: Agent Skills-compatible coding agents with file and shell tools; 
   CI equivalent commands.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -69,6 +69,12 @@ Standard tagging strategy on release:
 - Never publish an image from a dirty working tree.
 - Never publish with stale generated code — generation output must be committed.
 - CI is the authoritative gate; local checks mirror it but do not replace it.
+
+## Validation
+
+- Run the repository's documented local CI equivalents before claiming release readiness.
+- Confirm generated output is current and `git diff` only contains intended changes.
+- For image publishing, verify the release trigger and tag set without publishing from a dirty tree.
 
 ## Support files
 

@@ -115,6 +115,7 @@ def main() -> int:
     )
     ap.add_argument("--max-evals", type=int)
     ap.add_argument("--timeout", type=int, default=120)
+    ap.add_argument("--static", action="store_true", help="Validate and summarize fixtures without invoking a specific agent harness.")
     args = ap.parse_args()
 
     eval_path = Path(args.evals_json)
@@ -126,6 +127,18 @@ def main() -> int:
 
     cases = payload["evals"][: args.max_evals] if args.max_evals else payload["evals"]
     summary = {"skill_name": skill_name, "generated_at": timestamp, "cases": []}
+
+    if args.static:
+        summary["mode"] = "static"
+        for case in cases:
+            summary["cases"].append({
+                "id": case["id"],
+                "assertions": len(case.get("assertions") or []),
+                "files": len(case.get("files") or []),
+            })
+        (out_dir / "summary.json").write_text(json.dumps(summary, indent=2))
+        print(json.dumps({"status": "ok", "mode": "static", "output_dir": str(out_dir), "cases": len(summary["cases"])}))
+        return 0
 
     for case in cases:
         case_dir = out_dir / case["id"]

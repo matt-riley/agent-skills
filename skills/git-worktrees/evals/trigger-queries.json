@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Create a separate git worktree for this bug fix so it does not collide with release prep.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up one isolated checkout per agent for parallel PR work.",
+    "should_trigger": true
+  },
+  {
+    "query": "Recover a stale worktree without losing local edits.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement this feature on the current branch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review the finished diff for merge readiness.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain what git branches are.",
+    "should_trigger": false
+  }
+]

@@ -35,6 +35,7 @@ def main():
     ap.add_argument('--max-queries', type=int)
     ap.add_argument('--model', default='gpt-5.4')
     ap.add_argument('--timeout', type=int, default=120)
+    ap.add_argument('--static', action='store_true', help='Validate and summarize fixtures without invoking a specific agent harness.')
     default_output_root = Path(__file__).resolve().parent / 'results' / 'triggers'
     ap.add_argument('--output-root', default=str(default_output_root))
     args = ap.parse_args()
@@ -46,6 +47,13 @@ def main():
     timestamp = datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')
     out_dir = Path(args.output_root) / skill_name / timestamp
     out_dir.mkdir(parents=True, exist_ok=True)
+    if args.static:
+        positives = sum(1 for item in queries if item.get('should_trigger') is True)
+        negatives = sum(1 for item in queries if item.get('should_trigger') is False)
+        summary = {'skill_name': skill_name, 'mode': 'static', 'generated_at': timestamp, 'queries': len(queries), 'positives': positives, 'negatives': negatives, 'results': queries}
+        (out_dir / 'results.json').write_text(json.dumps(summary, indent=2))
+        print(json.dumps({'status': 'ok', 'mode': 'static', 'output_dir': str(out_dir), 'queries': len(queries), 'positives': positives, 'negatives': negatives}))
+        return 0
     results = []
     for item in queries:
         runs = []

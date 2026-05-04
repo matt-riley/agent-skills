@@ -1,10 +1,11 @@
 ---
 name: writing-and-editing
-description: Draft structured documents, audit multi-paragraph prose for readability, and review short audience-facing metadata strings. Use when the work is primarily writing, editing, or copy quality rather than planning, repo presentation, or prompt execution.
+description: Draft structured documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary work is writing, editing, or copy quality.
 license: Proprietary
+compatibility: Agent Skills-compatible agents; works with repository files or pasted prose and does not require shell tools unless scoring or file edits are requested.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 

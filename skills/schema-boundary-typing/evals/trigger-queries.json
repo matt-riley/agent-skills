@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Add runtime validation to this API payload and derive the TypeScript type from it.",
+    "should_trigger": true
+  },
+  {
+    "query": "This JSON parser returns untrusted data as a typed object; make the boundary truthful.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use the existing validator library to protect this webhook input.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix an internal type alias with no runtime input boundary.",
+    "should_trigger": false
+  },
+  {
+    "query": "Enable stricter tsconfig flags.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write unit tests for pure runtime behavior only.",
+    "should_trigger": false
+  }
+]

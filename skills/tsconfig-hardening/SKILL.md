@@ -1,8 +1,10 @@
 ---
 name: tsconfig-hardening
 description: Tighten and rationalize TypeScript configuration safely, especially when enabling stricter compiler checks incrementally.
+license: Proprietary
+compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a TypeScript project with tsconfig files and typecheck/build commands.
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable
@@ -42,8 +44,9 @@ metadata:
 ## First move
 
 1. Inventory the `tsconfig` chain and run `tsc --showConfig` or the nearest equivalent when available.
-2. Separate configuration cleanup from code fixes so the diff explains itself.
-3. Pick one strictness or resolution problem to address first instead of flipping every flag at once.
+2. Capture the current typecheck/build command and baseline compiler error count before changing flags.
+3. Separate configuration cleanup from code fixes so the diff explains itself.
+4. Pick one strictness or resolution problem to address first instead of flipping every flag at once.
 
 ## Workflow
 

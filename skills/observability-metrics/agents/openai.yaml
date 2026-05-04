@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Observability & Metrics'
-  short_description: 'Validate and operate application observability endpoints (/health, /metrics) and logging behavior. Use when adding metrics, changing observability auth, debugging production-like issues, or verifying a deployment is healthy.'
+  display_name: Observability & Metrics
+  short_description: Validate and operate application /health, /metrics, and logging
+    behavior. Use when adding metrics, changing observability auth, debugging production-like
+    issues, or verifying deployment health.
 policy:
   allow_implicit_invocation: true

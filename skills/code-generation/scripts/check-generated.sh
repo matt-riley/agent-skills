@@ -26,14 +26,19 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+before=$(git diff --stat || true)
 bash -lc "$generate_cmd"
 after=$(git diff --stat || true)
 changed=0
-if [[ -n "$after" ]]; then
+if [[ "$after" != "$before" ]]; then
   changed=1
 fi
 
-echo "{"command":"$generate_cmd","changed":$changed}"
+python3 - "$generate_cmd" "$changed" <<'PY'
+import json
+import sys
+print(json.dumps({"command": sys.argv[1], "changed": int(sys.argv[2])}))
+PY
 
 if [[ $expected_clean -eq 1 && $changed -eq 1 ]]; then
   echo 'Error: generation changed tracked files' >&2

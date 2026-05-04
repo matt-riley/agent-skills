@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Audit the SEO on my Astro blog and fix metadata, sitemap, schema, and OG gaps.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add structured data, llms.txt, and Open Graph image routes to this Astro site.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our Astro site has indexing and canonical URL issues; review the repo setup.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rewrite these meta descriptions for clarity and truncation only.",
+    "should_trigger": false
+  },
+  {
+    "query": "Audit prose quality across my blog posts.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up SEO for a Next.js app.",
+    "should_trigger": false
+  }
+]

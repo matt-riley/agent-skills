@@ -1,5 +1,6 @@
 interface:
-  display_name: 'Plan Review'
-  short_description: 'Create, revise, and approval-gate implementation plans when the deliverable is a plan artifact or plan revision, not code.'
+  display_name: Plan Review
+  short_description: Create, revise, and approval-gate implementation plans when the
+    deliverable is a plan artifact or plan revision, not code.
 policy:
   allow_implicit_invocation: true

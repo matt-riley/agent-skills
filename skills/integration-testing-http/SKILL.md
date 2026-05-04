@@ -1,14 +1,12 @@
 ---
 name: integration-testing-http
-description: Run and extend end-to-end HTTP integration tests for a server. Use when
-  changing handlers, middleware, request/response shapes, authentication, or API
-  contracts. This is a specialist overlay on top of the broader testing workflow.
+description: Run and extend end-to-end HTTP integration tests for server behavior. Use when handlers, middleware, auth, request/response shapes, or API contracts change.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash plus repository test commands for
   HTTP integration coverage.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -84,6 +82,12 @@ For every endpoint touched, verify:
 1. If compile errors appear in generated packages → `make generate`, then retry.
 2. Run with `-v` to see full request/response output for the failing test.
 3. If DB-related failures occur → verify the test DB is initialised and migrations are applied.
+
+## Validation
+
+- Run the narrow HTTP integration test or suite that covers the changed endpoint first.
+- Confirm status codes, auth behavior, request validation, response shape, and error body assertions are explicit.
+- Re-run the repository's broader test target when handler or middleware changes affect shared paths.
 
 ## Support files
 

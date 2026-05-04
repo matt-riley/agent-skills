@@ -1,0 +1,26 @@
+[
+  {
+    "query": "This component feels off; polish the spacing, shadows, radius, and interactions.",
+    "should_trigger": true
+  },
+  {
+    "query": "Tighten the hover and press states on this existing button.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this screenshot for concrete UI polish fixes, not broad UX strategy.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a new onboarding flow from scratch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix keyboard accessibility for this menu.",
+    "should_trigger": false
+  },
+  {
+    "query": "Implement a generic React component with no visual polish request.",
+    "should_trigger": false
+  }
+]

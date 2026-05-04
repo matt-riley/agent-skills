@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Add compile-time type tests for this generic helper inference behavior.",
+    "should_trigger": true
+  },
+  {
+    "query": "Lock down public API types with positive and negative tsd cases.",
+    "should_trigger": true
+  },
+  {
+    "query": "Turn this TypeScript inference bug into a regression type test.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write runtime unit tests for this function.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix current tsc compiler errors.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add runtime validation for a webhook payload.",
+    "should_trigger": false
+  }
+]

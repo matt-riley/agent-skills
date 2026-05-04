@@ -1,0 +1,27 @@
+{
+  "skill_name": "git-worktrees",
+  "evals": [
+    {
+      "id": "create-worktree",
+      "prompt": "Set up an isolated worktree for issue 42 from origin/main.",
+      "expected_behavior": "Inspects current worktrees and branch state, chooses safe names, creates a dedicated branch/worktree, and validates location.",
+      "assertions": [
+        "Starts with git worktree list and branch/base-ref checks",
+        "Uses repository naming conventions or default examples",
+        "Confirms git status inside the new worktree before task edits"
+      ],
+      "files": []
+    },
+    {
+      "id": "cleanup-worktree",
+      "prompt": "Clean up the stale worktree for an old PR without losing work.",
+      "expected_behavior": "Checks for uncommitted changes before removal and uses recovery cleanup guidance.",
+      "assertions": [
+        "Does not remove before checking status",
+        "Uses recovery-and-cleanup guidance",
+        "Prunes stale metadata only after preserving or confirming no local changes"
+      ],
+      "files": []
+    }
+  ]
+}

@@ -5,7 +5,7 @@ license: Proprietary
 compatibility: Harnesses that expose a read-only `sql` tool and a `session_store`-style history database.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -81,6 +81,7 @@ metadata:
 - **Must** cite the evidence surface you used: recent turns, checkpoints, refs, or edited files.
 - **Must** make partial or in-progress updates explicit about `session_store` usage and which evidence surfaces are being searched.
 - **Must not** answer history questions from model memory alone when `session_store` can provide evidence.
+- **Must** state the limitation and ask for another evidence source when the current harness does not expose a read-only `sql` tool or `session_store` database.
 - **Must not** stop at one narrow literal query if the first result set is empty and the concept can be expanded safely.
 - **Should** prefer structured joins when the user names a file, PR, issue, commit, or branch.
 - **Should** make uncertainty explicit when multiple sessions are plausible matches.

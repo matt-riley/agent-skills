@@ -1,5 +1,7 @@
 interface:
-  display_name: 'RPI Workflow'
-  short_description: 'Apply a Research -> Plan -> Implement -> Validate workflow for non-trivial work in agent-compatible coding harnesses, keeping progress durable across turns and sessions via workspace `plan.md` and `files/` artifacts.'
+  display_name: RPI Workflow
+  short_description: Apply a Research -> Plan -> Implement -> Validate workflow for
+    non-trivial work in agent-compatible coding harnesses, keeping progress durable
+    across turns and sessions via workspace `plan.md` and `files/` artifacts.
 policy:
   allow_implicit_invocation: true
