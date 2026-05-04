@@ -8,6 +8,9 @@ Portable Agent Skills catalog for:
 - Gemini CLI
 
 The catalog source of truth lives in this repository under `skills/`.
+Each skill directory contains the portable `SKILL.md`, any support files under `references/`, `assets/`, or `scripts/`, and harness-specific metadata where needed.
+
+For a task-oriented chooser, start with [`skills/README.md`](skills/README.md).
 
 ## Layout
 
@@ -34,6 +37,7 @@ That script will:
 
 - create `~/.agents/skills -> <repo>/skills`
 - create `~/.copilot/skills -> <repo>/skills` for Copilot compatibility
+- move any existing non-symlink directory at those paths aside as `*.pre-agent-skills-<timestamp>` before linking
 
 Codex and Gemini CLI both understand `~/.agents/skills`, and Pi can use either the shared `.agents` path or the Pi package manifest in this repo.
 
@@ -94,6 +98,12 @@ Gemini CLI reads skills from:
 - repo `.agents/skills`
 
 The shared `~/.agents/skills` path is the recommended interoperable location.
+
+## Browse and maintain the catalog
+
+- Use [`skills/README.md`](skills/README.md) to choose the right skill for a task.
+- Read `skills/<name>/SKILL.md` for the workflow, boundaries, and support-file references for a specific skill.
+- Use the `skill-creator` skill when adding a new catalog entry or upgrading an existing one.
 
 ## Validate the catalog
 

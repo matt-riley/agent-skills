@@ -1,8 +1,9 @@
 # Skill selection guide
 
-This catalog works best as a small set of default entry points plus sharper specialist overlays. Start with the skill whose deliverable most directly matches the user's request, then add overlays only when they contribute distinct operational knowledge.
+This guide helps you choose among the active skills in `skills/*`.
+Start with the skill whose deliverable most directly matches the user's request, then add overlays only when they contribute distinct operational knowledge.
 
-Archived skills live under `_archive/` and can be revived if needed.
+`skills/<name>/SKILL.md` remains the source of truth for any individual skill's workflow, boundaries, and support files.
 
 ## Core defaults
 
