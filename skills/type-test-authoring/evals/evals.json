@@ -1,0 +1,26 @@
+{
+  "skill_name": "type-test-authoring",
+  "evals": [
+    {
+      "id": "type-test-regression",
+      "prompt": "Add type regression tests for a public generic helper.",
+      "expected_behavior": "Matches existing type-test tooling, adds focused positive and negative assertions, avoids runtime-heavy tests, and runs the type-test/typecheck command.",
+      "assertions": [
+        "Finds nearest existing type-test convention first",
+        "Uses @ts-expect-error or existing negative assertion helper",
+        "Does not introduce new tooling casually"
+      ],
+      "files": []
+    },
+    {
+      "id": "runtime-test-boundary",
+      "prompt": "Add unit tests for runtime behavior only; no type inference contract changed.",
+      "expected_behavior": "Does not use type-test workflow for ordinary runtime tests.",
+      "assertions": [
+        "Recognizes runtime tests are primary",
+        "Does not add compile-time fixtures unnecessarily"
+      ],
+      "files": []
+    }
+  ]
+}

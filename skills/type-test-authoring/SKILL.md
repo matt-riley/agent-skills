@@ -1,8 +1,10 @@
 ---
 name: type-test-authoring
 description: Write compile-time type tests that protect public TypeScript APIs, inference behavior, and negative cases.
+license: Proprietary
+compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a TypeScript project with typecheck or type-test fixtures.
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable

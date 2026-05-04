@@ -1,14 +1,12 @@
 ---
 name: code-generation
-description: Run and troubleshoot project code generation after detecting the repository's
-  generator contract. Use when changing schema/query/template inputs that feed a generator,
-  or before building/testing if generated output might be stale.
+description: Run and troubleshoot repository code generation after detecting the generator contract. Use when schema, query, spec, or template inputs changed, or generated output may be stale.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, git, make, go, and project-specific
   generator CLIs such as sqlc or templ.
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
+  version: 1.2.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -69,7 +67,7 @@ Inspect the repo's build docs, CI workflow, and `.gitignore` before regenerating
 - If no generator-backed inputs changed, do not force regeneration as the first move unless the failure clearly points to stale output.
 - Unexpected generated diffs usually mean changed inputs, config drift, or tool-version drift; inspect those before patching outputs.
 
-## Verification
+## Validation
 
 - The relevant generation command completes successfully.
 - The diff or status matches the repo contract:

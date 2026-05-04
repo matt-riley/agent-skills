@@ -1,15 +1,11 @@
 ---
 name: implementation-review
-description: Review completed code changes, diffs, and implementation revisions
-  for the current target repo or workspace. Use when the user asks for code
-  review, implementation review, merge-readiness review, named reviewers, or
-  unanimous approval before work is considered done. This is finished-code
-  review, not plan drafting or automatic feedback execution.
+description: Review completed code changes, diffs, and implementation revisions for merge readiness. Use for code review, named reviewer approval, validation gaps, regressions, security risk, or scope drift.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents; works best with git-backed repos, diff or review context, and repo-local instruction files.
 metadata:
   owner: mattriley
-  version: 1.2.0 # x-release-please-version
+  version: 1.3.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -101,6 +97,13 @@ metadata:
 - **Should** compare the implementation against the approved plan or requirements when those exist.
 - **Should** treat follow-up fixes as a separate implementation step unless the user explicitly asks for both review and fixes in one pass.
 - **Before finishing:** confirm reviewer status matches the latest round, blockers and optional suggestions are clearly separated, validation is current, and the implementation-readiness verdict plus next step are stated explicitly.
+
+## Validation
+
+- Confirm the reviewed revision, diff, and validation evidence are current.
+- State whether the review is advisory, blocked by requested changes, or approved under the requested rule.
+- Keep blockers, optional suggestions, residual risks, and follow-up work clearly separated.
+- If named reviewers or models are unavailable in the current harness, say so and provide the best available single-review result instead of pretending approvals occurred.
 
 ## Reference files
 

@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Review Comment Resolution'
-  short_description: 'Apply pull request review feedback by assessing comments, fixing valid concerns, pushing the branch, and waiting for checks. Use when reviewer feedback must be carried through to completion, not just reviewed.'
+  display_name: Review Comment Resolution
+  short_description: Apply pull request review feedback by assessing comments, fixing
+    valid concerns, pushing the branch, and waiting for checks. Use when reviewer
+    feedback must be carried through to completion, not just reviewed.
 policy:
   allow_implicit_invocation: true

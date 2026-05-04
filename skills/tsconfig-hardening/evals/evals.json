@@ -1,0 +1,26 @@
+{
+  "skill_name": "tsconfig-hardening",
+  "evals": [
+    {
+      "id": "tsconfig-incremental",
+      "prompt": "Enable stricter TypeScript settings safely in a monorepo.",
+      "expected_behavior": "Inventories tsconfig chain, captures baseline commands/error counts, changes one concern at a time, and switches to tsc-error-triage if errors burst.",
+      "assertions": [
+        "Runs showConfig or equivalent inventory",
+        "Does not flip many flags at once",
+        "Preserves emit/module settings unless needed"
+      ],
+      "files": []
+    },
+    {
+      "id": "tsc-errors-boundary",
+      "prompt": "There are 80 tsc errors after strict mode was enabled; fix them now.",
+      "expected_behavior": "Routes follow-on compiler failures to tsc-error-triage.",
+      "assertions": [
+        "Recognizes compiler-error triage is now primary",
+        "Stops further config hardening"
+      ],
+      "files": []
+    }
+  ]
+}

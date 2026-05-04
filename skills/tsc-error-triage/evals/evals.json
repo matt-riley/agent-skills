@@ -1,0 +1,26 @@
+{
+  "skill_name": "tsc-error-triage",
+  "evals": [
+    {
+      "id": "tsc-root-cause",
+      "prompt": "Fix a burst of TypeScript compiler errors after a refactor.",
+      "expected_behavior": "Finds the repo typecheck command, captures full output, groups errors by root cause, fixes source types before leaf call sites, and reruns typecheck.",
+      "assertions": [
+        "Runs the repository typecheck command first",
+        "Groups errors by root symbol/module/config boundary",
+        "Avoids any/ts-ignore as the default fix"
+      ],
+      "files": []
+    },
+    {
+      "id": "tsconfig-boundary",
+      "prompt": "Enable noUncheckedIndexedAccess safely in this TypeScript repo.",
+      "expected_behavior": "Routes config hardening to tsconfig-hardening instead of compiler-error triage.",
+      "assertions": [
+        "Recognizes config change is the primary task",
+        "Does not start leaf compiler fixes before the config change exists"
+      ],
+      "files": []
+    }
+  ]
+}

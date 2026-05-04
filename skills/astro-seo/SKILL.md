@@ -1,8 +1,11 @@
 ---
 name: astro-seo
 description: Audit and improve SEO for Astro sites, including metadata, structured data, sitemaps, indexing, Open Graph images, schema endpoints, and related search visibility setup.
+license: Proprietary
+compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes an Astro project and repository-local build/check commands.
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
+  maturity: draft
 ---
 
 # Astro SEO
@@ -62,7 +65,7 @@ metadata:
 3. Recommend the smallest coherent implementation path:
    - upgrade or install `@jdevalk/astro-seo-graph` when it materially simplifies the missing pieces
    - preserve an existing hand-rolled setup when it already satisfies the important requirements
-4. Implement the missing pieces, using `AGENTS.md` for concrete code recipes when needed.
+4. Implement the missing pieces, using `references/implementation-recipes.md` for concrete code recipes when needed.
 5. Run [`writing-and-editing`](../writing-and-editing/SKILL.md) in metadata-audit mode on any short SEO strings you generated or rewrote, such as titles, descriptions, schema descriptions, FAQ answers, or frontmatter excerpts.
 6. If the task also produced long-form prose, mention [`writing-and-editing`](../writing-and-editing/SKILL.md) in readability-audit mode as a follow-up rather than trying to audit the whole content corpus inline.
 
@@ -93,4 +96,4 @@ metadata:
 
 ## Reference files
 
-- `AGENTS.md` - implementation recipes for installing, upgrading, and wiring the recommended Astro SEO stack
+- Read `references/implementation-recipes.md` when you need implementation recipes for installing, upgrading, and wiring the recommended Astro SEO stack.

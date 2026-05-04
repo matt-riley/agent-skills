@@ -1,0 +1,26 @@
+{
+  "skill_name": "review-comment-resolution",
+  "evals": [
+    {
+      "id": "resolve-comments",
+      "prompt": "Resolve PR review comments, push the branch, and wait for checks.",
+      "expected_behavior": "Inventories comments, classifies each concern, fixes valid ones, validates, commits/pushes intended changes, and watches checks.",
+      "assertions": [
+        "Classifies comments before editing",
+        "Does not assume every comment is correct",
+        "Waits for checks on the pushed head commit when access allows"
+      ],
+      "files": []
+    },
+    {
+      "id": "summarize-only-boundary",
+      "prompt": "Summarize these PR review comments without making changes.",
+      "expected_behavior": "Does not enter the fix/push/check workflow for a summarize-only request.",
+      "assertions": [
+        "Keeps output review-only",
+        "Does not commit or push changes"
+      ],
+      "files": []
+    }
+  ]
+}

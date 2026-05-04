@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Astro SEO'
-  short_description: 'Audit and improve SEO for Astro sites, including metadata, structured data, sitemaps, indexing, Open Graph images, schema endpoints, and related search visibility setup.'
+  display_name: Astro SEO
+  short_description: Audit and improve SEO for Astro sites, including metadata, structured
+    data, sitemaps, indexing, Open Graph images, schema endpoints, and related search
+    visibility setup.
 policy:
   allow_implicit_invocation: true

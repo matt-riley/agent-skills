@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Session Store History'
-  short_description: 'Search and summarize past work from the `session_store` database when the user asks what they worked on before, how a similar problem was handled, or which session, PR, issue, branch, or file changed something.'
+  display_name: Session Store History
+  short_description: Search and summarize past work from the `session_store` database
+    when the user asks what they worked on before, how a similar problem was handled,
+    or which session, PR, issue, branch, or file changed something.
 policy:
   allow_implicit_invocation: true

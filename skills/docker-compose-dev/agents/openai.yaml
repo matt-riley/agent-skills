@@ -1,5 +1,7 @@
 interface:
-  display_name: 'Docker Compose Dev'
-  short_description: 'Run a service stack locally using Docker Compose for prod-like development (e.g. PostgreSQL + app). Use when you need a real DB backend, multi-service integration, or want to reproduce production-like behavior locally.'
+  display_name: Docker Compose Dev
+  short_description: Run a service stack locally using Docker Compose for prod-like
+    development (e.g. PostgreSQL + app). Use when you need a real DB backend, multi-service
+    integration, or want to reproduce production-like behavior locally.
 policy:
   allow_implicit_invocation: true

@@ -1,0 +1,26 @@
+{
+  "skill_name": "github-actions-failure-triage",
+  "evals": [
+    {
+      "id": "actions-log-first",
+      "prompt": "Diagnose a failing GitHub Actions job with a run URL and failed check name.",
+      "expected_behavior": "Anchors the exact run/job/step/SHA, reads logs before editing, classifies the failure, and proposes the smallest justified fix.",
+      "assertions": [
+        "Requires concrete failing run evidence before editing",
+        "Maps failure to workflow file/action/reusable workflow/script",
+        "Separates workflow bugs from project/test/runtime failures"
+      ],
+      "files": []
+    },
+    {
+      "id": "actions-boundary",
+      "prompt": "Plan a broad migration from CircleCI to GitHub Actions.",
+      "expected_behavior": "Does not invoke failure triage for migration planning.",
+      "assertions": [
+        "States this is CI migration planning rather than failing-run triage",
+        "Routes to planning rather than speculatively editing GitHub Actions files"
+      ],
+      "files": []
+    }
+  ]
+}

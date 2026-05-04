@@ -8,7 +8,7 @@ compatibility: Agent Skills-compatible coding agents with file and shell tools; 
   workflow.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -84,6 +84,13 @@ Use `-v` only when you want to destroy all data (e.g. start fresh with a clean D
 | App crashes immediately | Check logs: `docker compose logs app`                                                   |
 | DB connection refused   | Confirm DB service is healthy before the app starts; add `depends_on` with health check |
 | Migrations fail         | Verify `DATABASE_URL` matches the credentials in `.env` and the DB is reachable         |
+
+## Validation
+
+- Confirm `docker compose ps` or the repo wrapper shows the expected services running.
+- Run the service health check or smoke test against the compose-backed app.
+- Confirm migrations and required seed/setup steps were applied deliberately, not assumed.
+- Before teardown, decide whether volumes should be preserved or intentionally destroyed.
 
 ## Support files
 

@@ -1,14 +1,12 @@
 ---
 name: repository-adapters
-description: Implement or modify database repository adapters. Use when adding repository
-  methods, changing queries, or mapping DB errors to domain errors. Covers the pattern
-  of domain interfaces backed by DB-specific implementations.
+description: Implement or modify database repository adapters. Use when adding adapter methods, changing queries, or mapping database errors while preserving domain boundaries.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a repository/domain layering pattern with
   database-backed adapters.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -78,7 +76,7 @@ Map DB-level errors to domain errors **at the adapter boundary** — never let D
 - Optional DB support (e.g. Postgres when only SQLite is required) must **skip** gracefully in tests, not fail.
 - Never leak raw DB error strings in API responses or logs.
 
-## Verification
+## Validation
 
 ```bash
 make test     # SQLite (or primary DB) must pass; optional DBs skip when unavailable

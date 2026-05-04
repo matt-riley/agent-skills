@@ -1,16 +1,12 @@
 ---
 name: configuration-env
-description: Configure an application safely via environment variables, .env files,
-  and repo-owned runtime config such as Wrangler bindings. Use when the server will
-  not start, behavior differs between environments, or when bootstrapping a new
-  deployment environment. This is an operational guardrail, not a substitute for
-  full security review or multi-service bootstrap guidance.
+description: Configure applications safely through environment variables, .env files, and repo-owned runtime config such as Wrangler bindings. Use for startup failures, environment drift, or deployment bootstrap.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, curl, and a local service start command
   for config validation.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -85,7 +81,7 @@ Required variables cause startup failure. Optional variables activate features.
 - Protect sensitive endpoints (metrics, admin) behind auth — do not leave them open by default.
 - **Never hardcode secrets in source code.**
 
-## Fast validation
+## Validation
 
 ```bash
 make build && ./bin/server   # or equivalent start command

@@ -1,5 +1,7 @@
 interface:
-  display_name: 'HTTP API & OpenAPI'
-  short_description: 'Keep HTTP behavior and OpenAPI contracts in sync after detecting whether the repository is spec-first, code-first, or hybrid. Use when adding or changing endpoints, request/response schemas, authentication requirements, or error shapes.'
+  display_name: HTTP API & OpenAPI
+  short_description: Keep HTTP behavior and OpenAPI contracts in sync after detecting
+    spec-first, code-first, or hybrid ownership. Use when endpoints, schemas, auth,
+    or error shapes change.
 policy:
   allow_implicit_invocation: true

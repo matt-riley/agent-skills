@@ -84,9 +84,9 @@ Do not copy another repo's metadata scheme blindly. This personal catalog should
 
 This skill library standard expects shared tooling under the catalog root `_shared/` directory:
 
-- `validate-skills.py` for structural validation
-- `run-trigger-evals.py` for trigger checks
-- `run-functional-evals.py` for with-skill vs baseline runs and grading scaffolds
+- `validate-skills.py` for structural validation, release metadata/version alignment, OpenAI metadata sync, support-file links, script syntax checks, and stable-skill trigger coverage
+- `run-trigger-evals.py` for trigger checks, with `--static` available for fixture-only validation when the Copilot CLI or another harness is unavailable
+- `run-functional-evals.py` for with-skill vs baseline runs and grading scaffolds, with `--static` available for fixture-only validation
 
 Prefer those tools over ad hoc one-off eval formats.
 

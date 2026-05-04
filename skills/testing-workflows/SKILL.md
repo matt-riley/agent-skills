@@ -1,13 +1,11 @@
 ---
 name: testing-workflows
-description: Run, debug, and extend tests for a Go project (unit + integration), including
-  code generation prerequisites. Use when changing domain logic, repositories, HTTP
-  handlers, or migrations, or when tests are failing unexpectedly.
+description: Run, debug, and extend tests for Go projects, including generation prerequisites. Use when domain logic, repositories, HTTP handlers, migrations, or unexpected test failures need coverage.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, make, go, and repository test entrypoints.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -73,6 +71,12 @@ Follow this sequence:
 - New features require tests before merging.
 - Tests must be order-independent with no shared mutable state between test cases.
 - Reach for `code-generation` first when failures smell like stale generated inputs rather than test logic.
+
+## Validation
+
+- Re-run the narrow failing test after each suspected fix before broadening.
+- Run the repository's broader test target before claiming the change is ready.
+- When adding features, confirm new or updated tests cover the touched domain, repository, or handler behavior.
 
 ## Support files
 

@@ -9,7 +9,7 @@ compatibility: Agent Skills-compatible coding agents; works best with workspace 
   and `files/` artifacts plus file references when the harness supports them.
 metadata:
   owner: mattriley
-  version: 1.2.0 # x-release-please-version
+  version: 1.3.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -93,6 +93,13 @@ metadata:
 - **Should** pause for approval when the user asked for plan gating, reviewer gating, or similar governance.
 - **Should** prefer narrower specialist skills when a task collapses to a smaller problem after research.
 - **May** reuse older shared artifacts for compatibility when a workflow already started that way, but convert back to workspace-local artifacts where practical.
+
+## Validation
+
+- Run the most relevant checks from `plan.md`, starting targeted and broadening when risk requires it.
+- Compare the final state against the plan and call out any intentional or accidental deviations.
+- Update `plan.md` or a concise `files/` handoff only when the evidence needs to persist beyond the final response.
+- End with validation status, residual risks, and the next step.
 
 ## Reference files
 

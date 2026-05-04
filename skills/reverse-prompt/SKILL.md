@@ -1,11 +1,11 @@
 ---
 name: reverse-prompt
-description: Sharpen or rewrite a rough request into a repository-grounded brief before research, planning, or implementation. Use when the user explicitly asks for a better prompt, a sharper request, a repo-grounded brief, or a contract-shaped execution brief before the next phase.
+description: Rewrite a rough request into a repository-grounded execution brief before research, planning, or implementation. Use when the user asks for a sharper prompt, better request, or contract-shaped brief.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents; useful before research, planning, or direct implementation when a sharper brief would materially improve execution.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: stable
 ---
 

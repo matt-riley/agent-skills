@@ -1,0 +1,26 @@
+[
+  {
+    "query": "This GitHub Actions deploy job failed on my PR; diagnose the failing step before changing YAML.",
+    "should_trigger": true
+  },
+  {
+    "query": "A matrix variant started failing after an actions/cache change. Find the smallest fix.",
+    "should_trigger": true
+  },
+  {
+    "query": "The reusable workflow call is red after an input change; inspect the run logs.",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a new CI pipeline from scratch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Address PR review comments and push fixes.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up a worktree for CI debugging.",
+    "should_trigger": false
+  }
+]

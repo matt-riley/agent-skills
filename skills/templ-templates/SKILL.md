@@ -8,7 +8,7 @@ compatibility: Agent Skills-compatible coding agents with file and shell tools; 
   template generation flow.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -80,6 +80,12 @@ make test
 | Compile errors referencing missing `*_templ.go` symbols | Run `templ generate`                                                  |
 | Template renders stale output                           | Rebuild — Go does not auto-detect `.templ` changes                    |
 | Logic creep in templates                                | Move conditions/computations to the handler; pass pre-computed values |
+
+## Validation
+
+- Run the repository's templ regeneration command after editing `.templ` files.
+- Confirm generated Go output changed only as expected and was not hand-edited.
+- Run `go build` or the repo's narrow build target, then relevant tests for handlers or pages touched.
 
 ## Support files
 

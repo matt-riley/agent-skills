@@ -1,11 +1,11 @@
 ---
 name: cloudflare-d1-query-tuning
-description: Tune slow Cloudflare D1 queries and D1-backed repository access without changing schema or migration files. Use when a Workers repo has runtime D1 query performance issues, over-fetching, or N+1 access patterns and the fix should stay in query or adapter logic.
+description: Tune slow Cloudflare D1 queries and D1-backed repository access without schema or migration changes. Use for N+1 access, over-fetching, pagination, or runtime D1 query-shape issues.
 license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a Cloudflare Workers repository with a D1 binding plus Wrangler or repo-owned D1 wrappers.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 

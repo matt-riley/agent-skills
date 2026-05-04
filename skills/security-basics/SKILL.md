@@ -8,7 +8,7 @@ compatibility: Agent Skills-compatible coding agents with file and shell tools; 
   auth, request handling, or data exposure.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -79,6 +79,12 @@ Before merging code that touches auth, request handling, or data exposure:
 - Never let error responses leak stack traces, DB errors, or internal file paths.
 - Never default production CORS to `*` when cookies or `Authorization` headers are in play.
 - Never log raw credentials, tokens, or PII — scrub at the structured-logging boundary.
+
+## Validation
+
+- Run targeted tests or checks for the changed auth, request-handling, logging, or exposure surface.
+- Confirm no secrets, tokens, credentials, private data, or sensitive endpoint outputs were added to logs or public responses.
+- Confirm authorization failures, invalid input, and cross-origin/cookie behavior are covered where relevant.
 
 ## Support files
 

@@ -1,10 +1,11 @@
 ---
 name: github-presence
-description: Audit and improve GitHub profile and repository presentation, including profile READMEs, pinned repositories, README quality, community health files, templates, and metadata. Use when the task is to make GitHub surfaces more credible, scannable, and complete.
+description: Audit and improve GitHub profile, organization, and repository presentation. Use for profile READMEs, pinned repositories, README quality, community health files, templates, and repo metadata.
 license: Proprietary
+compatibility: Agent Skills-compatible coding agents with file tools; may require manual GitHub UI follow-up for pinned repos and profile metadata.
 metadata:
   owner: mattriley
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 
@@ -88,4 +89,4 @@ metadata:
 
 - Read `references/profile-surface.md` when the task is about a personal or organization GitHub profile.
 - Read `references/repository-surface.md` when the task is about repo README, metadata, community files, or templates.
-- Read `AGENTS.md` when you need concrete file-generation recipes for profile or repository surfaces.
+- Read `references/generation-recipes.md` when you need concrete file-generation recipes for profile or repository surfaces.

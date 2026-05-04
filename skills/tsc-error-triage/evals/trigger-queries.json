@@ -1,0 +1,26 @@
+[
+  {
+    "query": "TypeScript exploded after this refactor; find the root cause before patching every error.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix the tsc --noEmit errors after upgrading this dependency.",
+    "should_trigger": true
+  },
+  {
+    "query": "I enabled a strict TS flag and now there are 80 compiler errors; triage them.",
+    "should_trigger": true
+  },
+  {
+    "query": "Change tsconfig to enable strict mode.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add type tests for a generic helper.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix a runtime bug with no compiler errors.",
+    "should_trigger": false
+  }
+]

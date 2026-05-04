@@ -1,5 +1,7 @@
 interface:
-  display_name: 'GitHub Presence'
-  short_description: 'Audit and improve GitHub profile and repository presentation, including profile READMEs, pinned repositories, README quality, community health files, templates, and metadata. Use when the task is to make GitHub surfaces more credible, scannable, and complete.'
+  display_name: GitHub Presence
+  short_description: Audit and improve GitHub profile, organization, and repository
+    presentation. Use for profile READMEs, pinned repositories, README quality, community
+    health files, templates, and repo metadata.
 policy:
   allow_implicit_invocation: true
