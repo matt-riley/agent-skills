@@ -23,6 +23,145 @@ jobs:
     secrets:
       token: ${{ secrets.RELEASE_PLEASE_TOKEN || github.token }}
 
+  tag-skill-versions:
+    name: Tag skill versions
+    needs: release
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+
+      - name: Fetch tags
+        run: git fetch --force --tags origin
+
+      - name: Detect skill version bumps
+        id: detect
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          python <<'PY'
+          import json
+          import os
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          before = os.environ.get('BEFORE_SHA', '')
+          head = os.environ['HEAD_SHA']
+          zero = '0' * 40
+
+          if not before or before == zero:
+              print('No previous push SHA available; skipping skill tag detection.')
+              with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
+                  fh.write('tags_json=[]\n')
+              raise SystemExit(0)
+
+          def git_show(ref: str, file_path: str):
+              try:
+                  return subprocess.check_output(
+                      ['git', 'show', f'{ref}:{file_path}'],
+                      text=True,
+                      stderr=subprocess.DEVNULL,
+                  )
+              except subprocess.CalledProcessError:
+                  return None
+
+          before_manifest_text = git_show(before, '.release-please-manifest.json')
+          head_manifest_text = git_show(head, '.release-please-manifest.json')
+          if before_manifest_text is None or head_manifest_text is None:
+              print('Release Please manifest not available on both sides of the push; skipping.')
+              with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
+                  fh.write('tags_json=[]\n')
+              raise SystemExit(0)
+
+          before_manifest = json.loads(before_manifest_text)
+          head_manifest = json.loads(head_manifest_text)
+          config = json.loads(Path('release-please-config.json').read_text())
+          packages = config['packages']
+
+          tags = []
+          for skill_path in sorted(head_manifest):
+              if not skill_path.startswith('skills/'):
+                  continue
+              if before_manifest.get(skill_path) == head_manifest[skill_path]:
+                  continue
+
+              package_cfg = packages.get(skill_path, {})
+              if not package_cfg.get('skip-github-release'):
+                  continue
+
+              component = package_cfg.get('package-name')
+              if not component:
+                  print(f'::warning::{skill_path} is missing package-name in release-please-config.json; skipping.')
+                  continue
+
+              version = head_manifest[skill_path]
+              tags.append({
+                  'path': skill_path,
+                  'component': component,
+                  'version': version,
+                  'tag': f'{component}-v{version}',
+              })
+
+          print(f'Detected {len(tags)} skill version bump(s).')
+          for item in tags:
+              print(f"- {item['path']} -> {item['tag']}")
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
+              fh.write(f"tags_json={json.dumps(tags, separators=(',', ':'))}\n")
+          PY
+
+      - name: Configure git
+        if: ${{ steps.detect.outputs.tags_json != '[]' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create missing skill tags
+        if: ${{ steps.detect.outputs.tags_json != '[]' }}
+        env:
+          TAGS_JSON: ${{ steps.detect.outputs.tags_json }}
+          TARGET_SHA: ${{ github.sha }}
+        run: |
+          python <<'PY'
+          import json
+          import os
+          import subprocess
+
+          tags = json.loads(os.environ['TAGS_JSON'])
+          target_sha = os.environ['TARGET_SHA']
+          created = []
+
+          for item in tags:
+              tag = item['tag']
+              exists = subprocess.run(
+                  ['git', 'ls-remote', '--exit-code', '--tags', 'origin', f'refs/tags/{tag}'],
+                  stdout=subprocess.DEVNULL,
+                  stderr=subprocess.DEVNULL,
+                  check=False,
+              ).returncode == 0
+              if exists:
+                  print(f'Tag already exists on origin: {tag}')
+                  continue
+
+              print(f'Creating tag {tag} at {target_sha}')
+              subprocess.check_call(['git', 'tag', '-a', tag, target_sha, '-m', f'Release {tag}'])
+              created.append(tag)
+
+          if not created:
+              print('No new skill tags to push.')
+              raise SystemExit(0)
+
+          subprocess.check_call(['git', 'push', 'origin', *created])
+          print('Pushed tags:', ', '.join(created))
+          PY
+
   publish-package:
     name: Publish root package
     needs: release

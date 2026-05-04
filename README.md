@@ -123,11 +123,12 @@ python _shared/validate-skills.py skills
 
 This repo uses Release Please via the shared workflow in `matt-riley-ci`.
 
-- the root package `@matt-riley/agent-skills` is one releasable component
-- each `skills/<name>` directory is also a separate releasable component with its own version
+- the root package `@matt-riley/agent-skills` is the only component that creates a GitHub Release entry
+- each `skills/<name>` directory keeps its own automatically managed version
 - skill versions are tracked in `.release-please-manifest.json` and mirrored into `SKILL.md` frontmatter at `metadata.version`
 - the `# x-release-please-version` marker on each skill version line lets Release Please update the frontmatter automatically
-- version bumps still follow conventional commits, so `feat:` and `fix:` messages on a skill path drive that skill's next release
+- version bumps still follow conventional commits, so `feat:` and `fix:` messages on a skill path drive that skill's next version
+- changed skills get plain git tags like `<skill-name>-v<version>` rather than GitHub Release entries
 - only the root npm package is published, and it is published to GitHub Packages when a root release is created
 
 When adding a new skill, add both:

@@ -11,6 +11,7 @@
     },
     "skills/astro-seo": {
       "package-name": "astro-seo",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -20,6 +21,7 @@
     },
     "skills/ci-images": {
       "package-name": "ci-images",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -29,6 +31,7 @@
     },
     "skills/cloudflare-d1-migrations": {
       "package-name": "cloudflare-d1-migrations",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -38,6 +41,7 @@
     },
     "skills/cloudflare-d1-query-tuning": {
       "package-name": "cloudflare-d1-query-tuning",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -47,6 +51,7 @@
     },
     "skills/code-generation": {
       "package-name": "code-generation",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -56,6 +61,7 @@
     },
     "skills/configuration-env": {
       "package-name": "configuration-env",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -65,6 +71,7 @@
     },
     "skills/database-migrations": {
       "package-name": "database-migrations",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -74,6 +81,7 @@
     },
     "skills/docker-compose-dev": {
       "package-name": "docker-compose-dev",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -83,6 +91,7 @@
     },
     "skills/git-worktrees": {
       "package-name": "git-worktrees",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -92,6 +101,7 @@
     },
     "skills/github-actions-failure-triage": {
       "package-name": "github-actions-failure-triage",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -101,6 +111,7 @@
     },
     "skills/github-presence": {
       "package-name": "github-presence",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -110,6 +121,7 @@
     },
     "skills/http-api-openapi": {
       "package-name": "http-api-openapi",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -119,6 +131,7 @@
     },
     "skills/implementation-review": {
       "package-name": "implementation-review",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -128,6 +141,7 @@
     },
     "skills/integration-testing-http": {
       "package-name": "integration-testing-http",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -137,6 +151,7 @@
     },
     "skills/make-interfaces-feel-better": {
       "package-name": "make-interfaces-feel-better",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -146,6 +161,7 @@
     },
     "skills/observability-metrics": {
       "package-name": "observability-metrics",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -155,6 +171,7 @@
     },
     "skills/plan-review": {
       "package-name": "plan-review",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -164,6 +181,7 @@
     },
     "skills/repository-adapters": {
       "package-name": "repository-adapters",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -173,6 +191,7 @@
     },
     "skills/reverse-prompt": {
       "package-name": "reverse-prompt",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -182,6 +201,7 @@
     },
     "skills/review-comment-resolution": {
       "package-name": "review-comment-resolution",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -191,6 +211,7 @@
     },
     "skills/rpi-workflow": {
       "package-name": "rpi-workflow",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -200,6 +221,7 @@
     },
     "skills/schema-boundary-typing": {
       "package-name": "schema-boundary-typing",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -209,6 +231,7 @@
     },
     "skills/security-basics": {
       "package-name": "security-basics",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -218,6 +241,7 @@
     },
     "skills/session-store-history": {
       "package-name": "session-store-history",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -227,6 +251,7 @@
     },
     "skills/skill-creator": {
       "package-name": "skill-creator",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -236,6 +261,7 @@
     },
     "skills/templ-templates": {
       "package-name": "templ-templates",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -245,6 +271,7 @@
     },
     "skills/testing-workflows": {
       "package-name": "testing-workflows",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -254,6 +281,7 @@
     },
     "skills/tsc-error-triage": {
       "package-name": "tsc-error-triage",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -263,6 +291,7 @@
     },
     "skills/tsconfig-hardening": {
       "package-name": "tsconfig-hardening",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -272,6 +301,7 @@
     },
     "skills/type-test-authoring": {
       "package-name": "type-test-authoring",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
@@ -281,6 +311,7 @@
     },
     "skills/writing-and-editing": {
       "package-name": "writing-and-editing",
+      "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
