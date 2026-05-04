@@ -8,7 +8,7 @@ license: Proprietary
 compatibility: Agent Skills spec format; usable by terminal-based AI coding agents.
 metadata:
   owner: mattriley
-  version: 1.1.0
+  version: 1.1.0 # x-release-please-version
   maturity: stable
 ---
 

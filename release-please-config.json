@@ -1,0 +1,292 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "simple",
+  "skip-changelog": true,
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "@matt-riley/agent-skills"
+    },
+    "skills/astro-seo": {
+      "package-name": "astro-seo",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/astro-seo/SKILL.md"
+        }
+      ]
+    },
+    "skills/ci-images": {
+      "package-name": "ci-images",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/ci-images/SKILL.md"
+        }
+      ]
+    },
+    "skills/cloudflare-d1-migrations": {
+      "package-name": "cloudflare-d1-migrations",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/cloudflare-d1-migrations/SKILL.md"
+        }
+      ]
+    },
+    "skills/cloudflare-d1-query-tuning": {
+      "package-name": "cloudflare-d1-query-tuning",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/cloudflare-d1-query-tuning/SKILL.md"
+        }
+      ]
+    },
+    "skills/code-generation": {
+      "package-name": "code-generation",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/code-generation/SKILL.md"
+        }
+      ]
+    },
+    "skills/configuration-env": {
+      "package-name": "configuration-env",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/configuration-env/SKILL.md"
+        }
+      ]
+    },
+    "skills/database-migrations": {
+      "package-name": "database-migrations",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/database-migrations/SKILL.md"
+        }
+      ]
+    },
+    "skills/docker-compose-dev": {
+      "package-name": "docker-compose-dev",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/docker-compose-dev/SKILL.md"
+        }
+      ]
+    },
+    "skills/git-worktrees": {
+      "package-name": "git-worktrees",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/git-worktrees/SKILL.md"
+        }
+      ]
+    },
+    "skills/github-actions-failure-triage": {
+      "package-name": "github-actions-failure-triage",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/github-actions-failure-triage/SKILL.md"
+        }
+      ]
+    },
+    "skills/github-presence": {
+      "package-name": "github-presence",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/github-presence/SKILL.md"
+        }
+      ]
+    },
+    "skills/http-api-openapi": {
+      "package-name": "http-api-openapi",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/http-api-openapi/SKILL.md"
+        }
+      ]
+    },
+    "skills/implementation-review": {
+      "package-name": "implementation-review",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/implementation-review/SKILL.md"
+        }
+      ]
+    },
+    "skills/integration-testing-http": {
+      "package-name": "integration-testing-http",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/integration-testing-http/SKILL.md"
+        }
+      ]
+    },
+    "skills/make-interfaces-feel-better": {
+      "package-name": "make-interfaces-feel-better",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/make-interfaces-feel-better/SKILL.md"
+        }
+      ]
+    },
+    "skills/observability-metrics": {
+      "package-name": "observability-metrics",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/observability-metrics/SKILL.md"
+        }
+      ]
+    },
+    "skills/plan-review": {
+      "package-name": "plan-review",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/plan-review/SKILL.md"
+        }
+      ]
+    },
+    "skills/repository-adapters": {
+      "package-name": "repository-adapters",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/repository-adapters/SKILL.md"
+        }
+      ]
+    },
+    "skills/reverse-prompt": {
+      "package-name": "reverse-prompt",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/reverse-prompt/SKILL.md"
+        }
+      ]
+    },
+    "skills/review-comment-resolution": {
+      "package-name": "review-comment-resolution",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/review-comment-resolution/SKILL.md"
+        }
+      ]
+    },
+    "skills/rpi-workflow": {
+      "package-name": "rpi-workflow",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/rpi-workflow/SKILL.md"
+        }
+      ]
+    },
+    "skills/schema-boundary-typing": {
+      "package-name": "schema-boundary-typing",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/schema-boundary-typing/SKILL.md"
+        }
+      ]
+    },
+    "skills/security-basics": {
+      "package-name": "security-basics",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/security-basics/SKILL.md"
+        }
+      ]
+    },
+    "skills/session-store-history": {
+      "package-name": "session-store-history",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/session-store-history/SKILL.md"
+        }
+      ]
+    },
+    "skills/skill-creator": {
+      "package-name": "skill-creator",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/skill-creator/SKILL.md"
+        }
+      ]
+    },
+    "skills/templ-templates": {
+      "package-name": "templ-templates",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/templ-templates/SKILL.md"
+        }
+      ]
+    },
+    "skills/testing-workflows": {
+      "package-name": "testing-workflows",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/testing-workflows/SKILL.md"
+        }
+      ]
+    },
+    "skills/tsc-error-triage": {
+      "package-name": "tsc-error-triage",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/tsc-error-triage/SKILL.md"
+        }
+      ]
+    },
+    "skills/tsconfig-hardening": {
+      "package-name": "tsconfig-hardening",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/tsconfig-hardening/SKILL.md"
+        }
+      ]
+    },
+    "skills/type-test-authoring": {
+      "package-name": "type-test-authoring",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/type-test-authoring/SKILL.md"
+        }
+      ]
+    },
+    "skills/writing-and-editing": {
+      "package-name": "writing-and-editing",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/writing-and-editing/SKILL.md"
+        }
+      ]
+    }
+  }
+}

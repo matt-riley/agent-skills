@@ -4,7 +4,7 @@ description: Draft structured documents, audit multi-paragraph prose for readabi
 license: Proprietary
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: draft
 ---
 

@@ -2,6 +2,7 @@
 name: github-actions-failure-triage
 description: Diagnose and minimally fix failing GitHub Actions runs in repositories already using GitHub Actions.
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: ci
   audience: general-coding-agent
   maturity: stable

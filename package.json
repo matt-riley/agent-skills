@@ -18,6 +18,10 @@
     "README.md",
     "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "validate": "python _shared/validate-skills.py skills",
     "link:user": "bash scripts/link-user-skills.sh"

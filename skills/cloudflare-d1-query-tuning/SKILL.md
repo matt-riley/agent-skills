@@ -5,7 +5,7 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a Cloudflare Workers repository with a D1 binding plus Wrangler or repo-owned D1 wrappers.
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: draft
 ---
 

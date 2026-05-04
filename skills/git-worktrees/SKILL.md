@@ -5,7 +5,7 @@ license: Proprietary
 compatibility: git repositories with worktree support; useful for human or multi-agent parallel work where isolated checkouts reduce conflicts.
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: stable
 ---
 

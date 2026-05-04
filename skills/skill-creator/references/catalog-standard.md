@@ -66,8 +66,11 @@ Local standard optional fields:
 
 - `license: Proprietary`
 - `compatibility` when environment assumptions matter
+- `metadata.version` when the skill is release-managed
 - `metadata.maturity`
 - additional metadata only when it is genuinely useful and used consistently in this personal catalog
+
+If a skill is release-managed in this repo, keep `metadata.version` as the human-visible mirror of the version tracked in `.release-please-manifest.json`.
 
 Use `metadata.maturity` deliberately:
 

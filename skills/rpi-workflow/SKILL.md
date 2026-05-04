@@ -9,7 +9,7 @@ compatibility: Agent Skills-compatible coding agents; works best with workspace 
   and `files/` artifacts plus file references when the harness supports them.
 metadata:
   owner: mattriley
-  version: 1.2.0
+  version: 1.2.0 # x-release-please-version
   maturity: draft
 ---
 

@@ -9,7 +9,7 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents; works best with git-backed repos, diff or review context, and repo-local instruction files.
 metadata:
   owner: mattriley
-  version: 1.2.0
+  version: 1.2.0 # x-release-please-version
   maturity: draft
 ---
 

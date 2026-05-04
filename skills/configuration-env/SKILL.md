@@ -10,7 +10,7 @@ compatibility: Agent Skills-compatible coding agents with file and shell tools; 
   for config validation.
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: draft
 ---
 

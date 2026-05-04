@@ -5,7 +5,7 @@ license: Proprietary
 compatibility: Harnesses that expose a read-only `sql` tool and a `session_store`-style history database.
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: draft
 ---
 

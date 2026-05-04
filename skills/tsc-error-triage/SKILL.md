@@ -2,6 +2,7 @@
 name: tsc-error-triage
 description: Diagnose and resolve TypeScript compiler errors by finding the smallest root-cause fix before editing call sites.
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable

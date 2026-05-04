@@ -6,7 +6,7 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents; works best with workspace plan artifacts, reviewer loops, and repo-local instruction files.
 metadata:
   owner: mattriley
-  version: 1.1.0
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 

@@ -8,7 +8,7 @@ compatibility: Agent Skills-compatible coding agents with file and shell tools; 
   generator CLIs such as sqlc or templ.
 metadata:
   owner: mattriley
-  version: 1.1.0
+  version: 1.1.0 # x-release-please-version
   maturity: draft
 ---
 

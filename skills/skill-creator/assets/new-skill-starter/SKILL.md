@@ -5,7 +5,7 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents; adjust only if this skill depends on a narrower environment or workflow.
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: draft
 ---
 

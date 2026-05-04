@@ -5,7 +5,7 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents; useful before research, planning, or direct implementation when a sharper brief would materially improve execution.
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: stable
 ---
 

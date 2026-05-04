@@ -32,12 +32,13 @@ license: Proprietary
 compatibility: Agent Skills-compatible coding agents
 metadata:
   owner: mattriley
-  version: 1.0.0
+  version: 1.0.0 # x-release-please-version
   maturity: draft
 ---
 ```
 
 Only keep `compatibility` if the environment assumption matters for the skill.
+If the new skill should participate in release automation, keep the marker comment and add the skill to `release-please-config.json` plus `.release-please-manifest.json`.
 
 ## Recommended support files
 

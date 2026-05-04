@@ -2,6 +2,7 @@
 name: tsconfig-hardening
 description: Tighten and rationalize TypeScript configuration safely, especially when enabling stricter compiler checks incrementally.
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable
