@@ -1,13 +1,10 @@
 ---
 name: integration-testing-http
-description: Run and extend end-to-end HTTP integration tests for server behavior. Use when handlers, middleware, auth, request/response shapes, or API contracts change.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash plus repository test commands for
-  HTTP integration coverage.
+description: "Run and extend end-to-end HTTP integration tests for server behavior. Use when handlers, middleware, auth, request/response shapes, or API contracts change."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Integration testing (HTTP)
@@ -33,6 +30,13 @@ metadata:
 ## First move
 
 - Run the targeted integration test with `-v` and read the real request/response output before proposing fixes.
+
+## Outputs
+
+- Targeted HTTP integration tests or assertions covering the touched endpoint's status codes, auth behavior, request validation, response shape, and side effects.
+- New or updated integration cases for changed endpoints, including OpenAPI-aligned expectations when the contract also changed.
+- Narrow test rerun results plus broader suite status when shared handlers or middleware were affected.
+
 
 ## Catalog position
 

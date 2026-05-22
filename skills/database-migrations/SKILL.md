@@ -1,15 +1,10 @@
 ---
 name: database-migrations
-description: Create, apply, inspect, and recover database schema migrations after
-  detecting the repository's migration contract. Use when changing persistent schema,
-  adding indexes/constraints, or troubleshooting migration state.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash plus the repository migration tool
-  or make targets.
+description: "Create, apply, inspect, and recover database schema migrations after detecting the repository's migration contract. Use when changing persistent schema, adding indexes/constraints, or troubleshooting migration state."
 metadata:
   owner: mattriley
-  version: 1.2.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 ## Use this skill when
@@ -57,6 +52,13 @@ Inspect the repo contract before suggesting commands or file edits. Determine wh
 4. Complete the follow-on validation the repo expects.
    - Regenerate downstream artifacts if schema changes feed generators such as `sqlc`.
    - Run the smallest relevant tests/checks after the migration path is correct.
+
+## Outputs
+
+- The repo's migration contract and correct migration entrypoints identified before any schema changes are applied.
+- New or corrected migration artifacts created through the repo's expected scaffolding or generation path.
+- Migration status/history plus downstream code-generation or test evidence confirming the expected schema state.
+
 
 ## Guardrails
 

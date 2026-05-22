@@ -1,15 +1,10 @@
 ---
 name: templ-templates
-description: Edit and troubleshoot server-side HTML templates (.templ files for Go's
-  templ framework), including regeneration and handler wiring. Use when changing UI
-  components, layouts, or page templates.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, go, templ, and repository-local Go
-  template generation flow.
+description: "Edit and troubleshoot server-side HTML templates (.templ files for Go's templ framework), including regeneration and handler wiring. Use when changing UI components, layouts, or page templates."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Templ templates
@@ -60,6 +55,13 @@ templ generate          # or: make templ-generate / make generate
 go build ./...
 make test
 ```
+
+## Outputs
+
+- Edited `.templ` source files and regenerated `*_templ.go` artifacts produced through the repo's normal templ command.
+- Template-to-handler wiring that passes typed data cleanly and preserves `Content-Type: text/html; charset=utf-8` for rendered responses.
+- Build and test evidence showing the regenerated templates compile and behave as expected.
+
 
 ## Handler wiring
 

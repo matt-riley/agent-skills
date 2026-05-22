@@ -1,15 +1,10 @@
 ---
 name: docker-compose-dev
-description: Run a service stack locally using Docker Compose for prod-like development
-  (e.g. PostgreSQL + app). Use when you need a real DB backend, multi-service integration,
-  or want to reproduce production-like behavior locally.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, docker, curl, and a repository docker-compose
-  workflow.
+description: "Run a service stack locally using Docker Compose for prod-like development (e.g. PostgreSQL + app). Use when you need a real DB backend, multi-service integration, or want to reproduce production-like behavior locally."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Docker Compose dev stack
@@ -34,6 +29,13 @@ metadata:
 ## First move
 
 - Copy `.env.example` to `.env`, bring the stack up, run migrations if not auto-applied, and verify the health endpoint.
+
+## Outputs
+
+- A compose-backed local stack started from the repo's `.env` template with required migrate or seed steps applied deliberately.
+- Running service state confirmed via `docker compose ps`, logs, and/or the repo's health endpoint.
+- An explicit teardown/reset outcome, including whether persistent volumes were preserved or intentionally destroyed.
+
 
 ## Quick start
 

@@ -1,15 +1,10 @@
 ---
 name: ci-images
-description: Validate CI checks locally and manage Docker image publishing workflows.
-  Use when changing build inputs (generated code, formatting, tests), preparing a
-  release, or verifying that image tags are correct.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, git, make, go, docker, and repo-local
-  CI equivalent commands.
+description: "Validate CI checks locally and manage Docker image publishing workflows. Use when changing build inputs (generated code, formatting, tests), preparing a release, or verifying that image tags are correct."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # CI images
@@ -34,6 +29,13 @@ metadata:
 ## First move
 
 - Run the local equivalents of each CI check in order and fix each one before moving on.
+
+## Outputs
+
+- Local CI parity results for generation, formatting, static analysis, and tests, with the failing stage identified or green status confirmed.
+- Release-readiness status showing generated artifacts are current and the working tree only contains intended changes.
+- Confirmed image publishing trigger and tag set (`vX.Y.Z`, `X.Y`, `X`, `latest`) for the release path under review.
+
 
 ## CI checks → local equivalents
 
@@ -80,4 +82,4 @@ Standard tagging strategy on release:
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.
-- Run `scripts/release-readiness.sh --help` when you want a parameterised release-readiness check.
+- [`scripts/release-readiness.sh`](scripts/release-readiness.sh) — run with `--help` for a parameterised release-readiness check.

@@ -28,7 +28,7 @@ Use lean frontmatter that tells the agent what the skill does and when to use it
 ---
 name: <new-skill-name>
 description: <what the skill does and when to use it from the user's point of view>
-license: Proprietary
+license: GNU GPL v3
 compatibility: Agent Skills-compatible coding agents
 metadata:
   owner: mattriley
@@ -38,6 +38,7 @@ metadata:
 ```
 
 Only keep `compatibility` if the environment assumption matters for the skill.
+Use the repo-root `LICENSE` file as the canonical license text.
 If the new skill should participate in release automation, keep the marker comment and add the skill to `release-please-config.json` plus `.release-please-manifest.json`.
 
 ## Recommended support files

@@ -1,16 +1,10 @@
 ---
 name: rpi-workflow
-description: Apply a Research -> Plan -> Implement -> Validate workflow for
-  non-trivial work in agent-compatible coding harnesses, keeping progress
-  durable across turns and sessions via workspace `plan.md` and `files/`
-  artifacts.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents; works best with workspace `plan.md`
-  and `files/` artifacts plus file references when the harness supports them.
+description: "Apply a Research -> Plan -> Implement -> Validate workflow for non-trivial work in agent-compatible coding harnesses, keeping progress durable across turns and sessions via workspace `plan.md` and `files/` artifacts."
 metadata:
   owner: mattriley
-  version: 1.3.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Research -> Plan -> Implement -> Validate (RPI-V)
@@ -83,6 +77,13 @@ metadata:
 - Run the most relevant verification first (targeted), then broaden as needed.
 - Compare the result against `plan.md`; call out intentional or accidental deviations.
 - Record follow-ups or residual risks; save a handoff note in `files/` only when evidence needs to persist (e.g. `files/validation-<topic>.md`).
+
+## Outputs
+
+- A workspace `plan.md` and any necessary `files/` notes that capture the research, plan, implementation phases, and validation path.
+- Implementation progress delivered one meaningful phase at a time against the documented plan.
+- A validation summary comparing the final result to the plan, including residual risks, deviations, or follow-up work that must persist.
+
 
 ## Guardrails
 

@@ -1,12 +1,10 @@
 ---
 name: github-presence
-description: Audit and improve GitHub profile, organization, and repository presentation. Use for profile READMEs, pinned repositories, README quality, community health files, templates, and repo metadata.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file tools; may require manual GitHub UI follow-up for pinned repos and profile metadata.
+description: "Audit and improve GitHub profile, organization, and repository presentation. Use for profile READMEs, pinned repositories, README quality, community health files, templates, and repo metadata."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # GitHub presence
@@ -69,6 +67,13 @@ metadata:
 4. **Writing follow-through.**
    - Use [`writing-and-editing`](../writing-and-editing/SKILL.md) when generated bios, descriptions, README prose, or taglines need a dedicated writing-quality pass.
    - Keep the broader GitHub-surface audit here; do not outsource the main routing decision.
+
+## Outputs
+
+- An audit of the target profile, repository, or org-defaults surface identifying the highest-impact presentation and trust gaps.
+- Generated or improved README, community-health, or template files in the correct GitHub location for that surface.
+- A concrete list of metadata, pinned-repo, or other manual GitHub settings changes that cannot be expressed through files alone.
+
 
 ## Guardrails
 

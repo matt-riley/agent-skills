@@ -1,12 +1,10 @@
 ---
 name: writing-and-editing
-description: Draft structured documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary work is writing, editing, or copy quality.
-license: Proprietary
-compatibility: Agent Skills-compatible agents; works with repository files or pasted prose and does not require shell tools unless scoring or file edits are requested.
+description: "Draft structured documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary work is writing, editing, or copy quality."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Writing and editing
@@ -77,6 +75,13 @@ metadata:
 5. **Handle cross-mode work deliberately.**
    - Draft first, then run readability or metadata review only after the structure or field set is stable.
    - If the user really wants only one narrow pass, do not broaden into the other modes automatically.
+
+## Outputs
+
+- A mode-specific deliverable: drafted document sections, a readability audit with evidence and score, or concrete metadata rewrites.
+- Audience-aware structure or grouped feedback that stays aligned to the chosen `draft`, `readability-audit`, or `metadata-audit` mode.
+- A final pass result for the selected mode without drifting into unrelated review or planning workflows.
+
 
 ## Guardrails
 

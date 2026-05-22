@@ -1,11 +1,9 @@
 ---
 name: astro-seo
-description: Audit and improve SEO for Astro sites, including metadata, structured data, sitemaps, indexing, Open Graph images, schema endpoints, and related search visibility setup.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes an Astro project and repository-local build/check commands.
+description: "Audit and improve SEO for Astro sites, including metadata, structured data, sitemaps, indexing, Open Graph images, schema endpoints, and related search visibility setup."
 metadata:
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Astro SEO
@@ -68,6 +66,13 @@ metadata:
 4. Implement the missing pieces, using `references/implementation-recipes.md` for concrete code recipes when needed.
 5. Run [`writing-and-editing`](../writing-and-editing/SKILL.md) in metadata-audit mode on any short SEO strings you generated or rewrote, such as titles, descriptions, schema descriptions, FAQ answers, or frontmatter excerpts.
 6. If the task also produced long-form prose, mention [`writing-and-editing`](../writing-and-editing/SKILL.md) in readability-audit mode as a follow-up rather than trying to audit the whole content corpus inline.
+
+## Outputs
+
+- SEO audit findings tied to the actual Astro files and routes that control metadata, canonicals, schema, sitemap, robots, and OG output.
+- Implemented or recommended Astro SEO changes such as config/component updates or an `@jdevalk/astro-seo-graph` install/upgrade path.
+- Validation evidence from representative pages or generated artifacts showing the expected canonical, metadata, schema, and crawl-surface output.
+
 
 ## Guardrails
 

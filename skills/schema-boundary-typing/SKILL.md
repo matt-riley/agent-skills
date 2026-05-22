@@ -1,10 +1,7 @@
 ---
 name: schema-boundary-typing
-description: Introduce or refine runtime schema validation at untrusted boundaries so static TypeScript types stay truthful.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a TypeScript project with typecheck and test commands.
+description: "Introduce or refine runtime schema validation at untrusted boundaries so static TypeScript types stay truthful."
 metadata:
-  version: 1.1.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable
@@ -64,18 +61,54 @@ metadata:
 - **Should** prefer a simple local guard when the boundary is small, one-off, and unlikely to be shared.
 - **May** keep a separate domain model when transport shapes and internal models differ materially.
 
+## Routing boundary
+
+- Route here from [`typescript-any-eliminator`](../typescript-any-eliminator/SKILL.md) when replacing `any` requires runtime boundary validation to make types truthful.
+- After boundary types are stable, route compile-time contract locking to [`type-test-authoring`](../type-test-authoring/SKILL.md).
+
 ## Validation
 
 - Run targeted tests for valid and invalid boundary inputs.
+- Verify invalid payloads produce the expected failure shape: field errors, result-object errors, or thrown boundary errors that match the repository's convention.
 - Re-run typecheck after deriving or re-exporting the validated type.
 - Confirm consumers no longer rely on unvalidated `unknown` or ad hoc casts.
+- Keep [`references/boundary-validation-scenarios.md`](references/boundary-validation-scenarios.md) in sync when the repo's error-handling convention, schema library, or transport-to-domain boundary changes.
+
+- Smoke test:
+  - should trigger: "Validate this JSON request body at the API edge and export the safe type."
+  - should not trigger: "Add compile-time tests for this inferred API type." (→ `type-test-authoring`)
 
 ## Examples
 
-- "Add runtime validation to this API payload and derive the TypeScript type from it."
-- "This JSON parsing helper returns weakly typed data. Introduce a schema at the boundary."
-- "Use the existing validator library to make this webhook payload type-safe."
+- `Before`
+  ```ts
+  const payload: User = JSON.parse(raw);
+  ```
+  `After`
+  ```ts
+  const payload = UserSchema.parse(JSON.parse(raw));
+  ```
+- `Failure shape` (custom result wrapper when callers branch on success or failure)
+  ```ts
+  {
+    ok: false,
+    errors: [
+      { path: ['body', 'email'], message: 'Invalid email address' },
+    ],
+  }
+  ```
+- `Before`
+  ```ts
+  export function readConfig(value: any) { return value.mode; }
+  ```
+  `After`
+  ```ts
+  export function readConfig(value: unknown) {
+    return ConfigSchema.parse(value).mode;
+  }
+  ```
 
 ## Reference files
 
 - [`references/schema-patterns.md`](references/schema-patterns.md) - patterns for schema-first validation, derivation, and transport-to-domain boundaries.
+- [`references/boundary-validation-scenarios.md`](references/boundary-validation-scenarios.md) - compact checklist for success, failure, and error-shape validation at the boundary.

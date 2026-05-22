@@ -1,11 +1,8 @@
 ---
 name: reverse-prompt
-description: Rewrite a rough request into a repository-grounded execution brief before research, planning, or implementation. Use when the user asks for a sharper prompt, better request, or contract-shaped brief.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents; useful before research, planning, or direct implementation when a sharper brief would materially improve execution.
+description: "Rewrite a rough request into a repository-grounded execution brief before research, planning, or implementation. Use when the user asks for a sharper prompt, better request, or contract-shaped brief."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: stable
 ---
 
@@ -49,6 +46,13 @@ metadata:
 - Missing target surfaces that cannot be safely inferred.
 - Conflicting goals or constraints that materially change the work.
 - Missing validation expectations for work that clearly needs a completion check.
+
+## Mode selection
+
+- Use `rewrite-and-return` when the user only wants a sharper brief or the next best prompt.
+- Use `rewrite-and-proceed` when the user asks you to sharpen the prompt and then act on it.
+- If both prompt-help wording and action wording appear, prefer `rewrite-and-proceed`.
+- If prompt-help intent is explicit but execution intent is absent, do not start the work; return the rewritten brief instead.
 
 ## First move
 
@@ -94,5 +98,7 @@ metadata:
 
 - Read `references/brief-template.md` when you need the canonical brief shape.
 - Read `references/contract-shaped-brief.md` when the user wants success criteria, definition-of-done language, or a stricter execution brief.
+- Read `references/context-needs-output.md` when the main blocker is missing repository context and you need to return a structured Must See / Should See / Already Have / Uncertainties response.
 - Read `references/decision-rules.md` when the choice between return-only, proceed, or blocker is unclear.
+- Read `references/rewrite-mode-scenarios.md` when mode-selection or blocker routing edge cases arise.
 - Read `assets/examples.md` when you want before/after examples or a quick sanity check for mode selection.

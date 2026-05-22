@@ -1,13 +1,10 @@
 ---
 name: configuration-env
-description: Configure applications safely through environment variables, .env files, and repo-owned runtime config such as Wrangler bindings. Use for startup failures, environment drift, or deployment bootstrap.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, curl, and a local service start command
-  for config validation.
+description: "Configure applications safely through environment variables, .env files, and repo-owned runtime config such as Wrangler bindings. Use for startup failures, environment drift, or deployment bootstrap."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Configuration and environment
@@ -34,6 +31,13 @@ metadata:
 ## First move
 
 - Compare real env vars and any `.env` against `.env.example` or the repo's config loader, then inspect runtime config files like `wrangler.*` for missing bindings or drift before starting the service and hitting `/health` or the closest existing startup check.
+
+## Outputs
+
+- A concrete config-drift diagnosis across real environment variables, `.env`, `.env.example`, and runtime binding files such as `wrangler.*`.
+- The required variable, binding, or loader changes needed for the service to start with the expected configuration contract.
+- Startup or `/health` verification showing the configuration was accepted, or an explicit blocker listing the missing required config.
+
 
 ## Catalog position
 
@@ -108,4 +112,4 @@ A healthy response confirms the configuration was accepted.
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.
-- Run `scripts/check-config.sh --help` when you want a repeatable environment/configuration check.
+- [`scripts/check-config.sh`](scripts/check-config.sh) — run with `--help` for a repeatable environment/configuration check.

@@ -1,13 +1,10 @@
 ---
 name: plan-review
-description: Create, revise, and approval-gate implementation plans when the
-  deliverable is a plan artifact or plan revision, not code.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents; works best with workspace plan artifacts, reviewer loops, and repo-local instruction files.
+description: "Create, revise, and approval-gate implementation plans when the deliverable is a plan artifact or plan revision, not code."
 metadata:
   owner: mattriley
-  version: 1.2.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Plan review
@@ -89,6 +86,13 @@ metadata:
    - The next implementation step is clear.
    - Stop at the planning handoff unless the user asks to implement or a broader approved workflow says to continue.
 
+## Outputs
+
+- A revised executable plan artifact covering phased work, validation commands, scope boundaries, assumptions, and notable risks.
+- Reviewer-by-reviewer verdicts on the current plan revision, with required changes separated from optional suggestions.
+- A final planning status of approved, blocked for revision, or advisory-only, plus the next implementation step.
+
+
 ## Guardrails
 
 - **Must** keep planning and research read-only unless the user explicitly asks for implementation.
@@ -121,3 +125,5 @@ metadata:
 - Read `references/reviewer-prompt.md` when preparing reviewer prompts or consolidating a review round.
 - Read `references/review-verdicts.md` when you want structured Jason/Freddy-style verdict tokens and same-round approval rules.
 - Read `references/personas/README.md` when you want to use or customize the Jason and Freddy reviewer personas.
+- [`references/personas/jason.md`](references/personas/jason.md) — Jason persona (implementation/execution risk focus)
+- [`references/personas/freddy.md`](references/personas/freddy.md) — Freddy persona (architecture/structural risk focus)

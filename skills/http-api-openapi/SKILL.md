@@ -1,13 +1,10 @@
 ---
 name: http-api-openapi
-description: Keep HTTP behavior and OpenAPI contracts in sync after detecting spec-first, code-first, or hybrid ownership. Use when endpoints, schemas, auth, or error shapes change.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash plus the repository HTTP/OpenAPI generation
-  or validation tooling.
+description: "Keep HTTP behavior and OpenAPI contracts in sync after detecting spec-first, code-first, or hybrid ownership. Use when endpoints, schemas, auth, or error shapes change."
 metadata:
   owner: mattriley
-  version: 1.2.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 ## Use this skill when
@@ -53,6 +50,13 @@ Determine the repo's contract flow before editing anything: spec-first, code-fir
 4. Run the repo's API checks.
    - Validate the spec when the repo has a validator.
    - Run the relevant integration/unit/contract tests for the changed surface.
+
+## Outputs
+
+- Updated contract-owner artifacts for the changed API surface, including spec, handler/type inputs, and any generated OpenAPI output the repo expects.
+- A documented behavior-to-contract alignment for auth requirements, request validation, response schemas, status codes, and error shapes.
+- Spec validation, generation, and/or API test evidence confirming the handler behavior and OpenAPI contract stay in sync.
+
 
 ## Guardrails
 

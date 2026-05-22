@@ -1,12 +1,10 @@
 ---
 name: implementation-review
-description: Review completed code changes, diffs, and implementation revisions for merge readiness. Use for code review, named reviewer approval, validation gaps, regressions, security risk, or scope drift.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents; works best with git-backed repos, diff or review context, and repo-local instruction files.
+description: "Review completed code changes, diffs, and implementation revisions for merge readiness. Use for code review, named reviewer approval, validation gaps, regressions, security risk, or scope drift."
 metadata:
   owner: mattriley
-  version: 1.3.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Implementation review
@@ -87,6 +85,13 @@ metadata:
    - Validation status is current and explicit.
    - Remaining risks, follow-ups, or deferred work are called out.
    - Do not present reviewer feedback execution as done unless the implementation was actually updated and re-reviewed.
+
+## Outputs
+
+- A frozen review target (diff, branch, PR, commit range, or file set) paired with the current validation evidence for that revision.
+- Consolidated blocker and optional findings tied to correctness, regression risk, security, rollout safety, and stated requirements.
+- A clear review verdict for the requested mode: advisory, blocked by requested changes, or approved under the required reviewer rule.
+
 
 ## Guardrails
 

@@ -1,15 +1,10 @@
 ---
 name: security-basics
-description: Apply security and privacy guardrails to application code. Use when touching
-  authentication, request handling, sensitive endpoint exposure, logging, or anything
-  that could leak data or allow unauthorised access.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes code review or implementation work touching
-  auth, request handling, or data exposure.
+description: "Apply security and privacy guardrails to application code. Use when touching authentication, request handling, sensitive endpoint exposure, logging, or anything that could leak data or allow unauthorised access."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Security basics
@@ -37,6 +32,13 @@ metadata:
 
 - Identify every auth, secret, input-trust, endpoint-exposure, and logging touchpoint in the change.
 - Run the review checklist below against each touchpoint before proposing fixes.
+
+## Outputs
+
+- A concrete security review or fix list covering auth, secrets, input validation, endpoint exposure, CORS/cookies, and logging touchpoints.
+- Checklist-backed confirmation that no hardcoded secrets, unsafe trust boundaries, leaked internals, or unprotected sensitive endpoints remain.
+- Targeted validation evidence for authorization failures, invalid input handling, and scrubbed logs or responses.
+
 
 ## Authentication & secrets
 

@@ -1,12 +1,10 @@
 ---
 name: testing-workflows
-description: Run, debug, and extend tests for Go projects, including generation prerequisites. Use when domain logic, repositories, HTTP handlers, migrations, or unexpected test failures need coverage.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, make, go, and repository test entrypoints.
+description: "Run, debug, and extend tests for Go projects, including generation prerequisites. Use when domain logic, repositories, HTTP handlers, migrations, or unexpected test failures need coverage."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Testing workflows
@@ -33,6 +31,13 @@ metadata:
 
 - Run the narrowest relevant test target first and read the actual failure output.
 - If compile errors reference generated packages, run `make generate` before re-running.
+
+## Outputs
+
+- A narrow failing-test reproduction and diagnosis, including generator refresh when stale generated inputs are the real cause.
+- New or updated tests for the touched domain, repository, or handler behavior at the correct scope.
+- Broader test-run evidence showing the fix or feature is ready beyond the isolated case.
+
 
 ## Fast paths
 

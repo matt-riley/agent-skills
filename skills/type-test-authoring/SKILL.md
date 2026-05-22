@@ -1,10 +1,7 @@
 ---
 name: type-test-authoring
-description: Write compile-time type tests that protect public TypeScript APIs, inference behavior, and negative cases.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a TypeScript project with typecheck or type-test fixtures.
+description: "Write compile-time type tests that protect public TypeScript APIs, inference behavior, and negative cases."
 metadata:
-  version: 1.1.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable
@@ -47,6 +44,22 @@ metadata:
 3. Identify the exact inference or assignability contract that needs protection.
 4. Add one positive and one negative case before broadening coverage.
 
+## Bootstrap without an existing pattern
+
+If the repository has no established type-test convention:
+
+1. Prefer a lightweight TypeScript fixture that the existing toolchain already understands.
+2. Use a dedicated `*.test-d.ts` or `*.type-test.ts` file when the contract needs to stay out of runtime code.
+3. Use inline `@ts-expect-error` only when the regression is tiny and close to the API that owns it.
+4. Keep the first pass small enough to validate with the repo's normal `tsc --noEmit` or equivalent.
+
+## Inline vs fixture-file tradeoffs
+
+- Inline assertions keep the example next to the code they protect and are best for one or two local cases.
+- Fixture files scale better when you need multiple positive and negative cases or want to keep runtime sources clean.
+- Fixture files are easier to expand later, but inline assertions are faster when the repo only needs a single regression lock.
+- If the contract is part of a public surface, prefer the style that makes the expected call shape easiest to read at a glance.
+
 ## Workflow
 
 1. Encode the expected inference or assignability behavior using the repository's current type-test tool, or the lightest new pattern justified by the repository's existing tooling.
@@ -63,19 +76,47 @@ metadata:
 - **Should** match the repository's current type-test tool instead of introducing a new one casually.
 - **Should** keep tests focused on exported or intentionally shared types.
 - **May** use compact helper aliases when the repository already has them.
+- **Should** stop at compile-time coverage when the bug is purely static; if the behavior depends on runtime data, use runtime tests instead.
+
+## Routing boundary
+
+- Use this skill after source typing work (for example via [`typescript-any-eliminator`](../typescript-any-eliminator/SKILL.md) or [`schema-boundary-typing`](../schema-boundary-typing/SKILL.md)) has made the target type surface truthful.
+- Keep this skill focused on compile-time guarantees only; route runtime API behavior tests to a runtime test skill.
+
+## Red flags
+
+- The contract only fails when the code executes, not when the type system checks it.
+- The first fixture would need a brand-new test harness instead of the existing TypeScript workflow.
+- The type assertion depends on generated data, environment state, or file system layout.
+- The test would be clearer as a small runtime example with a separate typecheck fixture for just the static boundary.
 
 ## Validation
 
 - Run the existing type-test command or the nearest equivalent fixture-based typecheck.
 - Confirm negative cases fail for the intended reason rather than from unrelated compiler noise.
 - Re-run adjacent runtime tests when the same API surface also changed at runtime.
+- Use [`references/type-test-scenarios.md`](references/type-test-scenarios.md) to choose inline assertions versus fixture/bootstrap patterns, and update it when the local type-test shape changes.
+
+- Smoke test:
+  - should trigger: "Add a compile-time test that locks parseUser inference."
+  - should not trigger: "Add a runtime API test for parseUser invalid input." (→ `test-driven-development`)
 
 ## Examples
 
-- "Add compile-time tests for this generic helper so inference regressions are caught."
-- "Lock down the public API types for this package with `tsd` or the repo's equivalent."
-- "Turn this type bug into a regression test with positive and negative cases."
+- `expectTypeOf`
+  ```ts
+  expectTypeOf(parseUser({ id: 1 })).toEqualTypeOf<User>();
+  // @ts-expect-error wrong shape
+  parseUser({ id: "1" });
+  ```
+- `@ts-expect-error` fixture
+  ```ts
+  acceptsString("ok");
+  // @ts-expect-error numbers are rejected
+  acceptsString(123);
+  ```
 
 ## Reference files
 
 - [`references/assertion-patterns.md`](references/assertion-patterns.md) - common positive and negative assertion patterns for compile-time type testing.
+- [`references/type-test-scenarios.md`](references/type-test-scenarios.md) - scenario checklist for choosing the lightest durable type-test structure.

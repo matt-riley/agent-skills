@@ -1,13 +1,10 @@
 ---
 name: code-generation
-description: Run and troubleshoot repository code generation after detecting the generator contract. Use when schema, query, spec, or template inputs changed, or generated output may be stale.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes bash, git, make, go, and project-specific
-  generator CLIs such as sqlc or templ.
+description: "Run and troubleshoot repository code generation after detecting the generator contract. Use when schema, query, spec, or template inputs changed, or generated output may be stale."
 metadata:
   owner: mattriley
-  version: 1.2.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 ## Use this skill when
@@ -59,6 +56,13 @@ Inspect the repo's build docs, CI workflow, and `.gitignore` before regenerating
    - Use the repo's diff or cleanliness check for generated files.
    - Build/test the affected area after generation succeeds.
 
+## Outputs
+
+- The repo's canonical generator entrypoints and output-handling contract (committed, ignored, or mixed) identified for the touched inputs.
+- Regenerated artifacts for the affected generators only, with the resulting diff or clean status inspected against the repo contract.
+- Follow-on build, test, or generated-output checks confirming the regenerated state is valid.
+
+
 ## Guardrails
 
 - Never edit generated files by hand; change the generator inputs or config instead.
@@ -79,4 +83,4 @@ Inspect the repo's build docs, CI workflow, and `.gitignore` before regenerating
 
 - Read `references/examples.md` when you need examples of stale-generation diagnosis or "regenerate before test" prompts.
 - Read `references/edge-cases.md` when the repo's committed-vs-ephemeral generation contract is unclear.
-- Run `scripts/check-generated.sh --help` when you need a deterministic generation + diff check for committed-output workflows.
+- [`scripts/check-generated.sh`](scripts/check-generated.sh) — run with `--help` for a deterministic generation + diff check for committed-output workflows.

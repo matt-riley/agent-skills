@@ -64,13 +64,14 @@ Required fields:
 
 Local standard optional fields:
 
-- `license: Proprietary`
+- `license: GNU GPL v3`
 - `compatibility` when environment assumptions matter
 - `metadata.version` when the skill is release-managed
 - `metadata.maturity`
 - additional metadata only when it is genuinely useful and used consistently in this personal catalog
 
 If a skill is release-managed in this repo, keep `metadata.version` as the human-visible mirror of the version tracked in `.release-please-manifest.json`.
+Use the repo-root `LICENSE` file as the canonical license text.
 
 Use `metadata.maturity` deliberately:
 

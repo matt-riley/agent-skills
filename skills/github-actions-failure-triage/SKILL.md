@@ -1,10 +1,7 @@
 ---
 name: github-actions-failure-triage
-description: Diagnose and minimally fix failing GitHub Actions runs in repositories already using GitHub Actions.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes access to GitHub Actions run evidence or workflow logs.
+description: "Diagnose and minimally fix failing GitHub Actions runs in repositories already using GitHub Actions."
 metadata:
-  version: 1.1.0 # x-release-please-version
   category: ci
   audience: general-coding-agent
   maturity: stable
@@ -29,6 +26,13 @@ Use this skill when a repository already uses GitHub Actions and the task is to 
 - The user is asking for greenfield CI design or a broad GitHub Actions redesign with no concrete failing run to anchor on.
 - The primary action required is changing org-admin settings, runner fleet configuration, branch protection, or environment policy rather than diagnosing a repository-owned failure.
 
+## Iron Law
+
+> **No edits before reading the concrete failing evidence.**
+>
+> Read the exact failing run, job, step, and logs before touching any file.
+> Speculative edits without evidence are the most common cause of wasted reruns.
+
 ## Routing boundary
 
 Use the closest matching workflow:
@@ -36,9 +40,11 @@ Use the closest matching workflow:
 | Situation | Use this skill? | Route instead |
 | --- | --- | --- |
 | Failing GitHub Actions run, job, or check in a repo already on Actions | Yes | - |
-| CI migration planning, parity checks, or staged cutover between CI systems | No | dedicated migration plan in `plan-review` |
+| CircleCI migration planning, parity checks, or staged cutover | No | [`circleci-to-github-actions-migration`](../circleci-to-github-actions-migration/SKILL.md) |
+| Broad CI migration planning, parity checks, or staged cutover between CI systems | No | dedicated migration plan in `plan-review` |
 | PR review-comment adjudication and fix batching | No | [`review-comment-resolution`](../review-comment-resolution/SKILL.md) |
 | Worktree or isolated branch setup for parallel changes | No | [`git-worktrees`](../git-worktrees/SKILL.md) |
+| Root cause found; local reproduction with `act` is feasible | No | [`github-actions-local-repro`](../github-actions-local-repro/SKILL.md) |
 
 ## Inputs to gather
 
@@ -66,6 +72,8 @@ Do not collect secret values. Only confirm whether the expected names, scopes, a
 
 ## First move
 
+**Announce at start:** "I'm using the github-actions-failure-triage skill to diagnose this run."
+
 1. Anchor the exact failing run, attempt, job, step, SHA, branch or ref, and event.
 2. Read the failed-step logs and surrounding setup context before editing anything.
 3. Map the failure to the exact workflow file, called reusable workflow, action version, or repository script that ran for that commit.
@@ -84,10 +92,25 @@ Do not collect secret values. Only confirm whether the expected names, scopes, a
 5. Apply the smallest justified change only after the evidence supports it.
 6. Validate as narrowly as possible:
    - relevant repository checks for the touched surface
-   - workflow linting such as `actionlint` when available or already expected
+   - workflow linting with `action-validator` or `actionlint` when available
    - targeted rerun, check, or workflow verification where practical
 7. Summarize the result using [`assets/triage-summary-template.md`](assets/triage-summary-template.md), including evidence, change made, validation, and any remaining blocker.
 8. If the failure really belongs to migration design, review-comment handling, or admin-only settings, stop and hand off cleanly instead of stretching the skill.
+
+## Quick decision appendix
+
+Use this as the fast path once the failure bucket is known:
+
+| Bucket | First safe move | Tightest fix | Rerun / escalation cue |
+| --- | --- | --- | --- |
+| Workflow syntax, trigger, or expression errors | Read the exact YAML and expression path that failed | Fix the broken key, trigger filter, or expression reference | Rerun only after the workflow parses cleanly |
+| Permissions, token, secret, or variable issues | Confirm the expected names and scopes without reading secret values | Adjust repo-owned permissions or secret wiring | Escalate when the dependency lives in org-admin or environment policy |
+| Runner or environment mismatch | Compare `runs-on`, image, labels, and shell assumptions | Switch to the correct runner or remove the environment-specific assumption | Escalate when the label or fleet health is outside repo control |
+| Matrix or fan-out issues | Identify the single failing axis | Tighten include/exclude logic or branch-specific setup | Rerun the narrow matrix leg after the fix |
+| Cache, artifact, job-output, or cross-job handoff failures | Compare the producer and consumer path or output name | Fix the exact path, name, or `needs` handoff | Rerun the downstream consumer after verifying the producer created the file |
+| Reusable workflow or action interface issues | Inspect both caller and callee contracts together | Align inputs, secrets, outputs, or ref pins | Escalate only if the contract change needs broader coordination |
+| Concurrency, cancellation, or dependency-order issues | Check `needs`, concurrency groups, and skip conditions | Remove the ordering bug or unsafe cancellation rule | Rerun after the dependency graph is corrected |
+| Project, test, deployment, or runtime failures | Confirm the workflow is exposing a real repo bug | Fix the code or config surface that actually failed | Hand off instead of polishing workflow YAML |
 
 ## Guardrails
 
@@ -96,29 +119,45 @@ Do not collect secret values. Only confirm whether the expected names, scopes, a
 - **Must not** collect, print, or store secret values.
 - **Must not** absorb migration planning, PR review handling, or worktree setup into this skill.
 - **Must not** rely on blind reruns as a substitute for diagnosis.
+- **Must not** rerun a failure just to feel productive; a rerun only counts when it can change the evidence or verify a narrowly targeted fix.
 - **Should** prefer the smallest change that explains the failure and preserves the surrounding workflow shape.
 - **Should** distinguish flaky, pre-existing, and newly introduced failures before claiming a fix.
 - **Should** escalate instead of guessing when the failure depends on org-admin controls, runner-fleet health, or broader CI redesign.
 
+## Common rationalisations
+
+| Rationalisation | Reality |
+|---|---|
+| "I'll just rerun it to see if it's flaky" | A rerun without evidence only wastes a run. Read the logs first. |
+| "It's probably a YAML syntax issue" | Most failures are runner, secret, or project bugs — not YAML. Read the logs before assuming. |
+| "It was working before the last merge, so it must be that" | Correlation is not causation. Anchor on the exact failing step. |
+| "I'll fix something obvious while I read the logs" | Speculative fixes in parallel with investigation create confounding variables. |
+| "The fix is small, I don't need to wait for the run" | A fix that seems small can pass locally and fail in CI for unrelated reasons. Wait for evidence. |
+
 ## Validation
 
 - Run the repository's relevant validation commands for the touched surface.
-- If workflow files changed, run workflow linting such as `actionlint` when available.
+- If workflow files changed, run workflow linting with `action-validator` or `actionlint` when available.
 - Re-check the exact failing workflow, job, or check when practical instead of relying only on generic local validation.
+- If the change touches artifact, cache, or output wiring, confirm both the producer and consumer paths before calling the fix complete.
+- If the failure stayed ambiguous after reading the logs, prefer escalation or extra debug evidence over repeated reruns.
 - If no change is made, provide a precise evidence-backed explanation of the root cause or blocker.
 - If rerun or check access is unavailable, state the limitation and provide the exact evidence-backed next action for someone with access.
+- Smoke test:
+  - should trigger: "Diagnose why the deploy job started failing after a workflow edit."
+  - should not trigger: "Reproduce this failing Actions job locally with act." (→ `github-actions-local-repro`)
 
 ## Examples
 
-- "The deploy job on my PR is failing with a missing artifact. Can you figure out why without rewriting the whole workflow?"
-- "Our workflow started failing after I bumped `actions/checkout`. Diagnose it before making broad CI changes."
-- "One matrix variant keeps failing in GitHub Actions even though the others pass."
-- "This reusable workflow call started failing after an input or ref change. Investigate the contract mismatch."
-- "Post-migration, this GitHub Actions check is red. Triage whether it's the workflow or the application."
+- "The `deploy` job on PR #182 fails on `Upload artifact` with `Artifact not found`; trace that run, fix the upload path, and do not touch the rest of the workflow."
+- "A workflow started failing after `actions/checkout` was bumped; confirm whether the failure is in the action input, the checkout depth, or the repo script before changing anything else."
+- "Only the `ubuntu-latest / node-20` matrix leg fails at the test step; isolate the failing job and keep the fix limited to that branch of the matrix."
+- "A reusable workflow call started failing after an input rename; verify the caller and callee contract before editing unrelated jobs."
 
 ## Reference files
 
 - [`references/evidence-checklist.md`](references/evidence-checklist.md) - intake fields and evidence to gather before editing
 - [`references/failure-buckets.md`](references/failure-buckets.md) - common failure categories, symptoms, and first checks
 - [`references/debug-and-escalation.md`](references/debug-and-escalation.md) - when to rerun, enable extra debugging, or hand off
+- [`references/triage-scenarios.md`](references/triage-scenarios.md) - compact scenario matrix for validation and fast bucket recognition
 - [`assets/triage-summary-template.md`](assets/triage-summary-template.md) - concise format for reporting root cause, fix, validation, and blockers

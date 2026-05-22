@@ -1,12 +1,10 @@
 ---
 name: cloudflare-d1-query-tuning
-description: Tune slow Cloudflare D1 queries and D1-backed repository access without schema or migration changes. Use for N+1 access, over-fetching, pagination, or runtime D1 query-shape issues.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a Cloudflare Workers repository with a D1 binding plus Wrangler or repo-owned D1 wrappers.
+description: "Tune slow Cloudflare D1 queries and D1-backed repository access without schema or migration changes. Use for N+1 access, over-fetching, pagination, or runtime D1 query-shape issues."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Cloudflare D1 query tuning
@@ -71,6 +69,13 @@ First confirm the problem is runtime query shape or D1 access behavior, not a mi
    - Re-run the same representative query path after the rewrite.
    - Compare the work done, such as plan shape, rows touched, or round trips, not just the final latency text.
    - Run the repo's normal tests or affected checks for the changed adapter/query path.
+
+## Outputs
+
+- The exact D1 binding, repository method, and query path identified for the slow request, with before/after plan evidence where available.
+- A query or adapter rewrite that reduces scans, over-fetching, or round trips without changing schema or result semantics.
+- Validation showing the tuned path preserves behavior and passes the repo's affected tests or checks.
+
 
 ## Guardrails
 

@@ -1,7 +1,7 @@
 ---
 name: example-skill
 description: Replace this with what the skill does and when to use it from the user's point of view. Name the task, the activation conditions, and the main boundary in one concise description.
-license: Proprietary
+license: GNU GPL v3
 compatibility: Agent Skills-compatible coding agents; adjust only if this skill depends on a narrower environment or workflow.
 metadata:
   owner: mattriley

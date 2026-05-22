@@ -1,10 +1,7 @@
 ---
 name: tsc-error-triage
-description: Diagnose and resolve TypeScript compiler errors by finding the smallest root-cause fix before editing call sites.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a TypeScript project with a meaningful typecheck command.
+description: "Diagnose and resolve TypeScript compiler errors by finding the smallest root-cause fix before editing call sites."
 metadata:
-  version: 1.1.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable
@@ -24,6 +21,13 @@ metadata:
 - The task is primarily about runtime bugs with no TypeScript compiler signal.
 - The repository is not using TypeScript or does not have a meaningful typecheck command.
 - The request is to redesign the type model broadly rather than to triage concrete compiler failures.
+
+## Iron Law
+
+> **Never patch leaf errors when a shared root cause is unresolved.**
+>
+> Fix the first causal error in the chain — broken export, generic constraint, config mismatch — before touching downstream call sites.
+> One root-cause fix can collapse dozens of leaf errors.
 
 ## Inputs to gather
 
@@ -47,6 +51,7 @@ metadata:
 3. Run that command and capture the full compiler output.
 4. Group the errors by root symbol, module, or config boundary instead of treating every error as independent.
 5. Start with the earliest high-fanout error before fixing downstream call sites.
+6. Look for one shared compiler snippet that points at a broken export, generic constraint, or config boundary.
 
 ## Workflow
 
@@ -64,18 +69,50 @@ metadata:
 - **Should** prefer fixing exported types, generic constraints, and config boundaries before editing many call sites.
 - **Should** preserve runtime behavior while improving type correctness.
 
+## Routing boundary
+
+- Use this skill when causal failures are source-type issues and need root-cause-first triage.
+- Route to [`tsconfig-hardening`](../tsconfig-hardening/SKILL.md) when first causal failures point to compiler configuration, project references, or module-resolution drift rather than source typings.
+- Route to [`project-references-migration`](../project-references-migration/SKILL.md) when the main issue is an incomplete or inconsistent `tsc -b` / `composite` workspace migration.
+- Route to [`type-test-authoring`](../type-test-authoring/SKILL.md) only after compiler stability is restored and you need compile-time regression locks.
+
 ## Validation
 
 - Re-run the same typecheck command and confirm the targeted errors are gone.
 - Check that no new class of compiler error was introduced nearby.
 - Run targeted tests for the touched surface when the repository has them.
+- Keep [`references/triage-scenarios.md`](references/triage-scenarios.md) in sync when a new root-cause pattern or noisy downstream failure shape becomes common.
+
+- Smoke test:
+  - should trigger: "Fix the tsc errors that exploded after yesterday's refactor."
+  - should not trigger: "Turn on noImplicitAny across the repo safely." (→ `tsconfig-hardening`)
 
 ## Examples
 
-- "TypeScript exploded after this refactor. Find the root cause instead of patching every call site."
-- "Fix the `tsc --noEmit` errors after upgrading this dependency."
-- "I enabled a stricter TS flag and now there are 80 errors. Triage them in the right order."
+- `tsc --noEmit` reports:
+  ```text
+  src/use.ts(8,12): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+  src/index.ts(3,1): error TS2305: Module '"./api"' has no exported member 'makeId'.
+  ```
+  Fix the missing export or shared generic first; the argument errors are downstream noise.
+- `High-fanout fix`
+  ```ts
+  export function parseId(value: string | undefined): string {
+    if (!value) throw new Error('missing id');
+    return value;
+  }
+  ```
+  One shared helper like this can collapse dozens of leaf errors once its return type is truthful.
+- `Before`
+  ```ts
+  export const toId = (value) => value.toString();
+  ```
+  `After`
+  ```ts
+  export const toId = (value: string | number) => value.toString();
+  ```
 
 ## Reference files
 
 - [`references/error-patterns.md`](references/error-patterns.md) - common compiler error families, likely root causes, and preferred first checks.
+- [`references/triage-scenarios.md`](references/triage-scenarios.md) - compact scenario matrix for root-cause-first compiler triage.

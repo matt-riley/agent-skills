@@ -1,11 +1,9 @@
 ---
 name: make-interfaces-feel-better
-description: Polish existing interfaces when the UI feels off through better radius, shadows, typography, motion, and micro-interactions.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file tools; works best with existing UI code, screenshots, or component context.
+description: "Polish existing interfaces when the UI feels off through better radius, shadows, typography, motion, and micro-interactions."
 metadata:
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Make interfaces feel better
@@ -48,6 +46,13 @@ metadata:
 1. Inspect the current UI and nearby shared primitives before proposing polish changes.
 2. Separate structural issues from detail issues so this skill stays focused on feel, not broad redesign.
 3. If reviewing, group findings by principle and present concrete before/after diffs instead of abstract taste notes.
+
+## Outputs
+
+- Component-level polish changes or review findings grouped by principle, with exact before/after deltas instead of generic taste comments.
+- Concrete UI refinements to typography, surfaces, spacing, shadows, or motion using the existing design tokens, utilities, and libraries.
+- Validation that the work stayed focused on interface feel rather than drifting into a broader redesign or new dependency footprint.
+
 
 ## Guardrails
 

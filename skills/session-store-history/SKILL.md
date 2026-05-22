@@ -1,12 +1,10 @@
 ---
 name: session-store-history
-description: Search and summarize past work from the `session_store` database when the user asks what they worked on before, how a similar problem was handled, or which session, PR, issue, branch, or file changed something.
-license: Proprietary
-compatibility: Harnesses that expose a read-only `sql` tool and a `session_store`-style history database.
+description: "Search and summarize past work from the `session_store` database when the user asks what they worked on before, how a similar problem was handled, or which session, PR, issue, branch, or file changed something."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Session store history
@@ -73,6 +71,13 @@ metadata:
 6. Start with a recall-oriented query that favors finding candidates, then tighten with repo, branch, time, file, or ref filters once the likely sessions appear.
 7. If you send a progress update before the final answer, make it concrete enough to name the database and evidence surfaces, for example: `I'm querying session_store turns and checkpoints first, then I'll narrow with refs and files if needed.`
 8. Synthesize the result into a short evidence-backed answer that names the most relevant sessions, what happened there, and any uncertainty or ambiguity.
+
+## Outputs
+
+- The `session_store` queries and evidence surfaces used for the history request, such as turns, checkpoints, refs, or edited files.
+- A short evidence-backed answer naming the most relevant sessions, timestamps, refs, and matched snippets when useful.
+- A clear uncertainty or no-match note when the available session evidence does not support a stronger claim.
+
 
 ## Guardrails
 

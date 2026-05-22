@@ -1,13 +1,10 @@
 ---
 name: repository-adapters
-description: Implement or modify database repository adapters. Use when adding adapter methods, changing queries, or mapping database errors while preserving domain boundaries.
-license: Proprietary
-compatibility: Agent Skills-compatible coding agents with file and shell tools; assumes a repository/domain layering pattern with
-  database-backed adapters.
+description: "Implement or modify database repository adapters. Use when adding adapter methods, changing queries, or mapping database errors while preserving domain boundaries."
 metadata:
   owner: mattriley
-  version: 1.1.0 # x-release-please-version
   maturity: draft
+  kind: task
 ---
 
 # Repository adapters
@@ -33,6 +30,13 @@ metadata:
 ## First move
 
 - Update the query source for each dialect, regenerate, then adjust the adapter to call the new or changed query before touching tests.
+
+## Outputs
+
+- Updated repository-layer inputs such as query sources, regenerated artifacts, and adapter implementation changes at the domain boundary.
+- DB-to-domain error mapping preserved or corrected for the touched operations so adapter callers keep the expected contract.
+- Test evidence for the primary adapter path, with optional dialects skipping cleanly when unavailable.
+
 
 ## Architecture pattern
 
