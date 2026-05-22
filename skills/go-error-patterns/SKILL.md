@@ -104,7 +104,6 @@ Use this skill when a Go task is really about error-type design, shared helper s
 ## Reference files
 
 - [`references/error-constructor-patterns.md`](references/error-constructor-patterns.md) — Go code examples for closure wrapping, alias removal, and the concrete-vs-interface decision table
-- [`../../instructions/go.instructions.md`](../../instructions/go.instructions.md) — source rules for Go error-pattern decisions, shared-type ownership, and lambda granularity
 - [`../go-build-and-test/SKILL.md`](../go-build-and-test/SKILL.md) — adjacent Go skill for build, test, toolchain, and CI parity failures
 - [`../schema-boundary-typing/SKILL.md`](../schema-boundary-typing/SKILL.md) — route here when the real task is boundary validation rather than Go error design
 - [`../systematic-debugging/SKILL.md`](../systematic-debugging/SKILL.md) — route here when the root cause is still unknown

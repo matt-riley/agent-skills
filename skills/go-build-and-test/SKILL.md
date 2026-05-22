@@ -86,6 +86,7 @@ Use this skill when a Go repository is failing to build or test and the next mov
 - Do not add allowlists or workflow exceptions for stdlib-only `govulncheck` findings before checking whether a Go patch update fixes them.
 - Do not trust stale `GOROOT` or `GOTOOLDIR` exports just because `go version` looks correct; verify the full environment.
 - Do not let tests depend on ignored or untracked repository files.
+- Do not edit generated files manually; run the repository's established generation commands instead.
 - Prefer the standard library first, but ask before introducing a package like Cobra for CLI plumbing rather than rejecting it automatically.
 
 ## Validation
@@ -106,6 +107,5 @@ Use this skill when a Go repository is failing to build or test and the next mov
 ## Reference files
 
 - [`references/toolchain-environment-checklist.md`](references/toolchain-environment-checklist.md) — `go env` key matrix, stale-override reset commands, `govulncheck` stdlib-finding triage steps, and CI fixture-file audit
-- [`../../instructions/go.instructions.md`](../../instructions/go.instructions.md) — source rules for toolchain checks, stdlib-first preferences, and Go test isolation
 - [`../go-error-patterns/SKILL.md`](../go-error-patterns/SKILL.md) — adjacent Go skill for covariance and error-design questions
 - [`../systematic-debugging/SKILL.md`](../systematic-debugging/SKILL.md) — route here when the failure is too ambiguous for a Go-specific triage workflow

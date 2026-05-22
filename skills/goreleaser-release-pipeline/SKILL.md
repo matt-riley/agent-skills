@@ -90,6 +90,7 @@ Use this skill when a repository already has, or is adding, a GoReleaser v2 rele
 - Do not remove defined releases or renumber version history if downstream monitoring depends on those release numbers.
 - Do not absorb generic GitHub Actions runner troubleshooting or PR lifecycle work into this skill.
 - Ensure `actions/checkout` uses `fetch-depth: 0` when GoReleaser generates a changelog; shallow clones silently produce incomplete or missing changelogs.
+- When the publish workflow depends on a Release Please tag triggering a downstream job, prefer a dedicated PAT over the default `GITHUB_TOKEN`; GitHub can suppress follow-on workflow runs from tags created by `GITHUB_TOKEN`.
 
 ## Validation
 
@@ -111,7 +112,6 @@ Use this skill when a repository already has, or is adding, a GoReleaser v2 rele
 ## Reference files
 
 - [`references/release-please-goreleaser-config.md`](references/release-please-goreleaser-config.md) — annotated workflow template, `include-component-in-tag` setting, `release_created` job gate, `fetch-depth: 0` note, and `goreleaser check` command
-- [`../../instructions/github-actions.instructions.md`](../../instructions/github-actions.instructions.md) — source rules for Release Please chaining, semver tag shape, and preserving numbered releases
 - [`../github-actions-failure-triage/SKILL.md`](../github-actions-failure-triage/SKILL.md) — route here when the failure is generic workflow or runner triage instead of release-pipeline design
 - [`../finishing-a-development-branch/SKILL.md`](../finishing-a-development-branch/SKILL.md) — route here when the question is branch integration rather than release publishing
 - [`../github-cli-pr-workflow/SKILL.md`](../github-cli-pr-workflow/SKILL.md) — route here when the work is PR lifecycle rather than release pipeline behavior
