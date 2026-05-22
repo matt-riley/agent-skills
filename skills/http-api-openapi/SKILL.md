@@ -1,7 +1,9 @@
 ---
 name: http-api-openapi
 description: "Keep HTTP behavior and OpenAPI contracts in sync after detecting spec-first, code-first, or hybrid ownership. Use when endpoints, schemas, auth, or error shapes change."
+license: GNU GPL v3
 metadata:
+  version: 1.3.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

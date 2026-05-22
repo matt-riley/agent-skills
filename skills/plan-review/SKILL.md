@@ -1,7 +1,9 @@
 ---
 name: plan-review
 description: "Create, revise, and approval-gate implementation plans when the deliverable is a plan artifact or plan revision, not code."
+license: GNU GPL v3
 metadata:
+  version: 1.3.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

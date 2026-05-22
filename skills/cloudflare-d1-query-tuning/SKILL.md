@@ -1,7 +1,9 @@
 ---
 name: cloudflare-d1-query-tuning
 description: "Tune slow Cloudflare D1 queries and D1-backed repository access without schema or migration changes. Use for N+1 access, over-fetching, pagination, or runtime D1 query-shape issues."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

@@ -1,7 +1,9 @@
 ---
 name: github-presence
 description: "Audit and improve GitHub profile, organization, and repository presentation. Use for profile READMEs, pinned repositories, README quality, community health files, templates, and repo metadata."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

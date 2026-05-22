@@ -1,7 +1,9 @@
 ---
 name: type-test-authoring
 description: "Write compile-time type tests that protect public TypeScript APIs, inference behavior, and negative cases."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable

@@ -1,7 +1,9 @@
 ---
 name: configuration-env
 description: "Configure applications safely through environment variables, .env files, and repo-owned runtime config such as Wrangler bindings. Use for startup failures, environment drift, or deployment bootstrap."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

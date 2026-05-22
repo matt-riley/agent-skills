@@ -1,7 +1,9 @@
 ---
 name: schema-boundary-typing
 description: "Introduce or refine runtime schema validation at untrusted boundaries so static TypeScript types stay truthful."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: stable

@@ -1,7 +1,9 @@
 ---
 name: testing-workflows
 description: "Run, debug, and extend tests for Go projects, including generation prerequisites. Use when domain logic, repositories, HTTP handlers, migrations, or unexpected test failures need coverage."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

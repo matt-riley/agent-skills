@@ -1,7 +1,9 @@
 ---
 name: integration-testing-http
 description: "Run and extend end-to-end HTTP integration tests for server behavior. Use when handlers, middleware, auth, request/response shapes, or API contracts change."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

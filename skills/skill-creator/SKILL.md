@@ -1,7 +1,9 @@
 ---
 name: skill-creator
 description: "Create or upgrade a reusable skill in the current skills catalog. Use when adding a skill, improving metadata/examples/evals, tightening trigger boundaries, or deciding if guidance belongs in a skill."
+license: GNU GPL v3
 metadata:
+  version: 1.3.0 # x-release-please-version
   owner: mattriley
   maturity: stable
 ---

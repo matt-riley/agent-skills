@@ -1,7 +1,9 @@
 ---
 name: review-comment-resolution
 description: "Apply pull request review feedback by assessing comments, fixing valid concerns, pushing the branch, and waiting for checks. Use when reviewer feedback must be carried through to completion, not just reviewed."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: stable
 ---

@@ -1,7 +1,9 @@
 ---
 name: cloudflare-d1-migrations
 description: "Create, inspect, apply, baseline, import, or recover Cloudflare D1 schema migrations across local, preview, and remote databases. Use when Wrangler D1 migration state or schema drift is the main risk."
+license: GNU GPL v3
 metadata:
+  version: 1.3.0 # x-release-please-version
   owner: mattriley
   maturity: stable
 ---

@@ -219,6 +219,20 @@ Start with these when the request matches them directly:
 | AI agent policy, tool allowlists, or audit trails | `agent-governance` | Runtime governance patterns are the speciality |
 | AI agent plugin integrity or promotion gates | `agent-supply-chain` | Supply chain verification is the main risk |
 | evaluating AI agent trigger accuracy or behavior | `agentic-eval` | Behavioral evaluation methodology is the focus |
+| recovering a stalled, blocked, or dormant task from partial context | `fallow` | Task-state recovery from partial context is the main need |
+| closing deferred items, open questions, or unresolved decisions | `resolve-open-loops` | Open-loop closure and handoff is the deliverable |
+| defining or enforcing explicit entry/exit contracts for multi-step workflows | `workflow-contracts` | Contract-shaped workflow boundaries are the main risk |
+| a mandatory pre-completion verification checklist | `verification-before-completion` | Evidence-gated sign-off is the main mechanism |
+| initializing a new project or creating/updating AGENTS.md instruction files | `init` | Scaffold and instruction-file setup is the deliverable |
+| co-authoring technical documentation with iterative Q&A | `doc-coauthoring` | Document structure and prose co-authorship is the main need |
+| a pre-edit context map or survey of likely files and patterns | `context-map` | Contextual file-and-pattern mapping is the main deliverable |
+| creating a guided code tour or narrative walkthrough | `code-tour` | Step-by-step `.tour` file creation is the deliverable |
+| an automated research pass to answer a question or validate a claim | `autoresearch` | Autonomous iterative research is the main mechanism |
+| structural code search, codemod rewrites, or ast-grep patterns | `ast-grep` | Syntax-aware search and rewrite is the speciality |
+| modern web platform patterns, HTML, CSS, forms, or web API guidance | `modern-web-guidance` | Current web platform guidance prevents legacy patterns |
+| Neovim config, plugins, LSP wiring, or startup behavior | `neovim-config` | Neovim Lua configuration is the speciality |
+| AWS Lambda Go packaging, bootstrap, or deployment | `aws-lambda-go-deployment` | Lambda runtime and IAM config for Go is the focus |
+| code navigation, symbol lookup, or LSP vs grep routing decisions | `code-intelligence` | Routing layer for LSP over text search is the main value |
 
 ## Boundary reminders
 

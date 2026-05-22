@@ -1,7 +1,9 @@
 ---
 name: templ-templates
 description: "Edit and troubleshoot server-side HTML templates (.templ files for Go's templ framework), including regeneration and handler wiring. Use when changing UI components, layouts, or page templates."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

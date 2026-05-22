@@ -1,7 +1,9 @@
 ---
 name: astro-seo
 description: "Audit and improve SEO for Astro sites, including metadata, structured data, sitemaps, indexing, Open Graph images, schema endpoints, and related search visibility setup."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   maturity: draft
   kind: task
 ---

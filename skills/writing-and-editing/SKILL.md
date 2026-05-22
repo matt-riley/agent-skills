@@ -1,7 +1,9 @@
 ---
 name: writing-and-editing
 description: "Draft structured documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary work is writing, editing, or copy quality."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

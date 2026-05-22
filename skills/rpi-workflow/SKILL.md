@@ -1,7 +1,9 @@
 ---
 name: rpi-workflow
 description: "Apply a Research -> Plan -> Implement -> Validate workflow for non-trivial work in agent-compatible coding harnesses, keeping progress durable across turns and sessions via workspace `plan.md` and `files/` artifacts."
+license: GNU GPL v3
 metadata:
+  version: 1.4.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task

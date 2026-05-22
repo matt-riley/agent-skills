@@ -1,7 +1,9 @@
 ---
 name: security-basics
 description: "Apply security and privacy guardrails to application code. Use when touching authentication, request handling, sensitive endpoint exposure, logging, or anything that could leak data or allow unauthorised access."
+license: GNU GPL v3
 metadata:
+  version: 1.2.0 # x-release-please-version
   owner: mattriley
   maturity: draft
   kind: task
