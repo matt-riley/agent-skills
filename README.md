@@ -138,7 +138,7 @@ When adding a new skill, add both:
 
 ## License
 
-This repository is licensed under GNU GPL v3. See `LICENSE`.
+This repository is licensed under GNU GPL v3. See the repo-root `LICENSE` file.
 
 ## Notes on portability
 

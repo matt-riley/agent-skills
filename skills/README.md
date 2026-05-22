@@ -24,8 +24,14 @@ Start with these when the request matches them directly:
 
 - `rpi-workflow` — full Research -> Plan -> Implement -> Validate discipline for non-trivial work
 - `plan-review` — plan drafting, hardening, approval gates, and optional structured reviewer personas
+- `plan-review-loop` — structured reviewer-persona loop (Jason and Freddy) that enforces unanimous approval over up to three rounds
 - `reverse-prompt` — sharpen a rough ask into a repository-grounded execution brief or contract-shaped brief before work starts
 - `implementation-review` — post-implementation review and approval
+- `verification-before-completion` — mandatory pre-done checklist that blocks task completion until evidence passes
+- `resolve-open-loops` — close or hand off deferred items, open questions, and unresolved decisions
+- `fallow` — recover a dormant, blocked, or long-deferred task from partial context
+- `workflow-contracts` — define and enforce explicit entry/exit contracts for multi-step workflows
+- `init` — initialize a new project with sensible scaffold and conventions
 
 ### Session history and recall
 
@@ -42,10 +48,16 @@ Start with these when the request matches them directly:
 - `tsconfig-hardening` — tighten or rationalize `tsconfig` safely and incrementally
 - `schema-boundary-typing` — align runtime validation with truthful TypeScript boundary types
 - `type-test-authoring` — add compile-time type regression tests for important APIs
+- `typescript-any-eliminator` — systematically hunt and replace `any` types with precise inferred or explicit types
+- `project-references-migration` — migrate a TypeScript monorepo from path aliases or flat config to TypeScript Project References
+- `mocha-to-jest-migration` — migrate a test suite from Mocha to Jest including imports, lifecycle hooks, and matchers
 
 ### CI and delivery workflows
 
 - `github-actions-failure-triage` — diagnose existing failing GitHub Actions runs with evidence-first minimal fixes
+- `github-actions-local-repro` — reproduce a GitHub Actions failure locally using act, Docker, or shell isolation
+- `circleci-to-github-actions-migration` — migrate a CircleCI pipeline to GitHub Actions step-by-step
+- `goreleaser-release-pipeline` — configure and operate a GoReleaser release pipeline with artifacts and changelogs
 - `ci-images` — local CI parity and image-publishing workflows
 
 ### Testing, APIs, and delivery checks
@@ -53,6 +65,15 @@ Start with these when the request matches them directly:
 - `testing-workflows` — default testing and debugging entry point
 - `integration-testing-http` — specialist overlay for endpoint, auth, request/response, and HTTP contract testing
 - `http-api-openapi` — keep handler and spec changes in sync
+- `test-driven-development` — strict TDD discipline: failing test → minimal pass → refactor
+- `systematic-debugging` — structured root-cause debugging when immediate fixes are elusive
+- `api-smoke-validation` — post-deploy smoke tests that verify key API endpoints are alive and correct
+
+### Go development
+
+- `go-build-and-test` — build, vet, and test Go packages with correct module and toolchain usage
+- `go-error-patterns` — apply idiomatic Go error wrapping, sentinel values, and `errors.As`/`errors.Is` patterns
+- `aws-lambda-go-deployment` — package and deploy Go functions to AWS Lambda with the right runtime and IAM config
 
 ### Schema and persistence
 
@@ -68,16 +89,58 @@ Start with these when the request matches them directly:
 - `docker-compose-dev` — local multi-service stack setup for prod-like development
 - `observability-metrics` — `/health`, `/metrics`, and logging behavior validation
 
+### Cloud and infrastructure
+
+- `aws-sdk-v2-to-v3-migration` — migrate AWS SDK v2 service clients to v3 modular imports and send commands
+- `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks
+- `terraform-skill` — write, plan, apply, and troubleshoot Terraform configurations and state
+- `iam-oidc-triage` — diagnose and fix IAM OIDC trust policy failures for GitHub Actions, AWS, and GCP
+- `secret-scan-triage` — identify, remediate, and prevent secret leaks caught by Trufflehog, GitGuardian, or similar scanners
+
 ### Frontend and site quality
 
 - `astro-seo` — Astro-specific SEO implementation and audit work
 - `make-interfaces-feel-better` — UI polish for existing interfaces
 - `templ-templates` — server-side templ template authoring and regeneration workflows
 
-### Review follow-through and branch isolation
+### Git and branch workflow
 
 - `review-comment-resolution` — apply PR feedback, push the fix branch, and wait for resulting checks
 - `git-worktrees` — set up isolated worktrees for parallel tasks, agents, or safer branch isolation
+- `finishing-a-development-branch` — complete all finishing steps on a feature branch before opening a PR
+- `github-cli-pr-workflow` — create, review, and merge pull requests using the GitHub CLI
+- `git-signing-troubleshoot` — diagnose and fix commit/tag signing failures (GPG, SSH, 1Password)
+- `worktrunk` — operate the Worktrunk git workflow tool for step-commit, squash-rebase, and trunk management
+
+### Research, knowledge, and discovery
+
+- `acquire-codebase-knowledge` — deep-map an existing codebase into seven structured docs covering stack, architecture, conventions, integrations, testing, and concerns
+- `autoresearch` — execute an automated research pass across docs, code, and search to answer a question or validate a claim
+- `code-tour` — create or follow a guided tour through an unfamiliar codebase
+- `context-map` — produce a domain-driven context map of bounded contexts and their integration relationships
+- `code-intelligence` — preferred routing layer for LSP, grep, and glob operations; always use LSP over text search when available
+
+### AI agent development
+
+- `agent-governance` — implement safety, policy, trust scoring, and audit patterns for AI agents that call external tools
+- `agent-supply-chain` — add integrity manifests and promotion gates to agent plugin and tool pipelines
+- `agentic-eval` — design and run behavioral evaluations for agent skills and trigger accuracy
+
+### Writing, docs, and planning artifacts
+
+- `doc-coauthoring` — co-author technical documentation with a domain expert in an iterative Q&A loop
+- `to-prd` — generate a Product Requirements Document from a feature idea or conversation
+- `to-issues` — convert a conversation, PRD, or plan into well-formed GitHub issues
+- `skill-authoring` — design, write, and improve reusable skills in this catalog
+- `skill-creator` — create or upgrade a skill with frontmatter, headings, evals, and validation
+
+### Developer experience and tooling
+
+- `neovim-config` — configure and extend a Neovim setup with plugins, keymaps, and LSP wiring
+- `grill-me` — generate adversarial questions to stress-test your understanding of a codebase or design
+- `grill-with-docs` — challenge an implementation against official docs to surface gaps and misnomers
+- `ast-grep` — run structural code search and rewrite using ast-grep patterns
+- `modern-web-guidance` — apply current web platform guidance for a specific framework or API decision
 
 ## Selection rules
 
@@ -96,6 +159,7 @@ Start with these when the request matches them directly:
 | --- | --- | --- |
 | a full research -> plan -> implement -> validate pass | `rpi-workflow` | Full lifecycle discipline is the primary need |
 | a plan, plan hardening, or reviewer-gated planning | `plan-review` | Planning is the deliverable; implementation is not yet in scope |
+| running a multi-reviewer approval loop on a completed /plan | `plan-review-loop` | Structured multi-round reviewer-persona loop with explicit verdict tokens is the main mechanism |
 | a rough prompt that should be sharpened into an executable repo-grounded brief | `reverse-prompt` | Prompt critique or rewrite is the primary need before work starts |
 | an explicit definition of done, success criteria, or a contract-shaped execution brief | `reverse-prompt` | Contract-shaped brief framing now lives with prompt sharpening |
 | what they worked on before, whether they handled a topic already, or which session linked to a file / PR / issue | `session-store-history` | Cross-session recall from `session_store` is the main task |
@@ -125,6 +189,36 @@ Start with these when the request matches them directly:
 | Astro SEO work | `astro-seo` | Astro-specific SEO implementation and audit risks dominate |
 | interface polish on an existing UI | `make-interfaces-feel-better` | Detail-level visual and interaction quality is the main problem |
 | isolated parallel checkouts, agent lanes, or safer multi-branch task setup | `git-worktrees` | Worktree setup and isolation are the main problem |
+| TDD, strict red-green-refactor cycle | `test-driven-development` | TDD discipline is the main ask |
+| a bug that resists quick diagnosis | `systematic-debugging` | Root-cause methodology beats random patch attempts |
+| post-deploy API smoke checks | `api-smoke-validation` | Smoke validation is the primary delivery gate |
+| mapping or documenting an unfamiliar codebase | `acquire-codebase-knowledge` | Produces 7 structured knowledge docs in docs/codebase/ |
+| a PRD from a feature idea or conversation | `to-prd` | PRD generation is the deliverable |
+| converting a plan or PRD into GitHub issues | `to-issues` | Issue creation is the deliverable |
+| Go build, vet, or test issues | `go-build-and-test` | Go module and toolchain handling is the speciality |
+| Go error wrapping, sentinel errors, or errors.As/Is patterns | `go-error-patterns` | Idiomatic Go error handling is the focus |
+| a GoReleaser release pipeline | `goreleaser-release-pipeline` | Release artifacts and changelogs are the main output |
+| reproducing a GitHub Actions failure locally | `github-actions-local-repro` | Local repro beats remote re-run for diagnosis |
+| migrating from CircleCI to GitHub Actions | `circleci-to-github-actions-migration` | Step-by-step CI migration is the deliverable |
+| AWS SDK v2 → v3 client migration | `aws-sdk-v2-to-v3-migration` | Modular v3 import and command shapes are the speciality |
+| SAM or CloudFormation template work | `sam-cloudformation` | SAM/CFN syntax, deploy, and stack management are the focus |
+| Terraform write, plan, or apply work | `terraform-skill` | Terraform config, state, and provider patterns are the focus |
+| IAM OIDC trust failures or GitHub Actions AWS auth | `iam-oidc-triage` | OIDC trust policy diagnosis is the speciality |
+| secret scanning alerts or leak remediation | `secret-scan-triage` | Secret identification and rotation are the main risk |
+| finishing, polishing, or PR-readying a feature branch | `finishing-a-development-branch` | Branch completion checklist is the deliverable |
+| creating or merging a PR with the GitHub CLI | `github-cli-pr-workflow` | `gh` PR workflow is the primary tool |
+| GPG, SSH, or 1Password commit signing failures | `git-signing-troubleshoot` | Signing configuration diagnosis is the speciality |
+| running the Worktrunk git workflow | `worktrunk` | Worktrunk commands, squash-rebase, and trunk ops are the focus |
+| TypeScript `any` elimination or type tightening | `typescript-any-eliminator` | Systematic any removal is the deliverable |
+| migrating TypeScript path aliases to Project References | `project-references-migration` | TypeScript project reference contract is the focus |
+| migrating Mocha tests to Jest | `mocha-to-jest-migration` | Test framework migration patterns are the speciality |
+| writing or improving reusable skills | `skill-authoring` | Skill authorship is the primary task |
+| creating a new skill or upgrading an existing one with correct frontmatter and evals | `skill-creator` | Skill creation/upgrade workflow with validation is the deliverable |
+| adversarial questioning to stress-test a design | `grill-me` | Adversarial review is the main format |
+| challenging an implementation against official docs | `grill-with-docs` | Doc-grounded critique is the main format |
+| AI agent policy, tool allowlists, or audit trails | `agent-governance` | Runtime governance patterns are the speciality |
+| AI agent plugin integrity or promotion gates | `agent-supply-chain` | Supply chain verification is the main risk |
+| evaluating AI agent trigger accuracy or behavior | `agentic-eval` | Behavioral evaluation methodology is the focus |
 
 ## Boundary reminders
 
@@ -136,6 +230,11 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `writing-and-editing` should own reader-facing writing work; keep it separate from `github-presence`, which owns broader profile and repository-surface audits.
 - `session-store-history` should own cross-session recall and session-to-ref/file tracing; keep it separate from current-workspace repo exploration, which should stay with repo-local search tools.
 - `cloudflare-d1-query-tuning` should own runtime D1 query-shape and access-path tuning without schema changes; keep it separate from `cloudflare-d1-migrations` and from generic `repository-adapters` work when Cloudflare D1 runtime behavior is the main risk.
+- `acquire-codebase-knowledge` should own deep seven-document codebase mapping; do not conflate it with narrow file reads, quick architecture sketches, or ad-hoc questions about single modules.
+- `plan-review-loop` is distinct from `plan-review`; `plan-review` owns plan drafting and one-shot approval; `plan-review-loop` owns the explicit multi-round reviewer-persona loop with Jason and Freddy.
+- `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
+- `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
+- `code-intelligence` is a routing overlay that ensures LSP is used when available; it should not be selected as the primary skill for work that has a more specific match.
 
 ## Layering notes
 
@@ -147,3 +246,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `cloudflare-d1-query-tuning` is the sharper match than `repository-adapters` when the main risk is Cloudflare D1 runtime query performance without schema or migration changes.
 - `code-generation` often pairs with schema, template, and API work, but usually should not be the only selected skill unless regeneration itself is the task.
 - `configuration-env` and `docker-compose-dev` are situational operational helpers, not default entry points.
+- `plan-review-loop` is the post-`/plan` structured approval loop; run it after `plan-review` creates the plan artifact.
+- `verification-before-completion` pairs with any implementation skill; load it last, before signing off.
+- `test-driven-development` and `systematic-debugging` layer onto `testing-workflows`; prefer the specialist when TDD discipline or structured root-cause methodology is the explicit need.
+- `agent-governance` and `agent-supply-chain` are complementary: governance controls runtime behavior; supply chain controls artifact integrity. Both often apply to the same agent project.

@@ -79,7 +79,7 @@ Every `SKILL.md` should have at least:
 
 Common optional fields in this catalog:
 
-- `license: Proprietary`
+- `license: GNU GPL v3`
 - `compatibility`
 - `metadata.version`
 - `metadata.maturity`
@@ -127,3 +127,7 @@ This repo uses Release Please.
 - Do not move detailed guidance into `README.md` when it belongs in a specific skill package.
 - Prefer the smallest accurate change that keeps the catalog internally consistent.
 - After editing skill content or metadata, run `npm run validate` before finishing.
+
+## Learned Rules
+
+1. [PROCESS] Always use `license: GNU GPL v3` in skill frontmatter and skill-authoring templates, and direct license lookups to the repo-root `LICENSE` file — because this catalog is GPL-licensed at the repository level.
