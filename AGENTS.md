@@ -131,3 +131,5 @@ This repo uses Release Please.
 ## Learned Rules
 
 1. [PROCESS] Always use `license: GNU GPL v3` in skill frontmatter and skill-authoring templates, and direct license lookups to the repo-root `LICENSE` file — because this catalog is GPL-licensed at the repository level.
+2. [PROCESS] When a skill is renamed, always update inter-skill links and `skills/README.md` routing entries in the same pass — because stale skill names break catalog validation and send agents to nonexistent packages.
+3. [PROCESS] Keep `skills/README.md` de-duplicated: if a skill is already called out under core defaults or a special guardrail, only repeat it later when the second mention adds distinct routing guidance — because repeated chooser entries make the catalog feel inconsistent and harder to scan.

@@ -31,7 +31,7 @@ Start with these when the request matches them directly:
 - `resolve-open-loops` — close or hand off deferred items, open questions, and unresolved decisions
 - `fallow` — recover a dormant, blocked, or long-deferred task from partial context
 - `workflow-contracts` — define and enforce explicit entry/exit contracts for multi-step workflows
-- `init` — initialize a new project with sensible scaffold and conventions
+- `agent-instructions` — create or update AGENTS.md, copilot-instructions.md, and per-path instruction guides when agent guidance is stale or missing
 
 ### Session history and recall
 
@@ -62,7 +62,6 @@ Start with these when the request matches them directly:
 
 ### Testing, APIs, and delivery checks
 
-- `testing-workflows` — default testing and debugging entry point
 - `integration-testing-http` — specialist overlay for endpoint, auth, request/response, and HTTP contract testing
 - `http-api-openapi` — keep handler and spec changes in sync
 - `test-driven-development` — strict TDD discipline: failing test → minimal pass → refactor
@@ -81,11 +80,9 @@ Start with these when the request matches them directly:
 - `cloudflare-d1-migrations` — Cloudflare D1 migration workflow for Wrangler, local/preview/remote promotion, and recovery
 - `cloudflare-d1-query-tuning` — Cloudflare D1 runtime query and repository-path tuning when schema or migration changes are out of scope
 - `repository-adapters` — repository-layer adapter changes and DB error mapping
-- `code-generation` — shared prerequisite when schema/query/template inputs feed generators
 
 ### Operations and runtime environment
 
-- `configuration-env` — env loading, `.env`, and config-drift troubleshooting
 - `docker-compose-dev` — local multi-service stack setup for prod-like development
 - `observability-metrics` — `/health`, `/metrics`, and logging behavior validation
 
@@ -223,7 +220,7 @@ Start with these when the request matches them directly:
 | closing deferred items, open questions, or unresolved decisions | `resolve-open-loops` | Open-loop closure and handoff is the deliverable |
 | defining or enforcing explicit entry/exit contracts for multi-step workflows | `workflow-contracts` | Contract-shaped workflow boundaries are the main risk |
 | a mandatory pre-completion verification checklist | `verification-before-completion` | Evidence-gated sign-off is the main mechanism |
-| initializing a new project or creating/updating AGENTS.md instruction files | `init` | Scaffold and instruction-file setup is the deliverable |
+| creating or updating AGENTS.md, copilot-instructions.md, or per-path instruction guides | `agent-instructions` | Instruction-file setup and maintenance is the deliverable |
 | co-authoring technical documentation with iterative Q&A | `doc-coauthoring` | Document structure and prose co-authorship is the main need |
 | a pre-edit context map or survey of likely files and patterns | `context-map` | Contextual file-and-pattern mapping is the main deliverable |
 | creating a guided code tour or narrative walkthrough | `code-tour` | Step-by-step `.tour` file creation is the deliverable |

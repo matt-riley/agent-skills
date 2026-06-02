@@ -150,7 +150,7 @@ The skill workflow is complete when:
 
 - Smoke test:
   - should trigger: "Rewrite our README with reader feedback for new contributors."
-  - should not trigger: "Refresh copilot-instructions.md for this repo's new conventions." (→ `init`)
+  - should not trigger: "Refresh copilot-instructions.md for this repo's new conventions." (→ `agent-instructions`)
 
 ## Examples
 

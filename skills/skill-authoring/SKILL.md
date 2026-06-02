@@ -132,7 +132,7 @@ The validator will report specific issues and how to fix them.
 | Situation | Use this skill? | Route instead |
 | --- | --- | --- |
 | Create or revise a reusable skill package | Yes | - |
-| Create or update agent instruction files (copilot-instructions.md, AGENTS.md) | No | [`init`](../init/SKILL.md) |
+| Create or update agent instruction files (copilot-instructions.md, AGENTS.md) | No | [`agent-instructions`](../agent-instructions/SKILL.md) |
 | Author collaborative documentation such as READMEs or runbooks | No | [`doc-coauthoring`](../doc-coauthoring/SKILL.md) |
 
 ## Inputs to gather
