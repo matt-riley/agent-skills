@@ -1,5 +1,5 @@
 ---
-name: init
+name: agent-instructions
 description: "Use when creating or updating agent instruction files (AGENTS.md for Pi, copilot-instructions.md for Copilot, per-path guides, or AGENTS.md router) — especially when instruction files are too long, generic, or stale, or when agents repeatedly make the same avoidable mistakes."
 metadata:
   category: authoring
@@ -7,7 +7,7 @@ metadata:
   maturity: beta
 ---
 
-# init Skill
+# agent-instructions Skill
 
 **Purpose:** Create or refresh instruction files that guide agent behavior and reduce repeated mistakes without rewriting the repository or enforcing tool choices that contradict the codebase.
 
