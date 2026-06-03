@@ -11,6 +11,7 @@
   "skills/git-worktrees": "1.2.0",
   "skills/github-actions-failure-triage": "1.2.0",
   "skills/github-presence": "1.2.0",
+  "skills/knip": "1.0.0",
   "skills/http-api-openapi": "1.3.0",
   "skills/implementation-review": "1.4.0",
   "skills/integration-testing-http": "1.2.0",

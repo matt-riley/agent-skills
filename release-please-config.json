@@ -119,6 +119,16 @@
         }
       ]
     },
+    "skills/knip": {
+      "package-name": "knip",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/knip/SKILL.md"
+        }
+      ]
+    },
     "skills/http-api-openapi": {
       "package-name": "http-api-openapi",
       "skip-github-release": true,

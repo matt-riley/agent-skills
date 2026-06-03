@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Run Knip on this TypeScript monorepo and tell me which exports, files, or dependencies look unused.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our JS workspace needs a PR-safe unused-dependency and unused-export audit before we delete packages.",
+    "should_trigger": true
+  },
+  {
+    "query": "Knip is flagging unresolved imports in a package; help me decide whether the config or code is wrong.",
+    "should_trigger": true
+  },
+  {
+    "query": "The test suite started failing after yesterday's merge and I need the root cause.",
+    "should_trigger": false
+  },
+  {
+    "query": "Tighten this tsconfig and enable stricter compiler checks.",
+    "should_trigger": false
+  },
+  {
+    "query": "Recover the dormant cleanup task from last week and continue from the prior plan.",
+    "should_trigger": false
+  }
+]

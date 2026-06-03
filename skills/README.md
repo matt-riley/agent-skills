@@ -52,6 +52,10 @@ Start with these when the request matches them directly:
 - `project-references-migration` — migrate a TypeScript monorepo from path aliases or flat config to TypeScript Project References
 - `mocha-to-jest-migration` — migrate a test suite from Mocha to Jest including imports, lifecycle hooks, and matchers
 
+### JavaScript and TypeScript code health
+
+- `knip` — find unused dependencies, exports, files, and unresolved imports with Knip in JS/TS projects
+
 ### CI and delivery workflows
 
 - `github-actions-failure-triage` — diagnose existing failing GitHub Actions runs with evidence-first minimal fixes
@@ -209,6 +213,7 @@ Start with these when the request matches them directly:
 | TypeScript `any` elimination or type tightening | `typescript-any-eliminator` | Systematic any removal is the deliverable |
 | migrating TypeScript path aliases to Project References | `project-references-migration` | TypeScript project reference contract is the focus |
 | migrating Mocha tests to Jest | `mocha-to-jest-migration` | Test framework migration patterns are the speciality |
+| finding unused dependencies, exports, files, or unresolved imports in a JS/TS repo | `knip` | Knip-based codebase health analysis is the main need |
 | writing or improving reusable skills | `skill-authoring` | Skill authorship is the primary task |
 | creating a new skill or upgrading an existing one with correct frontmatter and evals | `skill-creator` | Skill creation/upgrade workflow with validation is the deliverable |
 | adversarial questioning to stress-test a design | `grill-me` | Adversarial review is the main format |

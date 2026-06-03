@@ -1,0 +1,26 @@
+{
+  "skill_name": "knip",
+  "evals": [
+    {
+      "id": "knip-unused-code-audit",
+      "prompt": "Audit this JS/TS workspace with Knip and tell me what looks safe to clean up first.",
+      "expected_behavior": "Recognizes Knip as the right codebase-health skill, asks for the repository or package scope if missing, and focuses on unused dependencies, exports, files, and unresolved imports before suggesting fixes.",
+      "assertions": [
+        "Identifies Knip as the primary tool for unused-code analysis in JS/TS projects",
+        "Separates report-first analysis from applying fixes",
+        "Mentions config, workspace scope, or entry-point questions before deleting anything"
+      ],
+      "files": []
+    },
+    {
+      "id": "knip-boundary-check",
+      "prompt": "The test suite is failing after a refactor; use Knip to find the bug.",
+      "expected_behavior": "Routes away from Knip because this is a debugging task, not unused-code analysis.",
+      "assertions": [
+        "Does not claim Knip is the right tool for runtime or test failure diagnosis",
+        "Routes the task to systematic-debugging or another failure-analysis skill instead"
+      ],
+      "files": []
+    }
+  ]
+}
