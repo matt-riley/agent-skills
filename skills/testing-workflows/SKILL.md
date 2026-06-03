@@ -41,7 +41,11 @@ metadata:
 - Broader test-run evidence showing the fix or feature is ready beyond the isolated case.
 
 
-## Fast paths
+## Workflow
+
+Use the most specific path for the task; fall through to the debugging sequence when tests fail for unclear reasons. Layer in `integration-testing-http` when the problem is specifically endpoint contracts, auth behaviour, or request/response assertions over HTTP.
+
+### Fast paths
 
 ```bash
 make test                           # all tests (may run generation first)
@@ -50,11 +54,7 @@ make test-integration               # integration tests only
 go test -v -run TestName ./pkg/...  # single test, verbose
 ```
 
-## Catalog position
-
-Use this as the default testing entry point for Go work. If the problem is specifically about endpoint contracts, auth behaviour, or request/response assertions over HTTP, layer in `integration-testing-http` rather than replacing this skill entirely.
-
-## Debugging failures
+### Debugging failures
 
 Follow this sequence:
 
@@ -63,7 +63,7 @@ Follow this sequence:
 3. **DB-related failure in integration tests** → verify `DATABASE_URL` is set and migrations are applied.
 4. **Flaky / order-dependent tests** → check for shared mutable state; each test must be isolated.
 
-## Coverage expectations when adding features
+### Coverage expectations when adding features
 
 | Layer            | What to test                                                    |
 | ---------------- | --------------------------------------------------------------- |
@@ -85,7 +85,13 @@ Follow this sequence:
 - Run the repository's broader test target before claiming the change is ready.
 - When adding features, confirm new or updated tests cover the touched domain, repository, or handler behavior.
 
-## Support files
+## Examples
 
-- Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
-- Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.
+- `The domain validation test is failing after I renamed a field — isolate it and show me the fix.`
+- `Add integration tests for the new repository method so it works against both SQLite and Postgres.`
+- `The CI test run is red but I can't reproduce it locally — step me through the debugging sequence.`
+
+## Reference files
+
+- [`references/examples.md`](references/examples.md) — concrete user utterances, expected behaviour, and model answer shapes
+- [`references/edge-cases.md`](references/edge-cases.md) — near-miss requests, partial matches, and first-attempt failure patterns

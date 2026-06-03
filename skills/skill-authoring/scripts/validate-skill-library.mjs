@@ -31,9 +31,12 @@ const VALID_KINDS = new Set(["task", "reference"]);
 
 // Metadata contract: only these top-level keys are permitted in skill frontmatter.
 // See skills/skill-authoring/references/metadata-contract.md for rationale.
-const ALLOWED_TOP_LEVEL_KEYS = new Set(["name", "description", "metadata"]);
+// `license` is allowed because this catalog is GPL-licensed and AGENTS.md requires it in skill frontmatter.
+const ALLOWED_TOP_LEVEL_KEYS = new Set(["name", "description", "metadata", "license"]);
 
 // Upstream provenance keys that must not appear inside the metadata block.
+// `version` is intentionally omitted: release-managed skills mirror their version
+// into `metadata.version` via Release Please, which is the repo's versioning contract.
 const FORBIDDEN_METADATA_KEYS = new Set([
   "github-path",
   "github-ref",
@@ -41,7 +44,6 @@ const FORBIDDEN_METADATA_KEYS = new Set([
   "github-tree-sha",
   "author",
   "inspired-by",
-  "version",
   "enhancements",
 ]);
 

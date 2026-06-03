@@ -4,13 +4,14 @@ This document defines the canonical frontmatter contract for every skill under `
 
 ## Allowed top-level keys
 
-Only three top-level keys are valid in a skill frontmatter block:
+The following top-level keys are valid in a skill frontmatter block:
 
 | Key | Status | Notes |
 | --- | --- | --- |
 | `name` | **Required** | Kebab-case, matches the directory name exactly. |
 | `description` | **Required** | Single-line quoted string. 50–120 characters. Trigger-phrase required. |
 | `metadata` | **Required** (block) | Contains all skill lifecycle and classification fields. |
+| `license` | **Optional** | Use `GNU GPL v3` for skills in this catalog. Required by repo policy (see AGENTS.md Learned Rule 1). |
 
 **Any other top-level key is forbidden.** The following keys are explicitly banned because they belong elsewhere:
 
@@ -18,7 +19,6 @@ Only three top-level keys are valid in a skill frontmatter block:
 | --- | --- | --- |
 | `argument-hint` | Runtime hint, not skill identity | Reference file or `## Inputs to gather` |
 | `compatibility` | Operational detail, not skill identity | Reference file or guardrail |
-| `license` | Attribution, not skill identity | Commit message or `PROVENANCE.md` |
 | `author` | Attribution, not skill identity | Commit message or `PROVENANCE.md` |
 | `inspired-by` | Attribution, not skill identity | Commit message or `PROVENANCE.md` |
 
@@ -46,6 +46,7 @@ Skill-specific behavioral flags may be added under `metadata` as documented opti
 | Optional field | Status | Meaning | Used by |
 | --- | --- | --- | --- |
 | `metadata.reader_testing` | **Documented optional extension** | Signals that reader-testing is a required stage in the skill workflow. Valid value: `required`. | `doc-coauthoring` |
+| `metadata.version` | **Release-managed skills only** | Mirrors the skill's semver from Release Please. Set via `# x-release-please-version` comment. Do not bump manually. | Release-managed skills |
 
 **Do not add arbitrary skill-specific fields** to `metadata` without documenting them here first. If a field applies to only one skill and does not change how the validator or authoring system reasons about the skill, consider moving it to a `references/` file instead.
 
@@ -61,7 +62,6 @@ The following `metadata` keys are explicitly banned because they carry upstream 
 | `metadata.github-tree-sha` | Upstream awesome-copilot import | Remove. |
 | `metadata.author` | Upstream attribution | Commit message or `PROVENANCE.md`. |
 | `metadata.inspired-by` | Upstream attribution | Commit message or `PROVENANCE.md`. |
-| `metadata.version` | Upstream versioning | Not needed in local library; use git for history. |
 | `metadata.enhancements` | Upstream feature list | Move to `## Reference files` or a `references/` file. |
 
 ## Special-case decisions
@@ -146,6 +146,6 @@ The validator (`scripts/validate-skill-library.mjs`) currently enforces:
 | `description` must be ≥ 20 characters | All skills | Error |
 | `description` must include a trigger phrase | `draft` skills | Error |
 | `metadata.kind` must be `task` or `reference` if present | All skills | Error |
-| **Forbidden top-level keys** | All skills | **Error** (added wave 2) |
-| **Forbidden provenance keys in `metadata`** | All skills | **Error** (added wave 2) |
+| **Forbidden top-level keys** (anything other than `name`, `description`, `metadata`, `license`) | All skills | **Error** |
+| **Forbidden provenance keys in `metadata`** (`github-*`, `author`, `inspired-by`, `enhancements`) | All skills | **Error** |
 | **`metadata.kind` required for `draft` skills** | Draft skills | **Error** (added wave 2) |

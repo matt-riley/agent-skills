@@ -26,7 +26,8 @@ Use this skill when the job is to inspect or clean up a JavaScript or TypeScript
 
 - The main problem is a runtime failure, broken test, or unexpected behavior; route to `systematic-debugging`.
 - The main problem is TypeScript compiler output or tsconfig fallout; route to `tsc-error-triage` or `tsconfig-hardening`.
-- The task is resuming a dormant or blocked cleanup loop from partial context; route to `fallow`.
+- The task is resuming a dormant or blocked task from partial context; route to `resolve-open-loops`.
+- The analysis involves dead code, duplication, circular dependencies, or complexity hotspots rather than Knip's unused-import and dependency model; route to `fallow`.
 - The repository is not primarily JavaScript or TypeScript.
 - The request is about generic linting, formatting, or bundle-size work rather than Knip-based unused-code analysis.
 

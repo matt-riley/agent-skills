@@ -44,17 +44,20 @@ Use this skill when the job is to inspect or clean up a JavaScript or TypeScript
 
 **Required before starting**
 
-- The dormant or deferred task or loop to recover.
+- The repository root or package scope to analyze.
+- Whether the user wants a report, an audit, a fix preview, or applied cleanup.
 
 **Helpful if present**
 
-- Prior session notes or plan artifacts related to the task.
+- The Fallow config file location (`fallow.config.{js,mjs,ts}` or `package.json#fallow`).
+- Any directories, entry points, or generated files that should be excluded.
+- Prior false positives or ignore rules that should be respected.
 
 ## First move
 
-1. Identify the dormant task or deferred loop to resume.
-2. Check session history or plan artifacts for prior context.
-3. Route to the most relevant active skill based on the task type.
+1. Check for an existing Fallow config before choosing a command family.
+2. Read [`references/cli-reference.md`](references/cli-reference.md) to pick the right command for the analysis type (dead code, duplication, health, audit, fix, trace).
+3. Run a read-only analysis command before applying any fixes.
 
 ## Navigation
 

@@ -102,6 +102,12 @@ metadata:
 - In readability-audit mode, provide a Flesch score and quoted evidence.
 - In metadata-audit mode, keep the output actionable in seconds and provide rewrites only where needed.
 
+## Examples
+
+- `Draft a migration guide for customers moving from v2 to v3 of our API.`
+- `Audit this README for readability — it's too dense and our audience is not all engineers.`
+- `Review these 12 OpenAPI description strings for clarity, front-loading, and truncation fit.`
+
 ## Reference files
 
 - Read `references/doc-types-and-boundaries.md` when the task sounds like document work but may belong to another skill.

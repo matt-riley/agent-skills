@@ -29,7 +29,6 @@ Start with these when the request matches them directly:
 - `implementation-review` — post-implementation review and approval
 - `verification-before-completion` — mandatory pre-done checklist that blocks task completion until evidence passes
 - `resolve-open-loops` — close or hand off deferred items, open questions, and unresolved decisions
-- `fallow` — recover a dormant, blocked, or long-deferred task from partial context
 - `workflow-contracts` — define and enforce explicit entry/exit contracts for multi-step workflows
 - `agent-instructions` — create or update AGENTS.md, copilot-instructions.md, and per-path instruction guides when agent guidance is stale or missing
 
@@ -55,6 +54,7 @@ Start with these when the request matches them directly:
 ### JavaScript and TypeScript code health
 
 - `knip` — find unused dependencies, exports, files, and unresolved imports with Knip in JS/TS projects
+- `fallow` — audit JS/TS code health with the Fallow tool: dead code, duplication, circular dependencies, boundaries, and complexity
 
 ### CI and delivery workflows
 
@@ -214,6 +214,7 @@ Start with these when the request matches them directly:
 | migrating TypeScript path aliases to Project References | `project-references-migration` | TypeScript project reference contract is the focus |
 | migrating Mocha tests to Jest | `mocha-to-jest-migration` | Test framework migration patterns are the speciality |
 | finding unused dependencies, exports, files, or unresolved imports in a JS/TS repo | `knip` | Knip-based codebase health analysis is the main need |
+| auditing JS/TS dead code, duplication, circular dependencies, or architecture boundaries with Fallow | `fallow` | Fallow tool is requested or the scope is broader than unused-import detection |
 | writing or improving reusable skills | `skill-authoring` | Skill authorship is the primary task |
 | creating a new skill or upgrading an existing one with correct frontmatter and evals | `skill-creator` | Skill creation/upgrade workflow with validation is the deliverable |
 | adversarial questioning to stress-test a design | `grill-me` | Adversarial review is the main format |
@@ -221,7 +222,7 @@ Start with these when the request matches them directly:
 | AI agent policy, tool allowlists, or audit trails | `agent-governance` | Runtime governance patterns are the speciality |
 | AI agent plugin integrity or promotion gates | `agent-supply-chain` | Supply chain verification is the main risk |
 | evaluating AI agent trigger accuracy or behavior | `agentic-eval` | Behavioral evaluation methodology is the focus |
-| recovering a stalled, blocked, or dormant task from partial context | `fallow` | Task-state recovery from partial context is the main need |
+| recovering a stalled, blocked, or dormant task from partial context | `resolve-open-loops` | Open-loop and stalled-task recovery is the main need |
 | closing deferred items, open questions, or unresolved decisions | `resolve-open-loops` | Open-loop closure and handoff is the deliverable |
 | defining or enforcing explicit entry/exit contracts for multi-step workflows | `workflow-contracts` | Contract-shaped workflow boundaries are the main risk |
 | a mandatory pre-completion verification checklist | `verification-before-completion` | Evidence-gated sign-off is the main mechanism |
@@ -247,6 +248,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `session-store-history` should own cross-session recall and session-to-ref/file tracing; keep it separate from current-workspace repo exploration, which should stay with repo-local search tools.
 - `cloudflare-d1-query-tuning` should own runtime D1 query-shape and access-path tuning without schema changes; keep it separate from `cloudflare-d1-migrations` and from generic `repository-adapters` work when Cloudflare D1 runtime behavior is the main risk.
 - `acquire-codebase-knowledge` should own deep seven-document codebase mapping; do not conflate it with narrow file reads, quick architecture sketches, or ad-hoc questions about single modules.
+- `fallow` and `knip` are both JS/TS code-health tools but target different tools and scopes: prefer `knip` when the Knip tool is explicitly requested or the need is unused dependencies, exports, or unresolved imports; prefer `fallow` when the Fallow tool is requested or the analysis covers duplication, circular dependencies, complexity hotspots, architecture boundaries, or CI audit gates.
 - `plan-review-loop` is distinct from `plan-review`; `plan-review` owns plan drafting and one-shot approval; `plan-review-loop` owns the explicit multi-round reviewer-persona loop with Jason and Freddy.
 - `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
 - `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
