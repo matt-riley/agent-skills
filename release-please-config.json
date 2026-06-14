@@ -529,6 +529,16 @@
         }
       ]
     },
+    "skills/go-cli-development": {
+      "package-name": "go-cli-development",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/go-cli-development/SKILL.md"
+        }
+      ]
+    },
     "skills/go-build-and-test": {
       "package-name": "go-build-and-test",
       "skip-github-release": true,
@@ -536,6 +546,16 @@
         {
           "type": "generic",
           "path": "skills/go-build-and-test/SKILL.md"
+        }
+      ]
+    },
+    "skills/go-docker-builds": {
+      "package-name": "go-docker-builds",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/go-docker-builds/SKILL.md"
         }
       ]
     },
@@ -616,6 +636,26 @@
         {
           "type": "generic",
           "path": "skills/neovim-config/SKILL.md"
+        }
+      ]
+    },
+    "skills/neovim-config": {
+      "package-name": "neovim-config",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/neovim-config/SKILL.md"
+        }
+      ]
+    },
+    "skills/neovim-plugin-development": {
+      "package-name": "neovim-plugin-development",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/neovim-plugin-development/SKILL.md"
         }
       ]
     },

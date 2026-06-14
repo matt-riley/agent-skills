@@ -1,6 +1,6 @@
 ---
 name: writing-and-editing
-description: "Draft structured documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary work is writing, editing, or copy quality."
+description: "Draft structured documents, audit prose readability, and review short audience-facing metadata strings — solo writing quality work. Use when the primary task is writing, editing, or copy quality, not iterative co-authoring with reader feedback (use doc-coauthoring for that)."
 license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version

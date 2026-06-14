@@ -1,7 +1,8 @@
 interface:
   display_name: RPI Workflow
-  short_description: Apply a Research -> Plan -> Implement -> Validate workflow for
-    non-trivial work in agent-compatible coding harnesses, keeping progress durable
-    across turns and sessions via workspace `plan.md` and `files/` artifacts.
+  short_description: Apply a Research → Plan → Implement → Validate workflow for
+    multi-phase work that benefits from explicit phase boundaries. Use when the task
+    is complex, spans many files, or needs durable progress artifacts — not for small
+    fixes, single-file edits, or narrow specialist workflows.
 policy:
   allow_implicit_invocation: true

@@ -1,7 +1,8 @@
 interface:
   display_name: Observability & Metrics
   short_description: Validate and operate application /health, /metrics, and logging
-    behavior. Use when adding metrics, changing observability auth, debugging production-like
-    issues, or verifying deployment health.
+    behavior. Use when adding metrics, changing observability endpoint auth, or verifying
+    deployment telemetry — not for general production debugging where telemetry health
+    is not the question.
 policy:
   allow_implicit_invocation: true

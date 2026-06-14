@@ -1,0 +1,41 @@
+{
+  "skill_name": "go-docker-builds",
+  "evals": [
+    {
+      "id": "new-pure-go-dockerfile",
+      "prompt": "Write a Dockerfile for this Go API service at github.com/matt-riley/myapi. It uses Go 1.26, chi router, and has no CGO dependencies.",
+      "expected_behavior": "Produces a multi-stage Dockerfile with golang:1.26-alpine builder, CGO_ENABLED=0, scratch final image, and CA certs copied.",
+      "assertions": [
+        "Uses multi-stage build with golang:1.26-alpine builder",
+        "Sets CGO_ENABLED=0 for static compilation",
+        "Uses scratch as the final base image",
+        "Copies CA certificates from builder",
+        "Strips debug info with -ldflags=\"-s -w\"",
+        "Separates go mod download into its own layer"
+      ],
+      "files": []
+    },
+    {
+      "id": "cgo-dockerfile-fix",
+      "prompt": "My Go service uses go-sqlite3 and the Docker build fails with 'CGO_ENABLED=0'. Fix the Dockerfile.",
+      "expected_behavior": "Switches to CGO_ENABLED=1, adds gcc and musl-dev to builder, changes final image from scratch to alpine.",
+      "assertions": [
+        "Adds gcc and musl-dev to the builder stage",
+        "Sets CGO_ENABLED=1",
+        "Changes final base image from scratch to alpine",
+        "Adds ca-certificates and tzdata to final image"
+      ],
+      "files": []
+    },
+    {
+      "id": "not-trigger-docker-compose",
+      "prompt": "Run docker compose up to start PostgreSQL and the app for local dev.",
+      "expected_behavior": "Should NOT trigger go-docker-builds. Route to docker-compose-dev instead.",
+      "assertions": [
+        "Does not produce a production Dockerfile",
+        "Routes to docker-compose-dev"
+      ],
+      "files": []
+    }
+  ]
+}

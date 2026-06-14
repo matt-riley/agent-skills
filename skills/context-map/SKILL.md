@@ -1,6 +1,6 @@
 ---
 name: context-map
-description: Use when a task may span multiple files, when dependencies or tests are unclear, or when you need a pre-edit map of likely files and patterns before planning or implementation.
+description: Use when the user explicitly wants a pre-edit scoping pass — mapping candidate files, tests, and reference patterns before implementation. Not for general multi-file tasks unless the user asks "what files are involved" or requests a context map.
 license: GNU GPL v3
 metadata:
   version: 1.0.0 # x-release-please-version
@@ -8,7 +8,6 @@ metadata:
   audience: general-coding-agent
   maturity: draft
   kind: task
-  kind: reference
 ---
 
 # Context map
@@ -68,6 +67,12 @@ Use this skill when the next step is figuring out what to read or touch before c
 3. Distinguish confirmed files from likely follow-up files instead of flattening everything into one undifferentiated list.
 4. Name the nearby tests and reference patterns that should guide any later implementation.
 5. Stop once the next action is obvious: read a specific set of files, route to planning, or proceed with a tightly scoped implementation.
+
+## Outputs
+
+- A context map identifying candidate files grouped by role (entry points, dependencies, tests, reference patterns, risks).
+- Distinction between confirmed files and likely follow-up files.
+- Clear next action: read a specific set of files, route to planning, or proceed with a tightly scoped implementation.
 
 ## Guardrails
 

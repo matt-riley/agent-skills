@@ -1,0 +1,40 @@
+{
+  "skill_name": "neovim-plugin-development",
+  "evals": [
+    {
+      "id": "scaffold-new-plugin",
+      "prompt": "Create a new Neovim plugin called trailblazer.nvim that adds a :Trail command to list recent file visits.",
+      "expected_behavior": "Scaffolds lua/trailblazer/init.lua with setup(), config defaults, user command, and tests/ directory with plenary bootstrap.",
+      "assertions": [
+        "Creates lua/<name>/init.lua with setup() function",
+        "Registers user command with vim.api.nvim_create_user_command",
+        "Provides sensible config defaults",
+        "Creates tests/ with minimal_init.lua",
+        "Uses lua/<plugin>/ directory structure (not flat .lua file)"
+      ],
+      "files": []
+    },
+    {
+      "id": "add-ci-workflows",
+      "prompt": "Set up CI with selene, stylua, and plenary for this Neovim plugin repo. It's called waystone.nvim.",
+      "expected_behavior": "Creates .github/workflows/lint.yml and test.yml with selene, stylua, and plenary on stable + nightly.",
+      "assertions": [
+        "Creates lint workflow with selene and stylua",
+        "Creates test workflow with plenary on stable and nightly Neovim",
+        "Checks out plenary.nvim as a sibling directory",
+        "Uses rhysd/action-setup-vim for Neovim installation"
+      ],
+      "files": []
+    },
+    {
+      "id": "not-trigger-user-config",
+      "prompt": "Fix the LSP configuration in my init.lua — mason-lspconfig isn't setting up gopls correctly.",
+      "expected_behavior": "Should NOT trigger neovim-plugin-development. Route to neovim-config instead.",
+      "assertions": [
+        "Does not scaffold plugin structure",
+        "Routes to neovim-config for user configuration editing"
+      ],
+      "files": []
+    }
+  ]
+}

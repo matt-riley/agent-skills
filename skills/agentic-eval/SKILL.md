@@ -8,7 +8,6 @@ metadata:
   audience: general-coding-agent
   maturity: draft
   kind: task
-  kind: reference
 ---
 
 # Agentic Evaluation
@@ -68,6 +67,12 @@ The three evaluation strategy patterns (outcome-based, LLM-as-judge, rubric-base
 The implementation checklist — criteria, threshold, loop wiring, convergence, logging — is in `assets/eval-checklist.md`.
 
 For a new implementation, start with the checklist to confirm your setup is complete, then use the patterns reference to choose and adapt an evaluation strategy.
+
+## Outputs
+
+- Evaluation loop design with defined criteria, convergence check, and max iteration budget.
+- Structured evaluation scores per iteration with input, output, and critique logged.
+- Convergence or budget-exhaustion result confirming the loop terminated cleanly.
 
 ## Workflow
 

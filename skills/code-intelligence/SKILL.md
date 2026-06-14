@@ -7,7 +7,6 @@ metadata:
   category: workflow
   audience: general-coding-agent
   maturity: draft
-  kind: task
   kind: reference
 ---
 

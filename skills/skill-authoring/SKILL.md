@@ -1,6 +1,6 @@
 ---
 name: skill-authoring
-description: "Use when creating or revising a reusable agent skill under skills/<name>/SKILL.md — deciding activation, layering, examples, or validation, or choosing between a skill vs. instructions vs. a specialized agent."
+description: "Use when designing the shape of a new or revised skill — deciding activation language, layering, examples, and validation patterns. Consult this as the authoring style reference, not as a step-by-step builder. For building or upgrading a specific skill package, use skill-creator instead."
 license: GNU GPL v3
 metadata:
   version: 1.0.0 # x-release-please-version

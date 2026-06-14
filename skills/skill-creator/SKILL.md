@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: "Create or upgrade a reusable skill in the current skills catalog. Use when adding a skill, improving metadata/examples/evals, tightening trigger boundaries, or deciding if guidance belongs in a skill."
+description: "Build, upgrade, or standardise a specific skill package in the current catalog. Use when adding a new skill directory, improving its metadata/examples/evals, or tightening its trigger boundaries — not for general skill design philosophy or style reference (use skill-authoring for that)."
 license: GNU GPL v3
 metadata:
   version: 1.3.0 # x-release-please-version

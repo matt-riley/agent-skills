@@ -75,6 +75,8 @@ Start with these when the request matches them directly:
 ### Go development
 
 - `go-build-and-test` — build, vet, and test Go packages with correct module and toolchain usage
+- `go-cli-development` — develop, structure, and release Go CLI tools with cobra, goreleaser, and Homebrew
+- `go-docker-builds` — containerize Go services with multi-stage Docker builds, scratch images, health checks, and CI
 - `go-error-patterns` — apply idiomatic Go error wrapping, sentinel values, and `errors.As`/`errors.Is` patterns
 - `aws-lambda-go-deployment` — package and deploy Go functions to AWS Lambda with the right runtime and IAM config
 
@@ -138,6 +140,7 @@ Start with these when the request matches them directly:
 ### Developer experience and tooling
 
 - `neovim-config` — configure and extend a Neovim setup with plugins, keymaps, and LSP wiring
+- `neovim-plugin-development` — develop, test, and release Neovim Lua plugins with plenary, CI, and docs
 - `grill-me` — generate adversarial questions to stress-test your understanding of a codebase or design
 - `grill-with-docs` — challenge an implementation against official docs to surface gaps and misnomers
 - `ast-grep` — run structural code search and rewrite using ast-grep patterns
@@ -197,6 +200,8 @@ Start with these when the request matches them directly:
 | a PRD from a feature idea or conversation | `to-prd` | PRD generation is the deliverable |
 | converting a plan or PRD into GitHub issues | `to-issues` | Issue creation is the deliverable |
 | Go build, vet, or test issues | `go-build-and-test` | Go module and toolchain handling is the speciality |
+| building or releasing a Go CLI tool | `go-cli-development` | Go CLI structure, subcommands, flags, goreleaser, and Homebrew |
+| containerizing a Go service for production | `go-docker-builds` | Multi-stage Docker builds, scratch images, health checks, and CI |
 | Go error wrapping, sentinel errors, or errors.As/Is patterns | `go-error-patterns` | Idiomatic Go error handling is the focus |
 | a GoReleaser release pipeline | `goreleaser-release-pipeline` | Release artifacts and changelogs are the main output |
 | reproducing a GitHub Actions failure locally | `github-actions-local-repro` | Local repro beats remote re-run for diagnosis |
@@ -234,6 +239,7 @@ Start with these when the request matches them directly:
 | structural code search, codemod rewrites, or ast-grep patterns | `ast-grep` | Syntax-aware search and rewrite is the speciality |
 | modern web platform patterns, HTML, CSS, forms, or web API guidance | `modern-web-guidance` | Current web platform guidance prevents legacy patterns |
 | Neovim config, plugins, LSP wiring, or startup behavior | `neovim-config` | Neovim Lua configuration is the speciality |
+| developing a Neovim Lua plugin | `neovim-plugin-development` | Plugin structure, plenary tests, CI, and documentation |
 | AWS Lambda Go packaging, bootstrap, or deployment | `aws-lambda-go-deployment` | Lambda runtime and IAM config for Go is the focus |
 | code navigation, symbol lookup, or LSP vs grep routing decisions | `code-intelligence` | Routing layer for LSP over text search is the main value |
 
@@ -253,6 +259,9 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
 - `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
 - `code-intelligence` is a routing overlay that ensures LSP is used when available; it should not be selected as the primary skill for work that has a more specific match.
+- `neovim-config` owns editing user-level Neovim configuration (init.lua, lazy.nvim specs, LSP wiring); `neovim-plugin-development` owns building, testing, and releasing Neovim Lua plugins — these are complementary but distinct surfaces.
+- `go-build-and-test` owns Go build failures, toolchain mismatches, and CI-parity issues; `go-cli-development` owns CLI project structure, subcommand patterns, goreleaser, and Homebrew distribution — building vs authoring are different concerns.
+- `go-docker-builds` owns production Dockerfiles for Go services; `docker-compose-dev` owns local multi-service development stacks — production images vs local dev environments are different workflows.
 
 ## Layering notes
 
@@ -268,3 +277,6 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `verification-before-completion` pairs with any implementation skill; load it last, before signing off.
 - `test-driven-development` and `systematic-debugging` layer onto `testing-workflows`; prefer the specialist when TDD discipline or structured root-cause methodology is the explicit need.
 - `agent-governance` and `agent-supply-chain` are complementary: governance controls runtime behavior; supply chain controls artifact integrity. Both often apply to the same agent project.
+- `go-cli-development` pairs with `goreleaser-release-pipeline` when the release pipeline itself needs debugging; prefer `go-cli-development` for CLI authoring and `goreleaser-release-pipeline` for release-pipeline-specific failures.
+- `go-docker-builds` pairs with `go-build-and-test` when a Docker build fails; check toolchain state with `go-build-and-test` before debugging the Dockerfile.
+- `neovim-plugin-development` pairs with `neovim-config` when a plugin's user-facing configuration layer needs updating alongside the plugin itself.

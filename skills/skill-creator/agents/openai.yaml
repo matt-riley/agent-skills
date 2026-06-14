@@ -1,7 +1,8 @@
 interface:
   display_name: Skill Creator
-  short_description: Create or upgrade a reusable skill in the current skills catalog.
-    Use when adding a skill, improving metadata/examples/evals, tightening trigger
-    boundaries, or deciding if guidance belongs in a skill.
+  short_description: Build, upgrade, or standardise a specific skill package in the
+    current catalog. Use when adding a new skill directory, improving its metadata/examples/evals,
+    or tightening its trigger boundaries — not for general skill design philosophy
+    or style reference (use skill-authoring for that).
 policy:
   allow_implicit_invocation: true

@@ -1,6 +1,6 @@
 ---
 name: observability-metrics
-description: "Validate and operate application /health, /metrics, and logging behavior. Use when adding metrics, changing observability auth, debugging production-like issues, or verifying deployment health."
+description: "Validate and operate application /health, /metrics, and logging behavior. Use when adding metrics, changing observability endpoint auth, or verifying deployment telemetry — not for general production debugging where telemetry health is not the question."
 license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version

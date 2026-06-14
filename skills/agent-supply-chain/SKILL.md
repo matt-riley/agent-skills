@@ -8,7 +8,6 @@ metadata:
   audience: general-coding-agent
   maturity: draft
   kind: task
-  kind: reference
 ---
 # Agent Supply Chain Integrity
 
@@ -353,6 +352,13 @@ Add to your GitHub Actions workflow:
 | **Pin all dependency versions** | Unpinned deps = different code on every install |
 
 ---
+
+## Outputs
+
+- `INTEGRITY.json` manifest with SHA-256 file hashes and chain hash for a plugin directory.
+- Verification report listing any MISSING, MODIFIED, or UNTRACKED files.
+- Dependency version audit findings with severity and fix suggestions.
+- Promotion gate check result with pass/fail for integrity, required files, and pinned dependencies.
 
 ## Workflow
 

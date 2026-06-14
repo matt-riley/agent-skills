@@ -8,7 +8,6 @@ metadata:
   audience: general-coding-agent
   maturity: draft
   kind: task
-  kind: task
 ---
 
 # AWS Lambda Go deployment

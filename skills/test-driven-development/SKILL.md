@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: "Use when implementing a new feature, fixing a bug, or refactoring existing behavior — proven correct by executable tests written before production code."
+description: "Use when the user explicitly asks for test-driven development (TDD), a red-green-refactor cycle, or test-first implementation — not for general feature work, bug fixes, or refactoring unless TDD discipline is specifically requested."
 license: GNU GPL v3
 metadata:
   version: 1.0.0 # x-release-please-version

@@ -1,13 +1,12 @@
 ---
 name: modern-web-guidance
-description: "Use when writing HTML, CSS, JavaScript, forms, or web animations — prevents legacy patterns."
+description: "Consult this reference before implementing any HTML, CSS, JS, form, or animation feature — prevents legacy patterns by checking for modern standardised web platform APIs. Load as a reference overlay, not as a primary workflow skill."
 license: GNU GPL v3
 metadata:
   version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft
-  kind: task
   kind: reference
 ---
 

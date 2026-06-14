@@ -1,0 +1,52 @@
+{
+  "skill_name": "go-cli-development",
+  "evals": [
+    {
+      "id": "scaffold-new-cli",
+      "prompt": "Create a new Go CLI called `tunnel` that takes a --port flag and prints a connection message.",
+      "expected_behavior": "Scaffolds main.go → cmd/tunnel/root.go with stdlib flag, wires version injection, and creates the canonical project structure.",
+      "assertions": [
+        "Uses the canonical main.go → cmd/ → internal/ structure",
+        "Wires version injection via -ldflags",
+        "Prefers stdlib flag unless cobra is justified",
+        "Keeps main.go thin — import cmd, call Execute()"
+      ],
+      "files": []
+    },
+    {
+      "id": "add-subcommand-table",
+      "prompt": "Add a `list` subcommand to my existing Go CLI with table output and a --format json flag.",
+      "expected_behavior": "Creates cmd/cli/list.go with cobra command, uses go-pretty/tablewriter for table output, and supports --format json for machine-readable output.",
+      "assertions": [
+        "Creates a new subcommand file in cmd/",
+        "Uses a table library for formatted output",
+        "Supports --format json flag",
+        "Adds integration test that captures stdout"
+      ],
+      "files": []
+    },
+    {
+      "id": "wire-goreleaser-homebrew",
+      "prompt": "Wire goreleaser and Homebrew distribution for this Go CLI tool. It's called `dots-cli` and lives in github.com/matt-riley/dots-cli.",
+      "expected_behavior": "Creates .goreleaser.yaml with multi-platform builds, ldflags for version injection, and Homebrew tap configuration.",
+      "assertions": [
+        "Creates .goreleaser.yaml with correct structure",
+        "Configures brews section for homebrew-tools tap",
+        "Sets CGO_ENABLED=0 for static binaries",
+        "Wires ldflags for version, commit, and date",
+        "Includes darwin and linux in goos"
+      ],
+      "files": []
+    },
+    {
+      "id": "not-trigger-build-failure",
+      "prompt": "go build fails on this CLI with a GOROOT error.",
+      "expected_behavior": "Should NOT trigger go-cli-development. Route to go-build-and-test instead.",
+      "assertions": [
+        "Does not apply CLI-specific scaffolding or patterns",
+        "Routes to go-build-and-test for toolchain diagnosis"
+      ],
+      "files": []
+    }
+  ]
+}

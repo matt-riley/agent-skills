@@ -1,6 +1,6 @@
 ---
 name: integration-testing-http
-description: "Run and extend end-to-end HTTP integration tests for server behavior. Use when handlers, middleware, auth, request/response shapes, or API contracts change."
+description: "Write and run end-to-end HTTP integration tests for server behavior. Use when you need to add or fix integration test coverage for handlers, middleware, auth enforcement, or endpoint contracts — not for keeping OpenAPI specs in sync."
 license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version

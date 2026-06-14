@@ -1,0 +1,12 @@
+[
+  { "query": "Write a Dockerfile for this Go API service that builds a static binary and runs on scratch.", "should_trigger": true },
+  { "query": "This Go Docker build fails because of CGO linking — it needs sqlite3.", "should_trigger": true },
+  { "query": "Add a health check and non-root user to this Go service's Dockerfile.", "should_trigger": true },
+  { "query": "Containerize this Go chi API — I want a minimal scratch image with a health check.", "should_trigger": true },
+  { "query": "My Go service uses go-sqlite3 and the Docker build fails on CGO_ENABLED=0. Fix the Dockerfile.", "should_trigger": true },
+  { "query": "Set up GitHub Actions to build and push this Go service's Docker image to GHCR on every push to main.", "should_trigger": true },
+  { "query": "Run docker compose up to start PostgreSQL and the app for local dev.", "should_trigger": false },
+  { "query": "go build fails outside Docker with a GOROOT mismatch.", "should_trigger": false },
+  { "query": "Write a Dockerfile for this Node.js Express API.", "should_trigger": false },
+  { "query": "My GitHub Actions CI job is failing on the Docker build step.", "should_trigger": false }
+]

@@ -8,7 +8,6 @@ metadata:
   audience: planning-agent
   maturity: draft
   kind: task
-  kind: task
 ---
 
 # Plan review loop

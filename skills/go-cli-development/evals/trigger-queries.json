@@ -1,0 +1,12 @@
+[
+  { "query": "Create a new Go CLI called `tunnel` that takes a --port flag and prints a connection message.", "should_trigger": true },
+  { "query": "Add a `list` subcommand to my existing Go CLI with table output and a --format json flag.", "should_trigger": true },
+  { "query": "Wire goreleaser and Homebrew distribution for this Go CLI tool.", "should_trigger": true },
+  { "query": "Scaffold a new Go CLI called `gh-myrepo` with cobra, a `list` subcommand that prints a table, and version injection.", "should_trigger": true },
+  { "query": "Add a --config flag that reads a YAML file from ~/.config/mycli/ using viper.", "should_trigger": true },
+  { "query": "Set up goreleaser for my Go CLI to release darwin/amd64, darwin/arm64, and linux/amd64 binaries with a Homebrew formula.", "should_trigger": true },
+  { "query": "go build fails on this CLI with a GOROOT error.", "should_trigger": false },
+  { "query": "The table output test in cmd/list_test.go is failing.", "should_trigger": false },
+  { "query": "Fix this Go function's error handling — it returns the wrong error type.", "should_trigger": false },
+  { "query": "Create a new Node.js CLI with commander.", "should_trigger": false }
+]
