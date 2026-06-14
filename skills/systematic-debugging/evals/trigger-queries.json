@@ -1,0 +1,26 @@
+[
+  {
+    "query": "This test still flakes; find the root cause before we change code.",
+    "should_trigger": true
+  },
+  {
+    "query": "Multiple attempts to fix this bug have failed. Help me investigate the root cause systematically.",
+    "should_trigger": true
+  },
+  {
+    "query": "Behavior changed after the last commit; something is broken but I don't know why.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rerun the failing test to confirm the fix worked.",
+    "should_trigger": false
+  },
+  {
+    "query": "The root cause is already known; just apply this patch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a test for the new feature.",
+    "should_trigger": false
+  }
+]

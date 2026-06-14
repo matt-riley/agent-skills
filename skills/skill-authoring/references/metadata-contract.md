@@ -66,21 +66,7 @@ The following `metadata` keys are explicitly banned because they carry upstream 
 
 ## Special-case decisions
 
-### `acquire-codebase-knowledge`
-
-This skill was imported directly from the upstream `awesome-copilot` repository and retains several non-local frontmatter patterns:
-- Top-level `argument-hint`, `compatibility`, and `license` keys
-- A `metadata` block with only provenance fields (`github-path`, `github-ref`, `github-repo`, `github-tree-sha`, `version`, `enhancements`)
-
-**Resolution:** All of these are scheduled for bulk normalization in the wave 2 normalization pass. The skill should adopt local `metadata.category`, `metadata.audience`, `metadata.maturity`, and `metadata.kind` fields, and all forbidden keys should be removed. The `argument-hint` content moves to `## Inputs to gather`; the `compatibility` content moves to a `references/` file or guardrail; `license` and provenance fields move to a `PROVENANCE.md`.
-
-These fields are **not added to the local contract** — they are documented here as exceptions pending normalization.
-
-### `agent-governance` and `agent-supply-chain`
-
-Both skills were imported from the upstream `awesome-copilot` repository. Their `metadata` blocks contain only upstream provenance fields and their descriptions use the multiline YAML block scalar form (`|-`).
-
-**Resolution:** Both are scheduled for bulk normalization. They should adopt local `category`, `audience`, `maturity`, and `kind` fields; the provenance fields should be removed.
+The historical special cases for imported skills (`acquire-codebase-knowledge`, `agent-governance`, `agent-supply-chain`) have been normalized to the local contract (category/audience/maturity/kind + license at top level, provenance moved to PROVENANCE.md or commit history where appropriate). No further exceptions are active.
 
 ### `doc-coauthoring`
 
@@ -100,10 +86,12 @@ The description field must be a single quoted YAML string. Multiline block scala
 ---
 name: my-skill
 description: "Use when <trigger phrase>. Not when <adjacent skill> is more appropriate."
+license: GNU GPL v3
 metadata:
   category: workflow
   audience: general-coding-agent
   maturity: stable
+  kind: task
 ---
 ```
 
@@ -113,6 +101,7 @@ metadata:
 ---
 name: my-skill
 description: "Use when <trigger phrase>. Not when <adjacent skill> is more appropriate."
+license: GNU GPL v3
 metadata:
   category: workflow
   audience: general-coding-agent
@@ -127,6 +116,7 @@ metadata:
 ---
 name: my-skill
 description: "Use when <trigger phrase>."
+license: GNU GPL v3
 metadata:
   category: authoring
   audience: general-coding-agent

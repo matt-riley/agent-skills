@@ -1,10 +1,13 @@
 ---
 name: project-references-migration
 description: "Use when a layered TypeScript workspace needs an incremental project-references migration without breaking package boundaries or editor resolution."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # Project references migration
@@ -84,6 +87,11 @@ Pilot package config:
 5. Migrate packages incrementally from leaves upward.
 6. Switch scripts to `tsc -b` or the repository's equivalent only after the referenced graph is coherent.
 7. If a cycle appears, stop widening and split the dependency before adding more references.
+
+## Outputs
+
+- tsconfig and import changes that enable project references without breaking editor or build resolution for the workspace.
+- Evidence (build, type-check, or test) that the migration is safe.
 
 ## Guardrails
 

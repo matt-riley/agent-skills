@@ -7,12 +7,19 @@ import sys
 from pathlib import Path
 import yaml
 NAME_RE = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
+# Fuller canonical set per catalog-standard.md and the taught authoring shape
+# (python validator is the primary `npm run validate` gate; the mjs in skill-authoring/
+# provides additional local-authoring checks such as concrete content, orphans, order).
 CANONICAL_HEADINGS = (
     '## Use this skill when',
     '## Do not use this skill when',
     '## Inputs to gather',
     '## First move',
+    '## Workflow',
     '## Guardrails',
+    '## Validation',
+    '## Examples',
+    '## Reference files',
 )
 def fail(errors, message):
     errors.append(message)
@@ -67,6 +74,14 @@ def validate_canonical_headings(skill_path, body, errors):
     for heading in CANONICAL_HEADINGS:
         if not re.search(r'^' + re.escape(heading) + r'\s*$', stripped, re.M):
             fail(errors, f'{skill_path}: missing canonical heading {heading!r}')
+
+def validate_task_outputs(skill_path, fm, body, errors):
+    """Require ## Outputs for skills explicitly marked kind: task (modeled on mjs logic)."""
+    meta = fm.get('metadata') or {}
+    if isinstance(meta, dict) and meta.get('kind') == 'task':
+        stripped = strip_fences(body)
+        if not re.search(r'^## Outputs\s*$', stripped, re.M):
+            fail(errors, f'{skill_path}: task skills (kind: task) must include canonical heading ## Outputs')
 def validate_inter_skill_links(skill_path, body, skill_names, errors):
     # Match either markdown links like [text](../name/SKILL.md) or inline ../name/SKILL.md refs.
     pattern = re.compile(r'\.\./([a-z0-9-]+)/SKILL\.md')
@@ -212,6 +227,7 @@ def main():
         if 'allowed-tools' in fm and not isinstance(fm['allowed-tools'], str):
             fail(errors, f'{skill_path}: allowed-tools must be a string')
         validate_canonical_headings(skill_path, body, errors)
+        validate_task_outputs(skill_path, fm, body, errors)
         validate_inter_skill_links(skill_path, body, skill_names, errors)
         validate_openai_metadata(skill_dir, fm, errors)
         validate_release_metadata(skill_path, skill_name, fm, manifest, release_packages, errors)

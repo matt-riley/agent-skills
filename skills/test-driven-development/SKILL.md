@@ -1,10 +1,13 @@
 ---
 name: test-driven-development
 description: "Use when implementing a new feature, fixing a bug, or refactoring existing behavior — proven correct by executable tests written before production code."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # Test-Driven Development
@@ -84,6 +87,13 @@ The test failure is your proof that the feature does not exist yet. This is the 
 If production code was written before a test, **delete it**. Do not "adapt" it while writing tests afterward. Delete means delete.
 
 Unverified code is not a time-saving shortcut; it is technical debt. Keeping it forces you to reverse-engineer what it was supposed to do, which takes longer than rewriting it test-first.
+
+## Outputs
+
+- Failing test written first (red).
+- Minimal implementation that makes it pass (green).
+- Refactor that improves the code while keeping tests green.
+- Evidence of the TDD cycle (test output before/after).
 
 ## Guardrails
 

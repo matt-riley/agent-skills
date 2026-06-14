@@ -71,6 +71,18 @@ make test
 - Set response `Content-Type: text/html; charset=utf-8`.
 - Pass data from handler/domain into templates via typed parameters — do not compute data inside templates.
 
+## Workflow
+
+See the body and references for templ template authoring and regeneration steps.
+
+## Examples
+
+See references and the skill body for templ-templates examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Never edit `*_templ.go` files by hand — they are overwritten by `templ generate`.

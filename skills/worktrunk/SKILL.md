@@ -1,10 +1,13 @@
 ---
 name: worktrunk
 description: "Use when a user needs to configure or operate Worktrunk (wt) for worktree lifecycle management, hooks, LLM commits, or parallel agent workflows."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: version-control
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

@@ -77,6 +77,18 @@ metadata:
 - A concrete list of metadata, pinned-repo, or other manual GitHub settings changes that cannot be expressed through files alone.
 
 
+## Workflow
+
+See the body and references for GitHub presence audit and improvement steps.
+
+## Examples
+
+See references and the skill body for github-presence examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - **Must** distinguish profile surfaces from repository surfaces before generating files.

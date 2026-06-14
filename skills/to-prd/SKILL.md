@@ -1,10 +1,13 @@
 ---
 name: to-prd
 description: "Use when the user wants a PRD synthesized from current repository and conversation context, especially for issue-tracker handoff. Not when doc-coauthoring, workflow-contracts, or codebase discovery is the better fit."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: authoring
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

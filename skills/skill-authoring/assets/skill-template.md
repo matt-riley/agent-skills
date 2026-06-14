@@ -8,6 +8,7 @@ Keep the package shape predictable when it fits the workflow so future authoring
 ---
 name: my-skill-name
 description: "What this skill does. Use it when [trigger phrase 1], [trigger phrase 2], or [trigger phrase 3]. Prefer over-triggering to under — include a scope boundary if similar skills exist (e.g. but not when X is more appropriate)."
+license: GNU GPL v3
 metadata:
   category: workflow
   audience: general-coding-agent

@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Tests pass; help me decide whether to merge, PR, keep, or discard this branch.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implementation is complete on the feature branch with green tests. What are my options for integrating?",
+    "should_trigger": true
+  },
+  {
+    "query": "All tests are passing in this worktree; finish the branch for me.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a PR and watch checks for this ready branch.",
+    "should_trigger": false
+  },
+  {
+    "query": "The tests are still failing on my feature; what should I do?",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain git branches to me.",
+    "should_trigger": false
+  }
+]

@@ -1,10 +1,13 @@
 ---
 name: neovim-config
 description: "Use when editing, debugging, or validating a Neovim Lua configuration — including plugin management (vim.pack, lazy.nvim), LSP/completion wiring, treesitter, statusline, or startup behavior."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

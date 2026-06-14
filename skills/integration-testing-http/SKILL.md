@@ -76,6 +76,18 @@ For every endpoint touched, verify:
    - Edge cases specific to the endpoint's logic
 3. Run `make test-integration` — all must pass before merging.
 
+## Workflow
+
+See the body and references for HTTP contract testing steps.
+
+## Examples
+
+See references and the skill body for integration-testing-http examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Integration tests use a real or in-memory DB — do not mock the DB layer in integration tests.

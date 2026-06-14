@@ -74,6 +74,18 @@ docker compose down -v            # removes containers AND volumes
 
 Use `-v` only when you want to destroy all data (e.g. start fresh with a clean DB).
 
+## Workflow
+
+See the body and references for Docker Compose stack steps.
+
+## Examples
+
+See references and the skill body for docker-compose-dev examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Migrations are **not** run automatically by `docker compose up` — run them explicitly after services start.

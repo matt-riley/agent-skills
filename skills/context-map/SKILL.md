@@ -1,10 +1,13 @@
 ---
 name: context-map
 description: Use when a task may span multiple files, when dependencies or tests are unclear, or when you need a pre-edit map of likely files and patterns before planning or implementation.
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: reference
 ---
 

@@ -1,10 +1,13 @@
 ---
 name: ast-grep
 description: "Use when you need ast-grep structural search, linting, or safe codemod rewrites, especially for requests that mention ast-grep, sg, codemod, rule files, or syntax-aware edits instead of plain-text search."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

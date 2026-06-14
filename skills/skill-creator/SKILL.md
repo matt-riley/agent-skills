@@ -96,10 +96,9 @@ metadata:
 
 ## Validation
 
-- Run `node skills/skill-authoring/scripts/validate-skill-library.mjs` from `~/.copilot/` after editing `skills/`; this checks frontmatter compliance, required headings, orphaned support files, and reference targets.
-- Eval runner scripts have not yet been ported to Node.js; skip trigger-eval and functional-eval commands until a replacement is available.
-- When delivering or documenting a new skill scaffold, confirm the new skill passes the validator:
-  - `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/<new-skill-name>/SKILL.md`
+- Primary check: `python _shared/validate-skills.py skills` (or `npm run validate`) after any edit. This is the official catalog gate (frontmatter,  canonical headings including the fuller taught set, release metadata, support links, stable evals requirement, inter-skill links).
+- For detailed local authoring lint (extra heading requirements, concrete Examples/Reference files content, no orphaned support files, kind-specific rules): `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/<name>/SKILL.md` (or run over the whole catalog).
+- When delivering or documenting a new skill scaffold, confirm it passes the primary validator and has the expected support files + (when appropriate) evals.
 - Re-read `skills/README.md` alongside the changed skill to confirm the boundary does not overlap ambiguously with nearby skills.
 
 ## Examples

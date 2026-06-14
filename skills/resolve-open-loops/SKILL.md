@@ -1,10 +1,13 @@
 ---
 name: resolve-open-loops
 description: "Use when the stabilisation-guard blocks the session because of active open_loop or assistant_goal memories, or when the user explicitly asks to review and close out pending items in Lore."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # Resolve Open Loops
@@ -103,6 +106,11 @@ memory_save  content="<what was learned>"  type="commitment"  scope="repo"
 ```
 
 Only save when the user agrees — do not create memories speculatively.
+
+## Outputs
+
+- Open loops closed, handed off, or explicitly deferred with next owner and context.
+- Session or workspace state cleaned of the resolved items.
 
 ## Guardrails
 

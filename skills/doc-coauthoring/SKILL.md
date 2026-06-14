@@ -1,10 +1,14 @@
 ---
 name: doc-coauthoring
 description: "Use when user wants to write, refactor, or expand documentation (README, guides, API docs, runbooks, specification documents)."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: authoring
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
+  reader_testing: required
   kind: task
   reader_testing: required
 ---

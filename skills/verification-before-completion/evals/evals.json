@@ -1,0 +1,28 @@
+{
+  "skill_name": "verification-before-completion",
+  "evals": [
+    {
+      "id": "fresh-test-claim",
+      "prompt": "I just edited src/parser.ts to fix a bug. Before I say the bug is fixed, verify it.",
+      "expected_behavior": "States the claim clearly, identifies the exact reproduction command, runs it fresh (not cached), reads the full output, and only claims success with direct evidence from that run (quotes counts/exit code).",
+      "assertions": [
+        "Identifies and runs a fresh verification command",
+        "Reads and quotes actual output (exit code, pass/fail counts)",
+        "Does not rely on prior runs or code inspection alone",
+        "Only makes the 'fixed' claim after evidence confirms it"
+      ],
+      "files": []
+    },
+    {
+      "id": "linter-claim",
+      "prompt": "I ran the linter on the changed files. Confirm it's clean before I open the PR.",
+      "expected_behavior": "Runs (or re-runs) the exact linter command the user would run, captures full stdout, and only claims 'clean' when zero errors are actually reported in the fresh output.",
+      "assertions": [
+        "Uses the real linter invocation",
+        "Treats 'should be clean' or partial checks as insufficient",
+        "Quotes the actual 'no errors' or error count from output"
+      ],
+      "files": []
+    }
+  ]
+}

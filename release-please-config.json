@@ -328,6 +328,446 @@
           "path": "skills/writing-and-editing/SKILL.md"
         }
       ]
+    },
+    "skills/acquire-codebase-knowledge": {
+      "package-name": "acquire-codebase-knowledge",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/acquire-codebase-knowledge/SKILL.md"
+        }
+      ]
+    },
+    "skills/agent-governance": {
+      "package-name": "agent-governance",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/agent-governance/SKILL.md"
+        }
+      ]
+    },
+    "skills/agent-instructions": {
+      "package-name": "agent-instructions",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/agent-instructions/SKILL.md"
+        }
+      ]
+    },
+    "skills/agent-supply-chain": {
+      "package-name": "agent-supply-chain",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/agent-supply-chain/SKILL.md"
+        }
+      ]
+    },
+    "skills/agentic-eval": {
+      "package-name": "agentic-eval",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/agentic-eval/SKILL.md"
+        }
+      ]
+    },
+    "skills/api-smoke-validation": {
+      "package-name": "api-smoke-validation",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/api-smoke-validation/SKILL.md"
+        }
+      ]
+    },
+    "skills/ast-grep": {
+      "package-name": "ast-grep",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/ast-grep/SKILL.md"
+        }
+      ]
+    },
+    "skills/autoresearch": {
+      "package-name": "autoresearch",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/autoresearch/SKILL.md"
+        }
+      ]
+    },
+    "skills/aws-lambda-go-deployment": {
+      "package-name": "aws-lambda-go-deployment",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/aws-lambda-go-deployment/SKILL.md"
+        }
+      ]
+    },
+    "skills/aws-sdk-v2-to-v3-migration": {
+      "package-name": "aws-sdk-v2-to-v3-migration",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/aws-sdk-v2-to-v3-migration/SKILL.md"
+        }
+      ]
+    },
+    "skills/circleci-to-github-actions-migration": {
+      "package-name": "circleci-to-github-actions-migration",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/circleci-to-github-actions-migration/SKILL.md"
+        }
+      ]
+    },
+    "skills/code-intelligence": {
+      "package-name": "code-intelligence",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/code-intelligence/SKILL.md"
+        }
+      ]
+    },
+    "skills/code-tour": {
+      "package-name": "code-tour",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/code-tour/SKILL.md"
+        }
+      ]
+    },
+    "skills/context-map": {
+      "package-name": "context-map",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/context-map/SKILL.md"
+        }
+      ]
+    },
+    "skills/doc-coauthoring": {
+      "package-name": "doc-coauthoring",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/doc-coauthoring/SKILL.md"
+        }
+      ]
+    },
+    "skills/fallow": {
+      "package-name": "fallow",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/fallow/SKILL.md"
+        }
+      ]
+    },
+    "skills/finishing-a-development-branch": {
+      "package-name": "finishing-a-development-branch",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/finishing-a-development-branch/SKILL.md"
+        }
+      ]
+    },
+    "skills/git-signing-troubleshoot": {
+      "package-name": "git-signing-troubleshoot",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/git-signing-troubleshoot/SKILL.md"
+        }
+      ]
+    },
+    "skills/github-actions-local-repro": {
+      "package-name": "github-actions-local-repro",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/github-actions-local-repro/SKILL.md"
+        }
+      ]
+    },
+    "skills/github-cli-pr-workflow": {
+      "package-name": "github-cli-pr-workflow",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/github-cli-pr-workflow/SKILL.md"
+        }
+      ]
+    },
+    "skills/go-build-and-test": {
+      "package-name": "go-build-and-test",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/go-build-and-test/SKILL.md"
+        }
+      ]
+    },
+    "skills/go-error-patterns": {
+      "package-name": "go-error-patterns",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/go-error-patterns/SKILL.md"
+        }
+      ]
+    },
+    "skills/goreleaser-release-pipeline": {
+      "package-name": "goreleaser-release-pipeline",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/goreleaser-release-pipeline/SKILL.md"
+        }
+      ]
+    },
+    "skills/grill-me": {
+      "package-name": "grill-me",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/grill-me/SKILL.md"
+        }
+      ]
+    },
+    "skills/grill-with-docs": {
+      "package-name": "grill-with-docs",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/grill-with-docs/SKILL.md"
+        }
+      ]
+    },
+    "skills/iam-oidc-triage": {
+      "package-name": "iam-oidc-triage",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/iam-oidc-triage/SKILL.md"
+        }
+      ]
+    },
+    "skills/mocha-to-jest-migration": {
+      "package-name": "mocha-to-jest-migration",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/mocha-to-jest-migration/SKILL.md"
+        }
+      ]
+    },
+    "skills/modern-web-guidance": {
+      "package-name": "modern-web-guidance",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/modern-web-guidance/SKILL.md"
+        }
+      ]
+    },
+    "skills/neovim-config": {
+      "package-name": "neovim-config",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/neovim-config/SKILL.md"
+        }
+      ]
+    },
+    "skills/plan-review-loop": {
+      "package-name": "plan-review-loop",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/plan-review-loop/SKILL.md"
+        }
+      ]
+    },
+    "skills/project-references-migration": {
+      "package-name": "project-references-migration",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/project-references-migration/SKILL.md"
+        }
+      ]
+    },
+    "skills/resolve-open-loops": {
+      "package-name": "resolve-open-loops",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/resolve-open-loops/SKILL.md"
+        }
+      ]
+    },
+    "skills/sam-cloudformation": {
+      "package-name": "sam-cloudformation",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/sam-cloudformation/SKILL.md"
+        }
+      ]
+    },
+    "skills/secret-scan-triage": {
+      "package-name": "secret-scan-triage",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/secret-scan-triage/SKILL.md"
+        }
+      ]
+    },
+    "skills/skill-authoring": {
+      "package-name": "skill-authoring",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/skill-authoring/SKILL.md"
+        }
+      ]
+    },
+    "skills/systematic-debugging": {
+      "package-name": "systematic-debugging",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/systematic-debugging/SKILL.md"
+        }
+      ]
+    },
+    "skills/terraform-skill": {
+      "package-name": "terraform-skill",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/terraform-skill/SKILL.md"
+        }
+      ]
+    },
+    "skills/test-driven-development": {
+      "package-name": "test-driven-development",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/test-driven-development/SKILL.md"
+        }
+      ]
+    },
+    "skills/to-issues": {
+      "package-name": "to-issues",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/to-issues/SKILL.md"
+        }
+      ]
+    },
+    "skills/to-prd": {
+      "package-name": "to-prd",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/to-prd/SKILL.md"
+        }
+      ]
+    },
+    "skills/typescript-any-eliminator": {
+      "package-name": "typescript-any-eliminator",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/typescript-any-eliminator/SKILL.md"
+        }
+      ]
+    },
+    "skills/verification-before-completion": {
+      "package-name": "verification-before-completion",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/verification-before-completion/SKILL.md"
+        }
+      ]
+    },
+    "skills/workflow-contracts": {
+      "package-name": "workflow-contracts",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/workflow-contracts/SKILL.md"
+        }
+      ]
+    },
+    "skills/worktrunk": {
+      "package-name": "worktrunk",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/worktrunk/SKILL.md"
+        }
+      ]
     }
   }
 }

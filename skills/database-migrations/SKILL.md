@@ -62,6 +62,18 @@ Inspect the repo contract before suggesting commands or file edits. Determine wh
 - Migration status/history plus downstream code-generation or test evidence confirming the expected schema state.
 
 
+## Workflow
+
+See the body and references for migration create/apply/rollback steps.
+
+## Examples
+
+See references and the skill body for database migration examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Never assume every repo supports `down` migrations. Detect whether the contract is forward-only or reversible first.

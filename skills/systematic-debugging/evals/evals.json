@@ -1,0 +1,27 @@
+{
+  "skill_name": "systematic-debugging",
+  "evals": [
+    {
+      "id": "stack-trace-investigation",
+      "prompt": "Unit test fails with AssertionError: expected 42 but got 0. The test calls calculateTotal. Find the root cause before proposing a fix.",
+      "expected_behavior": "Reads the full error and stack, reproduces, traces data flow and recent changes or setup differences, forms a hypothesis, verifies with a minimal test or comparison, states the root cause clearly (e.g. setup not running), and only then proposes the minimal fix.",
+      "assertions": [
+        "Does not propose a fix before root cause is understood and stated",
+        "Compares failing vs. passing case or inspects setup/recent changes",
+        "Uses one hypothesis at a time and documents outcome"
+      ],
+      "files": []
+    },
+    {
+      "id": "post-commit-regression",
+      "prompt": "A feature that worked yesterday is broken after the last commit. Systematically find why.",
+      "expected_behavior": "Uses git log/show to identify the change, compares before/after, forms and tests a hypothesis about the root cause (removed line, config change, etc.), verifies, and only then proposes the restoration or fix.",
+      "assertions": [
+        "Inspects recent commits before guessing",
+        "States root cause in terms of the specific change",
+        "Avoids random patches"
+      ],
+      "files": []
+    }
+  ]
+}

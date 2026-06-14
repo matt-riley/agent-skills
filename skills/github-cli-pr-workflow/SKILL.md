@@ -1,10 +1,13 @@
 ---
 name: github-cli-pr-workflow
 description: "Use when a branch needs GitHub CLI PR lifecycle work, like creating or updating a PR, watching checks for a pushed head SHA, or preparing PR handoff before review."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

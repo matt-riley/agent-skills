@@ -1,10 +1,13 @@
 ---
 name: aws-sdk-v2-to-v3-migration
 description: "Use when the codebase still imports from 'aws-sdk' v2, uses new AWS.*() constructors, .promise() calls, AWS.config.update(), DocumentClient, or s3.upload() — and needs a safe modular v3 migration without changing runtime behavior."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: migrations
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # AWS SDK v2 to v3 migration
@@ -58,6 +61,11 @@ correct v3 package names and API shapes before writing any code.
 7. Replace method calls with `client.send(new Command(...))`, preserving input shapes and response handling.
 8. Update helpers, mocks, and tests to fit the v3 client-and-command model using the testing mocks reference.
 9. Validate pagination, streaming, document marshalling, retries, and error handling where used.
+
+## Outputs
+
+- Migrated code using v3 clients/commands (no v2 .promise() or DocumentClient patterns left in changed paths).
+- Tests or manual verification that the new shape works equivalently.
 
 ## Guardrails
 

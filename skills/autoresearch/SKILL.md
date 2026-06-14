@@ -1,10 +1,13 @@
 ---
 name: autoresearch
 description: "Use when running autonomous iterative experiments to optimize a measurable metric on an existing codebase — not for writing tests or diagnosing a specific failure."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

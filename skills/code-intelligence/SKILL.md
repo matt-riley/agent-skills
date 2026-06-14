@@ -1,10 +1,13 @@
 ---
 name: code-intelligence
 description: "Use when navigating or refactoring code — choosing between LSP, rg, or semantic search tools; an LSP call returns empty and you need to know if it failed; or a tool substitution needs disclosure."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: reference
 ---
 
@@ -104,6 +107,18 @@ Before claiming a tool is shimmed, aliased, or absent, prove it:
 `type -a <tool>`, `ls -l <resolved-path>`, `<tool> --version`. An unproven claim followed by a fallback is a verification failure, not a sanctioned substitution.
 
 Detail: [references/degradation-and-disclosure.md](references/degradation-and-disclosure.md#anti-phantom-shim-proof)
+
+## Workflow
+
+See the body and references for LSP/grep routing and code intelligence steps.
+
+## Examples
+
+See references and the skill body for code-intelligence examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
 
 ## Guardrails
 

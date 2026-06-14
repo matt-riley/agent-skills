@@ -1,10 +1,13 @@
 ---
 name: agent-supply-chain
 description: "Use this skill when generating SHA-256 integrity manifests for agent plugins, verifying that installed plugins match their manifests, detecting tampered files, auditing dependency pinning, or building provenance chains for plugin promotion."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: reference
 ---
 # Agent Supply Chain Integrity
@@ -350,6 +353,10 @@ Add to your GitHub Actions workflow:
 | **Pin all dependency versions** | Unpinned deps = different code on every install |
 
 ---
+
+## Workflow
+
+See the sections above for the integrity manifest and promotion gate workflow.
 
 ## Guardrails
 

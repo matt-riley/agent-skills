@@ -95,6 +95,18 @@ metadata:
 - A final planning status of approved, blocked for revision, or advisory-only, plus the next implementation step.
 
 
+## Workflow
+
+See the body and references for plan drafting, reviewer rounds, and approval steps.
+
+## Examples
+
+See references and the skill body for plan-review examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - **Must** keep planning and research read-only unless the user explicitly asks for implementation.

@@ -74,6 +74,18 @@ Map DB-level errors to domain errors **at the adapter boundary** — never let D
 
 **Never** include raw DB error strings in responses or logs — they expose implementation details and may contain sensitive data.
 
+## Workflow
+
+See the body and references for adapter and DB error mapping steps.
+
+## Examples
+
+See references and the skill body for repository-adapters examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Never edit generated query files by hand.

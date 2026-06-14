@@ -1,10 +1,13 @@
 ---
 name: grill-me
 description: "Use when the user wants to be interviewed or stress-tested about a plan, design, or decision — or when the user explicitly says 'grill me'. Not for domain-doc maintenance; route to grill-with-docs when CONTEXT.md or ADRs should be updated."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

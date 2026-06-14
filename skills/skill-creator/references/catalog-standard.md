@@ -79,6 +79,8 @@ Use `metadata.maturity` deliberately:
 - `draft` — still being shaped or missing confidence
 - `experimental` — intentionally risky, provisional, or likely to change quickly
 
+"beta" is a legacy value; standardize on the values above. Every skill must also carry `license: GNU GPL v3` (top level) per AGENTS.md Learned Rule 1.
+
 Do not copy another repo's metadata scheme blindly. This personal catalog should keep metadata lean and maintenance-friendly.
 
 ## Shared tooling

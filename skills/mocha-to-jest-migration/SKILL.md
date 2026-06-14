@@ -1,10 +1,13 @@
 ---
 name: mocha-to-jest-migration
 description: "Use when a JavaScript or TypeScript suite still depends on Mocha, Chai, or Sinon and needs an incremental Jest migration."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: migrations
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # Mocha to Jest migration
@@ -113,6 +116,11 @@ describe("retries", () => {
   });
 });
 ```
+
+## Outputs
+
+- Test files and config updated to Jest (imports, lifecycle, matchers, runners).
+- Evidence that the suite runs under Jest with equivalent or improved coverage.
 
 ## Guardrails
 

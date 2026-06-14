@@ -1,10 +1,13 @@
 ---
 name: agentic-eval
 description: "Use when designing or implementing an evaluation loop for AI agent outputs — reflection loops, evaluator-optimizer pipelines, LLM-as-judge scoring, or rubric-based iteration. Not when running an existing test suite or reviewing a completed artifact without iterating."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: reference
 ---
 
@@ -65,6 +68,18 @@ The three evaluation strategy patterns (outcome-based, LLM-as-judge, rubric-base
 The implementation checklist — criteria, threshold, loop wiring, convergence, logging — is in `assets/eval-checklist.md`.
 
 For a new implementation, start with the checklist to confirm your setup is complete, then use the patterns reference to choose and adapt an evaluation strategy.
+
+## Workflow
+
+See the body and references for agentic evaluation design and loop steps.
+
+## Examples
+
+See references and the skill body for agentic-eval examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
 
 ## Guardrails
 

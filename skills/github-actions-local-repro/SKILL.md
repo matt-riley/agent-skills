@@ -1,10 +1,13 @@
 ---
 name: github-actions-local-repro
 description: Use when a GitHub Actions failure needs local reproduction with act before pushing, especially for workflow logic or step-level regressions, but not when the failure depends on org-managed runner or secret policy.
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: ci
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # GitHub Actions local repro

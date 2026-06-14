@@ -1,10 +1,13 @@
 ---
 name: typescript-any-eliminator
 description: Use when TypeScript source contains explicit `any` in application code, shared helpers, DTOs, or API layers that should be narrowed without changing runtime behavior — or when a reviewer or lint rule flags unsafe `any` usage.
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # TypeScript any eliminator
@@ -65,6 +68,11 @@ Do not force a fake precise type when the right answer is to keep the boundary p
 5. Update adjacent call sites only when needed to keep the typed surface coherent.
 6. Preserve runtime behavior while tightening the types.
 7. Re-run the typecheck and targeted tests after the change.
+
+## Outputs
+
+- `any` usages replaced with precise types (inferred or explicit) in application code, helpers, DTOs, or API layers.
+- No runtime behavior change; type errors or tests confirm safety.
 
 ## Guardrails
 

@@ -1,11 +1,13 @@
 ---
 name: agent-governance
 description: "Use this skill when building AI agents that call external tools, implementing policy-based access controls, adding semantic intent classification, creating trust scoring systems, building audit trails, or enforcing rate limits and content filters on agents."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
-  kind: reference
+  maturity: draft
+  kind: task
 ---
 # Agent Governance Patterns
 
@@ -559,6 +561,15 @@ Match governance strictness to risk level:
 | **Separate policy from logic** | Governance enforcement should be independent of agent business logic |
 
 ---
+
+## Outputs
+
+- Policy, allowlists, trust scoring, or audit trail changes implemented with clear boundaries and tests or validation steps.
+- Runtime governance behavior documented or demonstrated.
+
+## Workflow
+
+See the sections above for trigger, inputs, first move, and detailed steps. The workflow is read the governance requirements, implement the policy/trust/audit controls with clear boundaries, and validate behavior (tests or manual).
 
 ## Guardrails
 

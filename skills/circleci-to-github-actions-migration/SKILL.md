@@ -1,10 +1,13 @@
 ---
 name: circleci-to-github-actions-migration
 description: Use when a repository still depends on .circleci/config.yml jobs, workflows, or artifacts that need to be replaced or phased out with GitHub Actions — including incremental shadow runs, staged cutover, and parity checks.
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: migrations
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # CircleCI to GitHub Actions migration
@@ -59,6 +62,11 @@ metadata:
 4. Recreate branch/path filters, matrix strategy, caches, artifacts, and environment protections intentionally.
 5. Keep deployment stages explicit instead of collapsing distinct environments into one opaque job.
 6. Run a staged rollout using `assets/rollout-checklist.md` before deleting CircleCI configuration.
+
+## Outputs
+
+- GitHub Actions workflows that replace the previous CircleCI jobs, with parity notes and any incremental shadow steps.
+- Clear migration status and next actions.
 
 ## Guardrails
 

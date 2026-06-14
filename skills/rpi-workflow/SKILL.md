@@ -87,6 +87,18 @@ metadata:
 - A validation summary comparing the final result to the plan, including residual risks, deviations, or follow-up work that must persist.
 
 
+## Workflow
+
+See the body and references for the Research -> Plan -> Implement -> Validate phases.
+
+## Examples
+
+See references and the skill body for rpi-workflow examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - **Must not** make code changes during the research phase.

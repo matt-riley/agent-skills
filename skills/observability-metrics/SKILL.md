@@ -83,6 +83,18 @@ curl -i -H "Authorization: Bearer $AUTH_TOKEN" http://localhost:<PORT>/metrics
 | `/metrics` returns 401        | Pass `Authorization: Bearer <token>` or check `METRICS_AUTH_ENABLED` setting      |
 | Expected metric not in output | Confirm it was registered at startup; confirm the instrumented code path executed |
 
+## Workflow
+
+See the body and references for /health /metrics logging validation steps.
+
+## Examples
+
+See references and the skill body for observability-metrics examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Protect `/metrics` in production; treat it as sensitive operational data.

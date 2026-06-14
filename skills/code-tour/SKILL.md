@@ -1,10 +1,13 @@
 ---
 name: code-tour
 description: "Use when asked to create a .tour walkthrough — onboarding, PR review, RCA, architecture, or any persona-targeted step-by-step code narrative. Not for codebase exploration without a .tour file output."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

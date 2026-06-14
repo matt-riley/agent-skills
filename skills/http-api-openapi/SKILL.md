@@ -60,6 +60,18 @@ Determine the repo's contract flow before editing anything: spec-first, code-fir
 - Spec validation, generation, and/or API test evidence confirming the handler behavior and OpenAPI contract stay in sync.
 
 
+## Workflow
+
+See the body and references for OpenAPI/handler sync steps.
+
+## Examples
+
+See references and the skill body for http-api-openapi examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Do not hand-edit generated OpenAPI output in code-first repos; change the source inputs that own it.

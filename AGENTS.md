@@ -79,10 +79,11 @@ Every `SKILL.md` should have at least:
 
 Common optional fields in this catalog:
 
-- `license: GNU GPL v3`
+- `license: GNU GPL v3` (required on every skill per Learned Rule 1)
 - `compatibility`
 - `metadata.version`
 - `metadata.maturity`
+- `metadata.kind` (task or reference; required for draft skills per the local authoring contract)
 
 If a skill is release-managed, `metadata.version` in `SKILL.md` should stay aligned with `.release-please-manifest.json`.
 

@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Before I say it's fixed, rerun the failing test and read the output.",
+    "should_trigger": true
+  },
+  {
+    "query": "I made changes; verify the build and tests really pass before I claim done.",
+    "should_trigger": true
+  },
+  {
+    "query": "All tests pass (from yesterday's run).",
+    "should_trigger": true
+  },
+  {
+    "query": "Find out why this failing test breaks only on CI.",
+    "should_trigger": false
+  },
+  {
+    "query": "I've understood the codebase.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rerun the failing test to confirm the fix worked.",
+    "should_trigger": false
+  }
+]

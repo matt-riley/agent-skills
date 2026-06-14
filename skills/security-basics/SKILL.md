@@ -76,6 +76,18 @@ Before merging code that touches auth, request handling, or data exposure:
 - [ ] Sensitive endpoints are protected
 - [ ] Structured logs are scrubbed of credentials and PII
 
+## Workflow
+
+See the body and references for security and privacy guardrail steps.
+
+## Examples
+
+See references and the skill body for security-basics examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Never hardcode secrets, tokens, or API keys in source or test fixtures.

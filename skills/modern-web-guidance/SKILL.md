@@ -1,10 +1,13 @@
 ---
 name: modern-web-guidance
 description: "Use when writing HTML, CSS, JavaScript, forms, or web animations — prevents legacy patterns."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: reference
 ---
 
@@ -88,6 +91,18 @@ npx -y modern-web-guidance@latest list
 
 > Requires Node.js ≥ 20. Works offline after first install (TensorFlow.js local search, no API keys).
 > On Windows: use `npx.cmd` instead of `npx`.
+
+## Workflow
+
+See the body and references for modern web guidance steps.
+
+## Examples
+
+See references and the skill body for modern-web-guidance examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
 
 ## Guardrails
 

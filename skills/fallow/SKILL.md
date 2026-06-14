@@ -1,10 +1,12 @@
 ---
 name: fallow
 description: "Use when auditing JS/TS code health with Fallow - dead code, duplication, boundaries, or cleanup; not for debugging failures."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: code-quality
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
   kind: reference
 ---
 
@@ -66,6 +68,18 @@ Start with [`references/cli-reference.md`](references/cli-reference.md) to pick 
 Read [`references/gotchas.md`](references/gotchas.md) before automating output parsing or running destructive cleanup. It captures the exit-code model, machine-readable output rules, and the mistakes that most often lead agents into bad deletions or broken JSON parsing.
 
 Use [`references/patterns.md`](references/patterns.md) when the user wants a repeatable workflow such as a full audit, a PR gate, a safe auto-fix cycle, baseline adoption, or monorepo-scoped analysis.
+
+## Workflow
+
+See the body and references for Fallow audit steps.
+
+## Examples
+
+See references and the skill body for fallow examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
 
 ## Guardrails
 

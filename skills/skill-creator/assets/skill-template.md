@@ -10,8 +10,10 @@ Use this as the default outline, then trim sections that do not earn their place
 ---
 name: example-skill
 description: What the skill does and when to use it.
+license: GNU GPL v3
 metadata:
   maturity: stable
+  kind: task
 ---
 
 # Example Skill

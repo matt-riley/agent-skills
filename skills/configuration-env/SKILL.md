@@ -103,6 +103,18 @@ A healthy response confirms the configuration was accepted.
 - `ALLOWED_ORIGINS=*` with cookie/credential-based auth
 - Silently ignoring missing required config — always fail fast at startup
 
+## Workflow
+
+See the body and references for env/config drift and startup debugging steps.
+
+## Examples
+
+See references and the skill body for configuration-env examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - Production must use real env vars or a secrets manager — never `.env` files.

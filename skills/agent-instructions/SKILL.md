@@ -1,10 +1,13 @@
 ---
 name: agent-instructions
 description: "Use when creating or updating agent instruction files (AGENTS.md for Pi, copilot-instructions.md for Copilot, per-path guides, or AGENTS.md router) — especially when instruction files are too long, generic, or stale, or when agents repeatedly make the same avoidable mistakes."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: authoring
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # agent-instructions Skill
@@ -159,6 +162,11 @@ For each line in the instruction file:
    - If NO (nice-to-know but not mission-critical): consider archiving it or moving to docs.
 
 **Delete the line if any answer is NO.**
+
+## Outputs
+
+- Updated or new instruction file (AGENTS.md, copilot-instructions.md, or per-path guide) with clear scope and examples.
+- Validation that the instructions are discoverable and reduce repeated mistakes.
 
 ## Guardrails
 

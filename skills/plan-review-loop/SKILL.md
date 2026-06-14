@@ -1,10 +1,13 @@
 ---
 name: plan-review-loop
 description: "Use when a completed /plan needs explicit multi-reviewer approval and refinement before implementation begins."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: planning-agent
-  maturity: beta
+  maturity: draft
+  kind: task
   kind: task
 ---
 

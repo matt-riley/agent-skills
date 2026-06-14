@@ -1,10 +1,13 @@
 ---
 name: skill-authoring
 description: "Use when creating or revising a reusable agent skill under skills/<name>/SKILL.md — deciding activation, layering, examples, or validation, or choosing between a skill vs. instructions vs. a specialized agent."
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: authoring
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: reference
 ---
 
 # Skill authoring
@@ -63,7 +66,7 @@ Every skill requires a YAML frontmatter block at the start of `SKILL.md`. This b
 - **kind** (string, **required for draft skills**): `task` for multi-step playbooks; `reference` for lookup-heavy guidance. Must be set before a skill can be promoted from `draft` to `stable`.
 - **reader_testing** (string, documented extension): `required` when reader-testing is a mandatory stage. See `references/metadata-contract.md` for the full list of allowed optional extensions.
 
-**Do not add** `license`, `compatibility`, `author`, `inspired-by`, `argument-hint`, or any other top-level keys beyond `name`, `description`, and `metadata`. Do not add upstream provenance keys (`github-path`, `github-ref`, `github-repo`, `github-tree-sha`, `version`, `enhancements`) inside the `metadata` block. See `references/metadata-contract.md` for the full contract, rationale, and exception policy.
+**Do not add** `compatibility`, `author`, `inspired-by`, `argument-hint`, or any other top-level keys beyond `name`, `description`, `metadata`, and `license`. `license: GNU GPL v3` is required by repo policy for every skill (see AGENTS.md Learned Rule 1 and `references/metadata-contract.md`). Do not add upstream provenance keys (`github-path`, `github-ref`, `github-repo`, `github-tree-sha`, `version`, `enhancements`) inside the `metadata` block. See `references/metadata-contract.md` for the full contract, rationale, and exception policy.
 
 ### Frontmatter example
 
@@ -71,10 +74,12 @@ Every skill requires a YAML frontmatter block at the start of `SKILL.md`. This b
 ---
 name: reverse-prompt
 description: Use when a request is under-specified, ambiguous, or needs sharpening before research, planning, or implementation begins — or when the user explicitly asks to improve, rewrite, or reverse-prompt their ask.
+license: GNU GPL v3
 metadata:
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 ```
 
@@ -86,7 +91,7 @@ The validator script (`scripts/validate-skill-library.mjs`) checks that:
 - [ ] `name` contains only alphanumeric, hyphens, underscores (no spaces or special characters)
 - [ ] `description` exists and is at least 20 characters long
 - [ ] `description` includes a trigger phrase ("when", "use this", or "use when")
-- [ ] No forbidden top-level keys (`argument-hint`, `compatibility`, `license`, `author`, `inspired-by`)
+- [ ] No forbidden top-level keys (`argument-hint`, `compatibility`, `author`, `inspired-by`) — `license: GNU GPL v3` is required on every skill per AGENTS.md
 - [ ] No forbidden provenance keys in `metadata` (`github-path`, `github-ref`, `github-repo`, `github-tree-sha`, `author`, `inspired-by`, `version`, `enhancements`)
 - [ ] `metadata.kind` is set to `task` or `reference` for all `draft` skills
 - [ ] Frontmatter is properly delimited with `---` markers
@@ -102,24 +107,32 @@ The validator script (`scripts/validate-skill-library.mjs`) checks that:
 | "missing frontmatter key name" or "description" | Frontmatter block incomplete | Add both `name:` and `description:` keys between `---` delimiters |
 | "missing frontmatter block" | No `---` delimiters in SKILL.md | Add `---` at the top of the file and close the frontmatter with another `---` |
 | "unterminated frontmatter block" | Only one `---` marker or no closing `---` | Ensure frontmatter is wrapped: `---` on first line and `---` after the last field |
-| "forbidden top-level frontmatter key" | Extra keys like `license`, `argument-hint` at top level | Move content to `metadata`, `## Inputs to gather`, or `references/`; see `metadata-contract.md` |
+| "forbidden top-level frontmatter key" | Extra keys like `argument-hint`, `compatibility` at top level | Move content to `metadata`, `## Inputs to gather`, or `references/`; see `metadata-contract.md`. (`license: GNU GPL v3` is required, not forbidden.) |
 | "forbidden provenance key metadata.*" | Upstream `github-*` or attribution fields inside `metadata` | Remove provenance fields; preserve attribution in a commit message or `PROVENANCE.md` |
 | "metadata.kind is required for draft skills" | New skill missing `kind` field | Add `kind: task` or `kind: reference` under `metadata` |
 
 ### Running the validator
 
-To validate a skill's frontmatter and structure:
+Primary catalog-wide check (run after any skill edit):
+
+```bash
+python _shared/validate-skills.py skills
+# or: npm run validate
+```
+
+For detailed local authoring/structure checks (concrete content, orphaned support files, heading order, kind-specific rules):
 
 ```bash
 node skills/skill-authoring/scripts/validate-skill-library.mjs [SKILL.md paths...]
 ```
 
-Validate all skills:
+Validate the whole catalog with the mjs linter:
+
 ```bash
 node skills/skill-authoring/scripts/validate-skill-library.mjs
 ```
 
-The validator will report specific issues and how to fix them.
+Prefer the python validator for day-to-day work; both should pass on a healthy skill. The mjs is stricter on the fuller heading set and local contract details.
 
 ## Do not use this skill when
 

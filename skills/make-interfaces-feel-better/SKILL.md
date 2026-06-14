@@ -56,6 +56,18 @@ metadata:
 - Validation that the work stayed focused on interface feel rather than drifting into a broader redesign or new dependency footprint.
 
 
+## Workflow
+
+See the body and references for UI polish steps.
+
+## Examples
+
+See references and the skill body for make-interfaces-feel-better examples.
+
+## Reference files
+
+See the references/ directory and linked files in the main content.
+
 ## Guardrails
 
 - **Must** preserve the existing visual system unless the user explicitly asks to change it.

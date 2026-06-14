@@ -1,10 +1,13 @@
 ---
 name: secret-scan-triage
 description: Use when secret scanning with gitleaks reports findings that need fast triage, containment, and false-positive adjudication before code changes or merges continue.
+license: GNU GPL v3
 metadata:
+  version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: beta
+  maturity: draft
+  kind: task
 ---
 
 # Secret scan triage
