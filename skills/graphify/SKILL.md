@@ -7,6 +7,58 @@ description: "Use for any question about a codebase, its architecture, file rela
 
 Turn any folder of files into a navigable knowledge graph with community detection, an honest audit trail, and three outputs: interactive HTML, GraphRAG-ready JSON, and a plain-language GRAPH_REPORT.md.
 
+## Use this skill when
+
+Use for any question about a codebase, its architecture, file relationships, or project content — especially when `graphify-out/` exists, where the question should be treated as a graphify query first. Turns any input (code, docs, papers, images, videos) into a persistent knowledge graph with god nodes, community detection, and query/path/explain tools.
+
+## Do not use this skill when
+
+The task is a routine code edit, bug fix, or feature implementation with no need for codebase mapping or graph-based queries.
+
+## Inputs to gather
+
+- The path, URL, or corpus to graphify
+- Whether the user wants a full build or a query against an existing graph
+- Any mode flags (`--deep`, `--update`, `--cluster-only`, etc.)
+
+## First move
+
+Check whether `graphify-out/graph.json` already exists. If it does and the user's request is a natural-language question about the codebase, run `graphify query` immediately without rebuilding.
+
+## Workflow
+
+Follow the step-by-step pipeline below: detect files, extract entities, build graph, cluster, label communities, generate outputs, and report. See the full procedure under `## What You Must Do When Invoked`.
+
+## Guardrails
+
+- Never invent an edge — use AMBIGUOUS if unsure
+- Never skip the corpus size warning
+- Always show token cost in the report
+- Never hide cohesion scores behind symbols — show the raw number
+- Never run HTML viz on a graph with more than 5,000 nodes without warning the user
+
+## Validation
+
+- Verify that graphify is installed (Step 1)
+- Confirm the graph outputs exist on disk after each step
+- Check that extraction produced nodes before proceeding to clustering
+
+## Examples
+
+All invocation examples are in the `## Usage` section below.
+
+## Reference files
+
+- `references/extraction-spec.md` — Subagent prompt template for semantic extraction
+- `references/github-and-merge.md` — Clone, cross-repo merge, and monorepo flow
+- `references/transcribe.md` — Video and audio transcription
+- `references/update.md` — Incremental update and re-cluster flows
+- `references/query.md` — Query, path, explain, and NetworkX fallback
+- `references/add-watch.md` — Add URL and watch-mode flows
+- `references/hooks.md` — Commit hook and native CLAUDE.md integration
+- `references/exports.md` — Wiki, Neo4j, SVG, GraphML, MCP, and benchmark exports
+- `.graphify_version` — Current graphify version for compatibility checks
+
 ## Usage
 
 ```
