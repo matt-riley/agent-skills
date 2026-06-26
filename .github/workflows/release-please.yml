@@ -15,7 +15,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-    uses: matt-riley/matt-riley-ci/.github/workflows/release-please.yml@098848d01b058526398113ee20eccadf30f4b881 # v1.9.2
+    uses: matt-riley/matt-riley-ci/.github/workflows/release-please.yml@7fd3aefaab1ae14d063930c85b2d629280c36620 # v2.0.0
     with:
       config-file: release-please-config.json
       manifest-file: .release-please-manifest.json
@@ -32,7 +32,7 @@ jobs:
       contents: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           fetch-depth: 0
 
@@ -172,7 +172,7 @@ jobs:
       packages: write
     steps:
       - name: Check out release tag
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           ref: ${{ needs.release.outputs.tag_name }}
 
