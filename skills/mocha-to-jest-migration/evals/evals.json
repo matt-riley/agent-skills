@@ -1,0 +1,139 @@
+{
+  "skill_name": "mocha-to-jest-migration",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Read `evals/fixtures/sinon-stubs.spec.js` and migrate it from Sinon stubs to Jest. Write the migrated file to the outputs directory as `sinon-stubs.spec.js`. Do not run the tests.",
+      "expected_behavior": "Migrates sinon-stubs.spec.js: replaces sinon.stub() with jest.spyOn() + mockResolvedValue, replaces stub.callsFake(fn) with .mockImplementation(fn), replaces onFirstCall().rejects()/onSecondCall().resolves() chains with mockRejectedValueOnce/mockResolvedValueOnce, replaces .calledOnce/.calledWith/.callCount with toHaveBeenCalledTimes/toHaveBeenCalledWith, replaces sinon.restore() with jest.restoreAllMocks(). Removes sinon and chai imports.",
+      "files": [
+        "evals/fixtures/sinon-stubs.spec.js"
+      ],
+      "assertions": [
+        "file_exists:sinon-stubs.spec.js",
+        "contains_text:sinon-stubs.spec.js:jest.spyOn(",
+        "contains_text:sinon-stubs.spec.js:mockImplementation(",
+        "contains_text:sinon-stubs.spec.js:mockRejectedValueOnce(",
+        "contains_text:sinon-stubs.spec.js:mockResolvedValueOnce(",
+        "contains_text:sinon-stubs.spec.js:toHaveBeenCalledTimes(",
+        "contains_text:sinon-stubs.spec.js:toHaveBeenCalledWith(",
+        "contains_text:sinon-stubs.spec.js:jest.restoreAllMocks()",
+        "The output file does not import sinon or call require('sinon')",
+        "buildSubject stub's callsFake(fn) is replaced with mockImplementation(fn) — not mockReturnValue or mockReturnValueOnce, which would ignore the function body",
+        "sendEmail's onFirstCall().rejects() and onSecondCall().resolves() are replaced with chained .mockRejectedValueOnce(new Error(...)).mockResolvedValueOnce({...}) on the same spy — not separate jest.spyOn calls or a mockImplementation that switches on callCount",
+        "callbackStub.callsArgWith(1, null, { success: true }) is replaced with a .mockImplementation((arg1, cb) => cb(null, { success: true })) or similar callback invocation — not a naive translation to .mockReturnValue or left as callsArgWith"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Read `evals/fixtures/sinon-timers.spec.js` and migrate it from sinon.useFakeTimers to Jest fake timers. Write the migrated file to the outputs directory as `sinon-timers.spec.js`. Do not run the tests.",
+      "expected_behavior": "Migrates sinon-timers.spec.js: replaces sinon.useFakeTimers({ now: ... }) with jest.useFakeTimers({ now: ... }) preserving the initial time option, replaces clock.restore() with jest.useRealTimers(), replaces synchronous clock.tick(n) with jest.advanceTimersByTime(n), and async clock.tickAsync(n) with await jest.advanceTimersByTimeAsync(n). Removes sinon imports.",
+      "files": [
+        "evals/fixtures/sinon-timers.spec.js"
+      ],
+      "assertions": [
+        "file_exists:sinon-timers.spec.js",
+        "contains_text:sinon-timers.spec.js:jest.useFakeTimers({",
+        "contains_text:sinon-timers.spec.js:jest.useRealTimers()",
+        "contains_text:sinon-timers.spec.js:advanceTimersByTime(",
+        "contains_text:sinon-timers.spec.js:advanceTimersByTimeAsync(",
+        "The output file does not import sinon or call require('sinon')",
+        "The jest.useFakeTimers call includes a now: property set to the same epoch as the original sinon.useFakeTimers call — not a bare jest.useFakeTimers() without options",
+        "The async retry test uses await jest.advanceTimersByTimeAsync() rather than the synchronous jest.advanceTimersByTime(), preserving async ordering"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Read `evals/fixtures/sinon-args.spec.js` and migrate it to Jest. Write the migrated file to the outputs directory as `sinon-args.spec.js`. Do not run the tests.",
+      "expected_behavior": "Migrates sinon-args.spec.js: replaces stub.withArgs(...).returns(...) with a mockImplementation that branches on arguments, replaces spy.firstCall.args[0] and spy.lastCall.args[0] with spy.mock.calls[...][0], replaces stub.returnValues[0] with stub.mock.results[0].value, removes sinon and chai imports.",
+      "files": [
+        "evals/fixtures/sinon-args.spec.js"
+      ],
+      "assertions": [
+        "file_exists:sinon-args.spec.js",
+        "contains_text:sinon-args.spec.js:mockImplementation(",
+        "contains_text:sinon-args.spec.js:mock.calls[",
+        "contains_text:sinon-args.spec.js:mock.results[",
+        "The output file does not import sinon or call require('sinon')",
+        "stub.withArgs(...).returns(...) is replaced with a single mockImplementation that branches on the argument — not separate jest.spyOn calls for each path",
+        "spy.firstCall.args[0] is replaced with spy.mock.calls[0][0], not with toHaveBeenNthCalledWith or a similar matcher"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Read `evals/fixtures/mixed-patterns.spec.js` and migrate it fully to Jest. This is the first file in a larger migration. After writing the migrated file to the outputs directory as `mixed-patterns.spec.js`, write a separate `migration-notes.md` to the outputs directory describing any Jest configuration or setup that must be in place before the rest of the suite can be migrated. Do not run the tests.",
+      "expected_behavior": "Produces two outputs: a fully migrated mixed-patterns.spec.js (all pattern families converted including the spy-vs-stub distinction for evictSpy) and a migration-notes.md identifying at least one concrete Jest setup requirement that must be verified before scaling the migration.",
+      "files": [
+        "evals/fixtures/mixed-patterns.spec.js"
+      ],
+      "assertions": [
+        "file_exists:mixed-patterns.spec.js",
+        "file_exists:migration-notes.md",
+        "contains_text:mixed-patterns.spec.js:jest.spyOn(",
+        "contains_text:mixed-patterns.spec.js:jest.useFakeTimers()",
+        "contains_text:mixed-patterns.spec.js:beforeAll(",
+        "contains_text:mixed-patterns.spec.js:afterAll(",
+        "contains_text:mixed-patterns.spec.js:.rejects",
+        "The migration-notes.md specifically identifies that 'chai-as-promised' or similar Chai plugins must be uninstalled or removed from global setup, as Jest handles promise assertions natively",
+        "The migrated file does not import sinon or chai",
+        "evictSpy (sinon.spy) is translated to jest.spyOn(cache, 'onEvict') without any chained .mockImplementation() or .mockReturnValue() — it is a pure observation spy, not a stub"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Read `evals/fixtures/proxyquire-module.spec.js` and migrate it to Jest. The source file uses `proxyquire` to inject module dependencies. Write the migrated file to the outputs directory as `proxyquire-module.spec.js`. Do not run the tests.",
+      "expected_behavior": "Replaces proxyquire with jest.mock() calls at the top of the file (outside any function), replaces sinon stubs on the injected objects with jest.fn(), replaces sinon.match.object({...}) in assertions with expect.objectContaining({...}), and removes sinon and chai imports.",
+      "files": [
+        "evals/fixtures/proxyquire-module.spec.js"
+      ],
+      "assertions": [
+        "file_exists:proxyquire-module.spec.js",
+        "contains_text:proxyquire-module.spec.js:jest.mock(",
+        "contains_text:proxyquire-module.spec.js:jest.fn(",
+        "contains_text:proxyquire-module.spec.js:expect.objectContaining(",
+        "The file does not call require('proxyquire') or reference the proxyquire variable anywhere",
+        "jest.mock() is called at the module level \u2014 not inside beforeEach, describe, or any other function",
+        "The sinon.match.object({ amount: 50 }) assertion is replaced with expect.objectContaining({ amount: 50 }) inside a toHaveBeenCalledWith matcher \u2014 not with a plain toEqual or toBe",
+        "The file does not import sinon or chai"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Read `evals/fixtures/mock-lifecycle.spec.js` and migrate it to Jest. Write the migrated file to the outputs directory as `mock-lifecycle.spec.js`. Do not run the tests.",
+      "expected_behavior": "Replaces sinon lifecycle methods with the correct Jest equivalents: stub.resetHistory() inside a test body \u2192 spy.mockClear() (per-spy, not jest.clearAllMocks()), stub.reset() \u2192 spy.mockReset() (clears calls and return values), stub.resetBehavior() \u2192 spy.mockReset() (closest Jest equivalent), sinon.restore() in afterEach \u2192 jest.restoreAllMocks(). The three-way distinction must be preserved \u2014 do not use one method as a blanket replacement for all.",
+      "files": [
+        "evals/fixtures/mock-lifecycle.spec.js"
+      ],
+      "assertions": [
+        "file_exists:mock-lifecycle.spec.js",
+        "contains_text:mock-lifecycle.spec.js:jest.restoreAllMocks()",
+        "contains_text:mock-lifecycle.spec.js:mockReset(",
+        "contains_text:mock-lifecycle.spec.js:mockClear(",
+        "The file does not import sinon or chai",
+        "getStub.resetHistory() inside the test body is replaced with getStub.mockClear() \u2014 not jest.clearAllMocks(), which would clear setStub and recordStub too",
+        "getStub.reset() is replaced with mockReset() \u2014 which clears both calls and implementation \u2014 not with mockClear() or jest.restoreAllMocks()",
+        "setStub.resetBehavior() is replaced with setStub.mockReset() \u2014 not setStub.mockClear() (which only clears history, not the return value) or jest.restoreAllMocks()",
+        "jest.restoreAllMocks() is used in afterEach to replace sinon.restore() \u2014 not as a blanket replacement for every reset call"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Read `evals/fixtures/sinon-sandbox.spec.js` and migrate it to Jest. Write the migrated file to the outputs directory as `sinon-sandbox.spec.js`. Do not run the tests.",
+      "expected_behavior": "Migrates sinon-sandbox.spec.js: eliminates sinon.createSandbox() by restructuring stubs into jest.spyOn() calls inside beforeEach and replacing sandbox.restore() with jest.restoreAllMocks() in afterEach. Replaces sandbox.resetHistory() with jest.clearAllMocks(). Replaces sinon.match({ to: sinon.match.string, subject: sinon.match.string }) in the calledWith check with toHaveBeenCalledWith(expect.objectContaining({ to: expect.any(String), subject: expect.any(String) })). Removes sinon and chai imports.",
+      "files": [
+        "evals/fixtures/sinon-sandbox.spec.js"
+      ],
+      "assertions": [
+        "file_exists:sinon-sandbox.spec.js",
+        "contains_text:sinon-sandbox.spec.js:jest.spyOn(",
+        "contains_text:sinon-sandbox.spec.js:jest.restoreAllMocks()",
+        "contains_text:sinon-sandbox.spec.js:jest.clearAllMocks()",
+        "contains_text:sinon-sandbox.spec.js:expect.objectContaining(",
+        "contains_text:sinon-sandbox.spec.js:expect.any(String)",
+        "The output file does not import sinon or chai",
+        "There is no sandbox variable, sandbox.stub(), sandbox.restore(), or sandbox.resetHistory() call in the output \u2014 sinon.createSandbox() is fully restructured into beforeEach/afterEach lifecycle hooks using jest.spyOn() and jest.restoreAllMocks()",
+        "sandbox.resetHistory() is replaced with jest.clearAllMocks() \u2014 not jest.restoreAllMocks() (which removes the spy) or individual spy.mockClear() calls (which would only clear one stub instead of the whole sandbox scope)",
+        "sinon.match({ to: sinon.match.string, subject: sinon.match.string }) is replaced with expect.objectContaining({ to: expect.any(String), subject: expect.any(String) }) inside a toHaveBeenCalledWith matcher \u2014 not with a plain object literal or expect.stringContaining"
+      ]
+    }
+  ]
+}

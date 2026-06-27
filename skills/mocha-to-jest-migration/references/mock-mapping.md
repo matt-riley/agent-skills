@@ -29,8 +29,12 @@ Jest provides built-in equivalents for nearly everything; no extra library is ne
 | `stub.returnsThis()` | `.mockReturnThis()` |
 | `stub.onFirstCall().returns(a)` | `.mockReturnValueOnce(a)` |
 | `stub.onSecondCall().returns(b)` | `.mockReturnValueOnce(a).mockReturnValueOnce(b)` |
+| `stub.onFirstCall().resolves(val)` | `.mockResolvedValueOnce(val)` |
+| `stub.onFirstCall().rejects(err)` | `.mockRejectedValueOnce(err)` |
 | `stub.callsFake(fn)` | `.mockImplementation(fn)` |
 | `stub.withArgs(a).returns(b)` | `.mockImplementation((x) => x === a ? b : undefined)` |
+| `stub.callsArg(0)` | `.mockImplementation((cb) => cb())` — Jest has no direct equivalent |
+| `stub.callsArgWith(1, a, b)` | `.mockImplementation((arg1, cb) => cb(a, b))` |
 | `stub.restore()` | `spy.mockRestore()` |
 
 ## Mocks (object-level expectations)
@@ -57,8 +61,9 @@ expect(spy).toHaveBeenCalledTimes(1);
 |-------|------|
 | `sinon.restore()` | `jest.restoreAllMocks()` — call in `afterEach` |
 | `stub.reset()` | `spy.mockReset()` — clears calls and return values |
-| `stub.resetBehavior()` | `spy.mockReset()` |
+| `stub.resetBehavior()` | `spy.mockReset()` — closest Jest equivalent; also clears call history |
 | `sinon.resetHistory()` | `jest.clearAllMocks()` — clears calls only, keeps implementation |
+| `stub.resetHistory()` | `spy.mockClear()` — per-spy form; prefer over `jest.clearAllMocks()` when only one spy's history should reset |
 
 Recommended pattern:
 

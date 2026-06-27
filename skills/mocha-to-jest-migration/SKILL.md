@@ -125,6 +125,7 @@ describe("retries", () => {
 ## Guardrails
 
 - **Must** preserve async behavior, timer behavior, and module mocking semantics explicitly.
+- **Must** use `await jest.advanceTimersByTimeAsync(n)` — not `jest.advanceTimersByTime(n)` — when the original test used `clock.tickAsync()` inside an async body. Using the synchronous variant silently breaks async ordering.
 - **Must not** do bulk mechanical rewrites without validation — migrate in small batches.
 - **Should** keep test names and intent stable unless the user asks for broader cleanup.
 - **Should** watch for memory or environment differences in CI after migration.
