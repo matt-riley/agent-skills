@@ -1,0 +1,46 @@
+[
+  {
+    "query": "Migrate this Mocha + Sinon test file to Jest without changing behavior.",
+    "should_trigger": true
+  },
+  {
+    "query": "Convert our Chai assertions to Jest matchers across these test files.",
+    "should_trigger": true
+  },
+  {
+    "query": "We're using Mocha and need to move to Jest — where do we start?",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me replace sinon.stub with jest.spyOn in our test suite.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our tests use sinon.useFakeTimers — how do I convert those to Jest fake timers?",
+    "should_trigger": true
+  },
+  {
+    "query": "Some files are already on Jest but the rest still use Mocha — help me finish the migration.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a new test to our existing Jest suite for this parser module.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the failing test in user.test.js — it's throwing a TypeError.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write tests for this new authentication module.",
+    "should_trigger": false
+  },
+  {
+    "query": "Our Jest tests are slow — how do I speed them up?",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up the Jest configuration for this new project from scratch.",
+    "should_trigger": false
+  }
+]

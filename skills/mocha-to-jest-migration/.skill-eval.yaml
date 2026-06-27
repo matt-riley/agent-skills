@@ -1,0 +1,11 @@
+defaults:
+  agent: pi
+  model: neuralwatt/glm-5.2-flex
+models:
+  - agent: pi
+    model: neuralwatt/glm-5.2-flex
+  - agent: pi
+    model: deepseek/deepseek-v4-flash
+judge:
+  agent: codex
+  model: gpt-5.4
