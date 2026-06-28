@@ -419,26 +419,6 @@
         }
       ]
     },
-    "skills/aws-sdk-v2-to-v3-migration": {
-      "package-name": "aws-sdk-v2-to-v3-migration",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/aws-sdk-v2-to-v3-migration/SKILL.md"
-        }
-      ]
-    },
-    "skills/circleci-to-github-actions-migration": {
-      "package-name": "circleci-to-github-actions-migration",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/circleci-to-github-actions-migration/SKILL.md"
-        }
-      ]
-    },
     "skills/code-intelligence": {
       "package-name": "code-intelligence",
       "skip-github-release": true,
@@ -609,16 +589,6 @@
         }
       ]
     },
-    "skills/mocha-to-jest-migration": {
-      "package-name": "mocha-to-jest-migration",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/mocha-to-jest-migration/SKILL.md"
-        }
-      ]
-    },
     "skills/modern-web-guidance": {
       "package-name": "modern-web-guidance",
       "skip-github-release": true,
@@ -626,16 +596,6 @@
         {
           "type": "generic",
           "path": "skills/modern-web-guidance/SKILL.md"
-        }
-      ]
-    },
-    "skills/neovim-config": {
-      "package-name": "neovim-config",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/neovim-config/SKILL.md"
         }
       ]
     },
@@ -666,16 +626,6 @@
         {
           "type": "generic",
           "path": "skills/plan-review-loop/SKILL.md"
-        }
-      ]
-    },
-    "skills/project-references-migration": {
-      "package-name": "project-references-migration",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/project-references-migration/SKILL.md"
         }
       ]
     },

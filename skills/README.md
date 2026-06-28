@@ -14,6 +14,15 @@ Start with these when the request matches them directly:
 - `security-basics` — cross-cutting auth, request-handling, and data-exposure guardrails
 - `code-generation` — prerequisite overlay when generated output may be stale
 
+## Archived skills
+
+One-shot migration skills live in `archived/`. They're still available but excluded from active discovery:
+
+- `archived/aws-sdk-v2-to-v3-migration` — AWS SDK v2 to v3 migration
+- `archived/circleci-to-github-actions-migration` — CircleCI to GitHub Actions migration
+- `archived/mocha-to-jest-migration` — Mocha to Jest migration
+- `archived/project-references-migration` — TypeScript Project References migration
+
 ## High-visibility operational guardrail
 
 - `configuration-env` — keep this easy to find for startup failures, env drift, and deployment/config debugging, but do not force it into every task by default
@@ -48,8 +57,6 @@ Start with these when the request matches them directly:
 - `schema-boundary-typing` — align runtime validation with truthful TypeScript boundary types
 - `type-test-authoring` — add compile-time type regression tests for important APIs
 - `typescript-any-eliminator` — systematically hunt and replace `any` types with precise inferred or explicit types
-- `project-references-migration` — migrate a TypeScript monorepo from path aliases or flat config to TypeScript Project References
-- `mocha-to-jest-migration` — migrate a test suite from Mocha to Jest including imports, lifecycle hooks, and matchers
 
 ### JavaScript and TypeScript code health
 
@@ -60,7 +67,6 @@ Start with these when the request matches them directly:
 
 - `github-actions-failure-triage` — diagnose existing failing GitHub Actions runs with evidence-first minimal fixes
 - `github-actions-local-repro` — reproduce a GitHub Actions failure locally using act, Docker, or shell isolation
-- `circleci-to-github-actions-migration` — migrate a CircleCI pipeline to GitHub Actions step-by-step
 - `goreleaser-release-pipeline` — configure and operate a GoReleaser release pipeline with artifacts and changelogs
 - `ci-images` — local CI parity and image-publishing workflows
 
@@ -94,7 +100,6 @@ Start with these when the request matches them directly:
 
 ### Cloud and infrastructure
 
-- `aws-sdk-v2-to-v3-migration` — migrate AWS SDK v2 service clients to v3 modular imports and send commands
 - `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks
 - `terraform-skill` — write, plan, apply, and troubleshoot Terraform configurations and state
 - `iam-oidc-triage` — diagnose and fix IAM OIDC trust policy failures for GitHub Actions, AWS, and GCP
@@ -205,8 +210,6 @@ Start with these when the request matches them directly:
 | Go error wrapping, sentinel errors, or errors.As/Is patterns | `go-error-patterns` | Idiomatic Go error handling is the focus |
 | a GoReleaser release pipeline | `goreleaser-release-pipeline` | Release artifacts and changelogs are the main output |
 | reproducing a GitHub Actions failure locally | `github-actions-local-repro` | Local repro beats remote re-run for diagnosis |
-| migrating from CircleCI to GitHub Actions | `circleci-to-github-actions-migration` | Step-by-step CI migration is the deliverable |
-| AWS SDK v2 → v3 client migration | `aws-sdk-v2-to-v3-migration` | Modular v3 import and command shapes are the speciality |
 | SAM or CloudFormation template work | `sam-cloudformation` | SAM/CFN syntax, deploy, and stack management are the focus |
 | Terraform write, plan, or apply work | `terraform-skill` | Terraform config, state, and provider patterns are the focus |
 | IAM OIDC trust failures or GitHub Actions AWS auth | `iam-oidc-triage` | OIDC trust policy diagnosis is the speciality |
@@ -216,8 +219,6 @@ Start with these when the request matches them directly:
 | GPG, SSH, or 1Password commit signing failures | `git-signing-troubleshoot` | Signing configuration diagnosis is the speciality |
 | running the Worktrunk git workflow | `worktrunk` | Worktrunk commands, squash-rebase, and trunk ops are the focus |
 | TypeScript `any` elimination or type tightening | `typescript-any-eliminator` | Systematic any removal is the deliverable |
-| migrating TypeScript path aliases to Project References | `project-references-migration` | TypeScript project reference contract is the focus |
-| migrating Mocha tests to Jest | `mocha-to-jest-migration` | Test framework migration patterns are the speciality |
 | finding unused dependencies, exports, files, or unresolved imports in a JS/TS repo | `knip` | Knip-based codebase health analysis is the main need |
 | auditing JS/TS dead code, duplication, circular dependencies, or architecture boundaries with Fallow | `fallow` | Fallow tool is requested or the scope is broader than unused-import detection |
 | writing or improving reusable skills | `skill-authoring` | Skill authorship is the primary task |

@@ -133,7 +133,7 @@ Stop broadening the config work when any of these happen:
 ## Routing boundary
 
 - Use this skill when the primary work is TypeScript configuration cleanup or strictness sequencing.
-- Route to [`project-references-migration`](../project-references-migration/SKILL.md) when the main goal is incremental `tsc -b` project-references adoption across a layered workspace.
+- Route to [`project-references-migration`](../../archived/project-references-migration/SKILL.md) (archived) when the main goal is incremental `tsc -b` project-references adoption across a layered workspace.
 - Route to [`tsc-error-triage`](../tsc-error-triage/SKILL.md) once config changes have landed and the task becomes source-level compiler error remediation.
 
 ## Validation

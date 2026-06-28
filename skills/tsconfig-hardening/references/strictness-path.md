@@ -19,7 +19,7 @@ Prefer to fix:
 - stale `paths`, `baseUrl`, or `types`
 - accidental divergence between packages that should share a base config
 
-If the real goal is adopting `composite`, `references`, or `tsc -b` across packages, use `skills/project-references-migration/SKILL.md` instead of treating it as ordinary strictness cleanup.
+If the real goal is adopting `composite`, `references`, or `tsc -b` across packages, use `skills/archived/project-references-migration/SKILL.md` instead of treating it as ordinary strictness cleanup.
 
 ## 3. Tighten flags in small batches
 

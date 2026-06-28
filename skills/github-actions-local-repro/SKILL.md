@@ -33,7 +33,7 @@ Use this skill when you need to reproduce a GitHub Actions failure locally with 
 | --- | --- | --- |
 | Concrete Actions failure where local job execution is feasible | Yes | - |
 | Failure tied to org policy, runner fleet labels, or protected environment gates | No | `github-actions-failure-triage` |
-| Main goal is CircleCI migration or parity rollout | No | `circleci-to-github-actions-migration` |
+| Main goal is CircleCI migration or parity rollout | No | `circleci-to-github-actions-migration` (archived) |
 
 ## Inputs to gather
 
