@@ -1,22 +1,14 @@
 ---
 name: find-skills
-description: Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.
+description: Helps users discover skills in the local agent-skills catalog when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an already-available local skill.
 license: GNU GPL v3
 ---
 
 # Find Skills
 
-This skill helps you discover and install skills from the open agent skills ecosystem.
+This skill helps you discover relevant skills already available in the local agent-skills catalog. All skills are directories under `skills/` with a `SKILL.md` — no external install needed.
 
-The Skills CLI (`npx skills`) is the package manager for the open agent skills ecosystem. Skills are modular packages that extend agent capabilities with specialized knowledge, workflows, and tools.
-
-**Key commands:**
-- `npx skills find [query]` - Search for skills interactively or by keyword
-- `npx skills add <package>` - Install a skill from GitHub or other sources
-- `npx skills check` - Check for skill updates
-- `npx skills update` - Update all installed skills
-
-**Browse skills at:** https://skills.sh/
+Start with `skills/README.md` for the family-organized chooser, then drill into individual `skills/<name>/SKILL.md` files for full workflows.
 
 ## Use this skill when
 
@@ -31,118 +23,98 @@ The Skills CLI (`npx skills`) is the package manager for the open agent skills e
 
 - The user asks you to perform a task directly and is not asking about skills discovery
 - The user has already identified a specific skill and wants you to use it
-- The user is asking for general programming advice, not skill installation
+- The user is asking for general programming advice, not skill lookup
 
 ## Inputs to gather
 
 - What domain does the user need help with? (e.g., React, testing, design, deployment)
 - What specific task do they want to accomplish?
-- Is this a common enough task that a skill likely exists?
+- Is this a common enough task that a skill likely exists in the local catalog?
 
 ## First move
 
-Check the [skills.sh leaderboard](https://skills.sh/) to see if a well-known skill already exists for the domain. The leaderboard ranks skills by total installs, surfacing the most popular and battle-tested options.
-
-For example, top skills for web development include:
-- `vercel-labs/agent-skills` — React, Next.js, web design (100K+ installs each)
-- `anthropics/skills` — Frontend design, document processing (100K+ installs)
+Read `skills/README.md` — the family-organized chooser. It groups skills by domain (governance, testing, git, CI/CD, database, etc.) so you can quickly find where the user's need fits. If the chooser doesn't cover the domain well, proceed to the workflow below for deeper search.
 
 ## Workflow
 
 ### Step 1: Understand what they need
 
-Identify the domain, the specific task, and whether this is a common enough task that a skill likely exists.
+Identify the domain, the specific task, and whether this is a common enough task that a skill likely exists in the local catalog.
 
-### Step 2: Search for skills
+### Step 2: Search the local catalog
 
-If the leaderboard doesn't cover the user's need, run:
+Search the local `skills/` directory for matching skills. Use `search_files` to grep for keywords across `SKILL.md` frontmatter (names, descriptions) and the chooser table in `skills/README.md`.
 
-```bash
-npx skills find [query]
-```
+Three search strategies, in priority order:
 
-For example:
+1. **Keyword match in skill descriptions** — grep `skills/*/SKILL.md` for the user's domain or task terms in the `description:` field
+2. **Family match in the chooser** — read `skills/README.md` to find where the topic fits (Governance, Testing, Git, CI/CD, etc.)
+3. **Fuzzy fallback** — list `skills/` directory names and skim their `SKILL.md` frontmatter when the match isn't obvious
 
-- User asks "how do I make my React app faster?" → `npx skills find react performance`
-- User asks "can you help me with PR reviews?" → `npx skills find pr review`
-- User asks "I need to create a changelog" → `npx skills find changelog`
-
-### Step 3: Verify quality before recommending
-
-**Do not recommend a skill based solely on search results.** Always verify:
-
-1. **Install count** — Prefer skills with 1K+ installs. Be cautious with anything under 100.
-2. **Source reputation** — Official sources (`vercel-labs`, `anthropics`, `microsoft`) are more trustworthy than unknown authors.
-3. **GitHub stars** — Check the source repository. A skill from a repo with <100 stars should be treated with skepticism.
-
-### Step 4: Present options to the user
+### Step 3: Present matches
 
 When you find relevant skills, present them with:
 
-1. The skill name and what it does
-2. The install count and source
-3. The install command they can run
-4. A link to learn more at skills.sh
+1. The skill name and what it does (from its `description` frontmatter)
+2. Its maturity level if listed in `metadata.maturity` (draft, stable)
+3. Its kind if listed in `metadata.kind` (task, reference)
+4. What the skill would do if activated — a one-sentence summary
 
-Example response:
+Example response format:
 
 ```
-I found a skill that might help! The "react-best-practices" skill provides
-React and Next.js performance optimization guidelines from Vercel Engineering.
-(185K installs)
+I found a skill in your catalog that might help!
 
-To install it:
-npx skills add vercel-labs/agent-skills@react-best-practices
+`implementation-review` — finished-code review workflow (stable, task)
+This walks you through a structured post-implementation review and approval.
 
-Learn more: https://skills.sh/vercel-labs/agent-skills/react-best-practices
+`plan-review` — plan drafting, hardening, and approval gates (stable, task)
+This helps draft and harden a plan before coding starts.
 ```
 
-### Step 5: Offer to install
+### Step 4: Offer to activate
 
-If the user wants to proceed, install the skill:
-
-```bash
-npx skills add <owner/repo@skill> -g -y
-```
-
-The `-g` flag installs globally (user-level) and `-y` skips confirmation prompts.
+If the user wants to proceed, load the skill with `skill_view(name='<skill-name>')` and follow its workflow. No installation required — all skills in the local catalog are already available.
 
 ### When no skills are found
 
-If no relevant skills exist:
+If no relevant local skills exist:
 
-1. Acknowledge that no existing skill was found
+1. Acknowledge that no existing skill was found in the local catalog
 2. Offer to help with the task directly using your general capabilities
-3. Suggest the user could create their own skill with `npx skills init`
+3. Suggest the user could create a custom skill using the `skill-creator` skill
 
 ## Guardrails
 
-- Never recommend a skill without verifying quality (install count, source reputation, stars)
-- Never install a skill without the user's explicit consent
-- Do not recommend skills from unknown authors with low install counts
+- Search the local catalog thoroughly before concluding no skill exists
+- Prefer stable skills over draft skills when both cover the same task
+- Never invent or hallucinate skills that don't exist in the catalog
+- Present at most 3-4 matches to avoid overwhelming the user
 
 ## Validation
 
 - Confirm the user's need is understood before searching
-- Verify skill quality metrics before recommending
-- Present options clearly with install counts, source, and commands
-- Ensure the user explicitly opts in before installing anything
+- Verify each match actually exists by reading its `SKILL.md` frontmatter
+- Present options clearly with skill name, description, and maturity
+- Let the user choose before loading a skill
 
 ## Examples
 
-See the leaderboard at https://skills.sh/ for curated, popular skills. Common categories include:
-
-| Category        | Example Queries                          |
-| --------------- | ---------------------------------------- |
-| Web Development | react, nextjs, typescript, css, tailwind |
-| Testing         | testing, jest, playwright, e2e           |
-| DevOps          | deploy, docker, kubernetes, ci-cd        |
-| Documentation   | docs, readme, changelog, api-docs        |
-| Code Quality    | review, lint, refactor, best-practices   |
-| Design          | ui, ux, design-system, accessibility     |
-| Productivity    | workflow, automation, git                |
+| Domain          | Example Query            | Likely Local Skill(s)       |
+| --------------- | ------------------------ | --------------------------- |
+| Testing         | "find a skill for testing" | `testing-workflows`, `api-smoke-validation` |
+| Code review     | "skill for PR review"    | `implementation-review`, `plan-review` |
+| Git             | "git workflow skill"     | `finishing-a-development-branch`, `git-worktrees`, `resolve-open-loops` |
+| CI/CD           | "debug CI failure"       | `github-actions-failure-triage`, `github-actions-local-repro` |
+| Database        | "database migration"     | `database-migrations`, `cloudflare-d1-migrations` |
+| Code generation | "generate code"          | `code-generation` |
+| Planning        | "plan before coding"     | `rpi-workflow`, `reverse-prompt`, `plan-review` |
+| Security        | "security review"        | `security-basics` |
+| Agent authoring | "create a skill"         | `skill-creator`, `agentic-eval` |
+| Documentation   | "write docs"             | `doc-coauthoring` |
+| Code search     | "find code in repo"      | `ast-grep`, `code-intelligence`, `code-tour` |
 
 ## Reference files
 
-- Browse skills at https://skills.sh/
-- Skills CLI: `npx skills --help`
+- `skills/README.md` — the family-organized chooser for the full catalog
+- `skills/<name>/SKILL.md` — each skill's source of truth
