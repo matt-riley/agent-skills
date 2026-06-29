@@ -4,7 +4,7 @@ description: "Polish existing interfaces when the UI feels off through better ra
 license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
-  maturity: draft
+  maturity: stable
   kind: task
 ---
 

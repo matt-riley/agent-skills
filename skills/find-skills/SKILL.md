@@ -1,9 +1,18 @@
 ---
 name: find-skills
-description: Helps users discover skills in the local agent-skills catalog when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an already-available local skill.
+description: Helps users discover skills in the local agent-skills catalog when they
+  ask questions like "how do I do X", "find a skill for X", "is there a skill that
+  can...", or express interest in extending capabilities. This skill should be used
+  when the user is looking for functionality that might exist as an already-available
+  local skill.
 license: GNU GPL v3
+metadata:
+  version: 0.1.0 # x-release-please-version
+  category: workflow
+  audience: general-coding-agent
+  maturity: draft
+  kind: reference
 ---
-
 # Find Skills
 
 This skill helps you discover relevant skills already available in the local agent-skills catalog. All skills are directories under `skills/` with a `SKILL.md` — no external install needed.

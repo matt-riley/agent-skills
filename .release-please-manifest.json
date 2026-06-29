@@ -78,5 +78,7 @@
   "skills/typescript-any-eliminator": "1.0.0",
   "skills/verification-before-completion": "1.0.0",
   "skills/workflow-contracts": "1.0.0",
-  "skills/worktrunk": "1.0.0"
+  "skills/worktrunk": "1.0.0",
+  "skills/find-skills": "0.1.0",
+  "skills/graphify": "0.1.0"
 }

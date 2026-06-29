@@ -758,6 +758,26 @@
           "path": "skills/worktrunk/SKILL.md"
         }
       ]
+    },
+    "skills/find-skills": {
+      "package-name": "find-skills",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/find-skills/SKILL.md"
+        }
+      ]
+    },
+    "skills/graphify": {
+      "package-name": "graphify",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "skills/graphify/SKILL.md"
+        }
+      ]
     }
   }
 }
