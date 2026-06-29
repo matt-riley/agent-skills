@@ -5,7 +5,7 @@ license: GNU GPL v3
 metadata:
   version: 1.4.0 # x-release-please-version
   owner: mattriley
-  maturity: draft
+  maturity: stable
   kind: task
 ---
 
