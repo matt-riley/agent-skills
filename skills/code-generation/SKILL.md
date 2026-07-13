@@ -69,14 +69,6 @@ Inspect the repo's build docs, CI workflow, and `.gitignore` before regenerating
 
 See the body and references for regeneration prerequisite steps.
 
-## Examples
-
-See references and the skill body for code generation examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Never edit generated files by hand; change the generator inputs or config instead.

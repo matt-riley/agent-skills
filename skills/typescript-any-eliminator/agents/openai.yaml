@@ -1,0 +1,5 @@
+interface:
+  display_name: "TypeScript Any Eliminator"
+  short_description: "Use when TypeScript source contains explicit `any` in application code, shared helpers, DTOs, or API layers that should be narrowed without changing runtime behavior — or when a reviewer or lint rule flags unsafe `any` usage."
+policy:
+  allow_implicit_invocation: true

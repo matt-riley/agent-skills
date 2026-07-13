@@ -1,0 +1,5 @@
+interface:
+  display_name: "Git Signing Troubleshoot"
+  short_description: "Use when commits, tags, or pushes are blocked by GPG or SSH signing failures — including 1Password op-ssh-sign errors, failed to fill whole buffer, or misleading op whoami output, not when the main task is branch integration, PR handling, or secret-scan triage."
+policy:
+  allow_implicit_invocation: true

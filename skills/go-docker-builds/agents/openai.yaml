@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Docker Builds"
+  short_description: "Containerize Go services with production-ready multi-stage Docker builds. Use when writing or debugging a Dockerfile for a Go service, setting up static compilation for scratch/distroless images, adding health checks, or wiring image builds into CI — not for Docker Compose local dev stacks or non-Go Dockerfiles."
+policy:
+  allow_implicit_invocation: true

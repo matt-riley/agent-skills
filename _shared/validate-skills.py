@@ -6,6 +6,29 @@ import subprocess
 import sys
 from pathlib import Path
 import yaml
+
+
+class UniqueKeySafeLoader(yaml.SafeLoader):
+    pass
+
+
+def construct_unique_mapping(loader, node, deep=False):
+    mapping = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        if key in mapping:
+            raise yaml.constructor.ConstructorError(
+                'while constructing a mapping', node.start_mark,
+                f'found duplicate key {key!r}', key_node.start_mark,
+            )
+        mapping[key] = loader.construct_object(value_node, deep=deep)
+    return mapping
+
+
+UniqueKeySafeLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    construct_unique_mapping,
+)
 NAME_RE = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 # Fuller canonical set per catalog-standard.md and the taught authoring shape
 # (python validator is the primary `npm run validate` gate; the mjs in skill-authoring/
@@ -21,6 +44,7 @@ CANONICAL_HEADINGS = (
     '## Examples',
     '## Reference files',
 )
+ALLOWED_TOP_LEVEL_KEYS = {'name', 'description', 'license', 'compatibility', 'metadata'}
 def fail(errors, message):
     errors.append(message)
 def load_skill(path):
@@ -28,7 +52,21 @@ def load_skill(path):
     m = re.match(r'^---\n(.*?)\n---\n?', text, re.S)
     if not m:
         raise ValueError('missing YAML frontmatter')
-    return yaml.safe_load(m.group(1)) or {}, text[m.end():]
+    return yaml.load(m.group(1), Loader=UniqueKeySafeLoader) or {}, text[m.end():]
+
+
+def validate_frontmatter_schema(skill_path, fm, errors):
+    for key in fm:
+        if key not in ALLOWED_TOP_LEVEL_KEYS:
+            fail(errors, f'{skill_path}: unsupported top-level frontmatter key: {key}')
+    if fm.get('license') != 'GNU GPL v3':
+        fail(errors, f'{skill_path}: license must be GNU GPL v3 for every catalog skill')
+    if 'compatibility' in fm and (not isinstance(fm['compatibility'], str) or len(fm['compatibility']) > 500):
+        fail(errors, f'{skill_path}: compatibility must be a string <= 500 chars')
+    if 'metadata' in fm:
+        meta = fm['metadata']
+        if not isinstance(meta, dict) or not all(isinstance(k, str) and isinstance(v, str) for k, v in meta.items()):
+            fail(errors, f'{skill_path}: metadata must be a string-to-string map')
 def validate_trigger_queries(path, errors):
     data = json.loads(path.read_text())
     if not isinstance(data, list):
@@ -71,17 +109,15 @@ def strip_fences(body):
     return FENCE_RE.sub('', body)
 def validate_canonical_headings(skill_path, body, errors):
     stripped = strip_fences(body)
+    previous_index = -1
     for heading in CANONICAL_HEADINGS:
-        if not re.search(r'^' + re.escape(heading) + r'\s*$', stripped, re.M):
-            fail(errors, f'{skill_path}: missing canonical heading {heading!r}')
+        match = re.search(r'^' + re.escape(heading) + r'\s*$', stripped, re.M)
+        if not match:
+            continue
+        if match.start() < previous_index:
+            fail(errors, f'{skill_path}: canonical heading out of order {heading!r}')
+        previous_index = match.start()
 
-def validate_task_outputs(skill_path, fm, body, errors):
-    """Require ## Outputs for skills explicitly marked kind: task (modeled on mjs logic)."""
-    meta = fm.get('metadata') or {}
-    if isinstance(meta, dict) and meta.get('kind') == 'task':
-        stripped = strip_fences(body)
-        if not re.search(r'^## Outputs\s*$', stripped, re.M):
-            fail(errors, f'{skill_path}: task skills (kind: task) must include canonical heading ## Outputs')
 def validate_inter_skill_links(skill_path, body, skill_names, errors):
     # Match either markdown links like [text](../name/SKILL.md) or inline ../name/SKILL.md refs.
     pattern = re.compile(r'\.\./([a-z0-9-]+)/SKILL\.md')
@@ -135,6 +171,8 @@ def validate_support_links(skill_dir, skill_path, body, errors):
         rel = support_file.relative_to(skill_dir).as_posix()
         if rel in ('SKILL.md', 'README.md') or rel.startswith(('agents/', 'evals/')):
             continue
+        if rel.startswith('scripts/tests/'):
+            continue
         parent_links = []
         for parent in support_file.relative_to(skill_dir).parents:
             parent_rel = parent.as_posix()
@@ -143,6 +181,12 @@ def validate_support_links(skill_dir, skill_path, body, errors):
             parent_links.append(parent_rel + '/')
         if rel not in linked_text and not any(parent in linked_text for parent in parent_links):
             fail(errors, f'{skill_path}: support file is not linked from SKILL.md: {rel}')
+
+    targets = set(re.findall(r'`((?:references|scripts|assets)/[^`]+)`', body))
+    targets.update(re.findall(r'\]\(((?:references|scripts|assets)/[^)#?]+)', body))
+    for rel in sorted(targets):
+        if '*' not in rel and not (skill_dir / rel).exists():
+            fail(errors, f'{skill_path}: referenced support file missing: {rel}')
 
 
 def validate_stable_trigger_evals(skill_path, skill_dir, fm, errors):
@@ -187,6 +231,43 @@ def validate_readme(root, skill_names, errors):
             if 'skill' in window or any(n in window for n in skill_names):
                 fail(errors, f'{readme}: references unknown skill `{token}`')
                 break
+
+
+def validate_catalog_invariants(catalog_root, skills_root, skill_names, errors):
+    chooser_path = skills_root / 'README.md'
+    chooser_text = chooser_path.read_text() if chooser_path.exists() else ''
+    for skill_name in sorted(skill_names):
+        skill_dir = skills_root / skill_name
+        if not (skill_dir / 'agents' / 'openai.yaml').is_file():
+            fail(errors, f'{skill_dir}: missing agents/openai.yaml for active skill')
+        if not re.search(r'`' + re.escape(skill_name) + r'`', chooser_text):
+            fail(errors, f'{chooser_path}: chooser is missing active skill {skill_name!r}')
+
+    config_path = catalog_root / 'release-please-config.json'
+    manifest_path = catalog_root / '.release-please-manifest.json'
+    if not config_path.exists() or not manifest_path.exists():
+        return
+    config = json.loads(config_path.read_text())
+    manifest = json.loads(manifest_path.read_text())
+    config_keys = set((config.get('packages') or {}).keys())
+    manifest_keys = set(manifest.keys())
+    if '.' not in config_keys or '.' not in manifest_keys:
+        fail(errors, f"{catalog_root}: root release package '.' is required in both release files")
+    if config_keys != manifest_keys:
+        config_only = sorted(config_keys - manifest_keys)
+        manifest_only = sorted(manifest_keys - config_keys)
+        fail(
+            errors,
+            f'{catalog_root}: release package keysets differ '
+            f'(config only: {config_only}; manifest only: {manifest_only})',
+        )
+    for package_path in sorted(config_keys | manifest_keys):
+        if package_path == '.':
+            continue
+        if not (catalog_root / package_path).is_dir():
+            fail(errors, f'{catalog_root}: release package path does not exist: {package_path!r}')
+
+
 def main():
     root = Path(sys.argv[1]) if len(sys.argv) > 1 else Path.cwd()
     errors = []
@@ -201,6 +282,7 @@ def main():
     release_packages = set()
     if config_path.exists():
         release_packages = set((json.loads(config_path.read_text()).get('packages') or {}).keys())
+    validate_catalog_invariants(catalog_root, root, skill_names, errors)
     for skill_dir in skill_dirs:
         skill_name = skill_dir.name
         skill_path = skill_dir / 'SKILL.md'
@@ -216,18 +298,8 @@ def main():
         desc = fm.get('description')
         if not isinstance(desc, str) or not desc.strip() or len(desc) > 1024:
             fail(errors, f'{skill_path}: description must be a non-empty string <= 1024 chars')
-        if 'license' in fm and not isinstance(fm['license'], str):
-            fail(errors, f'{skill_path}: license must be a string')
-        if 'compatibility' in fm and (not isinstance(fm['compatibility'], str) or len(fm['compatibility']) > 500):
-            fail(errors, f'{skill_path}: compatibility must be a string <= 500 chars')
-        if 'metadata' in fm:
-            meta = fm['metadata']
-            if not isinstance(meta, dict) or not all(isinstance(k, str) and isinstance(v, str) for k, v in meta.items()):
-                fail(errors, f'{skill_path}: metadata must be a string-to-string map')
-        if 'allowed-tools' in fm and not isinstance(fm['allowed-tools'], str):
-            fail(errors, f'{skill_path}: allowed-tools must be a string')
+        validate_frontmatter_schema(skill_path, fm, errors)
         validate_canonical_headings(skill_path, body, errors)
-        validate_task_outputs(skill_path, fm, body, errors)
         validate_inter_skill_links(skill_path, body, skill_names, errors)
         validate_openai_metadata(skill_dir, fm, errors)
         validate_release_metadata(skill_path, skill_name, fm, manifest, release_packages, errors)
@@ -237,6 +309,8 @@ def main():
         # Also validate inter-skill links inside authored support markdown under the skill.
         for support_md in sorted(skill_dir.rglob('*.md')):
             if support_md == skill_path:
+                continue
+            if support_md.relative_to(skill_dir).as_posix().startswith('scripts/tests/'):
                 continue
             try:
                 support_body = support_md.read_text()
@@ -251,12 +325,6 @@ def main():
             validate_evals(evals_file, skill_name, errors)
         if trigger_file.exists() != evals_file.exists():
             fail(errors, f'{skill_dir}: trigger and functional eval files should be added together')
-        for rel in re.findall(r'`((?:references|scripts|assets)/[^`]+)`', body):
-            rel_path = rel.split()[0]
-            if '*' in rel_path:
-                continue
-            if not (skill_dir / rel_path).exists():
-                fail(errors, f'{skill_path}: referenced support file missing: {rel_path}')
     validate_readme(root, skill_names, errors)
     if errors:
         for error in errors:

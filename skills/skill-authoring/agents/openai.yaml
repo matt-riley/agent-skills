@@ -1,0 +1,5 @@
+interface:
+  display_name: "Skill Authoring"
+  short_description: "Use when designing the shape of a new or revised skill — deciding activation language, layering, examples, and validation patterns. Consult this as the authoring style reference, not as a step-by-step builder. For building or upgrading a specific skill package, use skill-creator instead."
+policy:
+  allow_implicit_invocation: true

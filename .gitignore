@@ -1,4 +1,6 @@
 _shared/__pycache__/
+_shared/tests/__pycache__/
 _shared/results/
+node_modules/
 instructions/
 copilot-instructions.md

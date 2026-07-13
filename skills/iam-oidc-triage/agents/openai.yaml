@@ -1,0 +1,5 @@
+interface:
+  display_name: "IAM OIDC Triage"
+  short_description: "Use when GitHub Actions or another OIDC caller gets AWS sts:AssumeRole or sts:AssumeRoleWithWebIdentity AccessDenied — not when auth succeeds and the remaining failure is in SAM, CloudFormation, or Terraform execution."
+policy:
+  allow_implicit_invocation: true

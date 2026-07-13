@@ -1,0 +1,5 @@
+interface:
+  display_name: "Test Driven Development"
+  short_description: "Use when the user explicitly asks for test-driven development (TDD), a red-green-refactor cycle, or test-first implementation — not for general feature work, bug fixes, or refactoring unless TDD discipline is specifically requested."
+policy:
+  allow_implicit_invocation: true

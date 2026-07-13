@@ -47,7 +47,7 @@ metadata:
 | `GET /health`  | Liveness/readiness check              | Public                           |
 | `GET /metrics` | Prometheus-format operational metrics | Optional — protect in production |
 
-## Validation
+## Verification commands
 
 ```bash
 curl -i http://localhost:<PORT>/health
@@ -87,20 +87,16 @@ curl -i -H "Authorization: Bearer $AUTH_TOKEN" http://localhost:<PORT>/metrics
 
 See the body and references for /health /metrics logging validation steps.
 
-## Examples
-
-See references and the skill body for observability-metrics examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Protect `/metrics` in production; treat it as sensitive operational data.
 - Keep `/health` reachable by load balancers and free of internal-state leakage.
 - Register metrics at startup, not per request, to avoid duplicate-registration panics.
 - Never let structured logs carry secrets, tokens, full credential URLs, or PII.
+
+## Validation
+
+Run the verification commands above and confirm health status, Prometheus text format, authentication behavior, and sensitive-data constraints match the repository contract.
 
 ## Support files
 

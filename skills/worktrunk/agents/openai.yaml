@@ -1,0 +1,5 @@
+interface:
+  display_name: "Worktrunk"
+  short_description: "Use when a user needs to configure or operate Worktrunk (wt) for worktree lifecycle management, hooks, LLM commits, or parallel agent workflows."
+policy:
+  allow_implicit_invocation: true

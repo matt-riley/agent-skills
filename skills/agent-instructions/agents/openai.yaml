@@ -1,0 +1,5 @@
+interface:
+  display_name: "Agent Instructions"
+  short_description: "Use when creating or updating agent instruction files (AGENTS.md for Pi, copilot-instructions.md for Copilot, per-path guides, or AGENTS.md router) — especially when instruction files are too long, generic, or stale, or when agents repeatedly make the same avoidable mistakes."
+policy:
+  allow_implicit_invocation: true

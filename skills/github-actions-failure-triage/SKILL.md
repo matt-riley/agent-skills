@@ -42,7 +42,7 @@ Use the closest matching workflow:
 | Situation | Use this skill? | Route instead |
 | --- | --- | --- |
 | Failing GitHub Actions run, job, or check in a repo already on Actions | Yes | - |
-| CircleCI migration planning, parity checks, or staged cutover | No | [`circleci-to-github-actions-migration`](../../archived/circleci-to-github-actions-migration/SKILL.md) (archived) |
+| CircleCI migration planning, parity checks, or staged cutover | No | [`circleci-to-github-actions-migration`](../archived/circleci-to-github-actions-migration/SKILL.md) (archived) |
 | Broad CI migration planning, parity checks, or staged cutover between CI systems | No | dedicated migration plan in `plan-review` |
 | PR review-comment adjudication and fix batching | No | [`review-comment-resolution`](../review-comment-resolution/SKILL.md) |
 | Worktree or isolated branch setup for parallel changes | No | [`git-worktrees`](../git-worktrees/SKILL.md) |

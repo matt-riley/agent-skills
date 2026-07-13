@@ -34,7 +34,7 @@ Keep `SKILL.md` focused on the workflow, selection guidance, and explicit refere
 
 ### Put triggering in frontmatter
 
-The `description` field is the primary trigger mechanism. It must describe both what the skill does and when to use it from the user's point of view.
+The `description` field is the primary trigger mechanism. It must identify the skill's purpose and concrete activation conditions from the user's point of view, without encoding procedural workflow steps.
 
 ### Teach the same format you expect to see
 
@@ -50,6 +50,7 @@ A well-authored skill normally includes:
 - `Examples` and `Reference files` when those sections add signal
 
 Do not cargo-cult every heading into every skill. Omit empty or redundant sections rather than leaving dead scaffolding behind.
+When canonical headings are present, retain the order shown above. A `Reference files` section can route to local support files, related skills, or both; every local target must resolve.
 
 ### Use progressive disclosure
 

@@ -9,16 +9,16 @@ The following top-level keys are valid in a skill frontmatter block:
 | Key | Status | Notes |
 | --- | --- | --- |
 | `name` | **Required** | Kebab-case, matches the directory name exactly. |
-| `description` | **Required** | Single-line quoted string. 50–120 characters. Trigger-phrase required. |
-| `metadata` | **Required** (block) | Contains all skill lifecycle and classification fields. |
-| `license` | **Optional** | Use `GNU GPL v3` for skills in this catalog. Required by repo policy (see AGENTS.md Learned Rule 1). |
+| `description` | **Required** | Identifies purpose and concrete activation conditions without summarising procedural workflow. |
+| `metadata` | **Optional** (block) | Contains lifecycle and classification fields when the skill needs them; some fields become required under the conditions below. |
+| `license` | **Required by repo policy** | Use `GNU GPL v3`; see AGENTS.md Learned Rule 1. |
+| `compatibility` | **Optional** | Concise environment or product assumptions when they materially affect use. |
 
 **Any other top-level key is forbidden.** The following keys are explicitly banned because they belong elsewhere:
 
 | Banned key | Why banned | Where it belongs instead |
 | --- | --- | --- |
 | `argument-hint` | Runtime hint, not skill identity | Reference file or `## Inputs to gather` |
-| `compatibility` | Operational detail, not skill identity | Reference file or guardrail |
 | `author` | Attribution, not skill identity | Commit message or `PROVENANCE.md` |
 | `inspired-by` | Attribution, not skill identity | Commit message or `PROVENANCE.md` |
 
@@ -74,9 +74,11 @@ This skill uses `metadata.reader_testing: required` as a skill-specific behavior
 
 **Resolution:** This is the accepted pattern for skill-specific behavioral extensions. The field is documented in the optional extensions table above. Future skill-specific flags should follow the same pattern: add to `metadata`, document here, and add a validator check if the field is meaningful to automation.
 
-## Multiline description policy
+## Description and body policy
 
-The description field must be a single quoted YAML string. Multiline block scalars (`|-`, `|`, `>-`, `>`) are **not valid** for skill descriptions. Complex trigger conditions that do not fit on one line belong in `## Use this skill when`, not in the `description` field.
+The description must be a YAML string. Quoted scalars and valid multiline block scalars are accepted. Keep it concise: identify what the skill is for and the concrete conditions that should activate it, but leave procedural steps in the body. Complex routing detail belongs in `## Use this skill when` or `## Do not use this skill when`.
+
+Canonical body headings are optional. Use only headings that add signal, and keep any canonical headings that are present in the semantic order taught by the catalog standard. A `## Reference files` section may contain local support-file links, inter-skill routing links, or both; all local targets must exist.
 
 ## Frontmatter shape reference
 
@@ -136,6 +138,10 @@ The validator (`scripts/validate-skill-library.mjs`) currently enforces:
 | `description` must be ≥ 20 characters | All skills | Error |
 | `description` must include a trigger phrase | `draft` skills | Error |
 | `metadata.kind` must be `task` or `reference` if present | All skills | Error |
-| **Forbidden top-level keys** (anything other than `name`, `description`, `metadata`, `license`) | All skills | **Error** |
+| `metadata` must be a string-to-string map when present | All skills | Error |
+| `license` must equal `GNU GPL v3` | All skills | Error |
+| **Forbidden top-level keys** (anything other than `name`, `description`, `metadata`, `license`, `compatibility`) | All skills | **Error** |
+| Present canonical headings remain in semantic order | All skills | Error |
+| Referenced local support and inter-skill targets exist | All skills | Error |
 | **Forbidden provenance keys in `metadata`** (`github-*`, `author`, `inspired-by`, `enhancements`) | All skills | **Error** |
 | **`metadata.kind` required for `draft` skills** | Draft skills | **Error** (added wave 2) |

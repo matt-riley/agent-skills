@@ -1,0 +1,5 @@
+interface:
+  display_name: "Doc Coauthoring"
+  short_description: "Use when user wants to write, refactor, or expand documentation through iterative co-authoring with reader feedback — README, guides, API docs, runbooks, specification documents. Not for solo writing, readability audits, or metadata review (use writing-and-editing for those)."
+policy:
+  allow_implicit_invocation: true

@@ -24,11 +24,16 @@
   },
   "scripts": {
     "validate": "python _shared/validate-skills.py skills",
+    "validate:setup": "npm ci && python -m pip install -r requirements-dev.txt",
+    "test:validators": "node --test skills/skill-authoring/scripts/tests/validate-skill-library.test.mjs && python -m unittest discover -s _shared/tests",
     "link:user": "bash scripts/link-user-skills.sh"
   },
   "pi": {
     "skills": [
       "./skills"
     ]
+  },
+  "devDependencies": {
+    "yaml": "2.9.0"
   }
 }

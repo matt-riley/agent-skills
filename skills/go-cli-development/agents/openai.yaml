@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go CLI Development"
+  short_description: "Develop, structure, and release Go CLI tools. Use when building a new Go CLI, adding subcommands or flags, wiring config, formatting output, setting up goreleaser + Homebrew distribution, or debugging CLI-specific behavior — not for build failures or test debugging."
+policy:
+  allow_implicit_invocation: true

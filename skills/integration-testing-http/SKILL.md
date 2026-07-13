@@ -80,14 +80,6 @@ For every endpoint touched, verify:
 
 See the body and references for HTTP contract testing steps.
 
-## Examples
-
-See references and the skill body for integration-testing-http examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Integration tests use a real or in-memory DB — do not mock the DB layer in integration tests.

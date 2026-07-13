@@ -99,14 +99,6 @@ metadata:
 
 See the body and references for review rounds and consolidation steps.
 
-## Examples
-
-See references and the skill body for implementation-review examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - **Must** focus on materially important issues: correctness, regression risk, validation gaps, rollout safety, security issues, and unintended scope changes.

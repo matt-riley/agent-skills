@@ -1,0 +1,5 @@
+interface:
+  display_name: "Goreleaser Release Pipeline"
+  short_description: "Use when setting up, debugging, or fixing a GoReleaser v2 release pipeline — especially Release Please tag issues, missing release assets, or publish jobs that fail after a release is created, not when the main task is generic CI triage or PR handling."
+policy:
+  allow_implicit_invocation: true

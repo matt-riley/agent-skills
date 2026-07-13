@@ -73,14 +73,6 @@ Use [`references/patterns.md`](references/patterns.md) when the user wants a rep
 
 See the body and references for Fallow audit steps.
 
-## Examples
-
-See references and the skill body for fallow examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - For machine-readable agent workflows, use `--format json --quiet` and redirect stderr to `/dev/null`; do not use `2>&1`, which can corrupt JSON output with progress or warning text.

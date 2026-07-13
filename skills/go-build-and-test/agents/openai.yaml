@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Build and Test"
+  short_description: "Diagnose Go build failures, toolchain mismatches, and CI-parity problems — GOROOT/GOTOOLDIR overrides, govulncheck stdlib findings, or TempDir race flakes. Use when go build or CI fails for environmental reasons, not when individual tests fail on logic or coverage (use testing-workflows for that)."
+policy:
+  allow_implicit_invocation: true

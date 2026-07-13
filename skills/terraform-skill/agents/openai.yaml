@@ -1,0 +1,5 @@
+interface:
+  display_name: "Terraform Skill"
+  short_description: "Use when writing, reviewing, or debugging Terraform/OpenTofu — modules, tests, CI/CD, security scans, or state operations."
+policy:
+  allow_implicit_invocation: true

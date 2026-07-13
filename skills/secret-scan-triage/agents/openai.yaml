@@ -1,0 +1,5 @@
+interface:
+  display_name: "Secret Scan Triage"
+  short_description: "Use when secret scanning with gitleaks reports findings that need fast triage, containment, and false-positive adjudication before code changes or merges continue."
+policy:
+  allow_implicit_invocation: true

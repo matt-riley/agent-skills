@@ -78,14 +78,6 @@ Map DB-level errors to domain errors **at the adapter boundary** — never let D
 
 See the body and references for adapter and DB error mapping steps.
 
-## Examples
-
-See references and the skill body for repository-adapters examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Never edit generated query files by hand.

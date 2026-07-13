@@ -1,0 +1,5 @@
+interface:
+  display_name: "Agent Supply Chain"
+  short_description: "Use this skill when generating SHA-256 integrity manifests for agent plugins, verifying that installed plugins match their manifests, detecting tampered files, auditing dependency pinning, or building provenance chains for plugin promotion."
+policy:
+  allow_implicit_invocation: true

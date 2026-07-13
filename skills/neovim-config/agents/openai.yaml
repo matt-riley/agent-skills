@@ -1,0 +1,5 @@
+interface:
+  display_name: "Neovim Config"
+  short_description: "Use when editing, debugging, or validating a Neovim Lua configuration — including plugin management (vim.pack, lazy.nvim), LSP/completion wiring, treesitter, statusline, or startup behavior."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Context Map"
+  short_description: "Use when the user explicitly wants a pre-edit scoping pass — mapping candidate files, tests, and reference patterns before implementation. Not for general multi-file tasks unless the user asks \"what files are involved\" or requests a context map."
+policy:
+  allow_implicit_invocation: true

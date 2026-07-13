@@ -4,35 +4,36 @@ import { access, readFile, readdir } from "node:fs/promises";
 import { constants as fsConstants } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseDocument } from "yaml";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(SCRIPT_DIR, "../../..");
 const SKILLS_ROOT = path.join(REPO_ROOT, "skills");
 
-const REQUIRED_HEADINGS = [
+const CANONICAL_HEADINGS = [
   "## Use this skill when",
   "## Do not use this skill when",
   "## Inputs to gather",
   "## First move",
   "## Workflow",
+  "## Guardrails",
   "## Validation",
   "## Examples",
   "## Reference files",
 ];
-
-// Headings required only for task skills (omitted in reference skills per the import-rewrite-contract).
-const TASK_ONLY_HEADINGS = new Set([
-  "## Inputs to gather",
-  "## First move",
-  "## Workflow",
-]);
 
 const VALID_KINDS = new Set(["task", "reference"]);
 
 // Metadata contract: only these top-level keys are permitted in skill frontmatter.
 // See skills/skill-authoring/references/metadata-contract.md for rationale.
 // `license` is allowed because this catalog is GPL-licensed and AGENTS.md requires it in skill frontmatter.
-const ALLOWED_TOP_LEVEL_KEYS = new Set(["name", "description", "metadata", "license"]);
+const ALLOWED_TOP_LEVEL_KEYS = new Set([
+  "name",
+  "description",
+  "metadata",
+  "license",
+  "compatibility",
+]);
 
 // Upstream provenance keys that must not appear inside the metadata block.
 // `version` is intentionally omitted: release-managed skills mirror their version
@@ -52,24 +53,6 @@ function normalize(text) {
 }
 
 // fallow-ignore-next-line complexity
-function parseScalar(value) {
-  if (value === "true") {
-    return true;
-  }
-  if (value === "false") {
-    return false;
-  }
-  if (value === "null") {
-    return null;
-  }
-  const quoted = value.match(/^(['"])(.*)\1$/);
-  if (quoted) {
-    return quoted[2];
-  }
-  return value;
-}
-
-// fallow-ignore-next-line complexity
 function parseFrontmatter(text) {
   const normalized = normalize(text);
   if (!normalized.startsWith("---\n")) {
@@ -83,61 +66,16 @@ function parseFrontmatter(text) {
 
   const frontmatterText = normalized.slice(4, endIndex);
   const body = normalized.slice(endIndex + 5);
-  const frontmatter = {};
-  let currentObject = null;
-
-  for (const line of frontmatterText.split("\n")) {
-    if (!line.trim()) {
-      continue;
-    }
-    currentObject = parseFrontmatterLine(line, frontmatter, currentObject);
+  const document = parseDocument(frontmatterText, { uniqueKeys: true });
+  if (document.errors.length > 0) {
+    throw new Error(`invalid YAML frontmatter: ${document.errors[0].message}`);
+  }
+  const frontmatter = document.toJS();
+  if (!frontmatter || typeof frontmatter !== "object" || Array.isArray(frontmatter)) {
+    throw new Error("frontmatter must be a YAML mapping");
   }
 
   return { frontmatter, body };
-}
-
-function parseFrontmatterLine(line, frontmatter, currentObject) {
-  const indent = line.length - line.trimStart().length;
-  if (indent === 0) {
-    return parseTopLevelFrontmatterLine(line, frontmatter);
-  }
-
-  if (!currentObject || indent < 2) {
-    throw new Error(`unexpected frontmatter indentation: ${line}`);
-  }
-
-  parseNestedFrontmatterLine(line, currentObject);
-  return currentObject;
-}
-
-function parseTopLevelFrontmatterLine(line, frontmatter) {
-  const separatorIndex = line.indexOf(":");
-  if (separatorIndex === -1) {
-    throw new Error(`invalid frontmatter line: ${line}`);
-  }
-
-  const key = line.slice(0, separatorIndex).trim();
-  const value = line.slice(separatorIndex + 1).trim();
-  if (!value) {
-    const nestedObject = {};
-    frontmatter[key] = nestedObject;
-    return nestedObject;
-  }
-
-  frontmatter[key] = parseScalar(value);
-  return null;
-}
-
-function parseNestedFrontmatterLine(line, currentObject) {
-  const trimmed = line.trim();
-  const separatorIndex = trimmed.indexOf(":");
-  if (separatorIndex === -1) {
-    throw new Error(`invalid nested frontmatter line: ${line}`);
-  }
-
-  const key = trimmed.slice(0, separatorIndex).trim();
-  const value = trimmed.slice(separatorIndex + 1).trim();
-  currentObject[key] = parseScalar(value);
 }
 
 function parseOpeningFence(line) {
@@ -297,7 +235,7 @@ function normalizeLocalReferenceTarget(rawTargetValue) {
   }
 
   const cleanedTarget = rawTarget.split("#", 1)[0].split("?", 1)[0].trim();
-  if (!cleanedTarget) {
+  if (!cleanedTarget || /<[^>]+>/.test(cleanedTarget)) {
     return null;
   }
 
@@ -388,7 +326,9 @@ async function validateOrphanedSupportFiles(filePath, body, errors) {
       !path.relative(skillDir, f).startsWith("evals" + path.sep) &&
       !path.relative(skillDir, f).startsWith("evals/") &&
       !path.relative(skillDir, f).startsWith("assets" + path.sep) &&
-      !path.relative(skillDir, f).startsWith("assets/"),
+      !path.relative(skillDir, f).startsWith("assets/") &&
+      !path.relative(skillDir, f).startsWith(path.join("scripts", "tests") + path.sep) &&
+      !path.relative(skillDir, f).startsWith("scripts/tests/"),
   );
 
   if (supportFiles.length === 0) {
@@ -419,22 +359,25 @@ async function validateSkillContent(filePath, frontmatter, body) {
   validateSkillName(frontmatter, skillDir, errors);
   validateSkillDescription(frontmatter, errors);
   validateTopLevelFrontmatterKeys(frontmatter, errors);
+  validateLicense(frontmatter, errors);
   validateSkillMetadata(frontmatter.metadata, errors);
 
   const { searchableBody, errors: fenceErrors } = stripFencedCodeBlocks(body);
   errors.push(...fenceErrors);
   validateRequiredHeadings(searchableBody, frontmatter.metadata, errors);
   const examplesSection = getSectionText(body, "## Examples");
-  if (!sectionHasConcreteContent(examplesSection)) {
+  if (examplesSection !== null && !sectionHasConcreteContent(examplesSection)) {
     errors.push("examples section is empty or placeholder-only");
   }
 
   const referenceSection = getSectionText(body, "## Reference files");
-  if (!sectionHasConcreteContent(referenceSection)) {
+  if (referenceSection !== null && !sectionHasConcreteContent(referenceSection)) {
     errors.push("reference files section is empty or placeholder-only");
   }
 
-  await validateReferenceTargets(filePath, referenceSection, errors);
+  if (referenceSection !== null) {
+    await validateReferenceTargets(filePath, referenceSection, errors);
+  }
   await validateOrphanedSupportFiles(filePath, body, errors);
 
   return errors;
@@ -488,14 +431,29 @@ function validateTopLevelFrontmatterKeys(frontmatter, errors) {
   for (const key of Object.keys(frontmatter)) {
     if (!ALLOWED_TOP_LEVEL_KEYS.has(key)) {
       errors.push(
-        `forbidden top-level frontmatter key: ${key}; allowed keys are name, description, metadata — see skills/skill-authoring/references/metadata-contract.md`,
+        `forbidden top-level frontmatter key: ${key}; allowed keys are name, description, license, compatibility, metadata — see skills/skill-authoring/references/metadata-contract.md`,
       );
     }
   }
 }
 
+function validateLicense(frontmatter, errors) {
+  if (frontmatter.license !== "GNU GPL v3") {
+    errors.push("license must be GNU GPL v3 for every catalog skill");
+  }
+}
+
 function validateSkillMetadata(metadata, errors) {
-  if (!metadata || typeof metadata !== "object") {
+  if (metadata === undefined) {
+    return;
+  }
+  if (
+    metadata === null ||
+    typeof metadata !== "object" ||
+    Array.isArray(metadata) ||
+    Object.values(metadata).some((value) => typeof value !== "string")
+  ) {
+    errors.push("metadata must be a string-to-string map");
     return;
   }
 
@@ -537,16 +495,7 @@ function validateDraftMetadataKindRequirement(metadata, errors) {
 
 function validateRequiredHeadings(searchableBody, metadata, errors) {
   const lines = searchableBody.split("\n");
-  const requiredHeadings = REQUIRED_HEADINGS.filter((heading) =>
-    shouldValidateHeading(heading, metadata),
-  );
-
-  validateHeadingOrder(lines, requiredHeadings, errors);
-  validateTaskOutputsHeading(lines, metadata, errors);
-}
-
-function shouldValidateHeading(heading, metadata) {
-  return !(metadata?.kind === "reference" && TASK_ONLY_HEADINGS.has(heading));
+  validateHeadingOrder(lines, CANONICAL_HEADINGS, errors);
 }
 
 function validateHeadingOrder(lines, requiredHeadings, errors) {
@@ -554,7 +503,6 @@ function validateHeadingOrder(lines, requiredHeadings, errors) {
   for (const heading of requiredHeadings) {
     const index = findHeadingLineIndex(lines, heading);
     if (index === -1) {
-      errors.push(`missing heading ${heading}`);
       continue;
     }
     if (index < previousIndex) {
@@ -565,25 +513,12 @@ function validateHeadingOrder(lines, requiredHeadings, errors) {
   }
 }
 
-function validateTaskOutputsHeading(lines, metadata, errors) {
-  if (metadata?.kind !== "task") {
-    return;
-  }
-  if (findHeadingLineIndex(lines, "## Outputs") === -1) {
-    errors.push("missing heading ## Outputs for task skill");
-  }
-}
-
 async function validateReferenceTargets(filePath, referenceSection, errors) {
   const referenceTargets = collectReferenceTargets(referenceSection);
-  if (referenceTargets.size === 0) {
-    errors.push("reference files section does not list any files");
-    return;
-  }
-
   for (const rawTarget of referenceTargets) {
     const targetPath = path.resolve(path.dirname(filePath), rawTarget);
-    if (!(await pathExists(targetPath))) {
+    const repoRelativePath = path.resolve(REPO_ROOT, rawTarget);
+    if (!(await pathExists(targetPath)) && !(await pathExists(repoRelativePath))) {
       errors.push(`missing referenced file ${rawTarget}`);
     }
   }

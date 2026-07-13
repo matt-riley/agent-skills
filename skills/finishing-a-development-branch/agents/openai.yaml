@@ -1,0 +1,5 @@
+interface:
+  display_name: "Finish a Development Branch"
+  short_description: "Use when implementation work is complete and you need to decide how to integrate the branch — merging locally, creating a PR, keeping the branch, or discarding the work."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Agentic Eval"
+  short_description: "Use when designing or implementing an evaluation loop for AI agent outputs — reflection loops, evaluator-optimizer pipelines, LLM-as-judge scoring, or rubric-based iteration. Not when running an existing test suite or reviewing a completed artifact without iterating."
+policy:
+  allow_implicit_invocation: true

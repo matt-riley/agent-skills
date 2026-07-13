@@ -1,0 +1,5 @@
+interface:
+  display_name: "Agent Governance"
+  short_description: "Use this skill when building AI agents that call external tools, implementing policy-based access controls, adding semantic intent classification, creating trust scoring systems, building audit trails, or enforcing rate limits and content filters on agents."
+policy:
+  allow_implicit_invocation: true

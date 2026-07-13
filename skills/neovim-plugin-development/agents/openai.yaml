@@ -1,0 +1,5 @@
+interface:
+  display_name: "Neovim Plugin Development"
+  short_description: "Develop, test, and release Neovim Lua plugins. Use when building a new Neovim plugin, adding features to an existing plugin, setting up CI with GitHub Actions, writing plenary tests, generating documentation, or configuring release automation — not for editing user-level Neovim config."
+policy:
+  allow_implicit_invocation: true

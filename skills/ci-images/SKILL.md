@@ -72,14 +72,6 @@ Standard tagging strategy on release:
 
 See the body and references for the CI image and publishing steps.
 
-## Examples
-
-See references and the skill body for CI parity and image publishing examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Never publish an image from a dirty working tree.

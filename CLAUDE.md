@@ -40,12 +40,16 @@ This is the thing that actually enforces catalog consistency. When editing a ski
 
 - Directory name must match frontmatter `name` (kebab-case, `^[a-z0-9]+(?:-[a-z0-9]+)*$`).
 - Frontmatter `description` is trigger text and must match `agents/openai.yaml` `interface.short_description` exactly, if that file exists.
-- `SKILL.md` body must contain these canonical headings, verbatim, outside of code fences:
+- `SKILL.md` should use these canonical headings when they add signal. Omit empty or redundant sections; headings that are present must retain this semantic order and appear outside code fences:
   - `## Use this skill when`
   - `## Do not use this skill when`
   - `## Inputs to gather`
   - `## First move`
+  - `## Workflow`
   - `## Guardrails`
+  - `## Validation`
+  - `## Examples`
+  - `## Reference files`
 - Inter-skill links (`../<name>/SKILL.md`) must point at a skill that exists.
 - Support files under `references/`, `scripts/`, `assets/` must be linked from `SKILL.md`.
 - Every skill needs `license: GNU GPL v3` (Learned Rule 1). Release-managed skills additionally need `metadata.version` (with the x-release-please-version marker) and `metadata.maturity`; `metadata.version` must match `.release-please-manifest.json`.

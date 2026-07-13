@@ -1,0 +1,5 @@
+interface:
+  display_name: "SAM CloudFormation"
+  short_description: "Use when AWS SAM templates, CloudFormation stacks, or SAM deploys fail on YAML, transforms, resource wiring, or rollback state — not when the Lambda binary itself or IAM OIDC auth is the primary blocker."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Plan Review Loop"
+  short_description: "Use when a completed /plan needs explicit multi-reviewer approval and refinement before implementation begins."
+policy:
+  allow_implicit_invocation: true

@@ -91,14 +91,6 @@ metadata:
 
 See the body and references for the Research -> Plan -> Implement -> Validate phases.
 
-## Examples
-
-See references and the skill body for rpi-workflow examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - **Must not** make code changes during the research phase.

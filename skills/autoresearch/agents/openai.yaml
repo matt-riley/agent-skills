@@ -1,0 +1,5 @@
+interface:
+  display_name: "Autoresearch"
+  short_description: "Use when running autonomous iterative experiments to optimize a measurable metric on an existing codebase — not for writing tests or diagnosing a specific failure."
+policy:
+  allow_implicit_invocation: true

@@ -1,6 +1,6 @@
 ---
 name: api-smoke-validation
-description: "Run quick, repeatable API smoke tests after changes — verify auth, status codes, and response shapes with hurl. Use for smoke testing, sanity-checking endpoints, or confirming API health before broader testing."
+description: "Use when running quick, repeatable API smoke tests after changes with hurl, including auth, status-code, response-shape, endpoint sanity, and pre-integration health checks."
 license: GNU GPL v3
 metadata:
   version: 1.0.0 # x-release-please-version

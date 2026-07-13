@@ -78,14 +78,6 @@ For a new implementation, start with the checklist to confirm your setup is comp
 
 See the body and references for agentic evaluation design and loop steps.
 
-## Examples
-
-See references and the skill body for agentic-eval examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Always set a `max_iterations` bound (3–5 is a safe default) before wiring up a refinement loop. Unbounded loops stall agents.

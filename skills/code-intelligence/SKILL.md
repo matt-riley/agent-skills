@@ -111,14 +111,6 @@ Detail: [references/degradation-and-disclosure.md](references/degradation-and-di
 
 See the body and references for LSP/grep routing and code intelligence steps.
 
-## Examples
-
-See references and the skill body for code-intelligence examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - **Must not** invent symbol definitions or call relationships not found by a tool.

@@ -1,0 +1,5 @@
+interface:
+  display_name: "GitHub CLI PR Workflow"
+  short_description: "Use when a branch needs GitHub CLI PR lifecycle work, like creating or updating a PR, watching checks for a pushed head SHA, or preparing PR handoff before review."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Knip"
+  short_description: "Use when a JavaScript or TypeScript project needs Knip to find unused dependencies, exports, files, or unresolved imports; not for runtime failures or dormant-task recovery."
+policy:
+  allow_implicit_invocation: true

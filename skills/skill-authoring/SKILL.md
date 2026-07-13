@@ -66,7 +66,7 @@ Every skill requires a YAML frontmatter block at the start of `SKILL.md`. This b
 - **kind** (string, **required for draft skills**): `task` for multi-step playbooks; `reference` for lookup-heavy guidance. Must be set before a skill can be promoted from `draft` to `stable`.
 - **reader_testing** (string, documented extension): `required` when reader-testing is a mandatory stage. See `references/metadata-contract.md` for the full list of allowed optional extensions.
 
-**Do not add** `compatibility`, `author`, `inspired-by`, `argument-hint`, or any other top-level keys beyond `name`, `description`, `metadata`, and `license`. `license: GNU GPL v3` is required by repo policy for every skill (see AGENTS.md Learned Rule 1 and `references/metadata-contract.md`). Do not add upstream provenance keys (`github-path`, `github-ref`, `github-repo`, `github-tree-sha`, `version`, `enhancements`) inside the `metadata` block. See `references/metadata-contract.md` for the full contract, rationale, and exception policy.
+**Do not add** `author`, `inspired-by`, `argument-hint`, or other undocumented top-level keys. The supported keys are `name`, `description`, `metadata`, `license`, and optional `compatibility` for material environment assumptions. `license: GNU GPL v3` is required by repo policy for every skill (see AGENTS.md Learned Rule 1 and `references/metadata-contract.md`). Do not add upstream provenance keys (`github-path`, `github-ref`, `github-repo`, `github-tree-sha`, `version`, `enhancements`) inside the `metadata` block. See `references/metadata-contract.md` for the full contract, rationale, and exception policy.
 
 ### Frontmatter example
 
@@ -91,7 +91,7 @@ The validator script (`scripts/validate-skill-library.mjs`) checks that:
 - [ ] `name` contains only alphanumeric, hyphens, underscores (no spaces or special characters)
 - [ ] `description` exists and is at least 20 characters long
 - [ ] `description` includes a trigger phrase ("when", "use this", or "use when")
-- [ ] No forbidden top-level keys (`argument-hint`, `compatibility`, `author`, `inspired-by`) — `license: GNU GPL v3` is required on every skill per AGENTS.md
+- [ ] No forbidden top-level keys (`argument-hint`, `author`, `inspired-by`) — `compatibility` is optional and `license: GNU GPL v3` is required on every skill per AGENTS.md
 - [ ] No forbidden provenance keys in `metadata` (`github-path`, `github-ref`, `github-repo`, `github-tree-sha`, `author`, `inspired-by`, `version`, `enhancements`)
 - [ ] `metadata.kind` is set to `task` or `reference` for all `draft` skills
 - [ ] Frontmatter is properly delimited with `---` markers
@@ -107,7 +107,7 @@ The validator script (`scripts/validate-skill-library.mjs`) checks that:
 | "missing frontmatter key name" or "description" | Frontmatter block incomplete | Add both `name:` and `description:` keys between `---` delimiters |
 | "missing frontmatter block" | No `---` delimiters in SKILL.md | Add `---` at the top of the file and close the frontmatter with another `---` |
 | "unterminated frontmatter block" | Only one `---` marker or no closing `---` | Ensure frontmatter is wrapped: `---` on first line and `---` after the last field |
-| "forbidden top-level frontmatter key" | Extra keys like `argument-hint`, `compatibility` at top level | Move content to `metadata`, `## Inputs to gather`, or `references/`; see `metadata-contract.md`. (`license: GNU GPL v3` is required, not forbidden.) |
+| "forbidden top-level frontmatter key" | Undocumented keys like `argument-hint` at top level | Move content to `metadata`, `## Inputs to gather`, or `references/`; see `metadata-contract.md`. (`compatibility` is optional; `license: GNU GPL v3` is required.) |
 | "forbidden provenance key metadata.*" | Upstream `github-*` or attribution fields inside `metadata` | Remove provenance fields; preserve attribution in a commit message or `PROVENANCE.md` |
 | "metadata.kind is required for draft skills" | New skill missing `kind` field | Add `kind: task` or `kind: reference` under `metadata` |
 
@@ -168,7 +168,7 @@ Prefer the python validator for day-to-day work; both should pass on a healthy s
 ## Workflow
 
 1. Define what should activate the skill and what should not. As you define activation,
-   draft a description that enumerates the same trigger situations as explicit phrases.
+   draft a description that identifies the purpose and enumerates the same trigger situations as explicit phrases.
    Lean toward over-triggering rather than under — but pair it with at least one
    disambiguator (a scope boundary or a route-away condition) so adjacent skills are
    not crowded out.
@@ -200,7 +200,7 @@ Prefer the python validator for day-to-day work; both should pass on a healthy s
 - A description that only names the skill's domain without listing concrete trigger phrases is likely to undertrigger — the skill will be skipped when it would help.
 - **Red flag:** if the draft starts embedding repo policy, one-off orchestration, or environment-specific branching, move that content out of the skill.
 - **Handoff trigger:** if the shape needs a dedicated operator persona, split orchestration, or long-lived state, promote it to a specialized agent instead of widening the skill.
-- **Critical:** A description that summarises the skill's workflow causes agents to follow the description as a shortcut instead of reading the full skill body. Descriptions must only contain triggering conditions — what signals mean "read this skill now?" — never process summaries. (This was empirically documented by Jesse Lactin's obra/superpowers collection.)
+- **Critical:** A description should identify the skill's purpose and concrete activation conditions, but not summarise its procedural workflow. Workflow summaries can cause agents to use the description as a shortcut instead of reading the full skill body.
 - **Red flag:** A description that starts with a verb like "Migrate...", "Diagnose...", "Replace...", "Rewrite..." is almost certainly a workflow summary. Start with "Use when..." or a symptom/scenario.
 
 ## Anti-patterns
@@ -226,7 +226,7 @@ Prefer the python validator for day-to-day work; both should pass on a healthy s
   realistic request that should trigger it and one near-miss that should not. The
   description alone (not the SKILL.md body) should be sufficient to distinguish them.
   If neither triggers reliably, the description needs more explicit trigger phrases.
-- Description test: Cover the SKILL.md body and read only the description. Does it tell you *when* to use the skill, or *what the skill does*? If the latter — rewrite it. The description alone should distinguish "should I read this?" without revealing the workflow.
+- Description test: Cover the SKILL.md body and read only the description. Does it identify the purpose and distinguish when the skill should be read without revealing the workflow? If not, rewrite it.
 - If the target client supports skill reload or listing, verify the skill remains discoverable there.
 
 ## Examples

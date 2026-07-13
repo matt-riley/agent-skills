@@ -1,0 +1,5 @@
+interface:
+  display_name: "API Smoke Validation"
+  short_description: "Use when running quick, repeatable API smoke tests after changes with hurl, including auth, status-code, response-shape, endpoint sanity, and pre-integration health checks."
+policy:
+  allow_implicit_invocation: true

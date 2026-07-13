@@ -75,14 +75,6 @@ make test
 
 See the body and references for templ template authoring and regeneration steps.
 
-## Examples
-
-See references and the skill body for templ-templates examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Never edit `*_templ.go` files by hand — they are overwritten by `templ generate`.

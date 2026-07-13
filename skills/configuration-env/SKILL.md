@@ -87,7 +87,7 @@ Required variables cause startup failure. Optional variables activate features.
 - Protect sensitive endpoints (metrics, admin) behind auth — do not leave them open by default.
 - **Never hardcode secrets in source code.**
 
-## Validation
+## Verification commands
 
 ```bash
 make build && ./bin/server   # or equivalent start command
@@ -107,20 +107,16 @@ A healthy response confirms the configuration was accepted.
 
 See the body and references for env/config drift and startup debugging steps.
 
-## Examples
-
-See references and the skill body for configuration-env examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
-
 ## Guardrails
 
 - Production must use real env vars or a secrets manager — never `.env` files.
 - Required variables must fail the server at startup, not silently at request time.
 - Never commit `.env`; only `.env.example` belongs in source.
 - Never hardcode secrets in source code or test fixtures.
+
+## Validation
+
+Run the verification commands above and confirm the service starts successfully, the health endpoint responds, and missing required variables still fail fast.
 
 ## Support files
 

@@ -122,11 +122,13 @@ One-shot migration skills live in `archived/`. They're still available but exclu
 
 ### Research, knowledge, and discovery
 
+- `find-skills` — discover an existing local catalog skill when skill lookup is the deliverable; do not use it as a wrapper around a directly requested task
 - `acquire-codebase-knowledge` — deep-map an existing codebase into seven structured docs covering stack, architecture, conventions, integrations, testing, and concerns
 - `autoresearch` — execute an automated research pass across docs, code, and search to answer a question or validate a claim
 - `code-tour` — create or follow a guided tour through an unfamiliar codebase
 - `context-map` — produce a domain-driven context map of bounded contexts and their integration relationships
 - `code-intelligence` — preferred routing layer for LSP, grep, and glob operations; always use LSP over text search when available
+- `graphify` — turn a mixed document or code corpus into a persistent knowledge graph and graph-oriented exports; use direct analysis skills when no graph artifact is needed
 
 ### AI agent development
 

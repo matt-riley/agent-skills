@@ -1,6 +1,6 @@
 ---
 name: modern-web-guidance
-description: "Consult this reference before implementing any HTML, CSS, JS, form, or animation feature — prevents legacy patterns by checking for modern standardised web platform APIs. Load as a reference overlay, not as a primary workflow skill."
+description: "Modern web platform API guidance for avoiding legacy HTML, CSS, and JavaScript patterns. Use when implementing web interfaces, forms, accessibility, performance, browser APIs, or animations."
 license: GNU GPL v3
 metadata:
   version: 1.0.0 # x-release-please-version
@@ -94,14 +94,6 @@ npx -y modern-web-guidance@latest list
 ## Workflow
 
 See the body and references for modern web guidance steps.
-
-## Examples
-
-See references and the skill body for modern-web-guidance examples.
-
-## Reference files
-
-See the references/ directory and linked files in the main content.
 
 ## Guardrails
 

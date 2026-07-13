@@ -1,0 +1,5 @@
+interface:
+  display_name: "GitHub Actions Local Repro"
+  short_description: "Use when a GitHub Actions failure needs local reproduction with act before pushing, especially for workflow logic or step-level regressions, but not when the failure depends on org-managed runner or secret policy."
+policy:
+  allow_implicit_invocation: true

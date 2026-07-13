@@ -1,0 +1,5 @@
+interface:
+  display_name: "Fallow"
+  short_description: "Use when auditing JS/TS code health with Fallow - dead code, duplication, boundaries, or cleanup; not for debugging failures."
+policy:
+  allow_implicit_invocation: true

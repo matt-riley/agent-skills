@@ -1,0 +1,5 @@
+interface:
+  display_name: "Systematic Debugging"
+  short_description: "Use when encountering any bug, test failure, unexpected behavior, or persistent error before proposing fixes — especially under time pressure, after multiple failed attempts, or when the root cause is unclear."
+policy:
+  allow_implicit_invocation: true

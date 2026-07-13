@@ -41,9 +41,9 @@ Use this skill when implementing any feature, bugfix, or behavior change that re
 | Scenario | Use TDD Skill | Route Away |
 |---|---|---|
 | **New feature request** | Yes — write test for the desired behavior first | N/A |
-| **Bug report** | Yes — write test that reproduces the bug, then fix | Consider [github-actions-failure-triage](/skills/github-actions-failure-triage) if it's a CI failure |
-| **Refactor request** | Yes — write test for current behavior, refactor while keeping tests green | Consider [typescript-any-eliminator](/skills/typescript-any-eliminator) or other targeted hardening skills for narrower improvements |
-| **Code review feedback** | Yes if feedback requests behavior change or new handling | Use [review-comment-resolution](/skills/review-comment-resolution) for process; route back to TDD for code changes |
+| **Bug report** | Yes — write test that reproduces the bug, then fix | Consider [github-actions-failure-triage](../github-actions-failure-triage/SKILL.md) if it's a CI failure |
+| **Refactor request** | Yes — write test for current behavior, refactor while keeping tests green | Consider [typescript-any-eliminator](../typescript-any-eliminator/SKILL.md) or other targeted hardening skills for narrower improvements |
+| **Code review feedback** | Yes if feedback requests behavior change or new handling | Use [review-comment-resolution](../review-comment-resolution/SKILL.md) for process; route back to TDD for code changes |
 | **Performance optimization** | Yes — write benchmark test first, then optimize, keep tests green | N/A |
 | **Configuration or docs only** | No | Document without this skill |
 

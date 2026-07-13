@@ -110,8 +110,11 @@ The shared `~/.agents/skills` path is the recommended interoperable location.
 From the repo root:
 
 ```bash
+npm run validate:setup
 npm run validate
 ```
+
+The setup command installs the locked Node dependencies from `package-lock.json` and the pinned Python validation dependency from `requirements-dev.txt`. Run it once after a fresh checkout, then use `npm run test:validators` for the detailed authoring-contract regression suite.
 
 Or directly:
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "To PRD"
+  short_description: "Use when the user wants a PRD synthesized from current repository and conversation context, especially for issue-tracker handoff. Not when doc-coauthoring, workflow-contracts, or codebase discovery is the better fit."
+policy:
+  allow_implicit_invocation: true
