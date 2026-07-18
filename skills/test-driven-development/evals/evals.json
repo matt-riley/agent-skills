@@ -1,0 +1,38 @@
+{
+  "skill_name": "test-driven-development",
+  "evals": [
+    {
+      "id": "red-green-refactor-feature",
+      "prompt": "Add an email validator with strict TDD: write a failing test first, minimal implementation, then refactor.",
+      "expected_behavior": "Announces TDD discipline, writes one failing test and confirms it fails for the right reason before any production code, then applies minimal green code and refactors only after green.",
+      "assertions": [
+        "Does not write production code before a failing test exists",
+        "Confirms the test fails for the expected reason (feature missing, not syntax/import noise)",
+        "Writes only enough production code to pass the current test",
+        "Defers cleanup/refactor until after green"
+      ],
+      "files": []
+    },
+    {
+      "id": "bugfix-repro-test-first",
+      "prompt": "parseAmount('£1,000.00') returns the wrong value. Fix it with a failing test first.",
+      "expected_behavior": "Reproduces the bug with a failing test, watches it fail, then applies the minimal fix and keeps the suite green.",
+      "assertions": [
+        "Writes a test that encodes the expected amount before changing production code",
+        "Uses the red-green-refactor cycle rather than fix-then-test",
+        "Verifies the suite after the fix"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-verification",
+      "prompt": "Rerun the parser tests before claiming the bug is fixed.",
+      "expected_behavior": "Does not treat this as a TDD authoring task; routes to verification-before-completion or a simple re-run of existing tests.",
+      "assertions": [
+        "Does not start a red-green-refactor implementation cycle",
+        "Recognizes the ask is completion verification, not test-first design"
+      ],
+      "files": []
+    }
+  ]
+}

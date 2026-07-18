@@ -1,0 +1,38 @@
+{
+  "skill_name": "github-actions-local-repro",
+  "evals": [
+    {
+      "id": "act-narrow-job-repro",
+      "prompt": "Reproduce this pull_request failure for job lint-and-test with act and patch only what breaks in that job.",
+      "expected_behavior": "Lints the workflow if possible, runs a narrow act command for the failing job/event, captures the first failing step, applies a minimal fix, and re-runs the same local command.",
+      "assertions": [
+        "Uses act (or equivalent local workflow runner) targeting the failing job",
+        "Captures failing-step evidence before broad edits",
+        "Keeps the fix scoped to the reproduced path",
+        "Avoids printing real secret values"
+      ],
+      "files": []
+    },
+    {
+      "id": "workflow-edit-regression",
+      "prompt": "The build job started failing after a workflow edit; run it locally with act, isolate the failing step, and fix minimally.",
+      "expected_behavior": "Maps the hosted failure to local act inputs, reproduces the same step, and validates with the same act command after the patch.",
+      "assertions": [
+        "Compares local failure to the hosted failing step",
+        "Re-runs the same local reproduction command after the fix",
+        "Calls out when local success may not guarantee hosted success"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-hosted-only",
+      "prompt": "The job only fails on org-managed runners with protected environment secrets; logs show AccessDenied to the environment gate.",
+      "expected_behavior": "Does not force a futile act loop; routes to github-actions-failure-triage or notes hosted-only/policy constraints.",
+      "assertions": [
+        "Recognizes hosted-only or org-policy constraints",
+        "Does not insist act can fully reproduce protected-environment failures"
+      ],
+      "files": []
+    }
+  ]
+}

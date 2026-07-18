@@ -26,10 +26,10 @@ The following top-level keys are valid in a skill frontmatter block:
 
 | Field | Status | Valid values |
 | --- | --- | --- |
-| `metadata.category` | **Recommended** | `authoring`, `ci`, `migrations`, `typescript`, `version-control`, `workflow`, or another concise domain label. |
-| `metadata.audience` | **Recommended** | `general-coding-agent` for most skills. Use a more specific value only for narrowly specialized skills. |
-| `metadata.maturity` | **Recommended** | `draft` for new or unvalidated skills; `stable` after smoke-test validation and live use. |
-| `metadata.kind` | **Required for `draft` skills** | `task` or `reference`. Required before a draft skill can be promoted to stable. |
+| `metadata.category` | **Expected for all active skills** | Concise domain label aligned with `skills/README.md` families (for example `authoring`, `ci`, `typescript`, `go`, `git`, `governance`, `testing`, `data`, `ops`, `cloud`, `frontend`, `research`, `agents`, `editor`, `tooling`, `security`, `generation`, `session`, `writing`, `code-quality`, `workflow`). |
+| `metadata.audience` | **Expected for all active skills** | `general-coding-agent` for most skills. Use a more specific value only for narrowly specialized skills (for example `planning-agent`). |
+| `metadata.maturity` | **Required for release-managed skills** | `draft` while shaping; `stable` after paired evals and live confidence; `experimental` for provisional v0.x surfaces that may change quickly. |
+| `metadata.kind` | **Expected for all active skills** | `task` or `reference`.
 
 ### What `metadata.kind` means
 
@@ -79,6 +79,16 @@ This skill uses `metadata.reader_testing: required` as a skill-specific behavior
 The description must be a YAML string. Quoted scalars and valid multiline block scalars are accepted. Keep it concise: identify what the skill is for and the concrete conditions that should activate it, but leave procedural steps in the body. Complex routing detail belongs in `## Use this skill when` or `## Do not use this skill when`.
 
 Canonical body headings are optional. Use only headings that add signal, and keep any canonical headings that are present in the semantic order taught by the catalog standard. A `## Reference files` section may contain local support-file links, inter-skill routing links, or both; all local targets must exist.
+
+## Codex `agents/openai.yaml` policy
+
+Every active skill ships `agents/openai.yaml` with:
+
+- `interface.display_name`
+- `interface.short_description` — must match the skill frontmatter `description` exactly
+- `policy.allow_implicit_invocation` — boolean
+
+Default to `allow_implicit_invocation: true`. Set `false` for meta, routing, full-lifecycle process wrappers, or personal-harness skills that should not crowd out sharper task skills on generic prompts (for example `find-skills`, `code-intelligence`, `rpi-workflow`, `graphify`, `skill-authoring`, `session-store-history`, `resolve-open-loops`).
 
 ## Frontmatter shape reference
 

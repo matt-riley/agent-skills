@@ -5,4 +5,4 @@ interface:
     is complex, spans many files, or needs durable progress artifacts — not for small
     fixes, single-file edits, or narrow specialist workflows.
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

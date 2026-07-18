@@ -143,6 +143,31 @@ class ValidateSkillsRegressionTests(unittest.TestCase):
             VALIDATOR.validate_catalog_invariants(root, skills, {"one", "two"}, errors)
             self.assertTrue(any("root release package '.' is required" in error for error in errors))
 
+    def test_openai_policy_accepts_boolean_implicit_invocation(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            skill_dir = Path(temp_dir)
+            agents = skill_dir / "agents"
+            agents.mkdir()
+            path = agents / "openai.yaml"
+            fm = {"description": "Example skill."}
+            for value in (True, False):
+                with self.subTest(allow_implicit_invocation=value):
+                    path.write_text(
+                        "interface:\n  display_name: Example\n  short_description: Example skill.\n"
+                        f"policy:\n  allow_implicit_invocation: {'true' if value else 'false'}\n"
+                    )
+                    errors = []
+                    VALIDATOR.validate_openai_metadata(skill_dir, fm, errors)
+                    self.assertEqual(errors, [])
+
+            path.write_text(
+                "interface:\n  display_name: Example\n  short_description: Example skill.\n"
+                "policy:\n  allow_implicit_invocation: sometimes\n"
+            )
+            errors = []
+            VALIDATOR.validate_openai_metadata(skill_dir, fm, errors)
+            self.assertTrue(any("must be a boolean" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

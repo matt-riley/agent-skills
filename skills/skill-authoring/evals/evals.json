@@ -1,0 +1,37 @@
+{
+  "skill_name": "skill-authoring",
+  "evals": [
+    {
+      "id": "activation-and-layering",
+      "prompt": "I have a conventions-heavy note. Help me design a reusable skill: when it should activate, what kind it is, and what stays in SKILL.md versus references.",
+      "expected_behavior": "Acts as an authoring-style reference: defines activation and anti-triggers, chooses reference vs task kind, keeps SKILL.md concise with shallow support files, and avoids jumping into a full package scaffold unless asked.",
+      "assertions": [
+        "Defines when to use and when not to use the skill with concrete trigger language",
+        "Distinguishes reference versus task skill layering",
+        "Keeps SKILL.md concise and pushes lookup detail into shallow references"
+      ],
+      "files": []
+    },
+    {
+      "id": "frontmatter-and-description",
+      "prompt": "Review this draft skill frontmatter and description for undertriggering, forbidden keys, and GPL license requirements.",
+      "expected_behavior": "Checks name/directory match, trigger phrases in the description, required license, draft kind, and forbidden provenance or undocumented keys.",
+      "assertions": [
+        "Mentions description trigger phrases rather than domain-only labels",
+        "Mentions required frontmatter fields such as name, description, or license",
+        "Flags forbidden or provenance keys if present"
+      ],
+      "files": []
+    },
+    {
+      "id": "skill-authoring-boundary-creator",
+      "prompt": "Build me a complete new skill package with SKILL.md, references, evals, agents/openai.yaml, and validation commands.",
+      "expected_behavior": "Recognizes this as end-to-end package building and routes to skill-creator rather than only applying authoring style guidance.",
+      "assertions": [
+        "Does not treat pure style guidance as a full package scaffold workflow",
+        "Routes toward skill-creator or an end-to-end skill builder for packaging and evals"
+      ],
+      "files": []
+    }
+  ]
+}

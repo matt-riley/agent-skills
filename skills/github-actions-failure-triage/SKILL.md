@@ -7,6 +7,7 @@ metadata:
   category: ci
   audience: general-coding-agent
   maturity: stable
+  kind: task
 ---
 
 # GitHub Actions failure triage

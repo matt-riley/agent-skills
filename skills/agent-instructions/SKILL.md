@@ -83,15 +83,14 @@ See [discoverability-filter.md](references/discoverability-filter.md) for deeper
 Before starting, clarify:
 
 1. **Scope:** Which instruction files are in scope?
-   - **Pi Coding Agent:**
-     - Global: `~/.pi/agent/AGENTS.md` or `~/.pi/agent/CLAUDE.md`
-     - Project-level: `AGENTS.md` or `CLAUDE.md` in repo root or parent directories (discovered upward from cwd)
-   - **GitHub Copilot CLI:**
-     - Global: `~/.copilot/copilot-instructions.md`
-     - Project-level: `.github/copilot-instructions.md` (repo root)
-     - Per-path guides: `.github/instructions/*.md` (with YAML frontmatter `description` and `applyTo` fields)
-   - **Other harnesses:** Check your harness documentation for instruction file conventions
-   - `AGENTS.md` (agent roster and routing)
+   - Project-level agent instruction files (commonly `AGENTS.md`, `Claude.md`, or harness-specific names in the repo root or parents)
+   - User-level instruction files (paths are harness-specific; examples below)
+   - Per-path or per-file-type guides when the harness supports them
+   - Examples by harness:
+     - **Pi Coding Agent:** user-level `~/.pi/agent/AGENTS.md` or `~/.pi/agent/CLAUDE.md`; project-level `AGENTS.md` / `CLAUDE.md`
+     - **GitHub Copilot:** user-level `~/.copilot/copilot-instructions.md`; project-level `.github/copilot-instructions.md`; per-path `.github/instructions/*.md` (YAML frontmatter `description` and `applyTo`)
+   - **Other harnesses / coding agents:** check that harness's docs for instruction-file conventions rather than assuming one layout
+   - `AGENTS.md` (agent roster and routing) when used as a project router
    - Per-project files (if this is a multi-project workspace)
 
 2. **Problem:** What mistake or gap triggers this work?

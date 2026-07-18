@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: testing
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -78,7 +80,13 @@ For every endpoint touched, verify:
 
 ## Workflow
 
-See the body and references for HTTP contract testing steps.
+1. Identify the endpoints, auth modes, and request/response contracts under change.
+2. Prefer the repo's existing HTTP integration harness; extend rather than invent a parallel stack.
+3. Write or update tests for status codes, auth enforcement, validation errors, response shape, and side effects.
+4. Keep tests order-independent with clean DB/state per case; do not mock the DB in integration tests.
+5. Align assertions with OpenAPI or handler contracts when both change.
+6. Run the targeted integration test with verbose request/response output first.
+7. Widen to the suite when shared middleware or handlers moved; fix root cause, not flakes.
 
 ## Guardrails
 

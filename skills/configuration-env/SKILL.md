@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: ops
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -105,7 +107,13 @@ A healthy response confirms the configuration was accepted.
 
 ## Workflow
 
-See the body and references for env/config drift and startup debugging steps.
+1. Gather the startup failure or config symptom (missing env, bad binding, wrong environment).
+2. Compare live env / `.env` against `.env.example` and the repo config loader.
+3. Inspect runtime config files (`wrangler.*`, compose env, secrets mounts) for drift or missing bindings.
+4. Confirm required vs optional variables and fail-fast startup expectations.
+5. Apply the minimal config fix (example file, loader, binding, or secret wiring).
+6. Restart or re-run the service and hit `/health` (or the closest startup probe).
+7. Document which variables are required in prod and that production must not rely on committed `.env` files.
 
 ## Guardrails
 

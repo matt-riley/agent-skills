@@ -1,0 +1,37 @@
+{
+  "skill_name": "fallow",
+  "evals": [
+    {
+      "id": "fallow-dead-code-audit",
+      "prompt": "Audit this JS/TS workspace with Fallow and tell me what looks safe to clean up first.",
+      "expected_behavior": "Treats Fallow as the code-health tool for dead code, duplication, and structural issues; starts with a read-only analysis (prefer JSON/quiet), scopes the repo or package, and only moves to fix preview after triage.",
+      "assertions": [
+        "Identifies Fallow as the primary tool for dead-code or structural cleanup analysis",
+        "Prefers a read-only report or audit before applying fixes",
+        "Mentions config, package scope, exit-code handling, or false-positive triage before deletion"
+      ],
+      "files": []
+    },
+    {
+      "id": "fallow-safe-fix-preview",
+      "prompt": "Fallow flagged unused exports and a dependency. Preview auto-fixes first, then apply only what is safe.",
+      "expected_behavior": "Uses dry-run/fix preview before fallow fix --yes, and traces unclear unused items rather than deleting blindly.",
+      "assertions": [
+        "Mentions dry-run or fix preview before applying changes",
+        "Does not jump straight to destructive cleanup without a preview",
+        "Mentions re-running analysis or tests after fixes"
+      ],
+      "files": []
+    },
+    {
+      "id": "fallow-boundary-knip-or-debug",
+      "prompt": "The test suite is failing after a refactor; use Fallow to find the bug. Also, should I use Knip instead?",
+      "expected_behavior": "Routes away from Fallow for runtime/test-failure diagnosis and does not treat Knip as interchangeable for this debugging task.",
+      "assertions": [
+        "Does not claim Fallow is the right tool for runtime or test-failure diagnosis",
+        "Routes the failure-analysis work toward debugging rather than dead-code cleanup"
+      ],
+      "files": []
+    }
+  ]
+}

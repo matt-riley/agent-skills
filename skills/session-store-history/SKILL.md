@@ -2,9 +2,12 @@
 name: session-store-history
 description: "Search and summarize past work from the `session_store` database when the user asks what they worked on before, how a similar problem was handled, or which session, PR, issue, branch, or file changed something."
 license: GNU GPL v3
+compatibility: Requires a read-only SQL tool and access to the session_store database. Without those, state the limitation and ask for another evidence source.
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: session
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---

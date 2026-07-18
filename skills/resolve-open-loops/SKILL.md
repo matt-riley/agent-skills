@@ -2,6 +2,7 @@
 name: resolve-open-loops
 description: "Use when the stabilisation-guard blocks the session because of active open_loop or assistant_goal memories, or when the user explicitly asks to review and close out pending items in Lore."
 license: GNU GPL v3
+compatibility: Requires Lore memory tools (memory_search, memory_forget, memory_status) and the stabilisation-guard open-loop flow. Without Lore, surface unavailability and stop.
 metadata:
   version: 1.0.0 # x-release-please-version
   category: workflow

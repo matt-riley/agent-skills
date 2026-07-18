@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Add hurl smoke checks for POST /orders after auth middleware changes.",
+    "should_trigger": true
+  },
+  {
+    "query": "After routing changes, run a quick hurl suite for health, core read, and auth-protected endpoints.",
+    "should_trigger": true
+  },
+  {
+    "query": "Validate unauthenticated vs authenticated responses on /v1/profile with hurl before heavier integration tests.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need minimal, repeatable API smoke checks for status codes and response shape after request-body validation changes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write full behavior tests for the orders API using TDD from the start.",
+    "should_trigger": false
+  },
+  {
+    "query": "Design a load-test suite and deep integration coverage for every edge case on checkout.",
+    "should_trigger": false
+  },
+  {
+    "query": "This GitHub Actions deploy job failed on my PR; diagnose the failing step before changing YAML.",
+    "should_trigger": false
+  },
+  {
+    "query": "Keep the new HTTP endpoint and OpenAPI contract in sync after the handler change.",
+    "should_trigger": false
+  }
+]

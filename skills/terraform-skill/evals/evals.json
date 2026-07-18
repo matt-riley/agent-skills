@@ -1,0 +1,37 @@
+{
+  "skill_name": "terraform-skill",
+  "evals": [
+    {
+      "id": "module-and-plan-debug",
+      "prompt": "Debug this Terraform module and plan failure in our AWS stack.",
+      "expected_behavior": "Diagnoses failure mode first, loads only relevant Terraform references, and proposes HCL or state fixes with a validation plan (fmt/validate/plan).",
+      "assertions": [
+        "Treats the work as Terraform/OpenTofu infrastructure, not generic app CI",
+        "Diagnoses a failure mode before dumping all reference material",
+        "Includes validation commands such as fmt, validate, or plan"
+      ],
+      "files": []
+    },
+    {
+      "id": "provider-upgrade-moved",
+      "prompt": "I'm upgrading the AWS provider from 4.x to 5.x; what breaking changes and moved blocks do I need?",
+      "expected_behavior": "Addresses provider upgrade risk, mentions version floors and moved/import patterns where relevant, and avoids blind apply advice.",
+      "assertions": [
+        "Addresses provider upgrade or identity-churn risk",
+        "Mentions moved blocks, plan review, or pinning as risk controls",
+        "Does not route to SAM/CloudFormation tooling"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-non-iac-actions",
+      "prompt": "Diagnose a failing GitHub Actions job in a non-Terraform Node.js repo.",
+      "expected_behavior": "Routes to github-actions-failure-triage (or similar) instead of Terraform module workflows.",
+      "assertions": [
+        "Does not activate Terraform module authoring as the primary path",
+        "Recognizes non-IaC Actions triage as out of scope for terraform-skill"
+      ],
+      "files": []
+    }
+  ]
+}

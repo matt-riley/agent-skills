@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: ops
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -85,7 +87,13 @@ curl -i -H "Authorization: Bearer $AUTH_TOKEN" http://localhost:<PORT>/metrics
 
 ## Workflow
 
-See the body and references for /health /metrics logging validation steps.
+1. Hit `/health` and `/metrics` directly and read status/body before blaming app logic.
+2. Confirm auth/protection expectations for metrics in the current environment.
+3. Review metric registration (startup-time, not per-request) and naming/labels for the change.
+4. Add or fix instrumentation at the right boundary; keep high-cardinality labels under control.
+5. Ensure `/health` stays LB-safe and free of internal leakage; treat `/metrics` as sensitive in prod.
+6. Check structured logs for secret/PII scrubbing at the logging boundary.
+7. Re-curl endpoints and confirm Prometheus text/health output matches the repo contract.
 
 ## Guardrails
 

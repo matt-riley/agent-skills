@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: ops
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -76,7 +78,13 @@ Use `-v` only when you want to destroy all data (e.g. start fresh with a clean D
 
 ## Workflow
 
-See the body and references for Docker Compose stack steps.
+1. Copy `.env.example` to `.env` when missing; fill required secrets without committing `.env`.
+2. Bring the stack up with the repo's compose command.
+3. Run migrations/seeds explicitly if compose does not apply them automatically.
+4. Verify with `docker compose ps`, service logs, and the health endpoint.
+5. Exercise the local path the user cares about (API, worker, UI) against real compose services.
+6. On failure, isolate the unhealthy service, fix config/volumes/ports, and re-verify.
+7. Tear down deliberately: preserve volumes by default; only use `-v` when a full data wipe is intended.
 
 ## Guardrails
 

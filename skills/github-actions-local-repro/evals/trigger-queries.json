@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Reproduce the failing Actions job locally with act before I push again.",
+    "should_trigger": true
+  },
+  {
+    "query": "The build job started failing after a workflow edit; run it with act, isolate the step, and fix minimally.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use act to re-run the pull_request lint-and-test job against this branch.",
+    "should_trigger": true
+  },
+  {
+    "query": "Locally reproduce this matrix leg of the CI workflow with Docker-backed act.",
+    "should_trigger": true
+  },
+  {
+    "query": "Read the workflow logs and find the root cause first without a local repro loop.",
+    "should_trigger": false
+  },
+  {
+    "query": "This failure depends on org-managed runner labels and protected environment secrets.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a PR from this branch and watch the required checks.",
+    "should_trigger": false
+  },
+  {
+    "query": "Plan a CircleCI to GitHub Actions migration for the monorepo.",
+    "should_trigger": false
+  }
+]

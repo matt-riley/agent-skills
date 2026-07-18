@@ -362,7 +362,14 @@ Add to your GitHub Actions workflow:
 
 ## Workflow
 
-See the sections above for the integrity manifest and promotion gate workflow.
+1. Inventory plugins, tools, and agent packages the runtime loads.
+2. Generate or refresh the integrity manifest (SHA-256 per file plus chain hash) for each packaged artifact.
+3. Store manifests in source control next to the packages they protect.
+4. Add CI verification that fails on MISSING, MODIFIED, or UNTRACKED files.
+5. Run dependency version audits for unpinned or vulnerable packages.
+6. Wire a promotion gate that requires integrity pass, required files present, and pinned dependencies before release.
+7. On verification failure, fail closed — do not load or promote the artifact.
+8. Document how operators regenerate manifests after intentional package changes.
 
 ## Guardrails
 

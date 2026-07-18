@@ -1,0 +1,34 @@
+[
+  {
+    "query": "go test ./... fails in CI but passes locally — check GOROOT/GOTOOLDIR and toolchain parity.",
+    "should_trigger": true
+  },
+  {
+    "query": "GitHub Actions says go test fails on Linux with a TempDir cleanup race in our Go package.",
+    "should_trigger": true
+  },
+  {
+    "query": "govulncheck is red on a Dependabot PR but only reports standard-library packages.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our Go CI job started failing after a toolchain update; is GOROOT or GOTOOLDIR stale?",
+    "should_trigger": true
+  },
+  {
+    "query": "Why does func(string) *ValidationError not satisfy func(string) error in Go?",
+    "should_trigger": false
+  },
+  {
+    "query": "Debug this unknown production failure across services with a structured root-cause method.",
+    "should_trigger": false
+  },
+  {
+    "query": "Scaffold a new Go CLI with cobra, goreleaser, and Homebrew.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a multi-stage Docker image for this Go service with a health check.",
+    "should_trigger": false
+  }
+]

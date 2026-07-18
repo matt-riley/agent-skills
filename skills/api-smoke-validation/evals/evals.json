@@ -1,0 +1,37 @@
+{
+  "skill_name": "api-smoke-validation",
+  "evals": [
+    {
+      "id": "hurl-smoke-after-auth-change",
+      "prompt": "After auth middleware changes, add hurl smoke checks for unauthenticated vs authenticated responses on /v1/profile.",
+      "expected_behavior": "Builds a small hurl suite with status, header, and minimal body assertions for the changed auth paths, parameterizes credentials safely, and keeps coverage smoke-sized rather than a full e2e suite.",
+      "assertions": [
+        "Uses hurl for HTTP smoke requests",
+        "Asserts status codes and at least one response shape or auth-sensitive outcome",
+        "Avoids hardcoding sensitive credentials in files"
+      ],
+      "files": []
+    },
+    {
+      "id": "minimal-post-change-smoke",
+      "prompt": "Validate POST /orders and GET /orders/:id with hurl after request-body validation changes, keeping checks minimal and repeatable.",
+      "expected_behavior": "Selects critical paths only, writes deterministic assertions, runs the suite against a real target environment, and reports environment blockers if the API is not reachable.",
+      "assertions": [
+        "Targets the changed endpoints with focused smoke coverage",
+        "Mentions running hurl and fixing the smallest failure first",
+        "Keeps the suite minimal rather than expanding into full contract or load testing"
+      ],
+      "files": []
+    },
+    {
+      "id": "api-smoke-boundary-tdd",
+      "prompt": "Write full behavior tests for the orders API from a failing test first.",
+      "expected_behavior": "Routes away from api-smoke-validation because the task is full behavioral TDD, not quick hurl smoke checks.",
+      "assertions": [
+        "Does not treat hurl smoke as a substitute for full behavior-test design",
+        "Routes toward test-driven-development or deeper integration testing instead"
+      ],
+      "files": []
+    }
+  ]
+}

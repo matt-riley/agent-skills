@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: security
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -78,7 +80,13 @@ Before merging code that touches auth, request handling, or data exposure:
 
 ## Workflow
 
-See the body and references for security and privacy guardrail steps.
+1. Inventory auth, secrets, input trust, endpoint exposure, CORS/cookies, and logging touchpoints in the change.
+2. Run the skill's security checklist against each touchpoint.
+3. Flag hardcoded secrets, spoofable trust headers, over-broad CORS, unprotected sensitive routes, and log/response leakage.
+4. Propose minimal fixes that preserve intended product behavior.
+5. Verify authorization failures and invalid input paths return safe responses.
+6. Confirm logs and error bodies do not carry credentials, tokens, PII, stack traces, or internal paths.
+7. Summarize residual risk if anything remains out of scope.
 
 ## Guardrails
 

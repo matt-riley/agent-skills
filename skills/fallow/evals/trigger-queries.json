@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Run Fallow on this TypeScript repo and tell me which exports, files, and dependencies look safe to clean up first.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use Fallow to audit this Next.js repo for dead code, circular dependencies, and duplication before we start the refactor.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need a PR-safe dead-code check for changed files only with Fallow. Show me the command and likely false-positive traps.",
+    "should_trigger": true
+  },
+  {
+    "query": "Before we remove this package, trace whether Fallow thinks it is unused because of real dead code or a dynamic import pattern.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run Knip on this TypeScript monorepo and tell me which exports, files, or dependencies look unused.",
+    "should_trigger": false
+  },
+  {
+    "query": "The test suite started failing after yesterday's merge and I need the root cause.",
+    "should_trigger": false
+  },
+  {
+    "query": "tsc now reports 80 errors after enabling a stricter flag; help me triage them.",
+    "should_trigger": false
+  },
+  {
+    "query": "Map the files, tests, and patterns involved before we touch this feature.",
+    "should_trigger": false
+  }
+]

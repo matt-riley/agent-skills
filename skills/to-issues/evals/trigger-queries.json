@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Break this approved PRD into implementation issues and open them in dependency order.",
+    "should_trigger": true
+  },
+  {
+    "query": "Turn this implementation plan into independently grabbable GitHub issues, and show me the breakdown before you publish anything.",
+    "should_trigger": true
+  },
+  {
+    "query": "Break this PRD into thin vertical slices with blocker relationships and mark which ones need human review.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use the current issue and repo context to draft issue bodies for the next implementation wave, but leave them as ready-to-paste markdown.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write the PRD for this feature before we decide how to split the work.",
+    "should_trigger": false
+  },
+  {
+    "query": "Produce a structured markdown handoff for planning and review instead of tracker tickets.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explore the repository first because the architecture is still unclear.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rewrite this under-specified ask before deciding whether tickets should exist yet.",
+    "should_trigger": false
+  }
+]

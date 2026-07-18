@@ -27,6 +27,15 @@ One-shot migration skills live in `archived/`. They're still available but exclu
 
 - `configuration-env` — keep this easy to find for startup failures, env drift, and deployment/config debugging, but do not force it into every task by default
 
+## Local harness / personal environment
+
+These skills depend on personal harness tooling and are **not portable to every agent environment**:
+
+- `session-store-history` — cross-session recall via `session_store` (requires a read-only SQL tool and `session_store` access)
+- `resolve-open-loops` — Lore `open_loop` / `assistant_goal` triage (requires Lore memory tools and the stabilisation-guard flow)
+
+Load them only when the current harness exposes those tools; otherwise surface the limitation and use another evidence source.
+
 ## Families
 
 ### Governance and process
@@ -122,13 +131,13 @@ One-shot migration skills live in `archived/`. They're still available but exclu
 
 ### Research, knowledge, and discovery
 
-- `find-skills` — discover an existing local catalog skill when skill lookup is the deliverable; do not use it as a wrapper around a directly requested task
+- `find-skills` — discover an existing local catalog skill when skill lookup is the deliverable; do not use it as a wrapper around a directly requested task (experimental; explicit invocation preferred)
 - `acquire-codebase-knowledge` — deep-map an existing codebase into seven structured docs covering stack, architecture, conventions, integrations, testing, and concerns
 - `autoresearch` — execute an automated research pass across docs, code, and search to answer a question or validate a claim
 - `code-tour` — create or follow a guided tour through an unfamiliar codebase
 - `context-map` — produce a domain-driven context map of bounded contexts and their integration relationships
 - `code-intelligence` — preferred routing layer for LSP, grep, and glob operations; always use LSP over text search when available
-- `graphify` — turn a mixed document or code corpus into a persistent knowledge graph and graph-oriented exports; use direct analysis skills when no graph artifact is needed
+- `graphify` — turn a mixed document or code corpus into a persistent knowledge graph and graph-oriented exports; use direct analysis skills when no graph artifact is needed (experimental; explicit invocation preferred)
 
 ### AI agent development
 

@@ -71,7 +71,13 @@ Use [`references/patterns.md`](references/patterns.md) when the user wants a rep
 
 ## Workflow
 
-See the body and references for Fallow audit steps.
+1. Confirm the repo is primarily JS/TS and locate any existing Fallow config.
+2. Choose the command family from [`references/cli-reference.md`](references/cli-reference.md) (dead code, duplication, health, audit, fix, trace).
+3. Run a read-only analysis first; for agents prefer `--format json --quiet` and handle exit code 1 as "issues found".
+4. Triage findings with [`references/gotchas.md`](references/gotchas.md) before treating anything as safe to delete.
+5. Trace unclear unused exports/files/deps before removal.
+6. If cleanup is requested, `fallow fix --dry-run` then `fallow fix --yes` only after the preview matches intent.
+7. Re-run analysis and relevant tests/typecheck; follow [`references/patterns.md`](references/patterns.md) for PR/CI gates when needed.
 
 ## Guardrails
 

@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: frontend
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -44,19 +46,13 @@ Common locations: `internal/`, `templates/`, `web/`, or alongside handlers.
 
 ## Workflow
 
-1. Edit the `.templ` file.
-2. Regenerate (produces `*_templ.go`):
-
-```bash
-templ generate          # or: make templ-generate / make generate
-```
-
-3. Verify:
-
-```bash
-go build ./...
-make test
-```
+1. Locate the `.templ` file and any handler that renders it.
+2. Edit template markup/data usage only — keep business logic in handlers/domain.
+3. Regenerate with `templ generate` (or the repo's `make templ-generate` / `make generate`).
+4. Wire or update handler calls so typed data flows correctly.
+5. Set `Content-Type: text/html; charset=utf-8` on HTML responses.
+6. Verify with `go build ./...` and the repo test suite.
+7. Never hand-edit `*_templ.go`; regenerate after every template change.
 
 ## Outputs
 

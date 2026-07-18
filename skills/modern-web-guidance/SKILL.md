@@ -93,7 +93,13 @@ npx -y modern-web-guidance@latest list
 
 ## Workflow
 
-See the body and references for modern web guidance steps.
+1. Pin the exact web platform decision (HTML, CSS, a11y, forms, performance, etc.).
+2. Check routing boundaries so a more specific skill does not own the task.
+3. Load the matching reference (`css`, `html`, `accessibility`, `performance`, `forms`, or dynamic retrieval for niche topics).
+4. Prefer Baseline Widely Available features; call out Newly/Limited Availability with fallbacks.
+5. Adapt guidance to the project's framework and browser policy rather than pasting guide code blindly.
+6. Implement or recommend the modern pattern and note any polyfill or support risk.
+7. Verify with the project's lint/test/browser checks when code changes land.
 
 ## Guardrails
 

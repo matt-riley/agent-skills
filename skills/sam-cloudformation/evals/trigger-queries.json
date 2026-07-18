@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Our SAM deploy rolls back because the template has invalid resource wiring and the stack is stuck in UPDATE_ROLLBACK_FAILED.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix this SAM template validation error and keep the change limited to CloudFormation resource wiring.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run sam validate --lint and fix the Transform/schema errors before another deploy.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this GitHub Actions SAM deployment and align auth to a real SAM/CloudFormation pattern.",
+    "should_trigger": true
+  },
+  {
+    "query": "The Go Lambda zip is missing the bootstrap binary and fails before the template is the problem.",
+    "should_trigger": false
+  },
+  {
+    "query": "OIDC AssumeRole AccessDenied during deploy auth before sam deploy runs.",
+    "should_trigger": false
+  },
+  {
+    "query": "Debug this Terraform module and remote state lock for the same AWS account.",
+    "should_trigger": false
+  },
+  {
+    "query": "A generic Actions job failed; we don't know yet whether the SAM deploy step is involved.",
+    "should_trigger": false
+  }
+]

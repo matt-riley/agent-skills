@@ -1,0 +1,38 @@
+{
+  "skill_name": "agent-governance",
+  "evals": [
+    {
+      "id": "tool-allowlist-and-audit",
+      "prompt": "Add tool allowlists, rate limits, and append-only audit logs to this production coding agent that calls external APIs.",
+      "expected_behavior": "Chooses a governance level from risk, defines a policy with allowed tools and limits, enforces at the tool boundary, and wires audit events for allowed, denied, and error outcomes with fail-closed behavior.",
+      "assertions": [
+        "Defines a governance policy with allowed tools or blocked patterns",
+        "Enforces controls at the tool boundary rather than only documenting them",
+        "Includes audit trail or logging of allowed and denied events",
+        "Mentions fail-closed behavior when governance checks error"
+      ],
+      "files": []
+    },
+    {
+      "id": "multi-agent-trust-scoring",
+      "prompt": "We have multiple agents that can call privileged tools. Add trust scoring and human approval for sensitive operations.",
+      "expected_behavior": "Adds multi-agent trust scoring before privileged access and requires human approval for sensitive tools without mixing in supply-chain integrity manifests.",
+      "assertions": [
+        "Mentions trust scoring or multi-agent privilege gating",
+        "Mentions human approval for sensitive tool operations",
+        "Stays focused on runtime governance rather than package integrity hashing"
+      ],
+      "files": []
+    },
+    {
+      "id": "agent-governance-boundary-supply-chain",
+      "prompt": "Generate a SHA-256 manifest for this plugin and gate promotion on integrity verification.",
+      "expected_behavior": "Routes away from agent-governance because the task is supply-chain integrity, not runtime tool policy.",
+      "assertions": [
+        "Does not implement runtime tool allowlists for a manifest/integrity request",
+        "Routes toward agent-supply-chain or integrity-manifest work instead"
+      ],
+      "files": []
+    }
+  ]
+}

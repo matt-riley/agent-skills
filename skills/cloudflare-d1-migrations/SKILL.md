@@ -5,7 +5,10 @@ license: GNU GPL v3
 metadata:
   version: 1.3.0 # x-release-please-version
   owner: mattriley
+  category: data
+  audience: general-coding-agent
   maturity: stable
+  kind: task
 ---
 
 # Cloudflare D1 migrations

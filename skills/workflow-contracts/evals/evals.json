@@ -1,0 +1,37 @@
+{
+  "skill_name": "workflow-contracts",
+  "evals": [
+    {
+      "id": "planner-handoff-v1",
+      "prompt": "Turn this approved plan into a v1 planner handoff with status ready, task_id, validation commands, and a next action the executor can start immediately.",
+      "expected_behavior": "Uses the planner-handoff v1 template shape with required frontmatter (contract_type, contract_version, created_by, status) and concrete next action rather than freeform chat prose.",
+      "assertions": [
+        "Selects a planner handoff or planning-phase contract rather than inventing a new shape",
+        "Requires or fills contract_version v1 and shared frontmatter keys",
+        "Makes status and next action explicit instead of burying them in prose"
+      ],
+      "files": []
+    },
+    {
+      "id": "review-outcome-contract",
+      "prompt": "Rewrite these review notes into a review-outcome contract with status revise, accepted comments, and unresolved items.",
+      "expected_behavior": "Maps notes into the review-outcome contract with an explicit approve|revise|blocked-style status and structured review fields.",
+      "assertions": [
+        "Uses a review-outcome contract or equivalent review artifact",
+        "Makes the decision status explicit (for example revise)",
+        "Keeps accepted versus unresolved comments distinguishable"
+      ],
+      "files": []
+    },
+    {
+      "id": "workflow-contracts-boundary-prd",
+      "prompt": "Write a product requirements document for this feature before we create tickets.",
+      "expected_behavior": "Routes away from workflow-contracts because the task is PRD authoring, not a durable plan/review/execution handoff.",
+      "assertions": [
+        "Does not force a workflow-contract template for PRD authoring",
+        "Routes toward to-prd or product-requirements work instead of inventing a handoff contract"
+      ],
+      "files": []
+    }
+  ]
+}

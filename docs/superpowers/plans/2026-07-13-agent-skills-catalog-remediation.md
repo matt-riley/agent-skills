@@ -1,5 +1,7 @@
 # Agent Skills Catalog Remediation Implementation Plan
 
+> **Status (2026-07-18):** The structural remediation in this plan is largely landed on `main` (validators, Codex metadata, chooser coverage, release paths, progressive disclosure for oversized skills). A follow-on maturity/quality wave also completed: stub workflows replaced, `kind`/category/audience normalized, draft-with-evals promotions, Tier A eval fixtures, portability `compatibility` + selective implicit-invocation opt-outs, and experimental maturity for provisional `0.1.0` skills. Treat remaining unchecked boxes below as historical task detail, not a todo list to re-execute blindly.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the active Agent Skills catalog reproducibly valid, internally consistent, fully discoverable, and more context-efficient, then publish the reviewed remediation to `origin/main`.

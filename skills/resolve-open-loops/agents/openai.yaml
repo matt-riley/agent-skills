@@ -2,4 +2,4 @@ interface:
   display_name: "Resolve Open Loops"
   short_description: "Use when the stabilisation-guard blocks the session because of active open_loop or assistant_goal memories, or when the user explicitly asks to review and close out pending items in Lore."
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

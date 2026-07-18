@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Turn this approved plan into a v1 execution handoff with blockers, validation commands, and a next action.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rewrite these review notes into a review-outcome contract with status revise and the comments that were accepted.",
+    "should_trigger": true
+  },
+  {
+    "query": "Record the current implementation wave in an execution record that names changed files, checks run, and remaining blockers.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a planner handoff with status ready, task_id, and stable frontmatter the executor can start from immediately.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a PRD for this idea before we create tickets.",
+    "should_trigger": false
+  },
+  {
+    "query": "Break this approved contract into independently trackable GitHub issues.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create or revise a reusable skill package for our planning workflow.",
+    "should_trigger": false
+  },
+  {
+    "query": "Just summarize the plan in chat; no durable handoff file is needed.",
+    "should_trigger": false
+  }
+]

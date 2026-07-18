@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Debug this Terraform module and plan failure in our AWS stack.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a Terraform module for an AWS S3 bucket with versioning and encryption.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up a GitHub Actions pipeline for Terraform with plan review and protected applies on main.",
+    "should_trigger": true
+  },
+  {
+    "query": "We're upgrading the AWS provider from 4.x to 5.x — what moved blocks and breaking changes do we need?",
+    "should_trigger": true
+  },
+  {
+    "query": "Diagnose a failing GitHub Actions job in a non-Terraform Node.js repo.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix this SAM template validation error and stack rollback for our Lambda deploy.",
+    "should_trigger": false
+  },
+  {
+    "query": "What is the basic HCL syntax for a string variable?",
+    "should_trigger": false
+  },
+  {
+    "query": "Triage a secret-scan failure in application source that is not IaC.",
+    "should_trigger": false
+  }
+]

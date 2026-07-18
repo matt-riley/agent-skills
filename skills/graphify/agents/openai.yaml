@@ -2,4 +2,4 @@ interface:
   display_name: "Graphify"
   short_description: "Build and query persistent Graphify knowledge graphs from code, documents, papers, images, or video. Use when the user asks to graphify a corpus, needs graph-based mapping, path, or community analysis, invokes Graphify commands, or asks a corpus question when graphify-out/ already exists."
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

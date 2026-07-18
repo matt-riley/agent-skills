@@ -10,7 +10,7 @@ metadata:
   version: 0.1.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: draft
+  maturity: experimental
   kind: reference
 ---
 # Find Skills

@@ -1,0 +1,37 @@
+{
+  "skill_name": "to-prd",
+  "evals": [
+    {
+      "id": "synthesize-prd-from-context",
+      "prompt": "Turn everything we know about the billing retry flow into a PRD using the conversation and repo context; only ask if something is blocking.",
+      "expected_behavior": "Synthesizes a PRD from existing context rather than interviewing broadly; covers problem, solution, user stories, implementation and testing decisions, and out of scope, grounded in repository vocabulary.",
+      "assertions": [
+        "Starts from existing conversation or repository context rather than a broad interview",
+        "Covers user-facing problem/solution and user stories",
+        "Includes implementation and testing decisions without file paths or code snippets"
+      ],
+      "files": []
+    },
+    {
+      "id": "prd-publication-boundary",
+      "prompt": "Synthesize this feature discussion into a PRD and publish it to the issue tracker if labels and templates are known.",
+      "expected_behavior": "Produces a complete PRD markdown artifact and only publishes with verified tracker conventions; otherwise surfaces a publication blocker.",
+      "assertions": [
+        "Produces or outlines a full PRD artifact suitable for issue-tracker handoff",
+        "Avoids inventing issue labels or templates that are not verified",
+        "Mentions publish-or-blocker decision rather than assuming tracker fields"
+      ],
+      "files": []
+    },
+    {
+      "id": "to-prd-boundary-issues",
+      "prompt": "Break this approved PRD into independently grabbable implementation issues.",
+      "expected_behavior": "Routes away from to-prd because the PRD already exists and the task is issue slicing.",
+      "assertions": [
+        "Does not re-author a PRD when the task is ticket breakdown",
+        "Routes toward to-issues or issue slicing instead"
+      ],
+      "files": []
+    }
+  ]
+}

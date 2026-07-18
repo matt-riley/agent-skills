@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: data
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -76,7 +78,13 @@ Map DB-level errors to domain errors **at the adapter boundary** — never let D
 
 ## Workflow
 
-See the body and references for adapter and DB error mapping steps.
+1. Identify the domain interface and which DB dialect adapters implement it.
+2. Update query sources for each dialect that must stay in sync.
+3. Regenerate query code through the repo's normal generation path — never hand-edit generated files.
+4. Adjust adapters to call new/changed queries while preserving the shared domain interface.
+5. Keep DB-to-domain error mapping intact (`%w` / equivalent) so callers can use typed error checks.
+6. Add or update adapter tests; skip optional dialects cleanly when unavailable.
+7. Run generation checks, unit/adapter tests, and confirm no raw DB errors leak outward.
 
 ## Guardrails
 

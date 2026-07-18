@@ -1,0 +1,37 @@
+{
+  "skill_name": "typescript-any-eliminator",
+  "evals": [
+    {
+      "id": "replace-any-in-api-helper",
+      "prompt": "Replace any in this API helper with a truthful type. Prefer existing domain types and do not change runtime behavior.",
+      "expected_behavior": "Inventories any sites, reuses existing types when possible, chooses the narrowest truthful replacement (or unknown plus a guard at untrusted edges), avoids unsafe casts, and re-runs typecheck.",
+      "assertions": [
+        "Replaces any with a more precise type or unknown-plus-narrowing rather than leaving it",
+        "Reuses an existing domain type, DTO, or helper when available",
+        "Avoids unsafe casts such as as unknown as to silence the compiler",
+        "Mentions typecheck after the edit"
+      ],
+      "files": []
+    },
+    {
+      "id": "honest-boundary-stop",
+      "prompt": "This any sits on a generated OpenAPI client type and an intentionally unstructured external payload. Remove any if safe.",
+      "expected_behavior": "Stops when the boundary is generated, vendor-owned, or intentionally permissive; prefers unknown plus a guard over inventing a fake precise type.",
+      "assertions": [
+        "Does not force fake precision on generated or intentionally permissive boundaries",
+        "Mentions unknown plus narrowing or leaving the honest boundary alone"
+      ],
+      "files": []
+    },
+    {
+      "id": "any-eliminator-boundary-schema",
+      "prompt": "Add runtime validation for this untrusted JSON webhook and derive the TypeScript type from the schema.",
+      "expected_behavior": "Routes away from pure any elimination when the real work is schema-boundary runtime validation.",
+      "assertions": [
+        "Does not treat the task as only local any replacement",
+        "Routes toward schema-boundary-typing or runtime validation at the untrusted boundary"
+      ],
+      "files": []
+    }
+  ]
+}

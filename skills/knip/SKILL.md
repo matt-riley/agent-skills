@@ -5,7 +5,7 @@ license: GNU GPL v3
 metadata:
   category: code-quality
   audience: general-coding-agent
-  maturity: draft
+  maturity: stable
   kind: reference
   version: 1.0.0 # x-release-please-version
 ---

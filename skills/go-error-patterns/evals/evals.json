@@ -1,0 +1,36 @@
+{
+  "skill_name": "go-error-patterns",
+  "evals": [
+    {
+      "id": "constructor-closure-wrap",
+      "prompt": "My helper expects func(string) error but NewDomainError returns *DomainError. How should I wire this?",
+      "expected_behavior": "Explains that Go function types are not covariant, recommends a local closure that returns error, and prefers interface error in signatures unless concrete methods are required.",
+      "assertions": [
+        "Rejects covariance assumptions for func(string) *T vs func(string) error",
+        "Recommends wrapping the constructor in a closure returning error",
+        "Does not treat the problem as a GOROOT or CI toolchain issue"
+      ],
+      "files": []
+    },
+    {
+      "id": "alias-vs-owning-type",
+      "prompt": "We introduced type OptionalString = optional.String in a package; should that stay in the finished design?",
+      "expected_behavior": "Prefers using the shared owning package type directly and treats local aliases as temporary compatibility shims only.",
+      "assertions": [
+        "Discourages package-local aliases as the final design when an owning type exists",
+        "Allows temporary aliases only as explicit migration shims"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-build-failure",
+      "prompt": "go test ./... only fails in CI after a Go version bump; local is green.",
+      "expected_behavior": "Routes to go-build-and-test for toolchain/CI-parity diagnosis rather than error-type redesign.",
+      "assertions": [
+        "Does not start with constructor covariance as the primary fix",
+        "Routes toward go-build-and-test or toolchain/CI parity investigation"
+      ],
+      "files": []
+    }
+  ]
+}

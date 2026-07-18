@@ -4,6 +4,8 @@ description: "Polish existing interfaces when the UI feels off through better ra
 license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
+  category: frontend
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -58,7 +60,13 @@ metadata:
 
 ## Workflow
 
-See the body and references for UI polish steps.
+1. Inspect the current UI and shared primitives/tokens before proposing changes.
+2. Separate structural redesign (out of scope) from feel/polish issues (in scope).
+3. Group work by principle: typography, spacing, surfaces, hierarchy, motion, feedback.
+4. Apply concrete component-level diffs using existing tokens and libraries.
+5. Prefer CSS/native transitions over new motion dependencies; avoid `transition: all`.
+6. For reviews, present before/after findings grouped by principle, not abstract taste notes.
+7. Validate in the running UI that polish stayed local and the visual system is preserved.
 
 ## Guardrails
 

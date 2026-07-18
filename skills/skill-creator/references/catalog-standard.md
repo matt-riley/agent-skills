@@ -76,11 +76,19 @@ Use the repo-root `LICENSE` file as the canonical license text.
 
 Use `metadata.maturity` deliberately:
 
-- `stable` — proven, reused, and unlikely to change shape soon
+- `stable` — proven, reused, and unlikely to change shape soon (must include paired trigger evals)
 - `draft` — still being shaped or missing confidence
-- `experimental` — intentionally risky, provisional, or likely to change quickly
+- `experimental` — intentionally risky, provisional, or likely to change quickly (typical for early `0.x` surfaces)
+
+Every active skill should also declare:
+
+- `metadata.kind` — `task` or `reference`
+- `metadata.category` — concise family label aligned with `skills/README.md`
+- `metadata.audience` — usually `general-coding-agent`
 
 "beta" is a legacy value; standardize on the values above. Every skill must also carry `license: GNU GPL v3` (top level) per AGENTS.md Learned Rule 1.
+
+Use top-level `compatibility` when a skill needs non-portable tools (for example a local database or memory extension). In `agents/openai.yaml`, set `policy.allow_implicit_invocation` to a boolean; prefer `false` for meta/routing/personal-harness skills that should not auto-fire on generic prompts.
 
 Do not copy another repo's metadata scheme blindly. This personal catalog should keep metadata lean and maintenance-friendly.
 

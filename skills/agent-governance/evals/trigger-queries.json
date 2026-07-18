@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Add tool allowlists and audit logs to this coding agent.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement policy-based access controls and rate limits for agent tool calls in our production agent.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add semantic intent classification and trust scoring for a multi-agent CrewAI workflow.",
+    "should_trigger": true
+  },
+  {
+    "query": "Enforce content filters and human approval on sensitive tools like send_email in this PydanticAI agent.",
+    "should_trigger": true
+  },
+  {
+    "query": "Generate a SHA-256 integrity manifest for this plugin bundle and verify it in CI.",
+    "should_trigger": false
+  },
+  {
+    "query": "Detect tampered files and unpinned dependencies before promoting this agent plugin.",
+    "should_trigger": false
+  },
+  {
+    "query": "I changed cookies, CORS, and auth. Please look for privacy and security footguns in the request path.",
+    "should_trigger": false
+  },
+  {
+    "query": "Do a static security review of this agent source tree without adding runtime policy controls.",
+    "should_trigger": false
+  }
+]

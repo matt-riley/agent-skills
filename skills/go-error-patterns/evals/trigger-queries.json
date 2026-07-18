@@ -1,0 +1,34 @@
+[
+  {
+    "query": "My Go helper takes func(string) error, but my constructor returns *DomainError; what is the right pattern?",
+    "should_trigger": true
+  },
+  {
+    "query": "Why doesn't func(string) *ValidationError satisfy func(string) error in Go?",
+    "should_trigger": true
+  },
+  {
+    "query": "Should we keep type OptionalString = optional.String or import the shared type directly?",
+    "should_trigger": true
+  },
+  {
+    "query": "For this Go rewrite, should investment and protection stay as separate lambdas or merge into one binary?",
+    "should_trigger": true
+  },
+  {
+    "query": "go test ./... only fails in CI after a Go version bump.",
+    "should_trigger": false
+  },
+  {
+    "query": "govulncheck is red with only standard-library findings after a toolchain pin change.",
+    "should_trigger": false
+  },
+  {
+    "query": "Validate untrusted API request bodies with schema boundary typing.",
+    "should_trigger": false
+  },
+  {
+    "query": "Something is broken in production and nobody knows if it is code, config, or infra.",
+    "should_trigger": false
+  }
+]

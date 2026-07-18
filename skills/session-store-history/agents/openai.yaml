@@ -4,4 +4,4 @@ interface:
     when the user asks what they worked on before, how a similar problem was handled,
     or which session, PR, issue, branch, or file changed something.
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

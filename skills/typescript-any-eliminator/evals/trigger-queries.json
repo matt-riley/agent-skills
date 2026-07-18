@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Replace any in this API helper with a truthful type without changing runtime behavior.",
+    "should_trigger": true
+  },
+  {
+    "query": "Remove explicit any from our shared DTO and application helpers; keep behavior the same.",
+    "should_trigger": true
+  },
+  {
+    "query": "A reviewer flagged unsafe any usage in this service layer — narrow it safely.",
+    "should_trigger": true
+  },
+  {
+    "query": "Replace Record<string, any> in this payload type with something more precise.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add runtime validation for this untrusted JSON webhook input and derive the TypeScript type from the schema.",
+    "should_trigger": false
+  },
+  {
+    "query": "Enable stricter tsconfig flags and harden compiler options across the monorepo.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write type-level regression tests for inference and assignability after the type surface is truthful.",
+    "should_trigger": false
+  },
+  {
+    "query": "tsc reports a cascade of errors after a library upgrade; triage the root cause.",
+    "should_trigger": false
+  }
+]

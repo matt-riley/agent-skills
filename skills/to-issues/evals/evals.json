@@ -1,0 +1,37 @@
+{
+  "skill_name": "to-issues",
+  "evals": [
+    {
+      "id": "vertical-slice-breakdown",
+      "prompt": "Break this approved PRD into thin vertical implementation issues with dependencies, and show me the breakdown before publishing.",
+      "expected_behavior": "Proposes tracer-bullet vertical slices (not horizontal layers), each with title, AFK/HITL type, dependencies, user-story coverage, and acceptance criteria, and waits for approval before publishing.",
+      "assertions": [
+        "Breaks work into thin end-to-end vertical slices rather than layer-based tickets",
+        "Includes AFK versus HITL classification or equivalent human-review distinction",
+        "Presents the breakdown for approval before creating tracker issues"
+      ],
+      "files": []
+    },
+    {
+      "id": "dependency-ordered-publish",
+      "prompt": "Publish the approved issue slices to GitHub in dependency order with real blocker references.",
+      "expected_behavior": "Creates issues in dependency order so blockers reference real IDs, applies only verified labels, and does not invent tracker conventions.",
+      "assertions": [
+        "Publishes or drafts in dependency order",
+        "Avoids inventing unverified labels or project fields",
+        "Keeps blocker references concrete rather than circular or vague"
+      ],
+      "files": []
+    },
+    {
+      "id": "to-issues-boundary-prd",
+      "prompt": "Write the PRD for this feature before we decide how to split the work.",
+      "expected_behavior": "Routes away from to-issues because product framing is still missing.",
+      "assertions": [
+        "Does not invent implementation tickets when a PRD is still needed",
+        "Routes toward to-prd or product-requirements work instead"
+      ],
+      "files": []
+    }
+  ]
+}

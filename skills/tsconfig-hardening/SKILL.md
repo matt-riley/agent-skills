@@ -7,6 +7,7 @@ metadata:
   category: typescript
   audience: general-coding-agent
   maturity: stable
+  kind: task
 ---
 
 # Tsconfig hardening

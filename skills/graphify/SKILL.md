@@ -9,7 +9,7 @@ metadata:
   version: 0.1.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: draft
+  maturity: experimental
   kind: reference
 ---
 
@@ -41,7 +41,13 @@ Check whether `graphify-out/graph.json` already exists. If it does and the user'
 
 ## Workflow
 
-For a new graph, follow the pipeline in `references/default-build-workflow.md`: detect files, extract entities, build the graph, cluster, label communities, generate outputs, and report. For an existing graph or an explicit maintenance subcommand, use the focused routes below.
+1. Confirm the user wants a persistent Graphify graph artifact, not ad-hoc analysis.
+2. For a new graph, follow [`references/default-build-workflow.md`](references/default-build-workflow.md): detect inputs, extract entities, build the graph, export.
+3. For an existing graph, load it and answer with graph-oriented queries rather than rebuilding by default.
+4. Keep extraction and export settings explicit when the corpus mixes code, docs, and media.
+5. Validate that outputs (graph file / exports) exist and answer the user's question from the graph.
+6. Warn before heavy viz or rebuilds on large graphs; prefer incremental updates when available.
+7. Route pure code navigation or non-graph research to `code-intelligence` / `autoresearch` instead.
 
 ## Guardrails
 

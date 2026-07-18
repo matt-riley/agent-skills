@@ -5,6 +5,8 @@ license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
   owner: mattriley
+  category: ci
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---
@@ -70,7 +72,14 @@ Standard tagging strategy on release:
 
 ## Workflow
 
-See the body and references for the CI image and publishing steps.
+1. Identify the CI stages that must stay green locally (generate, format, lint/static, test, image build).
+2. Run local equivalents in CI order; fix the first failure before continuing.
+3. Confirm generated artifacts are current and committed when generation is part of the pipeline.
+4. For image work, confirm Dockerfile/build context matches the publishing workflow.
+5. Check release readiness (clean tree, intended tags `vX.Y.Z` / `X.Y` / `X` / `latest`).
+6. Run any repo release-readiness script (for example `scripts/release-readiness.sh` when present).
+7. Only after local parity and a clean tree, trigger or document the image publish path.
+8. Treat remote CI as authoritative; local green is necessary but not sufficient alone.
 
 ## Guardrails
 

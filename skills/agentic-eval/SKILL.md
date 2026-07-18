@@ -76,7 +76,15 @@ For a new implementation, start with the checklist to confirm your setup is comp
 
 ## Workflow
 
-See the body and references for agentic evaluation design and loop steps.
+1. Name the skill or agent behavior under evaluation and the success criteria.
+2. Load existing `trigger-queries.json` / eval fixtures when present; otherwise define criteria first.
+3. Choose a strategy from [`references/patterns.md`](references/patterns.md): outcome-based, LLM-as-judge, or rubric-based.
+4. Complete the setup checklist in [`assets/eval-checklist.md`](assets/eval-checklist.md) (criteria, threshold, max iterations, logging).
+5. Isolate generate → evaluate → optimize steps; keep the evaluator replaceable.
+6. Run the loop with a hard `max_iterations` bound and a convergence check.
+7. Log full trajectories (input, output, score, critique) for every iteration.
+8. Stop on threshold met, no improvement, or budget exhaustion; report structured scores.
+9. Feed failures back into skill description, anti-triggers, or workflow edits, then re-run.
 
 ## Guardrails
 

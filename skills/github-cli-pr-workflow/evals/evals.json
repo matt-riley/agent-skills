@@ -1,0 +1,37 @@
+{
+  "skill_name": "github-cli-pr-workflow",
+  "evals": [
+    {
+      "id": "create-pr-and-watch-checks",
+      "prompt": "Create a PR from this branch and watch required checks before handoff.",
+      "expected_behavior": "Uses gh to create or confirm the PR, anchors check status to the current pushed head SHA, and reports PR URL plus pass/fail/blocked status.",
+      "assertions": [
+        "Uses GitHub CLI PR lifecycle commands rather than browser-only steps",
+        "Anchors check status to the current head SHA, not a stale run",
+        "Reports PR identifier/URL with a clear next-route if checks fail or reviews start"
+      ],
+      "files": []
+    },
+    {
+      "id": "update-pr-metadata",
+      "prompt": "Update PR #412 title/body for the latest push and tell me if checks are green.",
+      "expected_behavior": "Updates PR metadata with gh, re-checks status against the latest head SHA, and keeps scope limited to PR lifecycle (not failure triage).",
+      "assertions": [
+        "Scopes work to PR metadata and check watching",
+        "Does not dive into workflow log root-cause diagnosis",
+        "References the current head SHA when reporting green/red status"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-finish-branch",
+      "prompt": "Tests are green — help me decide whether to merge locally, open a PR, keep, or discard the branch.",
+      "expected_behavior": "Routes to finishing-a-development-branch instead of treating this as a pure gh PR create/watch task.",
+      "assertions": [
+        "Does not default to gh pr create as the only option",
+        "Recognizes the integration decision belongs to finishing-a-development-branch"
+      ],
+      "files": []
+    }
+  ]
+}

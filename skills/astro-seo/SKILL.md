@@ -4,6 +4,8 @@ description: "Audit and improve SEO for Astro sites, including metadata, structu
 license: GNU GPL v3
 metadata:
   version: 1.2.0 # x-release-please-version
+  category: frontend
+  audience: general-coding-agent
   maturity: stable
   kind: task
 ---

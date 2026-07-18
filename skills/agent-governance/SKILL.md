@@ -69,7 +69,16 @@ Load the reference when implementing or comparing controls. Keep audit-only, gua
 
 ## Workflow
 
-See the sections above for trigger, inputs, first move, and detailed steps. The workflow is read the governance requirements, implement the policy/trust/audit controls with clear boundaries, and validate behavior (tests or manual).
+1. Classify risk level: open, standard, strict, or locked for the agent and its tools.
+2. Inventory tools the agent can call and the sensitive actions among them.
+3. Define a `GovernancePolicy` (allowed tools, blocked patterns, rate limits, human-approval needs).
+4. Read [`references/policy-patterns.md`](references/policy-patterns.md) for the control set that matches the risk level.
+5. Implement enforcement at the tool boundary (`@govern` or framework-equivalent middleware).
+6. Add intent classification when prompt-level danger detection is required.
+7. Wire append-only audit logging for allowed, denied, and error events.
+8. For multi-agent setups, add trust scoring before privileged tool access.
+9. Integrate with the target framework using [`references/framework-integration.md`](references/framework-integration.md).
+10. Validate fail-closed behavior: blocked tools deny, rate limits fire, audit events exist, and secrets never appear in logs.
 
 ## Guardrails
 

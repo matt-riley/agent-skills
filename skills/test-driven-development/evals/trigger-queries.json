@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Implement this parser with strict TDD: failing test first, then minimal code, then refactor.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix this bug using a red-green-refactor cycle — write the reproducing test before any production code.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want test-first implementation of the email validator; no production code until a test fails for the right reason.",
+    "should_trigger": true
+  },
+  {
+    "query": "Pin current behavior with tests, then refactor while keeping the suite green under TDD discipline.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rerun the parser tests before claiming the bug is fixed.",
+    "should_trigger": false
+  },
+  {
+    "query": "The test suite started failing after yesterday's merge and I need the root cause.",
+    "should_trigger": false
+  },
+  {
+    "query": "Update the README and environment variable docs only — no executable logic.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add coverage for this module using the repo's existing testing conventions without a TDD cycle.",
+    "should_trigger": false
+  }
+]

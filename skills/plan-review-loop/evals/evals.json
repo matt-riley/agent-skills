@@ -1,0 +1,37 @@
+{
+  "skill_name": "plan-review-loop",
+  "evals": [
+    {
+      "id": "unanimous-approval-round",
+      "prompt": "Use the plan-review-loop skill to review and refine the current completed /plan with Jason and Freddy.",
+      "expected_behavior": "Runs structured multi-reviewer analysis, collects exact verdict tokens, and treats unanimous same-round [PLAN-APPROVED] as ready for implementation.",
+      "assertions": [
+        "Expects or produces explicit [PLAN-APPROVED] or [PLAN-REVISE-NEEDED] tokens",
+        "Requires all configured reviewers to agree in the same round",
+        "Does not silently rewrite the plan without a revise path"
+      ],
+      "files": []
+    },
+    {
+      "id": "revise-then-rerun",
+      "prompt": "Jason returned [PLAN-REVISE-NEEDED] for missing rollback in task 5; Freddy approved. What next?",
+      "expected_behavior": "Treats the round as not approved, asks for plan updates, and allows another review round without exceeding the three-round maximum without an explicit outside decision.",
+      "assertions": [
+        "Does not mark the plan approved when any reviewer needs revision",
+        "Instructs updating the plan and re-invoking the review loop",
+        "Respects the multi-round approval model"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-grill-with-docs",
+      "prompt": "Stress-test this design and update CONTEXT.md as we go — no formal reviewer tokens.",
+      "expected_behavior": "Routes to grill-with-docs (or informal grill-me) instead of the structured plan-review-loop.",
+      "assertions": [
+        "Does not require [PLAN-APPROVED] tokens for an informal stress-test",
+        "Recognizes grill-with-docs / informal critique as the better fit"
+      ],
+      "files": []
+    }
+  ]
+}

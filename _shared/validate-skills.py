@@ -138,8 +138,8 @@ def validate_openai_metadata(skill_dir, fm, errors):
     if short != fm.get('description'):
         fail(errors, f'{path}: interface.short_description must match SKILL.md description')
     allow = (data.get('policy') or {}).get('allow_implicit_invocation')
-    if allow is not True:
-        fail(errors, f'{path}: policy.allow_implicit_invocation must be true for active catalog skills')
+    if not isinstance(allow, bool):
+        fail(errors, f'{path}: policy.allow_implicit_invocation must be a boolean (true or false)')
 
 
 def validate_release_metadata(skill_path, skill_name, fm, manifest, release_packages, errors):

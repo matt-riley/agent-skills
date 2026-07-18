@@ -6,7 +6,7 @@ metadata:
   version: 1.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
-  maturity: draft
+  maturity: stable
   kind: task
 ---
 

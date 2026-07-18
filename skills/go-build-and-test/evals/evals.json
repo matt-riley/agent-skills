@@ -1,0 +1,37 @@
+{
+  "skill_name": "go-build-and-test",
+  "evals": [
+    {
+      "id": "toolchain-mismatch",
+      "prompt": "Our Go CI job started failing after a toolchain update and I need to figure out whether GOROOT or GOTOOLDIR is stale.",
+      "expected_behavior": "Captures go version and go env, checks for stale GOROOT/GOTOOLDIR overrides, and separates environment issues from package code defects before editing.",
+      "assertions": [
+        "Inspects go version and go env (GOROOT, GOTOOLDIR, GOPATH) before code changes",
+        "Considers stale shell overrides as a first-class cause",
+        "Re-runs package-scoped go build/test after the fix"
+      ],
+      "files": []
+    },
+    {
+      "id": "ci-tempdir-race",
+      "prompt": "go test passes on macOS but fails on Linux CI with a TempDir cleanup error while a background event still writes.",
+      "expected_behavior": "Treats this as CI-parity/test-isolation, looks for t.TempDir races or late finished-event writes, and proposes the smallest isolation fix.",
+      "assertions": [
+        "Frames the issue as CI/OS parity or test isolation rather than pure product logic",
+        "Mentions TempDir cleanup, background writes, or waiting for finished events",
+        "Avoids jumping to go-error-patterns style signature redesign"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-error-covariance",
+      "prompt": "Why doesn't func(string) *ValidationError satisfy func(string) error in Go, and what should I pass instead?",
+      "expected_behavior": "Routes to go-error-patterns because this is error-type design, not a build/toolchain failure.",
+      "assertions": [
+        "Does not treat this primarily as a GOROOT or CI-parity problem",
+        "Points toward go-error-patterns or constructor-wrapping guidance"
+      ],
+      "files": []
+    }
+  ]
+}

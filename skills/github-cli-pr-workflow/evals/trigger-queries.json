@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Create a PR from this branch with gh and watch the latest checks.",
+    "should_trigger": true
+  },
+  {
+    "query": "Update PR #412 title and body, then confirm checks are green on the current head SHA.",
+    "should_trigger": true
+  },
+  {
+    "query": "Give me the current PR URL and check status for this pushed branch before handoff.",
+    "should_trigger": true
+  },
+  {
+    "query": "Watch required checks for the latest commit on this PR with gh pr checks.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me choose whether to merge, PR, keep, or discard this branch.",
+    "should_trigger": false
+  },
+  {
+    "query": "This workflow run failed — diagnose the root cause from the logs.",
+    "should_trigger": false
+  },
+  {
+    "query": "Walk the open review comments and produce follow-up commits for each disposition.",
+    "should_trigger": false
+  },
+  {
+    "query": "Set up an isolated git worktree for this feature lane.",
+    "should_trigger": false
+  }
+]

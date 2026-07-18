@@ -109,7 +109,13 @@ Detail: [references/degradation-and-disclosure.md](references/degradation-and-di
 
 ## Workflow
 
-See the body and references for LSP/grep routing and code intelligence steps.
+1. Identify the language and whether an LSP server is available for the target files.
+2. Prefer LSP: go-to-definition, find-references, hover, rename, diagnostics.
+3. If LSP returns empty or unsupported, disclose the fallback and switch to `rg`/glob with a tighter scope.
+4. For semantic "what does this do" questions without a stable symbol, use semantic search after LSP/grep miss.
+5. Never invent symbols, call graphs, or unused-status claims without tool evidence.
+6. When refactoring, confirm references via LSP before mass edits; re-run diagnostics after.
+7. Summarize which tool answered each claim so the user can trust the navigation trail.
 
 ## Guardrails
 

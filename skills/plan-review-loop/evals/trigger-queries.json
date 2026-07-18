@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Use Jason and Freddy to review this finished /plan before implementation.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run the plan-review-loop skill so reviewers can approve or request revisions on this completed plan.",
+    "should_trigger": true
+  },
+  {
+    "query": "We revised the plan after feedback; start another structured multi-reviewer approval round.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need documented [PLAN-APPROVED] / [PLAN-REVISE-NEEDED] gates before we implement.",
+    "should_trigger": true
+  },
+  {
+    "query": "Stress-test this design and update CONTEXT.md as we go.",
+    "should_trigger": false
+  },
+  {
+    "query": "Give me a fast informal critique of this idea without a full review loop.",
+    "should_trigger": false
+  },
+  {
+    "query": "Draft and harden a plan from scratch; we don't have a completed /plan yet.",
+    "should_trigger": false
+  },
+  {
+    "query": "The plan is already approved — start implementing the tasks.",
+    "should_trigger": false
+  }
+]

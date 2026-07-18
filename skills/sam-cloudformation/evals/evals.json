@@ -1,0 +1,37 @@
+{
+  "skill_name": "sam-cloudformation",
+  "evals": [
+    {
+      "id": "rollback-failed-recovery",
+      "prompt": "Our SAM deploy rolled back and the stack is stuck in UPDATE_ROLLBACK_FAILED after bad resource wiring. Recover safely.",
+      "expected_behavior": "Inspects CloudFormation events and drift, avoids blind redeploy loops, and considers continue-update-rollback or template fixes only after understanding the first broken resource.",
+      "assertions": [
+        "Treats UPDATE_ROLLBACK_FAILED as more than a simple retry",
+        "Uses stack events or drift evidence before recovery actions",
+        "Keeps focus on SAM/CloudFormation rather than Go binary packaging"
+      ],
+      "files": []
+    },
+    {
+      "id": "validate-before-deploy",
+      "prompt": "Fix this SAM template validation error; resources need portable ARNs without hardcoding account/region.",
+      "expected_behavior": "Runs or recommends sam validate --lint first, fixes schema/property/wiring issues, and prefers !Sub with AWS::AccountId/AWS::Region over hardcoded ARNs.",
+      "assertions": [
+        "Prioritizes sam validate --lint before repeated deploys",
+        "Mentions dynamic ARNs or avoiding hardcoded account/region",
+        "Confirms SAM transform headers when relevant"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-lambda-bootstrap",
+      "prompt": "The Go Lambda zip is missing the bootstrap binary and fails before the template is the problem.",
+      "expected_behavior": "Routes to aws-lambda-go-deployment because packaging/runtime is the primary blocker, not SAM template wiring.",
+      "assertions": [
+        "Does not keep iterating on SAM template schema as the main fix",
+        "Routes toward aws-lambda-go-deployment or Lambda packaging guidance"
+      ],
+      "files": []
+    }
+  ]
+}
