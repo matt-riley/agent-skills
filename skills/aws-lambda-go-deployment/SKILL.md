@@ -35,7 +35,7 @@ Use this skill when a Go Lambda fails because the binary, runtime, package layou
 | --- | --- | --- |
 | Go Lambda packaging, runtime, bootstrap, or handler problems | Yes | - |
 | SAM template YAML, CloudFormation stack rollback, or IAM resource wiring | No | [`sam-cloudformation`](../sam-cloudformation/SKILL.md) |
-| Deploy workflow fails on AssumeRole or OIDC auth | No | [`iam-oidc-triage`](../iam-oidc-triage/SKILL.md) |
+| Deploy workflow fails on AssumeRole or OIDC auth | No | [`sam-cloudformation`](../sam-cloudformation/SKILL.md) |
 | Go code does not compile before packaging | No | [`go-build-and-test`](../go-build-and-test/SKILL.md) |
 | CI workflow structure or runner behavior is failing | No | [`github-actions-failure-triage`](../github-actions-failure-triage/SKILL.md) |
 
@@ -83,7 +83,7 @@ Use this skill when a Go Lambda fails because the binary, runtime, package layou
 
 - A clear diagnosis of whether the failure is packaging, runtime selection, artifact layout, or event wiring.
 - The corrected build/deploy assumptions for Linux architecture, executable naming, and runtime choice.
-- A clean handoff to `sam-cloudformation`, `iam-oidc-triage`, `go-build-and-test`, or `github-actions-failure-triage` when this skill is not the right owner.
+- A clean handoff to `sam-cloudformation`, `go-build-and-test`, or `github-actions-failure-triage` when this skill is not the right owner.
 
 ## Guardrails
 
@@ -100,7 +100,7 @@ Use this skill when a Go Lambda fails because the binary, runtime, package layou
 - If the function is deployed, inspect CloudWatch logs for `INIT_START` and `START` to confirm whether the runtime got far enough to execute code.
 - Smoke test:
   - should trigger: "Our Go Lambda was built on macOS and now fails in AWS with an exec-format or missing-bootstrap style startup error."
-  - should not trigger: "The deploy job fails before deployment because GitHub Actions gets AccessDenied on AssumeRoleWithWebIdentity." (→ `iam-oidc-triage`)
+  - should not trigger: "The deploy job fails before deployment because GitHub Actions gets AccessDenied on AssumeRoleWithWebIdentity." (→ `sam-cloudformation`)
 
 ## Examples
 

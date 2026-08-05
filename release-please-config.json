@@ -549,16 +549,6 @@
         }
       ]
     },
-    "skills/iam-oidc-triage": {
-      "package-name": "iam-oidc-triage",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/modern-web-guidance": {
       "package-name": "modern-web-guidance",
       "skip-github-release": true,

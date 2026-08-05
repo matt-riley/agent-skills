@@ -108,9 +108,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Cloud and infrastructure
 
-- `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks
+- `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks, including OIDC/AssumeRole deploy-auth denials
 - `terraform-skill` — write, plan, apply, and troubleshoot Terraform configurations and state
-- `iam-oidc-triage` — diagnose and fix IAM OIDC trust policy failures for GitHub Actions, AWS, and GCP
 - `secret-scan-triage` — identify, remediate, and prevent secret leaks caught by gitleaks
 
 ### Frontend and site quality
@@ -218,8 +217,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | a GoReleaser release pipeline | `goreleaser-release-pipeline` | Release artifacts and changelogs are the main output |
 | reproducing a GitHub Actions failure locally | `github-actions-local-repro` | Local repro beats remote re-run for diagnosis |
 | SAM or CloudFormation template work | `sam-cloudformation` | SAM/CFN syntax, deploy, and stack management are the focus |
+| IAM OIDC trust failures or `sts:AssumeRole` AccessDenied on an AWS deploy | `sam-cloudformation` | Trust-policy diagnosis is the gate on the same SAM/CloudFormation deploy pipeline |
 | Terraform write, plan, or apply work | `terraform-skill` | Terraform config, state, and provider patterns are the focus |
-| IAM OIDC trust failures or GitHub Actions AWS auth | `iam-oidc-triage` | OIDC trust policy diagnosis is the speciality |
 | secret scanning alerts or leak remediation | `secret-scan-triage` | Secret identification and rotation are the main risk |
 | finishing, polishing, or PR-readying a feature branch | `finishing-a-development-branch` | Branch completion checklist is the deliverable |
 | creating or merging a PR with the GitHub CLI | `github-cli-pr-workflow` | `gh` PR workflow is the primary tool |
