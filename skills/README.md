@@ -112,7 +112,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 - `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks
 - `terraform-skill` — write, plan, apply, and troubleshoot Terraform configurations and state
 - `iam-oidc-triage` — diagnose and fix IAM OIDC trust policy failures for GitHub Actions, AWS, and GCP
-- `secret-scan-triage` — identify, remediate, and prevent secret leaks caught by Trufflehog, GitGuardian, or similar scanners
+- `secret-scan-triage` — identify, remediate, and prevent secret leaks caught by gitleaks
 
 ### Frontend and site quality
 
@@ -133,7 +133,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 - `find-skills` — discover an existing local catalog skill when skill lookup is the deliverable; do not use it as a wrapper around a directly requested task (experimental; explicit invocation preferred)
 - `acquire-codebase-knowledge` — deep-map an existing codebase into seven structured docs covering stack, architecture, conventions, integrations, testing, and concerns
-- `autoresearch` — execute an automated research pass across docs, code, and search to answer a question or validate a claim
+- `autoresearch` — run an autonomous numeric-metric hill-climbing loop on an experiment branch, logging `results.tsv` and making keep/revert decisions
 - `code-tour` — create or follow a guided tour through an unfamiliar codebase
 - `context-map` — produce a domain-driven context map of bounded contexts and their integration relationships
 - `code-intelligence` — preferred routing layer for LSP, grep, and glob operations; always use LSP over text search when available
@@ -143,7 +143,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 - `agent-governance` — implement safety, policy, trust scoring, and audit patterns for AI agents that call external tools
 - `agent-supply-chain` — add integrity manifests and promotion gates to agent plugin and tool pipelines
-- `agentic-eval` — design and run behavioral evaluations for agent skills and trigger accuracy
+- `agentic-eval` — design and run evaluation loops for agent outputs using reflection, evaluator-optimizer, or LLM-as-judge patterns
 
 ### Writing, docs, and planning artifacts
 
@@ -238,7 +238,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | challenging an implementation against official docs | `grill-with-docs` | Doc-grounded critique is the main format |
 | AI agent policy, tool allowlists, or audit trails | `agent-governance` | Runtime governance patterns are the speciality |
 | AI agent plugin integrity or promotion gates | `agent-supply-chain` | Supply chain verification is the main risk |
-| evaluating AI agent trigger accuracy or behavior | `agentic-eval` | Behavioral evaluation methodology is the focus |
+| designing or running evaluation loops for AI agent outputs | `agentic-eval` | Reflection, evaluator-optimizer, and LLM-as-judge patterns are the focus |
 | recovering a stalled, blocked, or dormant task from partial context | `resolve-open-loops` | Open-loop and stalled-task recovery is the main need |
 | closing deferred items, open questions, or unresolved decisions | `resolve-open-loops` | Open-loop closure and handoff is the deliverable |
 | defining or enforcing explicit entry/exit contracts for multi-step workflows | `workflow-contracts` | Contract-shaped workflow boundaries are the main risk |
@@ -247,7 +247,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | co-authoring technical documentation with iterative Q&A | `doc-coauthoring` | Document structure and prose co-authorship is the main need |
 | a pre-edit context map or survey of likely files and patterns | `context-map` | Contextual file-and-pattern mapping is the main deliverable |
 | creating a guided code tour or narrative walkthrough | `code-tour` | Step-by-step `.tour` file creation is the deliverable |
-| an automated research pass to answer a question or validate a claim | `autoresearch` | Autonomous iterative research is the main mechanism |
+| autonomous numeric-metric optimization with an experiment branch, `results.tsv`, and keep/revert decisions | `autoresearch` | Iterative hill-climbing is the main mechanism |
 | structural code search, codemod rewrites, or ast-grep patterns | `ast-grep` | Syntax-aware search and rewrite is the speciality |
 | modern web platform patterns, HTML, CSS, forms, or web API guidance | `modern-web-guidance` | Current web platform guidance prevents legacy patterns |
 | Neovim config, plugins, LSP wiring, or startup behavior | `neovim-config` | Neovim Lua configuration is the speciality |

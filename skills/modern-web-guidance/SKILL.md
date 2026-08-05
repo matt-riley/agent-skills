@@ -31,7 +31,7 @@ A reference and search tool for modern web platform APIs. Use before implementin
 - Working on CI/CD — pipelines, Docker, GitHub Actions workflows
 - Writing tooling — ESLint config, Vite/Webpack config, Python/Go scripts
 - Debugging a runtime error — use `systematic-debugging` instead
-- Reviewing a running website's design — use `web-design-reviewer` instead
+- Reviewing an existing UI for concrete visual polish — use [`make-interfaces-feel-better`](../make-interfaces-feel-better/SKILL.md) instead
 - Typing TypeScript API boundaries — use `schema-boundary-typing` instead
 
 ## Routing boundary
@@ -39,7 +39,7 @@ A reference and search tool for modern web platform APIs. Use before implementin
 | Situation | Use this skill? | Route instead |
 |-----------|----------------|---------------|
 | Implement a new UI component in HTML/CSS/JS | ✅ Yes | — |
-| Review the design of a running website | ❌ No | `web-design-reviewer` |
+| Review an existing UI for concrete visual polish | ❌ No | [`make-interfaces-feel-better`](../make-interfaces-feel-better/SKILL.md) |
 | Debug a runtime CSS/JS error | ❌ No | `systematic-debugging` |
 | Type a TypeScript API edge contract | ❌ No | `schema-boundary-typing` |
 | Audit dead CSS/JS code | ❌ No | `fallow` |

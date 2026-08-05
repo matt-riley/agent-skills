@@ -47,7 +47,7 @@ Check whether `graphify-out/graph.json` already exists. If it does and the user'
 4. Keep extraction and export settings explicit when the corpus mixes code, docs, and media.
 5. Validate that outputs (graph file / exports) exist and answer the user's question from the graph.
 6. Warn before heavy viz or rebuilds on large graphs; prefer incremental updates when available.
-7. Route pure code navigation or non-graph research to `code-intelligence` / `autoresearch` instead.
+7. Route pure code navigation to [`code-intelligence`](../code-intelligence/SKILL.md); handle ordinary non-graph research or codebase questions with direct analysis instead.
 
 ## Guardrails
 
@@ -63,22 +63,6 @@ Check whether `graphify-out/graph.json` already exists. If it does and the user'
 - Confirm the graph outputs exist on disk after each step
 - Check that extraction produced nodes before proceeding to clustering
 
-## Examples
-
-All invocation examples are in `references/default-build-workflow.md`.
-
-## Reference files
-
-- `references/default-build-workflow.md` — Full usage surface and ordered procedure for creating a new graph
-- `references/extraction-spec.md` — Subagent prompt template for semantic extraction
-- `references/github-and-merge.md` — Clone, cross-repo merge, and monorepo flow
-- `references/transcribe.md` — Video and audio transcription
-- `references/update.md` — Incremental update and re-cluster flows
-- `references/query.md` — Query, path, explain, and NetworkX fallback
-- `references/add-watch.md` — Add URL and watch-mode flows
-- `references/hooks.md` — Commit hook and native CLAUDE.md integration
-- `references/exports.md` — Wiki, Neo4j, SVG, GraphML, MCP, and benchmark exports
-- `.graphify_version` — Current graphify version for compatibility checks
 
 ## Default build workflow
 
@@ -131,3 +115,20 @@ Neither is part of the default build. When the user runs `/graphify add <url>` t
 ## For the commit hook and native CLAUDE.md integration
 
 When the user asks to install the post-commit auto-rebuild hook or wire graphify into a project's CLAUDE.md, see `references/hooks.md`.
+
+## Examples
+
+All invocation examples are in `references/default-build-workflow.md`.
+
+## Reference files
+
+- `references/default-build-workflow.md` — Full usage surface and ordered procedure for creating a new graph
+- `references/extraction-spec.md` — Subagent prompt template for semantic extraction
+- `references/github-and-merge.md` — Clone, cross-repo merge, and monorepo flow
+- `references/transcribe.md` — Video and audio transcription
+- `references/update.md` — Incremental update and re-cluster flows
+- `references/query.md` — Query, path, explain, and NetworkX fallback
+- `references/add-watch.md` — Add URL and watch-mode flows
+- `references/hooks.md` — Commit hook and native CLAUDE.md integration
+- `references/exports.md` — Wiki, Neo4j, SVG, GraphML, MCP, and benchmark exports
+- `.graphify_version` — Current graphify version for compatibility checks
