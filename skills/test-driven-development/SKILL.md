@@ -3,7 +3,7 @@ name: test-driven-development
 description: "Use when the user explicitly asks for test-driven development (TDD), a red-green-refactor cycle, or test-first implementation — not for general feature work, bug fixes, or refactoring unless TDD discipline is specifically requested."
 license: GNU GPL v3
 metadata:
-  version: 1.1.0 # x-release-please-version
+  version: 1.1.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

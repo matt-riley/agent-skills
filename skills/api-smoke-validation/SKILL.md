@@ -3,7 +3,7 @@ name: api-smoke-validation
 description: "Use when running quick, repeatable API smoke tests after changes with hurl, including auth, status-code, response-shape, endpoint sanity, and pre-integration health checks."
 license: GNU GPL v3
 metadata:
-  version: 1.1.0 # x-release-please-version
+  version: 1.1.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

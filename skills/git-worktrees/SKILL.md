@@ -3,7 +3,7 @@ name: git-worktrees
 description: "Set up and manage isolated git worktrees for parallel tasks, agent lanes, and safer branch isolation. Use when worktree setup or recovery is the real need, not generic planning or implementation guidance."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   owner: mattriley
   category: git
   audience: general-coding-agent

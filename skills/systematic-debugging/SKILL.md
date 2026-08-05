@@ -3,7 +3,7 @@ name: systematic-debugging
 description: "Use when encountering any bug, test failure, unexpected behavior, or persistent error before proposing fixes — especially under time pressure, after multiple failed attempts, or when the root cause is unclear."
 license: GNU GPL v3
 metadata:
-  version: 1.1.0 # x-release-please-version
+  version: 1.1.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: stable

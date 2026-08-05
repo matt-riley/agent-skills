@@ -3,7 +3,7 @@ name: neovim-plugin-development
 description: "Develop, test, and release Neovim Lua plugins. Use when building a new Neovim plugin, adding features to an existing plugin, setting up CI with GitHub Actions, writing plenary tests, generating documentation, or configuring release automation — not for editing user-level Neovim config."
 license: GNU GPL v3
 metadata:
-  version: 1.1.0 # x-release-please-version
+  version: 1.1.1 # x-release-please-version
   category: neovim
   audience: general-coding-agent
   maturity: stable

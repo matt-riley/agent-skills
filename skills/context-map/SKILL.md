@@ -3,7 +3,7 @@ name: context-map
 description: Use when the user explicitly wants a pre-edit scoping pass — mapping candidate files, tests, and reference patterns before implementation. Not for general multi-file tasks unless the user asks "what files are involved" or requests a context map.
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

@@ -3,7 +3,7 @@ name: iam-oidc-triage
 description: "Use when GitHub Actions or another OIDC caller gets AWS sts:AssumeRole or sts:AssumeRoleWithWebIdentity AccessDenied — not when auth succeeds and the remaining failure is in SAM, CloudFormation, or Terraform execution."
 license: GNU GPL v3
 metadata:
-  version: 1.0.1 # x-release-please-version
+  version: 1.0.2 # x-release-please-version
   category: ci
   audience: general-coding-agent
   maturity: draft

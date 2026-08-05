@@ -3,7 +3,7 @@ name: workflow-contracts
 description: "Use when a task needs a durable handoff artifact for planning, review, or execution in agent-driven workflows — not just a chat summary."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

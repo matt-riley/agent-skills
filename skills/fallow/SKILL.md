@@ -3,7 +3,7 @@ name: fallow
 description: "Use when auditing JS/TS code health with Fallow - dead code, duplication, boundaries, or cleanup; not for debugging failures."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: code-quality
   audience: general-coding-agent
   maturity: draft

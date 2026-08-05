@@ -3,7 +3,7 @@ name: go-cli-development
 description: "Develop, structure, and release Go CLI tools. Use when building a new Go CLI, adding subcommands or flags, wiring config, formatting output, setting up goreleaser + Homebrew distribution, or debugging CLI-specific behavior — not for build failures or test debugging."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: go
   audience: general-coding-agent
   maturity: stable

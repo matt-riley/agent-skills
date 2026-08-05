@@ -3,7 +3,7 @@ name: github-actions-failure-triage
 description: "Diagnose and minimally fix failing GitHub Actions runs in repositories already using GitHub Actions."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   category: ci
   audience: general-coding-agent
   maturity: stable
