@@ -53,7 +53,7 @@ command = "CLAUDECODE= MAX_THINKING_TOKENS=0 claude -p --no-session-persistence 
 # squash-template = "..."
 ```
 
-See [`assets/llm-commits-setup.md`](../assets/llm-commits-setup.md) for config blocks for other
+See [`llm-commits-setup.md`](llm-commits-setup.md) for config blocks for other
 LLM tools.
 
 ### List command defaults
@@ -132,7 +132,7 @@ Committed to the repository and shared with the team. Requires approval on first
 
 ### Hooks
 
-All 8 hook types available. See [`assets/hooks-reference.md`](../assets/hooks-reference.md) for
+All 8 hook types available. See [`hooks-reference.md`](hooks-reference.md) for
 full syntax and template variables.
 
 ```toml
