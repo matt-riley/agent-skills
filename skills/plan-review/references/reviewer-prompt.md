@@ -8,7 +8,7 @@ Use this template when the user asks for plan review, named reviewer models, or 
 Review the current implementation plan for correctness, repo fit, validation coverage, rollout safety, and scope discipline.
 
 Return exactly:
-1. Verdict: APPROVE or REQUEST_CHANGES
+1. Verdict: `[PLAN-APPROVED]` or `[PLAN-REVISE-NEEDED]` — exactly one token, written exactly as shown (see `review-verdicts.md`; any other format is rejected)
 2. Required changes
 3. Optional suggestions
 4. Approval rationale
@@ -25,7 +25,7 @@ Context:
 
 ## Consolidation rules
 
-- Treat `REQUEST_CHANGES` as blocking.
+- Treat `[PLAN-REVISE-NEEDED]` as blocking.
 - Merge duplicate findings across reviewers before revising the plan.
 - Preserve reviewer-specific concerns when they are materially different.
 - After revising the plan, send the updated revision back to the full reviewer set.

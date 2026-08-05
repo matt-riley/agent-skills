@@ -1,0 +1,25 @@
+{
+  "skill_name": "grill-me",
+  "evals": [
+    {
+      "id": "pure-interrogation",
+      "prompt": "Grill me on my plan to refactor the notification service.",
+      "expected_behavior": "Runs one-question-at-a-time plan interrogation without creating documentation files.",
+      "assertions": [
+        "Asks one focused question at a time",
+        "Keeps the default session free of documentation side effects"
+      ],
+      "files": []
+    },
+    {
+      "id": "explicit-documentation-mode",
+      "prompt": "Grill me and build CONTEXT.md as we resolve the domain language.",
+      "expected_behavior": "Enters documentation mode because the user explicitly requested CONTEXT.md, while retaining the one-question-at-a-time interrogation loop.",
+      "assertions": [
+        "Recognizes explicit documentation intent",
+        "Uses the CONTEXT.md format and updates only after terms are resolved"
+      ],
+      "files": []
+    }
+  ]
+}

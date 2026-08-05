@@ -79,5 +79,5 @@ This repo uses Release Please via the shared `matt-riley-ci` workflow.
 
 ## Learned rules (from AGENTS.md)
 
-1. Always use `license: GNU GPL v3` in skill frontmatter and skill-authoring templates, and direct license lookups to the repo-root `LICENSE` file — this catalog is GPL-licensed at the repository level.
+1. Always use `license: GNU GPL v3` in skill frontmatter and skill-creator templates, and direct license lookups to the repo-root `LICENSE` file — this catalog is GPL-licensed at the repository level.
 2. When a skill is renamed, update inter-skill links and `skills/README.md` routing entries in the same pass — stale names break catalog validation and send agents to nonexistent packages.

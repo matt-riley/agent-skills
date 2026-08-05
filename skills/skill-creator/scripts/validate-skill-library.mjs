@@ -25,7 +25,7 @@ const CANONICAL_HEADINGS = [
 const VALID_KINDS = new Set(["task", "reference"]);
 
 // Metadata contract: only these top-level keys are permitted in skill frontmatter.
-// See skills/skill-authoring/references/metadata-contract.md for rationale.
+// See skills/skill-creator/references/frontmatter-contract.md for rationale.
 // `license` is allowed because this catalog is GPL-licensed and AGENTS.md requires it in skill frontmatter.
 const ALLOWED_TOP_LEVEL_KEYS = new Set([
   "name",
@@ -431,7 +431,7 @@ function validateTopLevelFrontmatterKeys(frontmatter, errors) {
   for (const key of Object.keys(frontmatter)) {
     if (!ALLOWED_TOP_LEVEL_KEYS.has(key)) {
       errors.push(
-        `forbidden top-level frontmatter key: ${key}; allowed keys are name, description, license, compatibility, metadata — see skills/skill-authoring/references/metadata-contract.md`,
+        `forbidden top-level frontmatter key: ${key}; allowed keys are name, description, license, compatibility, metadata — see skills/skill-creator/references/frontmatter-contract.md`,
       );
     }
   }
@@ -468,7 +468,7 @@ function validateForbiddenMetadataKeys(metadata, errors) {
       continue;
     }
     errors.push(
-      `forbidden provenance key metadata.${key}; remove upstream attribution fields from frontmatter — see skills/skill-authoring/references/metadata-contract.md`,
+      `forbidden provenance key metadata.${key}; remove upstream attribution fields from frontmatter — see skills/skill-creator/references/frontmatter-contract.md`,
     );
   }
 }
@@ -489,7 +489,7 @@ function validateDraftMetadataKindRequirement(metadata, errors) {
   }
 
   errors.push(
-    'metadata.kind is required for draft skills; set to "task" or "reference" — see skills/skill-authoring/references/metadata-contract.md',
+    'metadata.kind is required for draft skills; set to "task" or "reference" — see skills/skill-creator/references/frontmatter-contract.md',
   );
 }
 

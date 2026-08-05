@@ -28,10 +28,10 @@
 - Modify: `package.json`
 - Create or modify: repository-owned Python dependency/bootstrap files as appropriate
 - Modify: `_shared/validate-skills.py`
-- Modify: `skills/skill-authoring/scripts/validate-skill-library.mjs`
-- Create or modify: validator regression fixtures/tests under `_shared/` or `skills/skill-authoring/scripts/`
-- Modify: `skills/skill-authoring/SKILL.md`
-- Modify: `skills/skill-authoring/references/metadata-contract.md`
+- Modify: `skills/skill-creator/scripts/validate-skill-library.mjs`
+- Create or modify: validator regression fixtures/tests under `_shared/` or `skills/skill-creator/scripts/`
+- Modify: `skills/skill-creator/SKILL.md`
+- Modify: `skills/skill-creator/references/frontmatter-contract.md`
 - Modify: `skills/skill-creator/references/catalog-standard.md`
 - Modify if needed: `README.md`
 
@@ -85,7 +85,7 @@ Add `agents/openai.yaml` to every active skill that lacks it. Derive concise dis
 
 - [ ] **Step 3: Repair routing and release metadata**
 
-Add `find-skills` and `graphify` to the chooser with non-overlapping boundaries. Update both Release Please files so archived skill entries point to their real directories, or consistently remove them if repository evidence proves archived packages are intentionally unmanaged.
+Keep discovery and graph routing in the chooser with non-overlapping boundaries. Update both Release Please files so archived skill entries point to their real directories, or consistently remove them if repository evidence proves archived packages are intentionally unmanaged.
 
 - [ ] **Step 4: Repair broken documentation**
 

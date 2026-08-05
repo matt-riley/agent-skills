@@ -1,0 +1,18 @@
+[
+  {
+    "query": "Design a reflection loop for my report-generation agent that scores each draft and retries until it meets a rubric threshold.",
+    "should_trigger": true
+  },
+  {
+    "query": "Build an evaluator-optimizer pipeline where an LLM judge ranks candidate outputs and the generator refines the winner.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run the existing test suite and tell me whether the build passes.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review this PR diff once and list the implementation issues.",
+    "should_trigger": false
+  }
+]

@@ -1,117 +1,115 @@
-# Skill Templates
+# Skill template
 
-Reference this file when drafting a new skill or reviewing canonical section structure and eval schemas.
+Use this as the canonical starter when creating or revising a catalog skill. Keep the package minimal and move lookup-heavy detail into purpose-named references.
 
-## Canonical `SKILL.md` shape
-
-Use this as the default outline, then trim sections that do not earn their place:
-
-````markdown
+```md
 ---
-name: example-skill
-description: What the skill does and when to use it.
+name: my-skill-name
+description: "Use when [specific request or trigger]. Not when [adjacent route] is more appropriate."
 license: GNU GPL v3
 metadata:
-  maturity: stable
+  category: workflow
+  audience: general-coding-agent
+  maturity: draft
   kind: task
 ---
 
-# Example Skill
+# My skill name
+
+Use this skill when ...
 
 ## Use this skill when
-- Positive trigger
+
+- ...
 
 ## Do not use this skill when
-- Anti-trigger
+
+- ...
+
+## Routing boundary
+
+| Situation | Use this skill? | Route instead |
+| --- | --- | --- |
+| ... | Yes | - |
+| ... | No | [`a nearby skill`](../skill-creator/SKILL.md) |
 
 ## Inputs to gather
+
 **Required before editing**
+
 - ...
 
 **Helpful if present**
+
 - ...
 
 **Only investigate if encountered**
+
 - ...
 
 ## First move
+
 1. ...
 
 ## Workflow
+
 1. ...
 
+## Outputs
+
+- ...
+
 ## Guardrails
+
 - **Must** ...
 - **Must not** ...
 - **Should** ...
-- **May** ...
 
 ## Validation
+
+- ...
+
+## Examples
+
 - ...
 
 ## Reference files
-- Read the relevant file under `references/` when its topic matches the current task.
-````
 
-## Canonical eval file schemas
+- [references/REFERENCE.md](references/REFERENCE.md) — ...
+```
 
-`evals/trigger-queries.json`:
+Use `metadata.kind: task` for a multi-step playbook with explicit inputs, outputs, and validation. Use `metadata.kind: reference` for lookup-heavy guidance where navigation and examples are the main value. Every active skill must declare `category`, `audience`, `maturity`, and `kind`; `maturity` is `stable`, `draft`, or `experimental` (`beta` is legacy).
+
+The frontmatter description should name the purpose and concrete activation conditions. Keep it tight, but do not enforce an arbitrary character range: purpose plus trigger situations and a useful scope boundary matter more than a fixed length. The description must state when to use the skill and, where overlap exists, when not to use it; it should not merely summarize the workflow.
+
+The routing boundary is required when adjacent skills exist. Keep every local support link resolvable, and run the target-skill validator rather than pointing validation back at `skill-creator`.
+
+## Eval file schemas
+
+Add `evals/trigger-queries.json` when trigger boundaries need static coverage:
 
 ```json
 [
-  { "query": "I changed sqlc files; regenerate before tests.", "should_trigger": true },
-  { "query": "Explain what protobuf is.", "should_trigger": false }
+  { "query": "A request that should activate the skill.", "should_trigger": true },
+  { "query": "A near-miss that belongs to an adjacent skill.", "should_trigger": false }
 ]
 ```
 
-`evals/evals.json`:
+Add `evals/evals.json` when workflow behavior needs assertions:
 
 ```json
 {
-  "skill_name": "example-skill",
+  "skill_name": "my-skill-name",
   "evals": [
     {
       "id": "example-case",
       "prompt": "User task goes here.",
       "expected_behavior": "Human-readable success description.",
-      "assertions": [
-        "Mentions the correct workflow",
-        "Uses the right validation step"
-      ],
+      "assertions": ["Mentions the correct workflow", "Uses the right validation step"],
       "files": []
     }
   ]
 }
 ```
 
-Use `files` only when the eval depends on specific local inputs.
-
-`evals/` is optional. Add it when it will catch real trigger mistakes or workflow regressions, not just because the directory template allows it.
-
-## Minimum starter bundle
-
-When the task is to create a new skill from scratch, the default minimal package is:
-
-```text
-<new-skill-name>/
-├── SKILL.md
-├── references/
-│   ├── examples.md
-│   ├── edge-cases.md
-│   └── validation-checklist.md
-└── evals/
-    ├── trigger-queries.json
-    └── evals.json
-```
-
-Validation commands should target the new skill path, not the authoring skill:
-
-```bash
-python _shared/validate-skills.py skills
-python _shared/run-trigger-evals.py skills/<new-skill-name>/evals/trigger-queries.json
-python _shared/run-functional-evals.py skills/<new-skill-name>/evals/evals.json
-```
-
-## Copy-ready starter scaffold
-
-If the user wants an actual starter package instead of a shape description, copy the files under `assets/new-skill-starter/` into the new skill directory and replace the placeholders there.
+Keep evals only when they catch a real trigger or workflow regression; target the skill's own paths in validation commands.

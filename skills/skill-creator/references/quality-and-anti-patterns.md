@@ -1,5 +1,7 @@
 # Skill quality scenarios
 
+Use these scenarios and anti-patterns when pressure-testing a skill package. The catalog standard in `catalog-standard.md` wins if a local example conflicts with it.
+
 Use these scenarios to keep the authoring benchmark concrete, shallow, and easy to hand off.
 
 | Scenario | Quality call | Expected move |
@@ -16,3 +18,10 @@ Use these scenarios to keep the authoring benchmark concrete, shallow, and easy 
 
 - Update this file whenever the benchmark shape or anti-pattern list changes.
 - If a new pattern becomes a reusable review rule, add it here before copying it into other skills.
+
+## Anti-patterns
+
+- Wrong layering: put lookup tables, full templates, or repo-specific exceptions in a shallow reference instead of bloating `SKILL.md`.
+- Over-specialized shape: do not bake in one repository's path conventions, CI roles, or internal team process.
+- Hidden workflow: make activation, workflow, outputs, and validation obvious instead of leaving author intent implicit.
+- Description-only summaries: a description that merely names the domain or recites steps is not enough; state concrete activation conditions and a scope boundary when overlap exists.

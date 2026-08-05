@@ -41,8 +41,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 ### Governance and process
 
 - `rpi-workflow` — full Research -> Plan -> Implement -> Validate discipline for non-trivial work
-- `plan-review` — plan drafting, hardening, approval gates, and optional structured reviewer personas
-- `plan-review-loop` — structured reviewer-persona loop (Jason and Freddy) that enforces unanimous approval over up to three rounds
+- `plan-review` — plan drafting, hardening, approval gates, and an explicit structured reviewer-persona mode (Jason and Freddy) with unanimous approval over up to three rounds
 - `reverse-prompt` — sharpen a rough ask into a repository-grounded execution brief or contract-shaped brief before work starts
 - `implementation-review` — post-implementation review and approval
 - `verification-before-completion` — mandatory pre-done checklist that blocks task completion until evidence passes
@@ -112,7 +111,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 - `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks
 - `terraform-skill` — write, plan, apply, and troubleshoot Terraform configurations and state
 - `iam-oidc-triage` — diagnose and fix IAM OIDC trust policy failures for GitHub Actions, AWS, and GCP
-- `secret-scan-triage` — identify, remediate, and prevent secret leaks caught by Trufflehog, GitGuardian, or similar scanners
+- `secret-scan-triage` — identify, remediate, and prevent secret leaks caught by gitleaks
 
 ### Frontend and site quality
 
@@ -131,9 +130,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Research, knowledge, and discovery
 
-- `find-skills` — discover an existing local catalog skill when skill lookup is the deliverable; do not use it as a wrapper around a directly requested task (experimental; explicit invocation preferred)
 - `acquire-codebase-knowledge` — deep-map an existing codebase into seven structured docs covering stack, architecture, conventions, integrations, testing, and concerns
-- `autoresearch` — execute an automated research pass across docs, code, and search to answer a question or validate a claim
+- `autoresearch` — run an autonomous numeric-metric hill-climbing loop on an experiment branch, logging `results.tsv` and making keep/revert decisions
 - `code-tour` — create or follow a guided tour through an unfamiliar codebase
 - `context-map` — produce a domain-driven context map of bounded contexts and their integration relationships
 - `code-intelligence` — preferred routing layer for LSP, grep, and glob operations; always use LSP over text search when available
@@ -143,22 +141,20 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 - `agent-governance` — implement safety, policy, trust scoring, and audit patterns for AI agents that call external tools
 - `agent-supply-chain` — add integrity manifests and promotion gates to agent plugin and tool pipelines
-- `agentic-eval` — design and run behavioral evaluations for agent skills and trigger accuracy
+- `agentic-eval` — design and run evaluation loops for agent outputs using reflection, evaluator-optimizer, or LLM-as-judge patterns
 
 ### Writing, docs, and planning artifacts
 
 - `doc-coauthoring` — co-author technical documentation with a domain expert in an iterative Q&A loop
 - `to-prd` — generate a Product Requirements Document from a feature idea or conversation
 - `to-issues` — convert a conversation, PRD, or plan into well-formed GitHub issues
-- `skill-authoring` — design, write, and improve reusable skills in this catalog
-- `skill-creator` — create or upgrade a skill with frontmatter, headings, evals, and validation
+- `skill-creator` — create, upgrade, and standardise reusable skills with frontmatter, layering guidance, evals, and validation
 
 ### Developer experience and tooling
 
 - `neovim-config` — configure and extend a Neovim setup with plugins, keymaps, and LSP wiring
 - `neovim-plugin-development` — develop, test, and release Neovim Lua plugins with plenary, CI, and docs
-- `grill-me` — generate adversarial questions to stress-test your understanding of a codebase or design
-- `grill-with-docs` — challenge an implementation against official docs to surface gaps and misnomers
+- `grill-me` — interrogate a plan or design; when the user explicitly mentions CONTEXT.md, ADRs, or a domain glossary, use its documentation mode
 - `ast-grep` — run structural code search and rewrite using ast-grep patterns
 - `modern-web-guidance` — apply current web platform guidance for a specific framework or API decision
 
@@ -179,7 +175,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | --- | --- | --- |
 | a full research -> plan -> implement -> validate pass | `rpi-workflow` | Full lifecycle discipline is the primary need |
 | a plan, plan hardening, or reviewer-gated planning | `plan-review` | Planning is the deliverable; implementation is not yet in scope |
-| running a multi-reviewer approval loop on a completed /plan | `plan-review-loop` | Structured multi-round reviewer-persona loop with explicit verdict tokens is the main mechanism |
+| running a multi-reviewer approval loop on a completed plan | `plan-review` | Explicit structured mode with reviewer verdict tokens is the main mechanism |
 | a rough prompt that should be sharpened into an executable repo-grounded brief | `reverse-prompt` | Prompt critique or rewrite is the primary need before work starts |
 | an explicit definition of done, success criteria, or a contract-shaped execution brief | `reverse-prompt` | Contract-shaped brief framing now lives with prompt sharpening |
 | what they worked on before, whether they handled a topic already, or which session linked to a file / PR / issue | `session-store-history` | Cross-session recall from `session_store` is the main task |
@@ -232,13 +228,11 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | TypeScript `any` elimination or type tightening | `typescript-any-eliminator` | Systematic any removal is the deliverable |
 | finding unused dependencies, exports, files, or unresolved imports in a JS/TS repo | `knip` | Knip-based codebase health analysis is the main need |
 | auditing JS/TS dead code, duplication, circular dependencies, or architecture boundaries with Fallow | `fallow` | Fallow tool is requested or the scope is broader than unused-import detection |
-| writing or improving reusable skills | `skill-authoring` | Skill authorship is the primary task |
 | creating a new skill or upgrading an existing one with correct frontmatter and evals | `skill-creator` | Skill creation/upgrade workflow with validation is the deliverable |
 | adversarial questioning to stress-test a design | `grill-me` | Adversarial review is the main format |
-| challenging an implementation against official docs | `grill-with-docs` | Doc-grounded critique is the main format |
 | AI agent policy, tool allowlists, or audit trails | `agent-governance` | Runtime governance patterns are the speciality |
 | AI agent plugin integrity or promotion gates | `agent-supply-chain` | Supply chain verification is the main risk |
-| evaluating AI agent trigger accuracy or behavior | `agentic-eval` | Behavioral evaluation methodology is the focus |
+| designing or running evaluation loops for AI agent outputs | `agentic-eval` | Reflection, evaluator-optimizer, and LLM-as-judge patterns are the focus |
 | recovering a stalled, blocked, or dormant task from partial context | `resolve-open-loops` | Open-loop and stalled-task recovery is the main need |
 | closing deferred items, open questions, or unresolved decisions | `resolve-open-loops` | Open-loop closure and handoff is the deliverable |
 | defining or enforcing explicit entry/exit contracts for multi-step workflows | `workflow-contracts` | Contract-shaped workflow boundaries are the main risk |
@@ -247,7 +241,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | co-authoring technical documentation with iterative Q&A | `doc-coauthoring` | Document structure and prose co-authorship is the main need |
 | a pre-edit context map or survey of likely files and patterns | `context-map` | Contextual file-and-pattern mapping is the main deliverable |
 | creating a guided code tour or narrative walkthrough | `code-tour` | Step-by-step `.tour` file creation is the deliverable |
-| an automated research pass to answer a question or validate a claim | `autoresearch` | Autonomous iterative research is the main mechanism |
+| autonomous numeric-metric optimization with an experiment branch, `results.tsv`, and keep/revert decisions | `autoresearch` | Iterative hill-climbing is the main mechanism |
 | structural code search, codemod rewrites, or ast-grep patterns | `ast-grep` | Syntax-aware search and rewrite is the speciality |
 | modern web platform patterns, HTML, CSS, forms, or web API guidance | `modern-web-guidance` | Current web platform guidance prevents legacy patterns |
 | Neovim config, plugins, LSP wiring, or startup behavior | `neovim-config` | Neovim Lua configuration is the speciality |
@@ -267,7 +261,8 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `cloudflare-d1-query-tuning` should own runtime D1 query-shape and access-path tuning without schema changes; keep it separate from `cloudflare-d1-migrations` and from generic `repository-adapters` work when Cloudflare D1 runtime behavior is the main risk.
 - `acquire-codebase-knowledge` should own deep seven-document codebase mapping; do not conflate it with narrow file reads, quick architecture sketches, or ad-hoc questions about single modules.
 - `fallow` and `knip` are both JS/TS code-health tools but target different tools and scopes: prefer `knip` when the Knip tool is explicitly requested or the need is unused dependencies, exports, or unresolved imports; prefer `fallow` when the Fallow tool is requested or the analysis covers duplication, circular dependencies, complexity hotspots, architecture boundaries, or CI audit gates.
-- `plan-review-loop` is distinct from `plan-review`; `plan-review` owns plan drafting and one-shot approval; `plan-review-loop` owns the explicit multi-round reviewer-persona loop with Jason and Freddy.
+- `plan-review` owns plan drafting by default and its explicit structured mode when the user requests reviewer-gated multi-round approval; require unanimous same-round verdicts and stop after three rounds.
+- `grill-me` owns pure plan/design interrogation by default and its explicit documentation mode only when the user names `CONTEXT.md`, ADRs, or a domain glossary; do not create domain docs silently.
 - `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
 - `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
 - `code-intelligence` is a routing overlay that ensures LSP is used when available; it should not be selected as the primary skill for work that has a more specific match.
@@ -285,7 +280,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `cloudflare-d1-query-tuning` is the sharper match than `repository-adapters` when the main risk is Cloudflare D1 runtime query performance without schema or migration changes.
 - `code-generation` often pairs with schema, template, and API work, but usually should not be the only selected skill unless regeneration itself is the task.
 - `configuration-env` and `docker-compose-dev` are situational operational helpers, not default entry points.
-- `plan-review-loop` is the post-`/plan` structured approval loop; run it after `plan-review` creates the plan artifact.
+- `plan-review` structured mode runs after a plan artifact exists and only when the user requests reviewer-gated multi-round approval.
 - `verification-before-completion` pairs with any implementation skill; load it last, before signing off.
 - `test-driven-development` and `systematic-debugging` layer onto `testing-workflows`; prefer the specialist when TDD discipline or structured root-cause methodology is the explicit need.
 - `agent-governance` and `agent-supply-chain` are complementary: governance controls runtime behavior; supply chain controls artifact integrity. Both often apply to the same agent project.

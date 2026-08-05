@@ -142,12 +142,6 @@ When the loop ends:
 
 ## Validation
 
-Mechanical:
-
-```bash
-node skills/skill-authoring/scripts/validate-skill-library.mjs skills/autoresearch/SKILL.md
-```
-
 Smoke tests:
 
 - should trigger: "I want you to keep running experiments on my Go benchmark until you find a 10% speedup"

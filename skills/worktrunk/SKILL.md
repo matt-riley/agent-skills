@@ -62,10 +62,10 @@ Use this skill when a user needs to configure `wt`, set up LLM commit messages, 
 ## Workflow
 
 1. **Configure worktree path** — set `worktree-path` in user config (inside-repo `.worktrees/` is recommended for agent harness worktree-manager compatibility)
-2. **Set up LLM commits** — add `[commit.generation]` block; see [`assets/llm-commits-setup.md`](assets/llm-commits-setup.md)
-3. **Add project hooks** — author `.config/wt.toml` hooks for install, dev server, DB, CI gates; see [`assets/hooks-reference.md`](assets/hooks-reference.md)
+2. **Set up LLM commits** — add `[commit.generation]` block; see [`references/llm-commits-setup.md`](references/llm-commits-setup.md)
+3. **Add project hooks** — author `.config/wt.toml` hooks for install, dev server, DB, CI gates; see [`references/hooks-reference.md`](references/hooks-reference.md)
 4. **Enable branch summaries** (optional) — `[list] summary = true` in user config
-5. **Run parallel agents** (optional) — use `wt switch --create --execute=<agent>`; see [`assets/parallel-agents-recipes.md`](assets/parallel-agents-recipes.md)
+5. **Run parallel agents** (optional) — use `wt switch --create --execute=<agent>`; see [`references/parallel-agents-recipes.md`](references/parallel-agents-recipes.md)
 
 ## Guardrails
 
@@ -98,7 +98,7 @@ wt remove test-wt-check                   # cleans up
 - **Set up LLM commit messages for this repo:**
   ```sh
   wt config show              # inspect current config location
-  # add [commit.generation] block — see assets/llm-commits-setup.md for provider options
+  # add [commit.generation] block — see references/llm-commits-setup.md for provider options
   wt switch --create test-llm-check
   # make a small change, then `wt merge` to confirm LLM message is generated
   ```
@@ -119,8 +119,8 @@ wt remove test-wt-check                   # cleans up
 
 ## Reference files
 
-- [`assets/hooks-reference.md`](assets/hooks-reference.md) — all hook types, template variables, filters, pipeline syntax
-- [`assets/merge-pipeline.md`](assets/merge-pipeline.md) — `wt merge` pipeline, flags, and `wt step` sub-commands
-- [`assets/llm-commits-setup.md`](assets/llm-commits-setup.md) — LLM commit generation config for Claude Code, Codex, llm CLI, aichat
-- [`assets/parallel-agents-recipes.md`](assets/parallel-agents-recipes.md) — one-shot alias pattern, dev server per worktree, DB per worktree, cold-start elimination
+- [`references/hooks-reference.md`](references/hooks-reference.md) — all hook types, template variables, filters, pipeline syntax
+- [`references/merge-pipeline.md`](references/merge-pipeline.md) — `wt merge` pipeline, flags, and `wt step` sub-commands
+- [`references/llm-commits-setup.md`](references/llm-commits-setup.md) — LLM commit generation config for Claude Code, Codex, llm CLI, aichat
+- [`references/parallel-agents-recipes.md`](references/parallel-agents-recipes.md) — one-shot alias pattern, dev server per worktree, DB per worktree, cold-start elimination
 - [`references/config-reference.md`](references/config-reference.md) — complete config key reference with defaults

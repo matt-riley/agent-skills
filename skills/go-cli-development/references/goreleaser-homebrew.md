@@ -27,12 +27,12 @@ builds:
 
 brews:
   - repository:
-      owner: matt-riley
-      name: homebrew-tools
+      owner: <tap-owner>
+      name: <tap-repo>
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     commit_author:
-      name: Matt Riley
-      email: matt@mattriley.me
+      name: <author-name>
+      email: <author-email>
     homepage: "https://github.com/<owner>/<repo>"
     description: "<one-line description>"
     license: "GNU GPL v3"
@@ -80,7 +80,7 @@ changelog:
 
 ## Homebrew tap setup
 
-1. Create `homebrew-tools` repo on GitHub (public).
+1. Create the `<tap-repo>` repo on GitHub (public).
 2. The first goreleaser run creates the formula at `Formula/<project>.rb`.
 3. The formula auto-updates on each release — no manual formula editing needed.
 
@@ -142,7 +142,7 @@ goreleaser release --snapshot --clean
 - [ ] CI workflow triggers on `v*` tags.
 - [ ] `fetch-depth: 0` is set in the checkout step.
 - [ ] Tested with `goreleaser release --snapshot --clean`.
-- [ ] `homebrew-tools` repo exists and is public.
+- [ ] `<tap-repo>` repo exists and is public.
 
 ## Common failure modes
 
@@ -150,6 +150,6 @@ goreleaser release --snapshot --clean
 |---|---|---|
 | `goreleaser: command not found` | goreleaser not installed | `brew install goreleaser` |
 | `403 Resource not accessible by integration` | Token lacks repo scope | Use a classic PAT, not a fine-grained token |
-| `Formula already exists` | Manual formula conflict | Delete the formula file from homebrew-tools; goreleaser will recreate it |
+| `Formula already exists` | Manual formula conflict | Delete the formula file from `<tap-repo>`; goreleaser will recreate it |
 | `--version prints "dev"` | Ldflags not wired | Check that `-X` paths match the actual package path in `cmd/cli/root.go` |
 | `fatal: No names found, cannot describe anything` | No tags in shallow clone | Add `fetch-depth: 0` to the checkout action |

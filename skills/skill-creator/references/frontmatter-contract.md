@@ -10,7 +10,7 @@ The following top-level keys are valid in a skill frontmatter block:
 | --- | --- | --- |
 | `name` | **Required** | Kebab-case, matches the directory name exactly. |
 | `description` | **Required** | Identifies purpose and concrete activation conditions without summarising procedural workflow. |
-| `metadata` | **Optional** (block) | Contains lifecycle and classification fields when the skill needs them; some fields become required under the conditions below. |
+| `metadata` | **Expected for active skills** (block) | Contains lifecycle and classification fields; `category`, `audience`, `maturity`, and `kind` are expected for every active skill. |
 | `license` | **Required by repo policy** | Use `GNU GPL v3`; see AGENTS.md Learned Rule 1. |
 | `compatibility` | **Optional** | Concise environment or product assumptions when they materially affect use. |
 
@@ -88,7 +88,7 @@ Every active skill ships `agents/openai.yaml` with:
 - `interface.short_description` — must match the skill frontmatter `description` exactly
 - `policy.allow_implicit_invocation` — boolean
 
-Default to `allow_implicit_invocation: true`. Set `false` for meta, routing, full-lifecycle process wrappers, or personal-harness skills that should not crowd out sharper task skills on generic prompts (for example `find-skills`, `code-intelligence`, `rpi-workflow`, `graphify`, `skill-authoring`, `session-store-history`, `resolve-open-loops`).
+Default to `allow_implicit_invocation: true`. Set `false` for meta, routing, full-lifecycle process wrappers, or personal-harness skills that should not crowd out sharper task skills on generic prompts (for example `code-intelligence`, `rpi-workflow`, `graphify`, `session-store-history`, `resolve-open-loops`).
 
 ## Frontmatter shape reference
 
@@ -155,3 +155,17 @@ The validator (`scripts/validate-skill-library.mjs`) currently enforces:
 | Referenced local support and inter-skill targets exist | All skills | Error |
 | **Forbidden provenance keys in `metadata`** (`github-*`, `author`, `inspired-by`, `enhancements`) | All skills | **Error** |
 | **`metadata.kind` required for `draft` skills** | Draft skills | **Error** (added wave 2) |
+
+## Troubleshooting frontmatter issues
+
+| Issue | Cause | Fix |
+| --- | --- | --- |
+| "frontmatter name does not match directory" | Name in `---` block doesn't match folder | Rename the `name:` field to match the skill directory name |
+| "name contains invalid characters" | Spaces, uppercase, or special characters in name | Use lowercase kebab-case (letters, digits, hyphens) only, matching `^[a-z0-9]+(?:-[a-z0-9]+)*$` (e.g., `my-skill-v2`) |
+| "description is too short" | Description under 20 characters | Expand description to at least 20 chars and include concrete trigger phrases |
+| "missing frontmatter key name" or "description" | Frontmatter block incomplete | Add both `name:` and `description:` keys between `---` delimiters |
+| "missing frontmatter block" | No `---` delimiters in SKILL.md | Add `---` at the top of the file and close the frontmatter with another `---` |
+| "unterminated frontmatter block" | Only one `---` marker or no closing `---` | Ensure frontmatter is wrapped: `---` on first line and `---` after the last field |
+| "forbidden top-level frontmatter key" | Undocumented keys like `argument-hint` at top level | Move content to `metadata`, `## Inputs to gather`, or `references/`; see the forbidden-keys rule above. (`compatibility` is optional; `license: GNU GPL v3` is required.) |
+| "forbidden provenance key metadata.*" | Upstream `github-*` or attribution fields inside `metadata` | Remove provenance fields; preserve attribution in a commit message or `PROVENANCE.md` |
+| "metadata.kind is required for draft skills" | New skill missing `kind` field | Add `kind: task` or `kind: reference` under `metadata` |

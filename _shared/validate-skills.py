@@ -31,7 +31,7 @@ UniqueKeySafeLoader.add_constructor(
 )
 NAME_RE = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 # Fuller canonical set per catalog-standard.md and the taught authoring shape
-# (python validator is the primary `npm run validate` gate; the mjs in skill-authoring/
+# (python validator is the primary `npm run validate` gate; the mjs in skill-creator/
 # provides additional local-authoring checks such as concrete content, orphans, order).
 CANONICAL_HEADINGS = (
     '## Use this skill when',

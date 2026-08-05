@@ -179,16 +179,6 @@
         }
       ]
     },
-    "skills/plan-review": {
-      "package-name": "plan-review",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/plan-review/SKILL.md"
-        }
-      ]
-    },
     "skills/repository-adapters": {
       "package-name": "repository-adapters",
       "skip-github-release": true,
@@ -256,16 +246,6 @@
         {
           "type": "generic",
           "path": "skills/session-store-history/SKILL.md"
-        }
-      ]
-    },
-    "skills/skill-creator": {
-      "package-name": "skill-creator",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/skill-creator/SKILL.md"
         }
       ]
     },
@@ -569,16 +549,6 @@
         }
       ]
     },
-    "skills/grill-with-docs": {
-      "package-name": "grill-with-docs",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/grill-with-docs/SKILL.md"
-        }
-      ]
-    },
     "skills/iam-oidc-triage": {
       "package-name": "iam-oidc-triage",
       "skip-github-release": true,
@@ -619,13 +589,13 @@
         }
       ]
     },
-    "skills/plan-review-loop": {
-      "package-name": "plan-review-loop",
+    "skills/plan-review": {
+      "package-name": "plan-review",
       "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/plan-review-loop/SKILL.md"
+          "path": "skills/plan-review/SKILL.md"
         }
       ]
     },
@@ -659,13 +629,13 @@
         }
       ]
     },
-    "skills/skill-authoring": {
-      "package-name": "skill-authoring",
+    "skills/skill-creator": {
+      "package-name": "skill-creator",
       "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/skill-authoring/SKILL.md"
+          "path": "skills/skill-creator/SKILL.md"
         }
       ]
     },
@@ -756,16 +726,6 @@
         {
           "type": "generic",
           "path": "skills/worktrunk/SKILL.md"
-        }
-      ]
-    },
-    "skills/find-skills": {
-      "package-name": "find-skills",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/find-skills/SKILL.md"
         }
       ]
     },

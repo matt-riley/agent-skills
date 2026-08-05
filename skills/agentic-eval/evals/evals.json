@@ -1,0 +1,26 @@
+{
+  "skill_name": "agentic-eval",
+  "evals": [
+    {
+      "id": "reflection-loop-design",
+      "prompt": "Design a reflection loop for my code-generation agent that retries until an LLM judge scores the output above 0.85.",
+      "expected_behavior": "Defines an evaluator-optimizer loop with explicit criteria, structured scores, a convergence check, logging, and a bounded iteration budget.",
+      "assertions": [
+        "Separates generation, evaluation, critique, and refinement steps",
+        "Sets a max_iterations bound and convergence condition",
+        "Requires structured evaluation output and logs each iteration"
+      ],
+      "files": []
+    },
+    {
+      "id": "one-shot-review-boundary",
+      "prompt": "Review this completed PR diff once and list the implementation issues; do not propose an iterative evaluator.",
+      "expected_behavior": "Routes a one-shot implementation review away from agentic-eval rather than inventing an evaluation loop.",
+      "assertions": [
+        "Does not design a reflection or evaluator-optimizer loop",
+        "Routes to implementation-review for the one-shot PR review"
+      ],
+      "files": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: plan-review
-description: "Create, revise, and approval-gate implementation plans when the deliverable is a plan artifact or plan revision, not code."
+description: "Use when the user wants an implementation plan, a hardened plan revision, or explicit reviewer-gated multi-round approval before implementation; not for reviewing finished code."
 license: GNU GPL v3
 metadata:
   version: 1.3.0 # x-release-please-version
@@ -18,6 +18,7 @@ metadata:
 - The user asks for an implementation plan, rollout plan, migration plan, or a hardened revision of an existing plan
 - The user is already planning or wants review-gated planning before implementation begins
 - The user wants named reviewer models or agents to approve the plan
+- The user explicitly asks for reviewer-gated or multi-round approval, Jason/Freddy-style review, or `[PLAN-APPROVED]` / `[PLAN-REVISE-NEEDED]` verdict tokens on an existing plan
 - The user wants stronger plan quality checks around repo fit, feasibility, validation, rollout safety, or scope control
 
 ## Do not use this skill when
@@ -69,14 +70,14 @@ metadata:
 
 3. **Choose the review mode deliberately.**
    - If the user names reviewer models, agents, or personas, use exactly that reviewer set.
-   - If the user wants structured default personas for plan pressure-testing, use the Jason and Freddy personas under `references/personas/`.
+   - If the user explicitly requests reviewer-gated or multi-round approval, use the Jason and Freddy personas under `references/personas/` unless the user names another reviewer set.
    - If the user requires an approval gate, the plan is not final until every required reviewer approves.
    - If the user only asked for a plan, still pressure-test for feasibility, testing, rollout, and scope discipline.
 
 4. **Run review rounds on a single shared revision.**
    - Every reviewer must see the same current plan revision.
-   - Each reviewer should return: `APPROVE` or `REQUEST_CHANGES`, required changes, optional suggestions, and approval rationale.
-   - When using the Jason/Freddy persona path, load `references/review-verdicts.md` so verdict tokens and round expectations stay consistent.
+   - Each reviewer should return exactly one verdict token: `[PLAN-APPROVED]` or `[PLAN-REVISE-NEEDED]`, followed by required changes or approval rationale.
+   - When using the structured persona path, load `references/review-verdicts.md` so token parsing, unanimous same-round approval, and the three-round limit stay consistent.
    - Load `references/reviewer-prompt.md` when preparing reviewer prompts.
 
 5. **Consolidate and iterate on the plan itself.**
@@ -85,7 +86,7 @@ metadata:
    - Do not drop, swap, or skip reviewers mid-process unless the user explicitly changes the review panel.
 
 6. **Finalize when the plan is executable.**
-   - All required reviewers have approved.
+   - All required reviewers have returned `[PLAN-APPROVED]` in the same round when reviewer-gated mode is active.
    - Remaining assumptions or open questions are explicit in the plan.
    - The next implementation step is clear.
    - Stop at the planning handoff unless the user asks to implement or a broader approved workflow says to continue.
@@ -97,16 +98,15 @@ metadata:
 - A final planning status of approved, blocked for revision, or advisory-only, plus the next implementation step.
 
 
-## Workflow
-
-See the body and references for plan drafting, reviewer rounds, and approval steps.
-
 ## Guardrails
 
 - **Must** keep planning and research read-only unless the user explicitly asks for implementation.
 - **Must** ground the plan in the actual target repo structure, tooling, and constraints.
 - **Must** keep scope boundaries, non-goals, and validation strategy explicit in the plan.
 - **Must not** turn this into finished-code review or merge-readiness review.
+- **Must** keep reviewer-gated mode explicit: do not invent a multi-round approval loop unless the user asks for reviewer-gated or multi-round approval.
+- **Must not** mark a structured review approved unless every configured reviewer returns `[PLAN-APPROVED]` in the same round.
+- **Must** stop structured reviewer rounds after three complete rounds and report not approved if unanimity is not reached.
 - **Should** call out risky migrations, coordination dependencies, or rollout hazards directly in the plan.
 - **Before finishing:** confirm reviewer status matches the latest round, the plan is approved or explicitly blocked, and the next step is stated.
 
@@ -116,6 +116,7 @@ See the body and references for plan drafting, reviewer rounds, and approval ste
 - Confirm required reviewer status is current: approved, blocked by requested changes, or advisory-only.
 - Confirm validation commands, success criteria, open assumptions, and the next implementation step are explicit.
 - If named reviewers or model-based approval is unavailable in the current harness, state that limitation instead of fabricating approval.
+- For structured mode, confirm each reviewer emitted exactly one recognized verdict token and that the round stayed within the three-round limit.
 
 ## Output checklist
 

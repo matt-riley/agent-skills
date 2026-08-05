@@ -1,6 +1,6 @@
 # Interrogation patterns
 
-Lightweight guidance for running an effective grilling session. For the full playbook including domain-doc maintenance patterns, see `skills/grill-with-docs/references/session-playbook.md`.
+Lightweight guidance for running an effective grilling session. For the full playbook, including the explicit documentation mode, see [session-playbook.md](session-playbook.md).
 
 ## Question sequencing
 

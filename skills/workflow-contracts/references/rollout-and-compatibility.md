@@ -9,7 +9,7 @@ Use these rules during the `v1` migration.
 3. Accept legacy prose artifacts as input during migration, but map them into the `v1` headings before handing them off downstream.
 4. Do not make `v1` the default expectation in always-on instructions until:
    - the templates exist
-   - the planner, research, and skill-authoring surfaces are updated
+   - the planner, research, and skill-creator surfaces are updated
    - at least one end-to-end dry run succeeds
 5. If mixed old/new artifact shapes start causing confusion, pause instruction cleanup and finish the contract migration first.
 

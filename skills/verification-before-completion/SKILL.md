@@ -36,7 +36,7 @@ metadata:
 - You are debugging failures and tracing root cause (this skill is for **confirming** fixes, not finding them)
 - You are reading documentation, exploring code, or gathering context
 
-See `references/common-failures.md` for the full Routing Boundary table and inputs.
+See `references/common-failures.md` for the Routing Boundary and common failure tables.
 
 ## Inputs to gather
 
@@ -104,6 +104,6 @@ See `references/examples.md` for the full set of claim examples (Tests Pass, Bui
 ## Reference files
 
 - `references/examples.md` — detailed claim walkthroughs with exact commands and output verification.
-- `references/common-failures.md` — Iron Law, routing table, inputs, Gate steps, and the "Requires vs. Not sufficient" table.
+- `references/common-failures.md` — routing guidance and the "Requires vs. Not sufficient" failure table.
 - [`systematic-debugging`](../systematic-debugging/SKILL.md) — use when root cause investigation is needed before verifying a fix.
 - [`test-driven-development`](../test-driven-development/SKILL.md) — use when writing tests to prove behavior before claiming correctness.

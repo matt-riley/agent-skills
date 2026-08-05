@@ -1,6 +1,6 @@
 # Session playbook
 
-Lightweight patterns for running an effective interrogation session. These apply to both `grill-me` and `grill-with-docs`, though the doc-maintenance steps are specific to `grill-with-docs`.
+Patterns for running an effective interrogation session. Pure interrogation is the default; the documentation steps below apply only when the user explicitly signals `CONTEXT.md`, ADR, or domain-glossary intent.
 
 ## Question sequencing
 
@@ -23,7 +23,7 @@ Lightweight patterns for running an effective interrogation session. These apply
 ## Fuzzy-term resolution
 
 - **Catch overloaded terms immediately.** If the user says "account" and it could mean Customer, User, or BillingAccount, propose a canonical term and ask which they mean.
-- **When a term is resolved, update CONTEXT.md immediately** (grill-with-docs only). Do not wait for the session to end. Inline updates ensure nothing is lost.
+- **When a term is resolved, update CONTEXT.md immediately** (documentation mode only). Do not wait for the session to end. Inline updates ensure nothing is lost.
 - **List rejected aliases under _Avoid_.** This prevents future drift back to ambiguous terms.
 
 ## When to explore instead of ask
@@ -37,5 +37,5 @@ Lightweight patterns for running an effective interrogation session. These apply
 The session is complete when:
 - Every branch of the decision tree has been resolved.
 - The user confirms they have a shared understanding of the plan.
-- All resolved terms are captured in CONTEXT.md (grill-with-docs only).
-- Any qualifying decisions have been offered as ADRs (grill-with-docs only).
+- All resolved terms are captured in CONTEXT.md (documentation mode only).
+- Any qualifying decisions have been offered as ADRs (documentation mode only).

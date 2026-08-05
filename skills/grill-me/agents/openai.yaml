@@ -1,5 +1,5 @@
 interface:
   display_name: "Grill Me"
-  short_description: "Use when the user wants to be interviewed or stress-tested about a plan, design, or decision — or when the user explicitly says 'grill me'. Not for domain-doc maintenance; route to grill-with-docs when CONTEXT.md or ADRs should be updated."
+  short_description: "Use when the user wants to be interviewed or stress-tested about a plan, design, or decision, including explicit requests to 'grill me'. If they also mention CONTEXT.md, ADRs, or a domain glossary, use the documentation mode; otherwise keep the session pure interrogation and do not create docs."
 policy:
   allow_implicit_invocation: true

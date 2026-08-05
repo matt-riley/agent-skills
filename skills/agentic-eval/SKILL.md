@@ -41,23 +41,23 @@ The core pattern is: **Generate → Evaluate → Critique → Refine → Output*
 | Running `npm test` to confirm a fix works | No | `verification-before-completion` |
 | Tracing why a specific assertion fails | No | `systematic-debugging` |
 | Writing Jest or pytest test coverage for a module | No | `test-driven-development` |
-| Reviewing a PR diff once, no iteration | No | `review-comment-resolution` |
+| Reviewing a PR diff once, no iteration | No | [`implementation-review`](../implementation-review/SKILL.md) |
 
 ## Inputs to gather
 
 **Required before starting**
 
 - The skill or agent behavior to evaluate.
-- The target metric: trigger accuracy, refusal rate, or behavioral assertion coverage.
+- The evaluation objective and target metric for the application's outputs.
 
 **Helpful if present**
 
-- Existing evals or trigger-queries files to extend.
+- Existing evaluation fixtures or application quality criteria to extend.
 
 ## First move
 
-1. Identify the skill or behavior to evaluate.
-2. Check whether a `trigger-queries.json` already exists; if so, load it to understand scope.
+1. Identify the application behavior to evaluate and the desired outcome.
+2. Define the evaluation criteria and target metric.
 3. Open the relevant reference file based on the evaluation type.
 
 ## Navigation
@@ -76,15 +76,14 @@ For a new implementation, start with the checklist to confirm your setup is comp
 
 ## Workflow
 
-1. Name the skill or agent behavior under evaluation and the success criteria.
-2. Load existing `trigger-queries.json` / eval fixtures when present; otherwise define criteria first.
-3. Choose a strategy from [`references/patterns.md`](references/patterns.md): outcome-based, LLM-as-judge, or rubric-based.
-4. Complete the setup checklist in [`assets/eval-checklist.md`](assets/eval-checklist.md) (criteria, threshold, max iterations, logging).
-5. Isolate generate → evaluate → optimize steps; keep the evaluator replaceable.
-6. Run the loop with a hard `max_iterations` bound and a convergence check.
-7. Log full trajectories (input, output, score, critique) for every iteration.
-8. Stop on threshold met, no improvement, or budget exhaustion; report structured scores.
-9. Feed failures back into skill description, anti-triggers, or workflow edits, then re-run.
+1. Name the application behavior under evaluation and the success criteria.
+2. Choose a strategy from [`references/patterns.md`](references/patterns.md): outcome-based, LLM-as-judge, or rubric-based.
+3. Complete the setup checklist in [`assets/eval-checklist.md`](assets/eval-checklist.md) (criteria, threshold, max iterations, logging).
+4. Isolate generate → evaluate → optimize steps; keep the evaluator replaceable.
+5. Run the loop with a hard `max_iterations` bound and a convergence check.
+6. Log full trajectories (input, output, score, critique) for every iteration.
+7. Stop on threshold met, no improvement, or budget exhaustion; report structured scores.
+8. Feed failures back into evaluator criteria, prompts, or optimization steps, then re-run.
 
 ## Guardrails
 
@@ -97,10 +96,6 @@ For a new implementation, start with the checklist to confirm your setup is comp
 - Handle evaluation parse failures gracefully — if the LLM judge returns malformed JSON, fall back to a safe default (treat as failing) rather than crashing the loop.
 
 ## Validation
-
-- should trigger: "I want to add a reflection loop to my code-generation agent so it self-critiques and reruns until the score exceeds 0.85"
-- should not trigger: "Run the test suite and tell me if the build passes"
-- should not trigger: "Why is this specific assertion failing in my TypeScript tests?"
 
 After implementing an evaluation loop, confirm:
 
