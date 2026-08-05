@@ -4,7 +4,7 @@ description: "Use when the stabilisation-guard blocks the session because of act
 license: GNU GPL v3
 compatibility: Requires Lore memory tools (memory_search, memory_forget, memory_status) and the stabilisation-guard open-loop flow. Without Lore, surface unavailability and stop.
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 2.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

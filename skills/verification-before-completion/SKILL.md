@@ -3,7 +3,7 @@ name: verification-before-completion
 description: "Use when about to claim work is complete, tests pass, a bug is fixed, or a build succeeds."
 license: GNU GPL v3
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 2.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: stable

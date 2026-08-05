@@ -3,7 +3,7 @@ name: go-docker-builds
 description: "Containerize Go services with production-ready multi-stage Docker builds. Use when writing or debugging a Dockerfile for a Go service, setting up static compilation for scratch/distroless images, adding health checks, or wiring image builds into CI — not for Docker Compose local dev stacks or non-Go Dockerfiles."
 license: GNU GPL v3
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   category: go
   audience: general-coding-agent
   maturity: stable

@@ -3,7 +3,7 @@ name: database-migrations
 description: "Create, apply, inspect, and recover database schema migrations after detecting the repository's migration contract. Use when changing persistent schema, adding indexes/constraints, or troubleshooting migration state."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.4.0 # x-release-please-version
   owner: mattriley
   category: data
   audience: general-coding-agent

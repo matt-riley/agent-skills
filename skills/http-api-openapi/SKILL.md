@@ -3,7 +3,7 @@ name: http-api-openapi
 description: "Keep OpenAPI contracts in sync with HTTP behavior. Use when you need to update spec files, code annotations, or both after changing endpoints, schemas, auth, or error shapes — not for writing or running integration tests."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.4.0 # x-release-please-version
   owner: mattriley
   category: testing
   audience: general-coding-agent

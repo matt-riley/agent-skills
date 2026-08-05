@@ -3,7 +3,7 @@ name: skill-creator
 description: "Build, upgrade, or standardise a specific skill package in the current catalog. Use when adding a skill directory, reconciling its authoring contract, improving metadata/examples/evals, or tightening trigger boundaries — not for one-off prompt advice."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 2.0.0 # x-release-please-version
   owner: mattriley
   category: authoring
   audience: general-coding-agent
