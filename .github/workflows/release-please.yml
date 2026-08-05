@@ -30,6 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - name: Check out repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
@@ -161,6 +162,26 @@ jobs:
           subprocess.check_call(['git', 'push', 'origin', *created])
           print('Pushed tags:', ', '.join(created))
           PY
+
+      - name: Mark merged release PRs as tagged
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pending=$(gh pr list --state merged --label "autorelease: pending" \
+            --json number,headRefName,mergeCommit \
+            --jq '.[] | select(.headRefName | startswith("release-please--")) | [.number, .mergeCommit.oid] | @tsv')
+          if [ -z "$pending" ]; then
+            echo "No merged release PRs awaiting tag labels."
+            exit 0
+          fi
+          echo "$pending" | while IFS=$'\t' read -r pr merge_sha; do
+            if [ -z "$(git tag --points-at "$merge_sha")" ]; then
+              echo "::warning::PR #$pr has no tags at merge commit $merge_sha; leaving autorelease: pending."
+              continue
+            fi
+            echo "Marking release PR #$pr as autorelease: tagged"
+            gh pr edit "$pr" --remove-label "autorelease: pending" --add-label "autorelease: tagged"
+          done
 
   publish-package:
     name: Publish root package
