@@ -719,16 +719,6 @@
         }
       ]
     },
-    "skills/worktrunk": {
-      "package-name": "worktrunk",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/graphify": {
       "package-name": "graphify",
       "skip-github-release": true,

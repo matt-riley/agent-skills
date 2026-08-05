@@ -12,6 +12,18 @@
     "should_trigger": true
   },
   {
+    "query": "Configure wt hooks and parallel lanes for this repo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up worktrunk config so worktrees land in .worktrees/ and post-start runs npm ci.",
+    "should_trigger": true
+  },
+  {
+    "query": "Enable LLM-generated commit messages for wt step commit and wt merge.",
+    "should_trigger": true
+  },
+  {
     "query": "Implement this feature on the current branch.",
     "should_trigger": false
   },
