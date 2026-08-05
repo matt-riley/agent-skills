@@ -3,7 +3,7 @@ name: rpi-workflow
 description: "Apply a Research → Plan → Implement → Validate workflow for multi-phase work that benefits from explicit phase boundaries. Use when the task is complex, spans many files, or needs durable progress artifacts — not for small fixes, single-file edits, or narrow specialist workflows."
 license: GNU GPL v3
 metadata:
-  version: 1.4.0 # x-release-please-version
+  version: 1.5.0 # x-release-please-version
   owner: mattriley
   category: governance
   audience: general-coding-agent

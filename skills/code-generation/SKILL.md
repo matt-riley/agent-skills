@@ -3,7 +3,7 @@ name: code-generation
 description: "Run and troubleshoot repository code generation after detecting the generator contract. Use when schema, query, spec, or template inputs changed, or generated output may be stale."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.4.0 # x-release-please-version
   owner: mattriley
   category: generation
   audience: general-coding-agent

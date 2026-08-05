@@ -37,10 +37,10 @@
 **Called by:** Any multi-step implementation workflow after all tasks complete and before final handoff.
 
 **Pairs with:**
-- [`git-worktrees`](../git-worktrees/SKILL.md) — cleanup via `mr_worktree_remove`
-- [`worktrunk`](../worktrunk/SKILL.md) — prefer `wt merge` for Option 1 when Worktrunk is installed
-- [`github-cli-pr-workflow`](../github-cli-pr-workflow/SKILL.md) — use for Option 2 PR creation/update and check-watch handoff after pushing
-- [`review-comment-resolution`](../review-comment-resolution/SKILL.md) — after Option 2 receives feedback
+- [`git-worktrees`](../../git-worktrees/SKILL.md) — cleanup via `mr_worktree_remove`
+- [`worktrunk`](../../worktrunk/SKILL.md) — prefer `wt merge` for Option 1 when Worktrunk is installed
+- [`github-cli-pr-workflow`](../../github-cli-pr-workflow/SKILL.md) — use for Option 2 PR creation/update and check-watch handoff after pushing
+- [`review-comment-resolution`](../../review-comment-resolution/SKILL.md) — after Option 2 receives feedback
 
 **Activates:** When implementation is complete and tests pass; agent is deciding final branch fate.
 

@@ -3,7 +3,7 @@ name: go-build-and-test
 description: "Diagnose Go build failures, toolchain mismatches, and CI-parity problems — GOROOT/GOTOOLDIR overrides, govulncheck stdlib findings, or TempDir race flakes. Use when go build or CI fails for environmental reasons, not when individual tests fail on logic or coverage (use testing-workflows for that)."
 license: GNU GPL v3
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

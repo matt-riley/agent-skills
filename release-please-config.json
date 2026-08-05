@@ -15,7 +15,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/astro-seo/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -25,7 +25,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/ci-images/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -35,7 +35,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/cloudflare-d1-migrations/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -45,7 +45,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/cloudflare-d1-query-tuning/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -55,7 +55,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/code-generation/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -65,7 +65,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/configuration-env/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -75,7 +75,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/database-migrations/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -85,7 +85,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/docker-compose-dev/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -95,7 +95,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/git-worktrees/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -105,7 +105,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/github-actions-failure-triage/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -115,7 +115,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/github-presence/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -125,7 +125,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/knip/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -135,7 +135,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/http-api-openapi/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -145,7 +145,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/implementation-review/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -155,7 +155,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/integration-testing-http/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -165,7 +165,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/make-interfaces-feel-better/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -175,7 +175,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/observability-metrics/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -185,7 +185,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/repository-adapters/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -195,7 +195,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/reverse-prompt/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -205,7 +205,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/review-comment-resolution/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -215,7 +215,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/rpi-workflow/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -225,7 +225,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/schema-boundary-typing/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -235,7 +235,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/security-basics/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -245,7 +245,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/session-store-history/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -255,7 +255,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/templ-templates/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -265,7 +265,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/testing-workflows/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -275,7 +275,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/tsc-error-triage/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -285,7 +285,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/tsconfig-hardening/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -295,7 +295,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/type-test-authoring/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -305,7 +305,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/writing-and-editing/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -315,7 +315,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/acquire-codebase-knowledge/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -325,7 +325,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/agent-governance/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -335,7 +335,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/agent-instructions/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -345,7 +345,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/agent-supply-chain/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -355,7 +355,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/agentic-eval/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -365,7 +365,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/api-smoke-validation/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -375,7 +375,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/ast-grep/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -385,7 +385,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/autoresearch/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -395,7 +395,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/aws-lambda-go-deployment/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -405,7 +405,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/code-intelligence/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -415,7 +415,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/code-tour/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -425,7 +425,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/context-map/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -435,7 +435,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/doc-coauthoring/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -445,7 +445,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/fallow/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -455,7 +455,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/finishing-a-development-branch/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -465,7 +465,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/git-signing-troubleshoot/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -475,7 +475,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/github-actions-local-repro/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -485,7 +485,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/github-cli-pr-workflow/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -495,7 +495,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/go-cli-development/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -505,7 +505,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/go-build-and-test/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -515,7 +515,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/go-docker-builds/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -525,7 +525,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/go-error-patterns/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -535,7 +535,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/goreleaser-release-pipeline/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -545,7 +545,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/grill-me/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -555,7 +555,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/iam-oidc-triage/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -565,7 +565,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/modern-web-guidance/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -575,7 +575,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/neovim-config/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -585,7 +585,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/neovim-plugin-development/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -595,7 +595,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/plan-review/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -605,7 +605,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/resolve-open-loops/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -615,7 +615,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/sam-cloudformation/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -625,7 +625,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/secret-scan-triage/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -635,7 +635,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/skill-creator/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -645,7 +645,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/systematic-debugging/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -655,7 +655,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/terraform-skill/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -665,7 +665,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/test-driven-development/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -675,7 +675,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/to-issues/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -685,7 +685,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/to-prd/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -695,7 +695,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/typescript-any-eliminator/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -705,7 +705,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/verification-before-completion/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -715,7 +715,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/workflow-contracts/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -725,7 +725,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/worktrunk/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     },
@@ -735,7 +735,7 @@
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/graphify/SKILL.md"
+          "path": "SKILL.md"
         }
       ]
     }

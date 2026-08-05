@@ -3,7 +3,7 @@ name: doc-coauthoring
 description: "Use when user wants to write, refactor, or expand documentation through iterative co-authoring with reader feedback — README, guides, API docs, runbooks, specification documents. Not for solo writing, readability audits, or metadata review (use writing-and-editing for those)."
 license: GNU GPL v3
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.0.1 # x-release-please-version
   category: authoring
   audience: general-coding-agent
   maturity: draft

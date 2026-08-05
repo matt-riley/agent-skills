@@ -3,7 +3,7 @@ name: agent-supply-chain
 description: "Use this skill when generating SHA-256 integrity manifests for agent plugins, verifying that installed plugins match their manifests, detecting tampered files, auditing dependency pinning, or building provenance chains for plugin promotion."
 license: GNU GPL v3
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 2.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

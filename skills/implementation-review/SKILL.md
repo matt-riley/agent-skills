@@ -3,7 +3,7 @@ name: implementation-review
 description: "Review completed code changes, diffs, and implementation revisions for merge readiness. Use for code review, named reviewer approval, validation gaps, regressions, security risk, or scope drift."
 license: GNU GPL v3
 metadata:
-  version: 1.4.0 # x-release-please-version
+  version: 1.5.0 # x-release-please-version
   owner: mattriley
   category: governance
   audience: general-coding-agent

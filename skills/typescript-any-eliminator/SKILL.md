@@ -3,7 +3,7 @@ name: typescript-any-eliminator
 description: Use when TypeScript source contains explicit `any` in application code, shared helpers, DTOs, or API layers that should be narrowed without changing runtime behavior — or when a reviewer or lint rule flags unsafe `any` usage.
 license: GNU GPL v3
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   category: typescript
   audience: general-coding-agent
   maturity: draft

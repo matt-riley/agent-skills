@@ -3,7 +3,7 @@ name: agent-governance
 description: "Use this skill when building AI agents that call external tools, implementing policy-based access controls, adding semantic intent classification, creating trust scoring systems, building audit trails, or enforcing rate limits and content filters on agents."
 license: GNU GPL v3
 metadata:
-  version: 1.0.0 # x-release-please-version
+  version: 1.1.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

@@ -6,7 +6,7 @@ description: Build and query persistent Graphify knowledge graphs from code, doc
   question when graphify-out/ already exists.
 license: GNU GPL v3
 metadata:
-  version: 0.1.0 # x-release-please-version
+  version: 0.2.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: experimental

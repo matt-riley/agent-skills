@@ -3,7 +3,7 @@ name: reverse-prompt
 description: "Rewrite a rough request into a repository-grounded execution brief before research, planning, or implementation. Use when the user asks for a sharper prompt, better request, or contract-shaped brief."
 license: GNU GPL v3
 metadata:
-  version: 1.2.0 # x-release-please-version
+  version: 1.3.0 # x-release-please-version
   owner: mattriley
   category: governance
   audience: general-coding-agent
