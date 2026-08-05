@@ -72,7 +72,6 @@ Use this skill when the job is to inspect or clean up a JavaScript or TypeScript
 
 ## Validation
 
-- Run `python _shared/validate-skills.py skills` from the catalog root.
 - If eval tooling is available, run `python _shared/run-trigger-evals.py skills/knip/evals/trigger-queries.json --static` and `python _shared/run-functional-evals.py skills/knip/evals/evals.json --static`.
 - Smoke test the activation wording with one request that should trigger and one near-miss that should not:
   - should trigger: `Run Knip on this TypeScript monorepo and tell me which exports, files, or dependencies look unused.`

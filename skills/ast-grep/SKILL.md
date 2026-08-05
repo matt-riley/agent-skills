@@ -92,9 +92,7 @@ Use this skill when the task benefits from AST-based search, linting, or rewrite
 
 ## Validation
 
-- Run metadata/structure validation:
-  - `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/ast-grep/SKILL.md`
-  - `node skills/skill-authoring/scripts/validate-skill-library.mjs`
+- Validate each ast-grep command against the requested language, scope, and output format before applying any rewrite.
 - Confirm every support file listed in `## Reference files` exists and is linked.
 - Smoke-test description-level routing with one trigger and one near-miss:
   - should trigger: `Use ast-grep to rewrite obj.val && obj.val() to obj.val?.() in TypeScript, preview first`

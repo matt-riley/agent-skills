@@ -93,7 +93,6 @@ Use this skill when the goal is to turn what is already known — repository con
 
 ## Validation
 
-- Run `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/to-prd/SKILL.md`.
 - Confirm the PRD uses the section order from [`assets/prd-template.md`](assets/prd-template.md).
 - Confirm `Problem Statement` and `Solution` are written from the user's perspective.
 - Confirm `Implementation Decisions` and `Testing Decisions` are grounded in repository context and mention no file paths or code snippets.

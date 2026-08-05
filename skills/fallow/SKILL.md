@@ -16,7 +16,7 @@ Use this skill when the job is to inspect or clean up a JavaScript or TypeScript
 
 ## Use this skill when
 
-- The user asks to find dead code, unused exports, unused files, unused types, or unused dependencies in a JS/TS repo.
+- The user explicitly asks to run Fallow or wants a broader JS/TS code-health audit covering duplication, circular dependencies, boundaries, complexity, or cleanup.
 - The user wants duplication, circular dependency, boundary-violation, feature-flag, or complexity analysis through Fallow.
 - The user wants a pre-release or pre-refactor code-health audit focused on cleanup and structural issues.
 - The user wants a PR or CI gate for dead code, duplication, or changed-file audit checks.
@@ -28,6 +28,7 @@ Use this skill when the job is to inspect or clean up a JavaScript or TypeScript
 - The main problem is a runtime failure, broken test, or unexpected behavior; route to `systematic-debugging`.
 - The main problem is TypeScript compiler output or tsconfig fallout; route to `tsc-error-triage` or `tsconfig-hardening`.
 - The task is linting, formatting, security scanning, or bundle-size analysis; use the tool that owns that surface.
+- The request is an unused-only audit without Fallow named; route to [`knip`](../knip/SKILL.md).
 - The next step is mapping files and tests before editing rather than running code-health analysis; route to `context-map`.
 - The repository is not primarily JavaScript or TypeScript.
 
@@ -36,6 +37,7 @@ Use this skill when the job is to inspect or clean up a JavaScript or TypeScript
 | Situation | Use this skill? | Route instead |
 | --- | --- | --- |
 | "Find unused exports, duplicate code, and circular imports in this TS repo" | Yes | - |
+| "Find unused exports in this TS repo" | No | [`knip`](../knip/SKILL.md) |
 | "My tests started failing after a refactor and I do not know why" | No | `systematic-debugging` |
 | "tsc now reports 80 errors after enabling a stricter flag" | No | `tsc-error-triage` or `tsconfig-hardening` |
 | "Map the files, tests, and patterns involved before we touch this feature" | No | `context-map` |
@@ -91,7 +93,7 @@ Use [`references/patterns.md`](references/patterns.md) when the user wants a rep
 
 ## Validation
 
-- Run `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/fallow/SKILL.md`.
+- Validate the Fallow report or cleanup preview against the requested scope and issue categories before acting on findings.
 - Confirm every support file linked in `## Reference files` exists and stays shallow under `skills/fallow/`.
 - Smoke test the activation wording with one request that should trigger and one near-miss that should not:
   - should trigger: `Run Fallow on this TypeScript repo and tell me which exports, files, and dependencies look safe to clean up first.`

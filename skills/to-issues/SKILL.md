@@ -104,7 +104,6 @@ Use this skill when the goal is to break already-shaped work into issue-tracker 
 
 ## Validation
 
-- Run `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/to-issues/SKILL.md`.
 - Confirm every slice has a title, `AFK`/`HITL` type, dependency status, user-story coverage, and acceptance criteria.
 - Confirm the proposed issues are thin vertical slices rather than layer-based tasks; use [`references/checklist.md`](references/checklist.md).
 - Confirm the publish order matches dependency order and does not create circular blockers.

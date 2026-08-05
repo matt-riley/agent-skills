@@ -123,7 +123,7 @@ Only save when the user agrees — do not create memories speculatively.
 
 ## Validation
 
-Run `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/resolve-open-loops/SKILL.md`.
+Confirm each reviewed loop has an explicit disposition, evidence-backed status, and human-readable resolution before reporting the hygiene pass complete.
 
 Smoke test:
 - should trigger: "The guard blocked me again — let's clear those open loops."

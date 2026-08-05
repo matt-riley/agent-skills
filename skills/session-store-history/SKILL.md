@@ -102,7 +102,6 @@ metadata:
 - Confirm the final answer matches the user's requested timeframe, repo, or ref scope when one was provided.
 - Confirm the findings come from `session_store` tables that actually support the claim you are making.
 - When the first query returns nothing, retry with expanded terms before concluding there is no history.
-- Run `python _shared/validate-skills.py skills` from the catalog root after editing this skill.
 - If you changed trigger wording, anti-triggers, or the frontmatter description, run `python _shared/run-trigger-evals.py skills/session-store-history/evals/trigger-queries.json`.
 - If you changed workflow guidance, guardrails, or support-file load conditions, run `python _shared/run-functional-evals.py skills/session-store-history/evals/evals.json`.
 - Re-read `skills/README.md` beside this skill to confirm the boundary stays distinct from current-workspace exploration and non-history tasks.

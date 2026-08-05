@@ -12,6 +12,10 @@
     "should_trigger": true
   },
   {
+    "query": "Find unused exports in this TS repo.",
+    "should_trigger": true
+  },
+  {
     "query": "The test suite started failing after yesterday's merge and I need the root cause.",
     "should_trigger": false
   },
