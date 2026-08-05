@@ -31,9 +31,11 @@ description: <what the skill does and when to use it from the user's point of vi
 license: GNU GPL v3
 compatibility: Agent Skills-compatible coding agents
 metadata:
-  owner: mattriley
   version: 1.0.0 # x-release-please-version
+  category: workflow
+  audience: general-coding-agent
   maturity: draft
+  kind: task
 ---
 ```
 

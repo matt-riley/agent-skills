@@ -63,7 +63,6 @@
   "skills/resolve-open-loops": "1.0.0",
   "skills/sam-cloudformation": "1.0.0",
   "skills/secret-scan-triage": "1.0.0",
-  "skills/skill-authoring": "1.0.0",
   "skills/systematic-debugging": "1.0.0",
   "skills/terraform-skill": "1.0.0",
   "skills/test-driven-development": "1.0.0",

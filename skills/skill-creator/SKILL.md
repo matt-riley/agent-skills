@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: "Build, upgrade, or standardise a specific skill package in the current catalog. Use when adding a new skill directory, improving its metadata/examples/evals, or tightening its trigger boundaries — not for general skill design philosophy or style reference (use skill-authoring for that)."
+description: "Build, upgrade, or standardise a specific skill package in the current catalog. Use when adding a skill directory, reconciling its authoring contract, improving metadata/examples/evals, or tightening trigger boundaries — not for one-off prompt advice."
 license: GNU GPL v3
 metadata:
   version: 1.3.0 # x-release-please-version
@@ -51,6 +51,7 @@ metadata:
 - Whether `scripts/` would remove repeated fragile reconstruction rather than just add maintenance
 - Whether `evals/` would catch meaningful trigger/workflow regressions instead of becoming noise
 - Whether the skill's maturity should stay `draft` or move to `stable` / `experimental`
+- Whether frontmatter, layering, anti-pattern, or import-rewrite guidance belongs in a purpose-named reference file
 
 ## First move
 
@@ -80,6 +81,7 @@ metadata:
 - **Must** define the skill boundary against nearby skills before finalizing wording.
 - **Must** put trigger guidance in both the frontmatter description and the body.
 - **Must** adapt the standard to this personal catalog rather than copying another repository wholesale.
+- **Must** treat `references/catalog-standard.md` as the source of truth when other authoring guidance conflicts with it.
 - **Must** hand back the existing starter scaffold directly when the user asks for a generic new-skill package and has not named a domain-specific skill yet.
 - **Must** state the progressive-disclosure split (`SKILL.md` for the workflow, `references/` and `evals/` for deeper support) when handing back the generic starter package.
 - **Must not** import Anthropic-specific `.claude`, `claude`, `.skill`, packaging, or benchmark machinery into this catalog unless the local catalog explicitly adopts that workflow.
@@ -100,7 +102,7 @@ metadata:
 ## Validation
 
 - Primary check: `python _shared/validate-skills.py skills` (or `npm run validate`) after any edit. This is the official catalog gate (frontmatter,  canonical headings including the fuller taught set, release metadata, support links, stable evals requirement, inter-skill links).
-- For detailed local authoring lint (extra heading requirements, concrete Examples/Reference files content, no orphaned support files, kind-specific rules): `node skills/skill-authoring/scripts/validate-skill-library.mjs skills/<name>/SKILL.md` (or run over the whole catalog).
+- For detailed local authoring lint (extra heading requirements, concrete Examples/Reference files content, no orphaned support files, kind-specific rules): `node skills/skill-creator/scripts/validate-skill-library.mjs skills/<name>/SKILL.md` (or run over the whole catalog).
 - When delivering or documenting a new skill scaffold, confirm it passes the primary validator and has the expected support files + (when appropriate) evals.
 - Re-read `skills/README.md` alongside the changed skill to confirm the boundary does not overlap ambiguously with nearby skills.
 
@@ -115,6 +117,12 @@ metadata:
 - Read `references/examples.md` when drafting trigger language or checking whether a revised description still matches representative create-or-upgrade requests.
 - Read `references/edge-cases.md` when the request is ambiguous, overlaps another customization surface, or risks adding scripts or assets without clear justification.
 - Read `references/new-skill-package.md` when the task is to hand back a copy-ready starter bundle with frontmatter, support files, evals, and validation commands for the new skill.
-- Read `references/catalog-standard.md` when you need authoring principles, frontmatter spec, or directory structure guidance.
+- Read `references/catalog-standard.md` when you need the governing authoring principles, frontmatter spec, or directory structure guidance.
+- Read `references/frontmatter-contract.md` when you need detailed frontmatter fields, validator rules, troubleshooting, or metadata examples.
+- Read `references/authoring-checklist.md` when doing a final structure, activation, layering, and quality check.
+- Read `references/layering-guide.md` when deciding whether guidance belongs in instructions, a skill, a specialized agent, or an extension.
+- Read `references/import-rewrite-contract.md` when adapting an upstream skill into this catalog.
+- Read `references/quality-and-anti-patterns.md` when pressure-testing package shape, descriptions, or support-file boundaries.
 - Read `assets/skill-template.md` when you need the canonical `SKILL.md` outline, section headings, or eval file schemas.
 - Copy `assets/new-skill-starter/` into the new skill directory when creating a skill from scratch; replace all placeholders before treating it as ready.
+- Run [`scripts/validate-skill-library.mjs`](scripts/validate-skill-library.mjs) for the stricter local authoring and support-file checks when the target package needs them.

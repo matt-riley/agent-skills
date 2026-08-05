@@ -43,7 +43,7 @@ Large `SKILL.md` files retain activation, first action, workflow, guardrails, va
 ### Catalog metadata and routing
 
 - Generate or repair `agents/openai.yaml` for every active skill using the local metadata conventions.
-- Add `find-skills` and `graphify` to the active chooser with boundaries that avoid crowding out direct task skills.
+- Keep discovery routing explicit in the active chooser with boundaries that avoid crowding out direct task skills.
 - Update archived Release Please entries to their real filesystem paths, or remove them from release management if the existing configuration shows archived packages are intentionally excluded. Apply the same decision consistently to both release files.
 - Remove or replace the broken root `copilot-instructions.md` link in `git-signing-troubleshoot` with a real repository-owned source.
 
@@ -76,7 +76,7 @@ Completion requires fresh successful results from:
 
 ```bash
 npm run validate
-node skills/skill-authoring/scripts/validate-skill-library.mjs
+node skills/skill-creator/scripts/validate-skill-library.mjs
 ```
 
 Every active eval fixture must also pass its static runner:

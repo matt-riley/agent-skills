@@ -148,8 +148,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 - `doc-coauthoring` — co-author technical documentation with a domain expert in an iterative Q&A loop
 - `to-prd` — generate a Product Requirements Document from a feature idea or conversation
 - `to-issues` — convert a conversation, PRD, or plan into well-formed GitHub issues
-- `skill-authoring` — design, write, and improve reusable skills in this catalog
-- `skill-creator` — create or upgrade a skill with frontmatter, headings, evals, and validation
+- `skill-creator` — create, upgrade, and standardise reusable skills with frontmatter, layering guidance, evals, and validation
 
 ### Developer experience and tooling
 
@@ -229,7 +228,6 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | TypeScript `any` elimination or type tightening | `typescript-any-eliminator` | Systematic any removal is the deliverable |
 | finding unused dependencies, exports, files, or unresolved imports in a JS/TS repo | `knip` | Knip-based codebase health analysis is the main need |
 | auditing JS/TS dead code, duplication, circular dependencies, or architecture boundaries with Fallow | `fallow` | Fallow tool is requested or the scope is broader than unused-import detection |
-| writing or improving reusable skills | `skill-authoring` | Skill authorship is the primary task |
 | creating a new skill or upgrading an existing one with correct frontmatter and evals | `skill-creator` | Skill creation/upgrade workflow with validation is the deliverable |
 | adversarial questioning to stress-test a design | `grill-me` | Adversarial review is the main format |
 | AI agent policy, tool allowlists, or audit trails | `agent-governance` | Runtime governance patterns are the speciality |

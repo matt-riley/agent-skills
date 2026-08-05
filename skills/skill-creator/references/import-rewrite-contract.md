@@ -13,7 +13,7 @@ Use this document when rewriting an upstream skill into this local library. All 
 
 ### Discard from upstream
 
-- Non-local frontmatter keys: `license`, `compatibility`, `author`, `inspired-by`, and any provenance or attribution fields — these belong in a commit message or a separate PROVENANCE note if you need to preserve attribution, not in frontmatter.
+- Non-local frontmatter keys: `author`, `inspired-by`, and any provenance or attribution fields — preserve attribution in a commit message or a separate PROVENANCE note. Keep the catalog-required `license: GNU GPL v3`; retain `compatibility` only when an environment assumption materially affects use.
 - Description blocks that lead with domain labels or workflow summaries instead of trigger phrases.
 - Headings that do not match the stable local section names (adapt, do not carry forward upstream heading variations).
 - Hard-coded absolute paths to skill locations outside this repository.
@@ -66,13 +66,15 @@ Replace `## Inputs to gather`, `## First move`, `## Workflow`, and `## Outputs` 
 | Field | Required | Valid values / rules |
 | --- | --- | --- |
 | `name` | Yes | Lowercase kebab-case. Must match the skill directory name exactly. No spaces, uppercase, or special characters. |
-| `description` | Yes | 50–120 characters. Must start with a trigger phrase ("Use when", "Use this when", or equivalent). Never a domain label alone. Never a workflow summary. |
+| `description` | Yes | A concise YAML string naming purpose and concrete activation conditions. Keep it tight, but do not enforce an arbitrary character range. State when to use it and, where overlap exists, when not to use it; do not merely summarize the workflow. |
 | `metadata.category` | Recommended | `authoring`, `ci`, `migrations`, `typescript`, `version-control`, `workflow`, or a concise domain label. |
 | `metadata.audience` | Recommended | `general-coding-agent` unless the skill is narrowly specialized. |
-| `metadata.maturity` | Recommended | `draft` for new imports; `stable` only after smoke-test validation and live use. |
-| `metadata.kind` | Required for new skills | `task` or `reference`. |
+| `metadata.maturity` | Expected for active skills | `stable`, `draft`, or `experimental`; `beta` is legacy. |
+| `metadata.kind` | Expected for active skills | `task` or `reference`; required for draft skills. |
+| `metadata.category` | Expected for active skills | A concise family label aligned with `skills/README.md`. |
+| `metadata.audience` | Expected for active skills | Usually `general-coding-agent`. |
 
-**Do not add** `license`, `compatibility`, `author`, `inspired-by`, or any other top-level keys not listed above.
+Every active skill must carry `license: GNU GPL v3`; retain `compatibility` only for material environment assumptions. Do not add `author`, `inspired-by`, or other undocumented top-level keys.
 
 **Multiline description blocks with embedded bullet lists are not valid.** Keep the description as a single quoted string. If the trigger conditions are complex, put them in `## Use this skill when` instead.
 
@@ -112,10 +114,10 @@ Every support file must be linked directly from `## Reference files` in `SKILL.m
 
 The `description` field is the primary activation signal. It must:
 
-- Lead with a trigger phrase, not a domain label or capability summary.
+- State a trigger phrase or concrete activation condition rather than only a domain label or capability summary.
 - Name the specific situations or request patterns that should fire the skill.
 - Include at least one scope boundary ("not when X is more appropriate") when adjacent skills exist.
-- Never summarize the workflow — an agent reading only the description must know whether to invoke the skill, not how to execute it.
+- Avoid summarizing the workflow — an agent reading only the description should know whether to invoke the skill, not how to execute it.
 
 The `## Routing boundary` table must include at least one row that routes away from this skill to a named adjacent skill, so activation between nearby skills stays unambiguous.
 
@@ -126,7 +128,7 @@ Each imported skill package must pass both mechanical and behavioral validation 
 ### Mechanical
 
 ```bash
-node skills/skill-authoring/scripts/validate-skill-library.mjs skills/<name>/SKILL.md
+node skills/skill-creator/scripts/validate-skill-library.mjs skills/<name>/SKILL.md
 ```
 
 This checks `name`/directory match, description length, trigger phrase presence, frontmatter syntax, and no missing required keys.
@@ -165,7 +167,7 @@ Read the completed `SKILL.md` as the target agent. The next action must be obvio
 - **Preserve:** The setup → branch → loop → report phase structure, the measurable metric contract (goal, command, extraction, direction, scope, constraints, budget), the results TSV format, the simplicity policy concept, and the experiment strategy priority order (low-hanging fruit first, diversify after plateaus, combine winners, etc.).
 - **Support file decision:** The results TSV format and the experiment strategy priority order work well as a `references/experiment-guide.md`. The phase-by-phase setup questions can become an `assets/setup-template.md` that an agent fills in instead of prose.
 - **Rewrite for local safety — required:** The upstream loop uses `git reset --hard HEAD~1` as the standard revert and `git commit --amend` in crash recovery. Both violate local repo safety policy for automated or repeated sequences. Replace with: use the dedicated experiment branch as the safety boundary; revert bad experiments by creating a new commit that reverts the previous one (`git revert HEAD --no-edit`) rather than a hard reset; omit `--amend` from the automated loop entirely.
-- **Remove from upstream:** `license`, `compatibility`, `metadata.author`, `metadata.inspired-by` frontmatter keys; the interactive question-and-answer framing (the skill should state what to gather, not mimic a questionnaire); the `---` horizontal rule dividers between phases (not local style).
+- **Remove from upstream:** `metadata.author`, `metadata.inspired-by`, and other provenance frontmatter keys; preserve the catalog-required `license: GNU GPL v3` and material `compatibility` assumptions. Also remove interactive question-and-answer framing (the skill should state what to gather, not mimic a questionnaire) and `---` horizontal rule dividers between phases (not local style).
 - **Routing:** Route against `test-driven-development` (when the task is writing tests, not optimizing a measurable metric) and `systematic-debugging` (when the goal is diagnosing a specific failure, not iterative optimization).
 
 ### agentic-eval

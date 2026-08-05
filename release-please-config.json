@@ -249,16 +249,6 @@
         }
       ]
     },
-    "skills/skill-creator": {
-      "package-name": "skill-creator",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/skill-creator/SKILL.md"
-        }
-      ]
-    },
     "skills/templ-templates": {
       "package-name": "templ-templates",
       "skip-github-release": true,
@@ -639,13 +629,13 @@
         }
       ]
     },
-    "skills/skill-authoring": {
-      "package-name": "skill-authoring",
+    "skills/skill-creator": {
+      "package-name": "skill-creator",
       "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/skill-authoring/SKILL.md"
+          "path": "skills/skill-creator/SKILL.md"
         }
       ]
     },

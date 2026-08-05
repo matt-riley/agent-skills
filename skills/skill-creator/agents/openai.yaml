@@ -1,8 +1,5 @@
 interface:
   display_name: Skill Creator
-  short_description: Build, upgrade, or standardise a specific skill package in the
-    current catalog. Use when adding a new skill directory, improving its metadata/examples/evals,
-    or tightening its trigger boundaries — not for general skill design philosophy
-    or style reference (use skill-authoring for that).
+  short_description: Build, upgrade, or standardise a specific skill package in the current catalog. Use when adding a skill directory, reconciling its authoring contract, improving metadata/examples/evals, or tightening trigger boundaries — not for one-off prompt advice.
 policy:
   allow_implicit_invocation: true

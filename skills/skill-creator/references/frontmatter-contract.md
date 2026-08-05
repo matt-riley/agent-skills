@@ -10,7 +10,7 @@ The following top-level keys are valid in a skill frontmatter block:
 | --- | --- | --- |
 | `name` | **Required** | Kebab-case, matches the directory name exactly. |
 | `description` | **Required** | Identifies purpose and concrete activation conditions without summarising procedural workflow. |
-| `metadata` | **Optional** (block) | Contains lifecycle and classification fields when the skill needs them; some fields become required under the conditions below. |
+| `metadata` | **Expected for active skills** (block) | Contains lifecycle and classification fields; `category`, `audience`, `maturity`, and `kind` are expected for every active skill. |
 | `license` | **Required by repo policy** | Use `GNU GPL v3`; see AGENTS.md Learned Rule 1. |
 | `compatibility` | **Optional** | Concise environment or product assumptions when they materially affect use. |
 
@@ -88,7 +88,7 @@ Every active skill ships `agents/openai.yaml` with:
 - `interface.short_description` — must match the skill frontmatter `description` exactly
 - `policy.allow_implicit_invocation` — boolean
 
-Default to `allow_implicit_invocation: true`. Set `false` for meta, routing, full-lifecycle process wrappers, or personal-harness skills that should not crowd out sharper task skills on generic prompts (for example `find-skills`, `code-intelligence`, `rpi-workflow`, `graphify`, `skill-authoring`, `session-store-history`, `resolve-open-loops`).
+Default to `allow_implicit_invocation: true`. Set `false` for meta, routing, full-lifecycle process wrappers, or personal-harness skills that should not crowd out sharper task skills on generic prompts (for example `code-intelligence`, `rpi-workflow`, `graphify`, `session-store-history`, `resolve-open-loops`).
 
 ## Frontmatter shape reference
 

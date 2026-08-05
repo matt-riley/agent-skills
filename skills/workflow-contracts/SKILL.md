@@ -32,7 +32,7 @@ Use this skill when a task needs a durable handoff artifact instead of a chat su
 | Situation | Use this skill? | Route instead |
 | --- | --- | --- |
 | Create or consume a structured plan, review, or execution artifact in this repo | Yes | - |
-| Create or revise a reusable skill package | No | [`skill-authoring`](../skill-authoring/SKILL.md) |
+| Create or revise a reusable skill package | No | [`skill-creator`](../skill-creator/SKILL.md) |
 | Write global policy that should always apply even when no artifact is produced | No | global instructions or a scoped instruction file |
 | Produce requirements before creating the contract | No | [`to-prd`](../to-prd/SKILL.md) |
 | Break an approved contract into independently trackable tickets | No | [`to-issues`](../to-issues/SKILL.md) |
@@ -80,7 +80,7 @@ Use this skill when a task needs a durable handoff artifact instead of a chat su
 5. If a legacy artifact must feed the next phase, map it into the `v1` headings before handing it off.
 6. Validate the finished artifact with [`references/checklist.md`](references/checklist.md).
 7. Hand off the artifact with an explicit next action instead of assuming the next agent will infer it from chat history.
-8. If the task would require inventing a new artifact shape or parser, route to [`skill-authoring`](../skill-authoring/SKILL.md) instead of stretching this skill.
+8. If the task would require inventing a new artifact shape or parser, route to [`skill-creator`](../skill-creator/SKILL.md) instead of stretching this skill.
 
 ## Outputs
 
