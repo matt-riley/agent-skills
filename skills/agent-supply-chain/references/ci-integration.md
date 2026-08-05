@@ -40,7 +40,7 @@ Add manifest verification as a pre-deploy step. The check re-hashes all plugin f
 
 ## Promotion gate
 
-Use `promotion_check()` from `../SKILL.md` to block any deployment where integrity, required files, or dependency pinning checks fail:
+Use `promotion_check()` from [`integrity-patterns.md`](integrity-patterns.md) to block any deployment where integrity, required files, or dependency pinning checks fail:
 
 ```python
 result = promotion_check("my-plugin/")

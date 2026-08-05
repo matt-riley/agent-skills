@@ -194,53 +194,14 @@ For Bubble Tea TUIs, the framework handles signals; do not add a second signal h
 
 ### 6. Goreleaser and Homebrew distribution
 
-The canonical goreleaser config for a Go CLI distributed via Homebrew:
-
-```yaml
-before:
-  hooks:
-    - go mod tidy
-builds:
-  - env:
-      - CGO_ENABLED=0
-    goos: [linux, darwin]
-    goarch: [amd64, arm64]
-    ldflags:
-      - -s -w
-      - -X github.com/owner/repo/cmd/cli.version={{.Version}}
-      - -X github.com/owner/repo/cmd/cli.commit={{.Commit}}
-      - -X github.com/owner/repo/cmd/cli.date={{.Date}}
-brews:
-  - tap:
-      owner: matt-riley
-      name: homebrew-tools
-      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    commit_author:
-      name: Matt Riley
-      email: matt@mattriley.me
-    homepage: https://github.com/<owner>/<repo>
-    description: "<short description>"
-archives:
-  - format: tar.gz
-    name_template: >-
-      {{ .ProjectName }}_{{ title .Os }}_{{ if eq .Arch "amd64" }}x86_64{{ else }}{{ .Arch }}{{ end }}
-    format_overrides:
-      - goos: windows
-        format: zip
-checksum:
-  name_template: "checksums.txt"
-changelog:
-  sort: asc
-  filters:
-    exclude: ["^docs:", "^test:"]
-```
+Use [`references/goreleaser-homebrew.md`](references/goreleaser-homebrew.md) as the canonical full goreleaser and Homebrew configuration.
 
 Key rules:
 - Set `CGO_ENABLED=0` for static binaries that run on scratch containers and minimal Linux.
 - The Homebrew tap token must be available as `HOMEBREW_TAP_GITHUB_TOKEN` in CI.
 - Include at least `darwin` and `linux` in `goos`; add `windows` only when explicitly requested.
 - The `archives.name_template` should produce clean filenames without Go's arch convention.
-- Read [`references/goreleaser-homebrew.md`](references/goreleaser-homebrew.md) for full goreleaser + Homebrew integration details.
+- Keep the tap owner, tap repository, commit author, and contact email as project-specific placeholders until the release owner supplies them.
 
 ### 7. Testing CLI behavior
 
