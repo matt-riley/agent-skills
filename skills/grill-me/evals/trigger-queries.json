@@ -1,0 +1,18 @@
+[
+  {
+    "query": "Grill me on my plan to refactor the notification service.",
+    "should_trigger": true
+  },
+  {
+    "query": "Grill me and build CONTEXT.md as we resolve the domain language.",
+    "should_trigger": true
+  },
+  {
+    "query": "Sharpen this vague request into a repo-grounded brief before we start.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review this completed plan with unanimous reviewer-gated rounds and verdict tokens.",
+    "should_trigger": false
+  }
+]

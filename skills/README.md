@@ -156,8 +156,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 - `neovim-config` — configure and extend a Neovim setup with plugins, keymaps, and LSP wiring
 - `neovim-plugin-development` — develop, test, and release Neovim Lua plugins with plenary, CI, and docs
-- `grill-me` — generate adversarial questions to stress-test your understanding of a codebase or design
-- `grill-with-docs` — challenge an implementation against official docs to surface gaps and misnomers
+- `grill-me` — interrogate a plan or design; when the user explicitly mentions CONTEXT.md, ADRs, or a domain glossary, use its documentation mode
 - `ast-grep` — run structural code search and rewrite using ast-grep patterns
 - `modern-web-guidance` — apply current web platform guidance for a specific framework or API decision
 
@@ -234,7 +233,6 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | writing or improving reusable skills | `skill-authoring` | Skill authorship is the primary task |
 | creating a new skill or upgrading an existing one with correct frontmatter and evals | `skill-creator` | Skill creation/upgrade workflow with validation is the deliverable |
 | adversarial questioning to stress-test a design | `grill-me` | Adversarial review is the main format |
-| challenging an implementation against official docs | `grill-with-docs` | Doc-grounded critique is the main format |
 | AI agent policy, tool allowlists, or audit trails | `agent-governance` | Runtime governance patterns are the speciality |
 | AI agent plugin integrity or promotion gates | `agent-supply-chain` | Supply chain verification is the main risk |
 | designing or running evaluation loops for AI agent outputs | `agentic-eval` | Reflection, evaluator-optimizer, and LLM-as-judge patterns are the focus |
@@ -267,6 +265,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `acquire-codebase-knowledge` should own deep seven-document codebase mapping; do not conflate it with narrow file reads, quick architecture sketches, or ad-hoc questions about single modules.
 - `fallow` and `knip` are both JS/TS code-health tools but target different tools and scopes: prefer `knip` when the Knip tool is explicitly requested or the need is unused dependencies, exports, or unresolved imports; prefer `fallow` when the Fallow tool is requested or the analysis covers duplication, circular dependencies, complexity hotspots, architecture boundaries, or CI audit gates.
 - `plan-review-loop` is distinct from `plan-review`; `plan-review` owns plan drafting and one-shot approval; `plan-review-loop` owns the explicit multi-round reviewer-persona loop with Jason and Freddy.
+- `grill-me` owns pure plan/design interrogation by default and its explicit documentation mode only when the user names `CONTEXT.md`, ADRs, or a domain glossary; do not create domain docs silently.
 - `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
 - `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
 - `code-intelligence` is a routing overlay that ensures LSP is used when available; it should not be selected as the primary skill for work that has a more specific match.

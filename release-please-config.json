@@ -569,16 +569,6 @@
         }
       ]
     },
-    "skills/grill-with-docs": {
-      "package-name": "grill-with-docs",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/grill-with-docs/SKILL.md"
-        }
-      ]
-    },
     "skills/iam-oidc-triage": {
       "package-name": "iam-oidc-triage",
       "skip-github-release": true,
