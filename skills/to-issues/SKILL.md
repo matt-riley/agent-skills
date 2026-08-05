@@ -3,7 +3,7 @@ name: to-issues
 description: "Use when the user wants to turn a plan, spec, PRD, or approved idea into independently grabbable issue-tracker slices. Not when the work still needs a PRD, repository discovery, or a generic handoff artifact."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

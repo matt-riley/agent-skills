@@ -3,7 +3,7 @@ name: integration-testing-http
 description: "Write and run end-to-end HTTP integration tests for server behavior. Use when you need to add or fix integration test coverage for handlers, middleware, auth enforcement, or endpoint contracts — not for keeping OpenAPI specs in sync."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   owner: mattriley
   category: testing
   audience: general-coding-agent

@@ -3,7 +3,7 @@ name: terraform-skill
 description: "Use when writing, reviewing, or debugging Terraform/OpenTofu — modules, tests, CI/CD, security scans, or state operations."
 license: GNU GPL v3
 metadata:
-  version: 1.1.0 # x-release-please-version
+  version: 1.1.1 # x-release-please-version
   category: terraform
   audience: general-coding-agent
   maturity: draft

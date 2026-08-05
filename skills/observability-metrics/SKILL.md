@@ -3,7 +3,7 @@ name: observability-metrics
 description: "Validate and operate application /health, /metrics, and logging behavior. Use when adding metrics, changing observability endpoint auth, or verifying deployment telemetry — not for general production debugging where telemetry health is not the question."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   owner: mattriley
   category: ops
   audience: general-coding-agent

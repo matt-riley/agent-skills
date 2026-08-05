@@ -3,7 +3,7 @@ name: goreleaser-release-pipeline
 description: "Use when setting up, debugging, or fixing a GoReleaser v2 release pipeline — especially Release Please tag issues, missing release assets, or publish jobs that fail after a release is created, not when the main task is generic CI triage or PR handling."
 license: GNU GPL v3
 metadata:
-  version: 1.0.1 # x-release-please-version
+  version: 1.0.2 # x-release-please-version
   category: ci
   audience: general-coding-agent
   maturity: draft

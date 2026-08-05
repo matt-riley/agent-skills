@@ -3,7 +3,7 @@ name: testing-workflows
 description: "Write, run, and debug Go tests — unit and integration — including generator refresh when stale generated code causes failures. Use when adding test coverage or debugging test failures in domain logic, repositories, or handlers. For build failures, toolchain issues, or CI-parity problems, use go-build-and-test instead."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   owner: mattriley
   category: testing
   audience: general-coding-agent

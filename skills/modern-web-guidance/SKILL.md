@@ -3,7 +3,7 @@ name: modern-web-guidance
 description: "Modern web platform API guidance for avoiding legacy HTML, CSS, and JavaScript patterns. Use when implementing web interfaces, forms, accessibility, performance, browser APIs, or animations."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

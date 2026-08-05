@@ -3,7 +3,7 @@ name: make-interfaces-feel-better
 description: "Polish existing interfaces when the UI feels off through better radius, shadows, typography, motion, and micro-interactions."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   category: frontend
   audience: general-coding-agent
   maturity: stable

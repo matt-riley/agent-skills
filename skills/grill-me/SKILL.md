@@ -3,7 +3,7 @@ name: grill-me
 description: "Use when the user wants to be interviewed or stress-tested about a plan, design, or decision, including explicit requests to 'grill me'. If they also mention CONTEXT.md, ADRs, or a domain glossary, use the documentation mode; otherwise keep the session pure interrogation and do not create docs."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft

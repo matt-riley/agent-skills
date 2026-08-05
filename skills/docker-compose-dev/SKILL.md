@@ -3,7 +3,7 @@ name: docker-compose-dev
 description: "Run a service stack locally using Docker Compose for prod-like development (e.g. PostgreSQL + app). Use when you need a real DB backend, multi-service integration, or want to reproduce production-like behavior locally."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   owner: mattriley
   category: ops
   audience: general-coding-agent

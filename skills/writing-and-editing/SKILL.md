@@ -3,7 +3,7 @@ name: writing-and-editing
 description: "Draft structured documents, audit prose readability, and review short audience-facing metadata strings — solo writing quality work. Use when the primary task is writing, editing, or copy quality, not iterative co-authoring with reader feedback (use doc-coauthoring for that)."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   owner: mattriley
   category: writing
   audience: general-coding-agent

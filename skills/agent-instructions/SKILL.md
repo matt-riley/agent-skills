@@ -3,7 +3,7 @@ name: agent-instructions
 description: "Use when creating or updating agent instruction files (AGENTS.md for Pi, copilot-instructions.md for Copilot, per-path guides, or AGENTS.md router) — especially when instruction files are too long, generic, or stale, or when agents repeatedly make the same avoidable mistakes."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: authoring
   audience: general-coding-agent
   maturity: draft

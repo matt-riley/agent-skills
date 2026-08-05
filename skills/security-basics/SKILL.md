@@ -3,7 +3,7 @@ name: security-basics
 description: "Apply security and privacy guardrails to application code. Use when touching authentication, secrets, sensitive endpoint exposure, or logging of credentials/PII — not for general request-handling changes without a security dimension."
 license: GNU GPL v3
 metadata:
-  version: 1.3.0 # x-release-please-version
+  version: 1.3.1 # x-release-please-version
   owner: mattriley
   category: security
   audience: general-coding-agent

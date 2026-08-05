@@ -3,7 +3,7 @@ name: agentic-eval
 description: "Use when designing or implementing an evaluation loop for AI agent outputs — reflection loops, evaluator-optimizer pipelines, LLM-as-judge scoring, or rubric-based iteration. Not when running an existing test suite or reviewing a completed artifact without iterating."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 2.0.1 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: draft
