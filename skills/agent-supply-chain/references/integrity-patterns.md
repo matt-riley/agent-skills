@@ -141,7 +141,8 @@ FAILED: 3 issue(s)
 Check that agent dependencies use pinned versions.
 
 ```python
-import re
+import json
+from pathlib import Path
 
 def audit_versions(config_path: str) -> list[dict]:
     """Audit dependency version pinning in a config file."""
@@ -180,6 +181,11 @@ def audit_versions(config_path: str) -> list[dict]:
 Use integrity verification as a gate before promoting plugins.
 
 ```python
+import json
+from pathlib import Path
+
+# Requires verify_manifest() from Pattern 2.
+
 def promotion_check(plugin_dir: str) -> dict:
     """Check if a plugin is ready for production promotion."""
     checks = {}

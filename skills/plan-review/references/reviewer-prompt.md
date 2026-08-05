@@ -25,7 +25,7 @@ Context:
 
 ## Consolidation rules
 
-- Treat `REQUEST_CHANGES` as blocking.
+- Treat `[PLAN-REVISE-NEEDED]` as blocking.
 - Merge duplicate findings across reviewers before revising the plan.
 - Preserve reviewer-specific concerns when they are materially different.
 - After revising the plan, send the updated revision back to the full reviewer set.

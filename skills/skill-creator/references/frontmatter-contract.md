@@ -161,7 +161,7 @@ The validator (`scripts/validate-skill-library.mjs`) currently enforces:
 | Issue | Cause | Fix |
 | --- | --- | --- |
 | "frontmatter name does not match directory" | Name in `---` block doesn't match folder | Rename the `name:` field to match the skill directory name |
-| "name contains invalid characters" | Spaces, uppercase, or special characters in name | Use lowercase alphanumeric, hyphens, underscores only (e.g., `my-skill-v2`) |
+| "name contains invalid characters" | Spaces, uppercase, or special characters in name | Use lowercase kebab-case (letters, digits, hyphens) only, matching `^[a-z0-9]+(?:-[a-z0-9]+)*$` (e.g., `my-skill-v2`) |
 | "description is too short" | Description under 20 characters | Expand description to at least 20 chars and include concrete trigger phrases |
 | "missing frontmatter key name" or "description" | Frontmatter block incomplete | Add both `name:` and `description:` keys between `---` delimiters |
 | "missing frontmatter block" | No `---` delimiters in SKILL.md | Add `---` at the top of the file and close the frontmatter with another `---` |
