@@ -3,7 +3,7 @@ name: sam-cloudformation
 description: "Use when AWS SAM templates, CloudFormation stacks, or SAM deploys fail on YAML, transforms, resource wiring, or rollback state, or when the deploy caller gets AWS sts:AssumeRole or sts:AssumeRoleWithWebIdentity AccessDenied — not when the Lambda binary itself or Terraform-owned infrastructure is the primary blocker."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 3.0.0 # x-release-please-version
   category: ci
   audience: general-coding-agent
   maturity: draft

@@ -3,7 +3,7 @@ name: finishing-a-development-branch
 description: "Use when implementation work is complete and you need to decide how to integrate the branch — merging locally, creating a PR, keeping the branch, or discarding the work."
 license: GNU GPL v3
 metadata:
-  version: 2.0.0 # x-release-please-version
+  version: 3.0.0 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: stable
