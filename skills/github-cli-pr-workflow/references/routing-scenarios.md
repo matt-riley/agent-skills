@@ -9,7 +9,7 @@ Use this table to keep boundaries clear with nearby skills.
 | "Why did this Actions job fail?" | `github-actions-failure-triage` |
 | "Address reviewer comments and push fixes." | `review-comment-resolution` |
 | "Decide merge vs PR vs keep vs discard." | `finishing-a-development-branch` |
-| "Set up a worktree lane before starting." | `git-worktrees` or `worktrunk` |
+| "Set up a worktree lane before starting." | `git-worktrees` |
 
 ## Escalation cues
 

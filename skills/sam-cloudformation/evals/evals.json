@@ -24,6 +24,18 @@
       "files": []
     },
     {
+      "id": "oidc-assumerole-denied",
+      "prompt": "Our SAM deploy job fails in configure-aws-credentials with AccessDenied on sts:AssumeRoleWithWebIdentity. Fix it.",
+      "expected_behavior": "Treats the AssumeRole denial as the blocker before any template work, checks the trust policy aud/sub conditions and provider registration against the real caller, and only returns to stack triage once auth succeeds.",
+      "assertions": [
+        "Does not diagnose stack rollback, drift, or template schema first",
+        "Anchors the exact denied action and checks token.actions.githubusercontent.com aud/sub conditions",
+        "Uses references/oidc-assumerole-triage.md rather than widening the trust policy",
+        "Re-verifies the auth step before moving on to CloudFormation triage"
+      ],
+      "files": []
+    },
+    {
       "id": "route-away-lambda-bootstrap",
       "prompt": "The Go Lambda zip is missing the bootstrap binary and fails before the template is the problem.",
       "expected_behavior": "Routes to aws-lambda-go-deployment because packaging/runtime is the primary blocker, not SAM template wiring.",

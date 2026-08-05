@@ -21,7 +21,7 @@ Use `wt` when it is installed (`wt --version`) — it fires hooks, tracks lifecy
 
 ## Notes
 
-- Worktrunk computes worktree paths from a template in `~/.config/worktrunk/config.toml`. The default is a sibling directory (`../repo.branch-name`). For agent harness compatibility, set: `worktree-path = "{{ repo_path }}/.worktrees/{{ branch | sanitize }}"`..
+- Worktrunk computes worktree paths from a template in `~/.config/worktrunk/config.toml`. The default is a sibling directory (`../repo.branch-name`). For agent harness compatibility, set: `worktree-path = "{{ repo_path }}/.worktrees/{{ branch | sanitize }}"`.
 - `wt merge` defaults to squash mode, which requires `[commit.generation]` config. Pass `--no-squash` when not configured.
 - All `wt` commands accept `-C <path>` to set the working repository root.
-- See the `worktrunk` skill for hooks, LLM commit setup, and parallel agent recipes.
+- See [hooks-reference.md](hooks-reference.md), [llm-commits-setup.md](llm-commits-setup.md), and [parallel-agents-recipes.md](parallel-agents-recipes.md) for hooks, LLM commit setup, and parallel agent recipes.

@@ -96,7 +96,6 @@ See `references/examples.md` for the four complete worked examples (merge, PR, k
 - `references/examples.md` — full multi-example transcripts with commands and outcomes.
 - `references/routing-boundaries.md` — Iron Law, routing table, inputs, first-move summary.
 - `references/decision-rules.md` — options details, cleanup rules, guardrails-in-practice, validation, integration notes.
-- [`git-worktrees`](../git-worktrees/SKILL.md) — worktree lifecycle and `mr_worktree_remove`.
-- [`worktrunk`](../worktrunk/SKILL.md) — prefer `wt` commands when available.
+- [`git-worktrees`](../git-worktrees/SKILL.md) — worktree lifecycle and `mr_worktree_remove`; prefer its `wt` commands when Worktrunk is installed.
 - [`github-cli-pr-workflow`](../github-cli-pr-workflow/SKILL.md) — Option 2 PR + checks handoff.
 - [`review-comment-resolution`](../review-comment-resolution/SKILL.md) — post-PR review feedback loops.

@@ -22,6 +22,18 @@
         "Prunes stale metadata only after preserving or confirming no local changes"
       ],
       "files": []
+    },
+    {
+      "id": "configure-worktrunk",
+      "prompt": "Configure wt for this repo so worktrees land in .worktrees/, a post-start hook runs npm ci, and commits get LLM-generated messages.",
+      "expected_behavior": "Confirms wt is installed, inspects existing config before writing, then sets worktree-path, project hooks, and commit generation using the Worktrunk references.",
+      "assertions": [
+        "Runs wt --version and wt config show before changing config",
+        "Sets worktree-path and authors hooks in the project .config/wt.toml",
+        "Adds a [commit.generation] block before relying on wt step commit",
+        "Verifies with wt config show and a throwaway wt switch --create / wt remove round trip"
+      ],
+      "files": []
     }
   ]
 }

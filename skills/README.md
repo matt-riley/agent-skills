@@ -108,9 +108,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Cloud and infrastructure
 
-- `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks
+- `sam-cloudformation` — author, validate, and deploy SAM templates and CloudFormation stacks, including OIDC/AssumeRole deploy-auth denials
 - `terraform-skill` — write, plan, apply, and troubleshoot Terraform configurations and state
-- `iam-oidc-triage` — diagnose and fix IAM OIDC trust policy failures for GitHub Actions, AWS, and GCP
 - `secret-scan-triage` — identify, remediate, and prevent secret leaks caught by gitleaks
 
 ### Frontend and site quality
@@ -122,11 +121,10 @@ Load them only when the current harness exposes those tools; otherwise surface t
 ### Git and branch workflow
 
 - `review-comment-resolution` — apply PR feedback, push the fix branch, and wait for resulting checks
-- `git-worktrees` — set up isolated worktrees for parallel tasks, agents, or safer branch isolation
+- `git-worktrees` — set up isolated worktrees for parallel tasks, agents, or safer branch isolation, and configure or operate Worktrunk (`wt`) for hooks, LLM commits, merges, and parallel lanes
 - `finishing-a-development-branch` — complete all finishing steps on a feature branch before opening a PR
 - `github-cli-pr-workflow` — create, review, and merge pull requests using the GitHub CLI
 - `git-signing-troubleshoot` — diagnose and fix commit/tag signing failures (GPG, SSH, 1Password)
-- `worktrunk` — operate the Worktrunk git workflow tool for step-commit, squash-rebase, and trunk management
 
 ### Research, knowledge, and discovery
 
@@ -205,6 +203,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | Astro SEO work | `astro-seo` | Astro-specific SEO implementation and audit risks dominate |
 | interface polish on an existing UI | `make-interfaces-feel-better` | Detail-level visual and interaction quality is the main problem |
 | isolated parallel checkouts, agent lanes, or safer multi-branch task setup | `git-worktrees` | Worktree setup and isolation are the main problem |
+| Worktrunk (`wt`) config, hooks, LLM commit messages, merge pipeline, or parallel agent lanes | `git-worktrees` | The `wt` surface is the worktree lifecycle tool this skill prefers when installed |
 | TDD, strict red-green-refactor cycle | `test-driven-development` | TDD discipline is the main ask |
 | a bug that resists quick diagnosis | `systematic-debugging` | Root-cause methodology beats random patch attempts |
 | post-deploy API smoke checks | `api-smoke-validation` | Smoke validation is the primary delivery gate |
@@ -218,13 +217,12 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | a GoReleaser release pipeline | `goreleaser-release-pipeline` | Release artifacts and changelogs are the main output |
 | reproducing a GitHub Actions failure locally | `github-actions-local-repro` | Local repro beats remote re-run for diagnosis |
 | SAM or CloudFormation template work | `sam-cloudformation` | SAM/CFN syntax, deploy, and stack management are the focus |
+| IAM OIDC trust failures or `sts:AssumeRole` AccessDenied on an AWS deploy | `sam-cloudformation` | Trust-policy diagnosis is the gate on the same SAM/CloudFormation deploy pipeline |
 | Terraform write, plan, or apply work | `terraform-skill` | Terraform config, state, and provider patterns are the focus |
-| IAM OIDC trust failures or GitHub Actions AWS auth | `iam-oidc-triage` | OIDC trust policy diagnosis is the speciality |
 | secret scanning alerts or leak remediation | `secret-scan-triage` | Secret identification and rotation are the main risk |
 | finishing, polishing, or PR-readying a feature branch | `finishing-a-development-branch` | Branch completion checklist is the deliverable |
 | creating or merging a PR with the GitHub CLI | `github-cli-pr-workflow` | `gh` PR workflow is the primary tool |
 | GPG, SSH, or 1Password commit signing failures | `git-signing-troubleshoot` | Signing configuration diagnosis is the speciality |
-| running the Worktrunk git workflow | `worktrunk` | Worktrunk commands, squash-rebase, and trunk ops are the focus |
 | TypeScript `any` elimination or type tightening | `typescript-any-eliminator` | Systematic any removal is the deliverable |
 | finding unused dependencies, exports, files, or unresolved imports in a JS/TS repo | `knip` | Knip-based codebase health analysis is the main need |
 | auditing JS/TS dead code, duplication, circular dependencies, or architecture boundaries with Fallow | `fallow` | Fallow tool is requested or the scope is broader than unused-import detection |
@@ -253,7 +251,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 Keep these boundaries crisp instead of broadening nearby skills:
 
-- `git-worktrees` should own worktree setup and isolation for parallel or multi-branch work; do not bury worktree mechanics inside `rpi-workflow`, `plan-review`, or implementation skills.
+- `git-worktrees` should own worktree setup and isolation for parallel or multi-branch work, including the Worktrunk (`wt`) config, hooks, and merge-pipeline surface; do not bury worktree mechanics inside `rpi-workflow`, `plan-review`, or implementation skills.
 - `review-comment-resolution` should own "apply review feedback and update the code/tests" work; keep it separate from `implementation-review`, which evaluates existing code rather than carrying feedback through to completion.
 - `reverse-prompt` should own prompt and execution-brief sharpening; keep it separate from `plan-review`, which owns plan artifacts and approval gates.
 - `writing-and-editing` should own reader-facing writing work; keep it separate from `github-presence`, which owns broader profile and repository-surface audits.

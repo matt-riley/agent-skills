@@ -16,11 +16,23 @@
     "should_trigger": true
   },
   {
-    "query": "The Go Lambda zip is missing the bootstrap binary and fails before the template is the problem.",
-    "should_trigger": false
+    "query": "GitHub Actions fails in configure-aws-credentials with AccessDenied on sts:AssumeRoleWithWebIdentity for our deployment role.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our deploy role's trust policy sub condition does not match the branch that triggered the run, so AssumeRole is denied.",
+    "should_trigger": true
+  },
+  {
+    "query": "We migrated from CircleCI to GitHub Actions and the AWS deploy role now denies OIDC callers; audit the trust policy.",
+    "should_trigger": true
   },
   {
     "query": "OIDC AssumeRole AccessDenied during deploy auth before sam deploy runs.",
+    "should_trigger": true
+  },
+  {
+    "query": "The Go Lambda zip is missing the bootstrap binary and fails before the template is the problem.",
     "should_trigger": false
   },
   {

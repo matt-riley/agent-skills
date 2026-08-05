@@ -26,7 +26,7 @@ Use this skill when the main task is the PR lifecycle loop around a pushed branc
 - The main task is diagnosing why a workflow or check failed; route to [`github-actions-failure-triage`](../github-actions-failure-triage/SKILL.md).
 - The main task is adjudicating PR review comments and producing follow-up commits; route to [`review-comment-resolution`](../review-comment-resolution/SKILL.md).
 - The main task is deciding merge vs PR vs keep vs discard; route to [`finishing-a-development-branch`](../finishing-a-development-branch/SKILL.md).
-- The main task is worktree setup or branch-lane isolation; route to [`git-worktrees`](../git-worktrees/SKILL.md) or [`worktrunk`](../worktrunk/SKILL.md).
+- The main task is worktree setup or branch-lane isolation; route to [`git-worktrees`](../git-worktrees/SKILL.md).
 
 ## Iron Law
 
@@ -42,7 +42,7 @@ Use this skill when the main task is the PR lifecycle loop around a pushed branc
 | Failing run needs root-cause diagnosis | No | `github-actions-failure-triage` |
 | Review comments need disposition and code fixes | No | `review-comment-resolution` |
 | Need to choose integration option after implementation is done | No | `finishing-a-development-branch` |
-| Need isolated worktree or parallel lane setup | No | `git-worktrees` or `worktrunk` |
+| Need isolated worktree or parallel lane setup | No | `git-worktrees` |
 
 ## Inputs to gather
 
