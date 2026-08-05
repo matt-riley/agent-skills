@@ -155,3 +155,17 @@ The validator (`scripts/validate-skill-library.mjs`) currently enforces:
 | Referenced local support and inter-skill targets exist | All skills | Error |
 | **Forbidden provenance keys in `metadata`** (`github-*`, `author`, `inspired-by`, `enhancements`) | All skills | **Error** |
 | **`metadata.kind` required for `draft` skills** | Draft skills | **Error** (added wave 2) |
+
+## Troubleshooting frontmatter issues
+
+| Issue | Cause | Fix |
+| --- | --- | --- |
+| "frontmatter name does not match directory" | Name in `---` block doesn't match folder | Rename the `name:` field to match the skill directory name |
+| "name contains invalid characters" | Spaces, uppercase, or special characters in name | Use lowercase alphanumeric, hyphens, underscores only (e.g., `my-skill-v2`) |
+| "description is too short" | Description under 20 characters | Expand description to at least 20 chars and include concrete trigger phrases |
+| "missing frontmatter key name" or "description" | Frontmatter block incomplete | Add both `name:` and `description:` keys between `---` delimiters |
+| "missing frontmatter block" | No `---` delimiters in SKILL.md | Add `---` at the top of the file and close the frontmatter with another `---` |
+| "unterminated frontmatter block" | Only one `---` marker or no closing `---` | Ensure frontmatter is wrapped: `---` on first line and `---` after the last field |
+| "forbidden top-level frontmatter key" | Undocumented keys like `argument-hint` at top level | Move content to `metadata`, `## Inputs to gather`, or `references/`; see the forbidden-keys rule above. (`compatibility` is optional; `license: GNU GPL v3` is required.) |
+| "forbidden provenance key metadata.*" | Upstream `github-*` or attribution fields inside `metadata` | Remove provenance fields; preserve attribution in a commit message or `PROVENANCE.md` |
+| "metadata.kind is required for draft skills" | New skill missing `kind` field | Add `kind: task` or `kind: reference` under `metadata` |
