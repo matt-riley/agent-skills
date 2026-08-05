@@ -131,7 +131,6 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Research, knowledge, and discovery
 
-- `find-skills` — discover an existing local catalog skill when skill lookup is the deliverable; do not use it as a wrapper around a directly requested task (experimental; explicit invocation preferred)
 - `acquire-codebase-knowledge` — deep-map an existing codebase into seven structured docs covering stack, architecture, conventions, integrations, testing, and concerns
 - `autoresearch` — run an autonomous numeric-metric hill-climbing loop on an experiment branch, logging `results.tsv` and making keep/revert decisions
 - `code-tour` — create or follow a guided tour through an unfamiliar codebase
