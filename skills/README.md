@@ -41,8 +41,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 ### Governance and process
 
 - `rpi-workflow` — full Research -> Plan -> Implement -> Validate discipline for non-trivial work
-- `plan-review` — plan drafting, hardening, approval gates, and optional structured reviewer personas
-- `plan-review-loop` — structured reviewer-persona loop (Jason and Freddy) that enforces unanimous approval over up to three rounds
+- `plan-review` — plan drafting, hardening, approval gates, and an explicit structured reviewer-persona mode (Jason and Freddy) with unanimous approval over up to three rounds
 - `reverse-prompt` — sharpen a rough ask into a repository-grounded execution brief or contract-shaped brief before work starts
 - `implementation-review` — post-implementation review and approval
 - `verification-before-completion` — mandatory pre-done checklist that blocks task completion until evidence passes
@@ -177,7 +176,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | --- | --- | --- |
 | a full research -> plan -> implement -> validate pass | `rpi-workflow` | Full lifecycle discipline is the primary need |
 | a plan, plan hardening, or reviewer-gated planning | `plan-review` | Planning is the deliverable; implementation is not yet in scope |
-| running a multi-reviewer approval loop on a completed /plan | `plan-review-loop` | Structured multi-round reviewer-persona loop with explicit verdict tokens is the main mechanism |
+| running a multi-reviewer approval loop on a completed plan | `plan-review` | Explicit structured mode with reviewer verdict tokens is the main mechanism |
 | a rough prompt that should be sharpened into an executable repo-grounded brief | `reverse-prompt` | Prompt critique or rewrite is the primary need before work starts |
 | an explicit definition of done, success criteria, or a contract-shaped execution brief | `reverse-prompt` | Contract-shaped brief framing now lives with prompt sharpening |
 | what they worked on before, whether they handled a topic already, or which session linked to a file / PR / issue | `session-store-history` | Cross-session recall from `session_store` is the main task |
@@ -264,7 +263,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `cloudflare-d1-query-tuning` should own runtime D1 query-shape and access-path tuning without schema changes; keep it separate from `cloudflare-d1-migrations` and from generic `repository-adapters` work when Cloudflare D1 runtime behavior is the main risk.
 - `acquire-codebase-knowledge` should own deep seven-document codebase mapping; do not conflate it with narrow file reads, quick architecture sketches, or ad-hoc questions about single modules.
 - `fallow` and `knip` are both JS/TS code-health tools but target different tools and scopes: prefer `knip` when the Knip tool is explicitly requested or the need is unused dependencies, exports, or unresolved imports; prefer `fallow` when the Fallow tool is requested or the analysis covers duplication, circular dependencies, complexity hotspots, architecture boundaries, or CI audit gates.
-- `plan-review-loop` is distinct from `plan-review`; `plan-review` owns plan drafting and one-shot approval; `plan-review-loop` owns the explicit multi-round reviewer-persona loop with Jason and Freddy.
+- `plan-review` owns plan drafting by default and its explicit structured mode when the user requests reviewer-gated multi-round approval; require unanimous same-round verdicts and stop after three rounds.
 - `grill-me` owns pure plan/design interrogation by default and its explicit documentation mode only when the user names `CONTEXT.md`, ADRs, or a domain glossary; do not create domain docs silently.
 - `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
 - `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
@@ -283,7 +282,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `cloudflare-d1-query-tuning` is the sharper match than `repository-adapters` when the main risk is Cloudflare D1 runtime query performance without schema or migration changes.
 - `code-generation` often pairs with schema, template, and API work, but usually should not be the only selected skill unless regeneration itself is the task.
 - `configuration-env` and `docker-compose-dev` are situational operational helpers, not default entry points.
-- `plan-review-loop` is the post-`/plan` structured approval loop; run it after `plan-review` creates the plan artifact.
+- `plan-review` structured mode runs after a plan artifact exists and only when the user requests reviewer-gated multi-round approval.
 - `verification-before-completion` pairs with any implementation skill; load it last, before signing off.
 - `test-driven-development` and `systematic-debugging` layer onto `testing-workflows`; prefer the specialist when TDD discipline or structured root-cause methodology is the explicit need.
 - `agent-governance` and `agent-supply-chain` are complementary: governance controls runtime behavior; supply chain controls artifact integrity. Both often apply to the same agent project.

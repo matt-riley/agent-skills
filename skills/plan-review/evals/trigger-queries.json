@@ -12,6 +12,14 @@
     "should_trigger": true
   },
   {
+    "query": "Use Jason and Freddy to review this finished plan before implementation.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run a structured multi-reviewer approval round and require [PLAN-APPROVED] or [PLAN-REVISE-NEEDED].",
+    "should_trigger": true
+  },
+  {
     "query": "Review the finished code diff.",
     "should_trigger": false
   },
@@ -21,6 +29,18 @@
   },
   {
     "query": "Implement the feature now instead of planning it.",
+    "should_trigger": false
+  },
+  {
+    "query": "Stress-test this design and update CONTEXT.md as we go — no formal reviewer tokens.",
+    "should_trigger": false
+  },
+  {
+    "query": "Give me a fast informal critique of this idea without a full review loop.",
+    "should_trigger": false
+  },
+  {
+    "query": "The plan is already approved — start implementing the tasks.",
     "should_trigger": false
   }
 ]

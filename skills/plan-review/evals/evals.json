@@ -22,6 +22,38 @@
         "Focuses on executable plan quality."
       ],
       "files": []
+    },
+    {
+      "id": "unanimous-approval-round",
+      "prompt": "Review the current completed plan with Jason and Freddy using a structured approval round.",
+      "expected_behavior": "Runs structured multi-reviewer analysis, collects exact verdict tokens, and treats unanimous same-round [PLAN-APPROVED] as ready for implementation.",
+      "assertions": [
+        "Expects or produces explicit [PLAN-APPROVED] or [PLAN-REVISE-NEEDED] tokens",
+        "Requires all configured reviewers to agree in the same round",
+        "Does not silently rewrite the plan without a revise path"
+      ],
+      "files": []
+    },
+    {
+      "id": "revise-then-rerun",
+      "prompt": "Jason returned [PLAN-REVISE-NEEDED] for missing rollback in task 5; Freddy approved. What next?",
+      "expected_behavior": "Treats the round as not approved, asks for plan updates, and allows another review round without exceeding the three-round maximum without an explicit outside decision.",
+      "assertions": [
+        "Does not mark the plan approved when any reviewer needs revision",
+        "Instructs updating the plan and rerunning the full reviewer set",
+        "Respects the three-round approval model"
+      ],
+      "files": []
+    },
+    {
+      "id": "route-away-informal-grill",
+      "prompt": "Stress-test this design and update CONTEXT.md as we go — no formal reviewer tokens.",
+      "expected_behavior": "Routes to grill-me documentation mode instead of requiring the structured plan-review approval loop.",
+      "assertions": [
+        "Does not require [PLAN-APPROVED] tokens for an informal stress-test",
+        "Recognizes grill-me as the better fit"
+      ],
+      "files": []
     }
   ]
 }

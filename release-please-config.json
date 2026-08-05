@@ -179,16 +179,6 @@
         }
       ]
     },
-    "skills/plan-review": {
-      "package-name": "plan-review",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "skills/plan-review/SKILL.md"
-        }
-      ]
-    },
     "skills/repository-adapters": {
       "package-name": "repository-adapters",
       "skip-github-release": true,
@@ -609,13 +599,13 @@
         }
       ]
     },
-    "skills/plan-review-loop": {
-      "package-name": "plan-review-loop",
+    "skills/plan-review": {
+      "package-name": "plan-review",
       "skip-github-release": true,
       "extra-files": [
         {
           "type": "generic",
-          "path": "skills/plan-review-loop/SKILL.md"
+          "path": "skills/plan-review/SKILL.md"
         }
       ]
     },
