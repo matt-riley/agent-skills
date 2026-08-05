@@ -3,7 +3,7 @@ name: git-worktrees
 description: "Set up and manage isolated git worktrees for parallel tasks and agent lanes, and configure or operate Worktrunk (wt) for worktree lifecycle, hooks, LLM commits, and parallel agent workflows. Use when worktree setup, recovery, or wt configuration is the real need, not generic planning or implementation guidance."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 2.0.0 # x-release-please-version
   owner: mattriley
   category: git
   audience: general-coding-agent
