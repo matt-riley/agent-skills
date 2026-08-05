@@ -1,10 +1,4 @@
-# Common Failures, Iron Law, Routing, and Gate Details
-
-## Iron Law
-
-> **NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE**
->
-> A claim like "tests pass," "build succeeds," or "bug is fixed" requires you to have actually run the relevant command, read the full output, and confirmed the claim matches that evidence. Assumptions, previous runs, or code inspection alone do not count.
+# Common Failures and Routing
 
 ## Routing Boundary
 
@@ -16,28 +10,6 @@
 | "I've understood the codebase" | ❌ No | Continue exploration or code inspection |
 | "The build failed; here's why" + no rebuild | ✅ Yes | Rebuild, read full error output |
 | "This PR is ready" (untested) | ✅ Yes | Run tests, linting, build before claiming readiness |
-
-## Inputs to Gather
-
-1. **Claim**: What are you about to claim? (e.g., "tests pass", "bug is fixed", "build works")
-2. **Command**: What single command proves or disproves this claim?
-3. **Success Criteria**: What does success look like in the output? (exit code 0, "0 failures", "All tests passed", etc.)
-4. **Scope**: Which tests, files, or targets? (e.g., "all tests" vs. "one unit test" vs. "integration suite")
-
-## First move / Gate (Summary)
-
-Before proceeding:
-1. **State the claim clearly**: "I am about to claim: [specific claim]"
-2. **Identify the proof command**: "The command that proves this is: `[command]`"
-3. **Describe success**: "Success means: [specific output pattern or exit code]"
-4. **Check if ready**: "Am I ready to run this now?"
-
-**BEFORE claiming any status or marking work complete:**
-- IDENTIFY the command
-- RUN the full command fresh (capture complete output)
-- READ the full output carefully (exit codes, counts, warnings)
-- VERIFY: does the output confirm the claim?
-- ONLY THEN make the claim with direct evidence (quote the output)
 
 ## Common Failures Table
 
@@ -54,7 +26,6 @@ Before proceeding:
 ## Notes
 
 - This skill applies to all verification scenarios: test passes, build succeeds, lint clean, bug fixed, command execution, agent completion.
-- Do not skip the Gate. The Gate is the entire point of this skill.
 - If you are uncertain, state the uncertainty as part of your verification result.
 
-See main SKILL.md for the concise Workflow/Guardrails/Validation and the Reference files section (links to systematic-debugging and test-driven-development). Long examples live here in `examples.md`.
+See main SKILL.md for the canonical Iron Law, Inputs, Gate, Workflow, Guardrails, and Validation. Long examples live here in `examples.md`.
