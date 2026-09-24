@@ -1,0 +1,14 @@
+[
+  { "query": "Rewrite our README with reader feedback for new contributors.", "should_trigger": true },
+  { "query": "Write a README for my new CLI tool for first-time users, and test it with someone new to the project before we call it done.", "should_trigger": true },
+  { "query": "Improve our API reference so developers can get started in 5 minutes — loop in a real developer for feedback.", "should_trigger": true },
+  { "query": "Refactor our runbook so on-call engineers can follow it under pressure; validate it with an on-call engineer.", "should_trigger": true },
+  { "query": "We need a new architecture decision record — gather context on the tradeoffs, draft it, and get feedback from another engineer.", "should_trigger": true },
+  { "query": "Expand our onboarding guide to cover the new SSO flow, and validate it works with a new hire before we merge it.", "should_trigger": true },
+  { "query": "Help me write a spec document for the notification system that multiple teams will read, and get structured feedback before we publish it.", "should_trigger": true },
+  { "query": "This tech spec's scope keeps drifting depending on who reads it — help me pin down the audience and restructure it properly.", "should_trigger": true },
+  { "query": "Refresh copilot-instructions.md for this repo's new conventions.", "should_trigger": false },
+  { "query": "Fix the typo in the installation section of the README where it says 'recieve' instead of 'receive'.", "should_trigger": false },
+  { "query": "Run a readability audit on this README and give me a Flesch score.", "should_trigger": false },
+  { "query": "Jot down some notes in my personal scratch file about today's debugging session — just for me, nobody else will read it.", "should_trigger": false }
+]

@@ -1,0 +1,81 @@
+{
+  "skill_name": "code-intelligence",
+  "evals": [
+    {
+      "id": "anchor-then-lsp-find-references",
+      "prompt": "Find all callers of validateToken in this TypeScript service.",
+      "expected_behavior": "Anchors the symbol with a text search to get a file:line:character position, calls the LSP at that position rather than by bare name, and reads the returned locations for source context.",
+      "assertions": [
+        "Anchors the symbol with a text search (e.g. rg) to get a file:line:character position before calling the LSP",
+        "Calls LSP findReferences/incomingCalls at a position, not a bare symbol name",
+        "Reads the returned locations' source text rather than reporting bare positions"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "LSP is called at a `file:line:character` position, not a bare symbol name"
+      ]
+    },
+    {
+      "id": "degradation-gate-before-fallback",
+      "prompt": "findReferences on this symbol returned an empty array - is the LSP broken?",
+      "expected_behavior": "Runs the three-check degradation gate (documentSymbol responsiveness, confirms the call was position-anchored, retries once) before concluding the LSP is broken, and discloses any resulting fallback in the Intended/Actual/Reason/Impact format on the first line.",
+      "assertions": [
+        "Runs documentSymbol on an in-scope file to confirm the server is responsive before concluding LSP is broken",
+        "Confirms the failing call was position-anchored rather than a bare symbol name",
+        "Retries the call once before falling back",
+        "If it falls back to rg, discloses the substitution in Intended/Actual/Reason/Impact format on the first line"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "semantic-search-not-exhaustive",
+      "prompt": "Which tool should I use to find where rate-limiting is implemented in this codebase?",
+      "expected_behavior": "Recommends semantic/fuzzy search for the conceptual 'where might this live' question rather than grep, and explicitly notes the results are not exhaustive.",
+      "assertions": [
+        "Recommends semantic/fuzzy search for a conceptual 'where might this live' question rather than grep as the first choice",
+        "Explicitly notes semantic search results are not exhaustive and should not be used for completeness or count claims"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "single-anchored-lookup-not-a-sweep",
+      "prompt": "Find the definition of the RateLimiter class in this Go service - I just need where it's declared.",
+      "expected_behavior": "Uses a single anchored LSP goToDefinition call for the well-known symbol rather than sweeping the whole repo with grep or invoking semantic search unnecessarily.",
+      "assertions": [
+        "Uses a single anchored LSP goToDefinition call rather than a repo-wide grep sweep for a well-known symbol",
+        "Does not invoke semantic/fuzzy search when an exact symbol lookup via LSP already answers the question",
+        "Reports the definition location without unrelated extra navigation calls"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-literal-count-use-rg",
+      "prompt": "Count how many times TODO appears in this repo.",
+      "expected_behavior": "Routes to a plain rg text-search command instead of invoking the code-intelligence tool-selection workflow, since this is an exact-literal exhaustive count with no symbol-scope concern.",
+      "assertions": [
+        "Does not invoke LSP or the code-intelligence routing workflow for a literal exhaustive count",
+        "Uses rg directly, e.g. `rg 'TODO' | wc -l`"
+      ],
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "an `rg 'TODO' | wc -l`-style exact-count command is used"
+      ]
+    },
+    {
+      "id": "boundary-structural-codemod-use-ast-grep",
+      "prompt": "Rewrite every place that manually checks `!= null` to use optional chaining across the codebase.",
+      "expected_behavior": "Routes to the ast-grep skill for this structural rewrite instead of treating it as an LSP navigation or grep task.",
+      "assertions": [
+        "Does not attempt this as an LSP navigation or plain grep task",
+        "Routes to ast-grep for the structural codemod instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

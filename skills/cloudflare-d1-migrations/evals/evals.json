@@ -10,7 +10,11 @@
         "Mentions wrangler d1 migrations create/list/apply with --local before --remote, including --persist-to when local persistence matters.",
         "States that D1 should use corrective forward migrations rather than down migrations or editing applied files."
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "wrangler d1 migrations apply <DB> --local is run and inspected before --remote"
+      ]
     },
     {
       "id": "preview-and-custom-ledger",
@@ -21,7 +25,8 @@
         "Mentions preview_database_id plus custom migrations_dir or migrations_table from Wrangler config.",
         "Mentions list or apply commands in local then preview then remote order, or explicitly states that preview comes before remote when configured."
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "remote-drift-recovery",
@@ -32,7 +37,11 @@
         "Mentions export or time-travel information before destructive repair.",
         "Treats repair as a new corrective forward migration or explicit restore, not an edit to an applied migration."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "recovery uses a new corrective forward migration, never a down migration or an edit to an already-applied file"
+      ]
     },
     {
       "id": "sqlite-import-pitfalls",
@@ -43,18 +52,35 @@
         "Mentions removing BEGIN TRANSACTION and COMMIT plus the _cf_KV table definition from imported SQL dumps.",
         "Mentions a D1-specific import/export caveat such as wrangler d1 execute --file, statement length limits, foreign-key ordering, or virtual tables."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "BEGIN TRANSACTION and COMMIT lines are stripped from the dump before import"
+      ]
+    },
+    {
+      "id": "no-preview-configured",
+      "prompt": "This Worker has one D1 database and no preview_database_id in wrangler config. I need to add a migration, validate it locally, then promote it safely. What order should I use?",
+      "expected_behavior": "The response keeps the workflow environment-aware and does not invent an unnecessary preview promotion step when no preview database is configured.",
+      "assertions": [
+        "Mentions confirming the D1 binding and whether preview exists in Wrangler config before choosing commands.",
+        "Does not require a preview apply step when no preview database is configured.",
+        "Uses local inspection or apply before remote inspection or apply."
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "runtime-bug-not-migration",
       "prompt": "My Worker has a D1 prepared statement bug at runtime, but schema and migration files are unchanged. How should I debug it?",
-      "expected_behavior": "The response recognizes this is not a migration or schema-state task and avoids prescribing the D1 migration workflow.",
+      "expected_behavior": "The response recognizes this is not a migration or schema-state task and avoids prescribing the D1 migration workflow, pointing toward cloudflare-d1-query-tuning or runtime debugging instead.",
       "assertions": [
         "States that this is not a migration or schema-state problem when schema and migration files are unchanged.",
         "Does not prescribe wrangler d1 migrations create or apply as the main path.",
-        "Focuses on runtime or query debugging rather than the D1 migration ledger."
+        "Focuses on runtime or query debugging (e.g. cloudflare-d1-query-tuning) rather than the D1 migration ledger."
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
     },
     {
       "id": "binding-drift-not-migration",
@@ -63,20 +89,10 @@
       "assertions": [
         "States that this is binding or configuration drift rather than a migration or schema-state task.",
         "Does not prescribe wrangler d1 migrations create or apply as the main fix.",
-        "Redirects toward Wrangler or environment configuration work rather than ledger or schema repair."
+        "Redirects toward Wrangler or environment configuration work (configuration-env) rather than ledger or schema repair."
       ],
-      "files": []
-    },
-    {
-      "id": "no-preview-configured",
-      "prompt": "This Worker has one D1 database and no preview_database_id in wrangler config. I need to add a migration, validate it locally, then promote it safely. What order should I use?",
-      "expected_behavior": "The response keeps the workflow environment-aware and does not invent preview steps when no preview database is configured.",
-      "assertions": [
-        "Mentions confirming the D1 binding and whether preview exists in Wrangler config before choosing commands.",
-        "Does not require a preview apply step when no preview database is configured.",
-        "Uses local inspection or apply before remote inspection or apply."
-      ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

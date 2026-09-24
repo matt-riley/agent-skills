@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "Rerun the failing test to confirm the fix worked.",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm about to open a PR claiming CI will pass — confirm it actually does first.",
+    "should_trigger": true
+  },
+  {
+    "query": "The lint step ran clean in an earlier commit; confirm it's still clean before I merge now.",
+    "should_trigger": true
+  },
+  {
+    "query": "This function looks correct after reading through it — mark the task done.",
+    "should_trigger": true
+  },
+  {
     "query": "Find out why this failing test breaks only on CI.",
     "should_trigger": false
   },
@@ -20,7 +36,7 @@
     "should_trigger": false
   },
   {
-    "query": "Rerun the failing test to confirm the fix worked.",
+    "query": "What test command should I run to check this feature?",
     "should_trigger": false
   }
 ]

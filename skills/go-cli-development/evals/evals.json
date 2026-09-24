@@ -4,26 +4,28 @@
     {
       "id": "scaffold-new-cli",
       "prompt": "Create a new Go CLI called `tunnel` that takes a --port flag and prints a connection message.",
-      "expected_behavior": "Scaffolds main.go → cmd/tunnel/root.go with stdlib flag, wires version injection, and creates the canonical project structure.",
+      "expected_behavior": "Checks whether the CLI already exists, then scaffolds main.go -> cmd/tunnel/root.go with stdlib flag, wires version injection, and creates the canonical project structure.",
       "assertions": [
-        "Uses the canonical main.go → cmd/ → internal/ structure",
+        "Checks whether the CLI or a framework choice already exists before scaffolding",
+        "Uses the canonical main.go -> cmd/ -> internal/ structure",
         "Wires version injection via -ldflags",
-        "Prefers stdlib flag unless cobra is justified",
+        "Prefers stdlib flag unless cobra is justified, and asks before introducing cobra",
         "Keeps main.go thin — import cmd, call Execute()"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "add-subcommand-table",
-      "prompt": "Add a `list` subcommand to my existing Go CLI with table output and a --format json flag.",
-      "expected_behavior": "Creates cmd/cli/list.go with cobra command, uses go-pretty/tablewriter for table output, and supports --format json for machine-readable output.",
+      "id": "minimal-flag-addition",
+      "prompt": "My Go CLI already uses stdlib flag with two simple commands. Add a third `--verbose` flag to the existing root command.",
+      "expected_behavior": "Adds the flag to the existing stdlib flag setup with a minimal, scoped diff, without introducing cobra or another framework and without restructuring the existing command tree.",
       "assertions": [
-        "Creates a new subcommand file in cmd/",
-        "Uses a table library for formatted output",
-        "Supports --format json flag",
-        "Adds integration test that captures stdout"
+        "Does not introduce cobra or another CLI framework for a simple flag addition",
+        "Scopes the change to the requested flag rather than restructuring the existing CLI",
+        "Keeps using the repo's existing stdlib flag convention"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "wire-goreleaser-homebrew",
@@ -31,22 +33,52 @@
       "expected_behavior": "Creates .goreleaser.yaml with multi-platform builds, ldflags for version injection, and Homebrew tap configuration.",
       "assertions": [
         "Creates .goreleaser.yaml with correct structure",
-        "Configures brews section for homebrew-tools tap",
+        "Configures a brews section for the Homebrew tap",
         "Sets CGO_ENABLED=0 for static binaries",
         "Wires ldflags for version, commit, and date",
         "Includes darwin and linux in goos"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "CGO_ENABLED=0",
+        "goos includes darwin and linux"
+      ]
+    },
+    {
+      "id": "add-subcommand-table",
+      "prompt": "Add a `list` subcommand to my existing Go CLI with table output and a --format json flag.",
+      "expected_behavior": "Creates cmd/cli/list.go with a new subcommand, uses a table library for formatted output, and supports --format json for machine-readable output.",
+      "assertions": [
+        "Creates a new subcommand file in cmd/",
+        "Uses a table library for formatted output",
+        "Supports --format json flag",
+        "Adds an integration test that captures stdout via cmd.SetOut"
+      ],
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "not-trigger-build-failure",
       "prompt": "go build fails on this CLI with a GOROOT error.",
-      "expected_behavior": "Should NOT trigger go-cli-development. Route to go-build-and-test instead.",
+      "expected_behavior": "Should NOT trigger go-cli-development. Routes to go-build-and-test for toolchain diagnosis instead of applying CLI scaffolding.",
       "assertions": [
-        "Does not apply CLI-specific scaffolding or patterns",
+        "Does not apply CLI-specific scaffolding or subcommand patterns",
         "Routes to go-build-and-test for toolchain diagnosis"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "not-trigger-failing-unit-test",
+      "prompt": "The table output test in cmd/list_test.go is failing — the expected column header doesn't match.",
+      "expected_behavior": "Should NOT apply go-cli-development's scaffolding workflow. Routes to testing-workflows since this is a failing test on logic/output, not CLI structure or release wiring.",
+      "assertions": [
+        "Does not treat this as a new CLI-structure or release-plumbing task",
+        "Routes to testing-workflows for the failing test's logic"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

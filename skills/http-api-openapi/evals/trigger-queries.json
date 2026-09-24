@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "We hand-author openapi.yaml. I changed a response schema in the handler — walk me through updating the spec correctly.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our new 429 rate-limit error isn't documented anywhere in the API contract. Add it in the right place.",
+    "should_trigger": true
+  },
+  {
+    "query": "I removed a required field from a request body. What else needs to change so the spec doesn't lie?",
+    "should_trigger": true
+  },
+  {
+    "query": "Our error response shape changed from a plain string to a structured {code, message} object across several endpoints — sync the docs and code.",
+    "should_trigger": true
+  },
+  {
     "query": "Write a generic REST API tutorial.",
     "should_trigger": false
   },
@@ -20,7 +36,7 @@
     "should_trigger": false
   },
   {
-    "query": "Tune a database repository query.",
+    "query": "Write integration tests for our existing endpoints; the contract itself isn't changing.",
     "should_trigger": false
   }
 ]

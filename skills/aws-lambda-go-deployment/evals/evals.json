@@ -1,0 +1,89 @@
+{
+  "skill_name": "aws-lambda-go-deployment",
+  "evals": [
+    {
+      "id": "macos-binary-exec-format",
+      "prompt": "Our Go Lambda was built on macOS and now fails in AWS with an exec-format or missing-bootstrap style startup error. Fix it.",
+      "expected_behavior": "Diagnoses the failure as package-layout/runtime-startup, cross-compiles for Linux (or uses a container build) instead of trusting the macOS binary, and confirms the runtime and executable naming before redeploying.",
+      "assertions": [
+        "Recommends `sam build --use-container` or manually cross-compiling with `GOOS=linux GOARCH=amd64` (or `arm64` on Graviton) instead of shipping the macOS binary",
+        "Confirms the runtime is `provided.al2` or `provided.al2023`, not the deprecated `go1.x`",
+        "Confirms the zipped executable is named `bootstrap` or matches the configured Handler path before redeploying"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "GOOS=linux is used for the build",
+        "runtime is provided.al2 or provided.al2023, never go1.x",
+        "zipped binary is named bootstrap unless Handler overrides the path"
+      ]
+    },
+    {
+      "id": "invocation-fails-after-deploy",
+      "prompt": "The Lambda deployed successfully but every invocation fails immediately. What should I check first?",
+      "expected_behavior": "Reads CloudWatch Logs for INIT_START and START before assuming an application-code bug, separating a runtime-startup failure from a code-level failure.",
+      "assertions": [
+        "Reads CloudWatch Logs and looks for `INIT_START` and `START` before proposing an application-code fix",
+        "Does not immediately rewrite handler/application logic without first confirming the runtime got far enough to execute code",
+        "Only moves on to event payload or Function URL/API Gateway wiring after the binary is confirmed to boot"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "CloudWatch Logs are checked for INIT_START and START before touching application code"
+      ]
+    },
+    {
+      "id": "narrow-packaging-fix-scope",
+      "prompt": "This Go Lambda fails to start because it's missing the bootstrap binary. Just fix the packaging — don't touch anything else.",
+      "expected_behavior": "Makes the minimal fix to the build/packaging path (correct GOOS/GOARCH and executable naming) without widening into SAM template rewrites, IAM changes, or unrelated CI restructuring.",
+      "assertions": [
+        "Scopes the fix to the build/packaging path (cross-compile flags, executable name, zip layout)",
+        "Does not rewrite SAM template resources, IAM policies, or CI workflow structure as part of this fix",
+        "Re-inspects only the built zip or `.aws-sam` output to confirm the artifact layout rather than re-running the whole deploy pipeline speculatively"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "graviton-runtime-outcome",
+      "prompt": "We moved a Go Lambda to arm64/Graviton and now it won't start. Get it running correctly.",
+      "expected_behavior": "Delivers a corrected build (GOARCH=arm64, provided.al2/al2023 runtime, bootstrap-named artifact) and confirms via the artifact layout and CloudWatch logs that the function now boots.",
+      "assertions": [
+        "Final guidance specifies `GOARCH=arm64` matching the deployed Lambda architecture",
+        "Final artifact has the correct executable name/path for the configured Handler and runtime family",
+        "States how to confirm success: inspect the artifact layout and then check CloudWatch `INIT_START`/`START` after redeploy"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "GOARCH=arm64 matches the deployed function's architecture",
+        "runtime is provided.al2 or provided.al2023"
+      ]
+    },
+    {
+      "id": "route-away-oidc-assumerole",
+      "prompt": "GitHub Actions fails in configure-aws-credentials with AccessDenied on sts:AssumeRoleWithWebIdentity for our Lambda deploy role.",
+      "expected_behavior": "Recognizes this is an OIDC/AssumeRole auth failure, not a Go binary or packaging problem, and routes to sam-cloudformation instead of proposing GOOS/GOARCH or bootstrap-naming fixes.",
+      "assertions": [
+        "Does not propose Go build, GOARCH, or bootstrap-naming changes for an AssumeRole AccessDenied error",
+        "Names `sam-cloudformation` as the skill that owns OIDC/AssumeRole trust-policy triage",
+        "Does not inspect CloudWatch init/start logs, since the deploy never reaches the function"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "route-away-go-compile-error",
+      "prompt": "The Go Lambda code fails with an undefined variable in main.go before we even get to packaging or deployment.",
+      "expected_behavior": "Recognizes the failure is a plain Go compile error prior to Lambda packaging and routes to go-build-and-test rather than treating it as a deployment/runtime issue.",
+      "assertions": [
+        "Does not propose Lambda runtime, GOARCH, or bootstrap-naming fixes for a plain compile error",
+        "States that the code must compile before Lambda packaging is relevant, and routes to `go-build-and-test`",
+        "Does not inspect CloudWatch logs, since the function was never built or deployed"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

@@ -20,6 +20,18 @@
     "should_trigger": true
   },
   {
+    "query": "Give me the starter scaffold for a brand-new skill: frontmatter, references, and eval stubs.",
+    "should_trigger": true
+  },
+  {
+    "query": "Two of our skills overlap and agents keep picking the wrong one. Redraw the routing boundary between them.",
+    "should_trigger": true
+  },
+  {
+    "query": "Decide whether skill-creator itself needs a `scripts/` directory before adding one out of habit.",
+    "should_trigger": true
+  },
+  {
     "query": "Use an existing skill to solve a task right now instead of creating one.",
     "should_trigger": false
   },
@@ -32,11 +44,7 @@
     "should_trigger": false
   },
   {
-    "query": "Review an implementation diff rather than authoring a skill.",
-    "should_trigger": false
-  },
-  {
-    "query": "Create a named specialist agent for reviewing PRs.",
+    "query": "Create a named specialist agent persona for reviewing PRs, not a reusable skill.",
     "should_trigger": false
   }
 ]

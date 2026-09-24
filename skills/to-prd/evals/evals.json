@@ -2,36 +2,68 @@
   "skill_name": "to-prd",
   "evals": [
     {
-      "id": "synthesize-prd-from-context",
+      "id": "reads-context-before-drafting",
       "prompt": "Turn everything we know about the billing retry flow into a PRD using the conversation and repo context; only ask if something is blocking.",
-      "expected_behavior": "Synthesizes a PRD from existing context rather than interviewing broadly; covers problem, solution, user stories, implementation and testing decisions, and out of scope, grounded in repository vocabulary.",
+      "expected_behavior": "Reads the current conversation and the relevant repository surfaces first, inspects the implementation enough to name the major modules likely to change, and only then drafts the PRD — asking a targeted question only if something materially blocking is missing.",
       "assertions": [
-        "Starts from existing conversation or repository context rather than a broad interview",
-        "Covers user-facing problem/solution and user stories",
-        "Includes implementation and testing decisions without file paths or code snippets"
+        "Reads the current conversation and relevant repository surfaces before drafting",
+        "Inspects the codebase enough to name concrete modules or surfaces likely to change before writing Implementation Decisions",
+        "Does not open with a broad interview; any question asked is targeted at a materially blocking gap"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "prd-publication-boundary",
-      "prompt": "Synthesize this feature discussion into a PRD and publish it to the issue tracker if labels and templates are known.",
-      "expected_behavior": "Produces a complete PRD markdown artifact and only publishes with verified tracker conventions; otherwise surfaces a publication blocker.",
+      "id": "targeted-question-not-broad-interview",
+      "prompt": "We've fully discussed the offline sync feature: problem, target users, constraints, and rollout plan are all above. Write the PRD, but we haven't decided yet whether conflict resolution should be last-write-wins or manual merge, and that changes the user stories.",
+      "expected_behavior": "Recognizes that problem, users, constraints, and rollout are already settled and does not re-ask about them; asks only the one targeted question about conflict-resolution strategy because it materially changes the user stories and scope, then proceeds to draft.",
       "assertions": [
-        "Produces or outlines a full PRD artifact suitable for issue-tracker handoff",
-        "Avoids inventing issue labels or templates that are not verified",
-        "Mentions publish-or-blocker decision rather than assuming tracker fields"
+        "Does not re-ask about problem, target users, constraints, or rollout already given in the prompt",
+        "Asks at most one targeted question, about the conflict-resolution strategy, because it materially changes scope",
+        "Does not stall the whole PRD waiting on unrelated details that were already provided"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "prd-follows-template-section-order",
+      "prompt": "Synthesize this feature discussion into a PRD with extensive user stories, implementation decisions, testing decisions, and out-of-scope items.",
+      "expected_behavior": "Produces a PRD using the required section order from the PRD template, with a user-facing Problem Statement and Solution, an extensive User Stories list covering edge cases and failure paths, Implementation and Testing Decisions grounded in repo evidence with no file paths or code snippets, and an explicit Out of Scope section.",
+      "assertions": [
+        "Problem Statement and Solution are written from the user's perspective, not implementation detail",
+        "User Stories list is extensive and covers edge cases, operator/admin roles, or failure/recovery paths where relevant",
+        "Implementation Decisions and Testing Decisions contain no file paths or code snippets",
+        "Out of Scope section is explicit and present"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "the PRD's section headings appear in this order: Problem Statement, Solution, User Stories, Implementation Decisions, Testing Decisions, Out of Scope",
+        "Implementation Decisions contains no file paths (no '/' path fragments) and no code blocks"
+      ]
+    },
+    {
+      "id": "publication-blocker-without-verified-labels",
+      "prompt": "Synthesize this feature discussion into a PRD and publish it to the issue tracker if labels and templates are known.",
+      "expected_behavior": "Produces a complete PRD markdown artifact and only publishes with verified tracker conventions such as real issue labels or templates; otherwise stops at the markdown artifact and surfaces the publication blocker explicitly rather than inventing labels like needs-triage.",
+      "assertions": [
+        "Produces a complete PRD artifact suitable for issue-tracker handoff",
+        "Does not invent issue labels such as needs-triage that are not verified in the project",
+        "States a publish-or-blocker decision explicitly rather than silently assuming tracker fields exist"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     },
     {
       "id": "to-prd-boundary-issues",
       "prompt": "Break this approved PRD into independently grabbable implementation issues.",
-      "expected_behavior": "Routes away from to-prd because the PRD already exists and the task is issue slicing.",
+      "expected_behavior": "Routes away from to-prd because the PRD already exists and the task is issue slicing, not PRD authoring.",
       "assertions": [
-        "Does not re-author a PRD when the task is ticket breakdown",
-        "Routes toward to-issues or issue slicing instead"
+        "Does not re-author or re-synthesize a PRD when the task is ticket breakdown",
+        "Routes toward to-issues instead"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

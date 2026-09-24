@@ -10,18 +10,71 @@
         "Mentions auth or error shape alignment.",
         "Mentions invariants or anti-patterns for drift."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "determine-contract-owner-first",
+      "prompt": "I changed a response schema in a handler. Update the OpenAPI contract to match.",
+      "expected_behavior": "Before editing any file, the agent determines whether the repo is spec-first, code-first, or hybrid by reading repo docs, build targets, and generation tooling, then follows that specific contract path rather than assuming openapi.yaml is hand-edited.",
+      "assertions": [
+        "Investigates whether the repo is spec-first, code-first, or hybrid before editing files.",
+        "Does not assume `openapi.yaml` is hand-maintained without checking for generation tooling.",
+        "Follows the repo-appropriate order (spec-first: spec then handlers; code-first: handler/types then regenerate)."
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "identifies whether the repo is spec-first, code-first, or hybrid before making changes"
+      ]
+    },
+    {
+      "id": "scoped-contract-sync-not-full-rewrite",
+      "prompt": "I added one optional query parameter to GET /orders. Update the contract for just that.",
+      "expected_behavior": "The agent updates only the affected operation's parameter definition (and regenerates if code-first) without rewriting unrelated paths, schemas, or the whole spec file.",
+      "assertions": [
+        "Scopes the spec/contract change to the single new optional parameter on GET /orders.",
+        "Does not touch unrelated endpoints, schemas, or regenerate the entire spec beyond what changed.",
+        "Runs the repo's spec validation/generation step scoped to the change rather than a full-repo rebuild when a scoped one suffices."
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "spec-drift-debug",
       "prompt": "The code and OpenAPI document are drifting apart after a recent endpoint change. How should I fix it?",
-      "expected_behavior": "The response uses a source-of-truth-driven workflow and does not treat the code/spec as unrelated surfaces.",
+      "expected_behavior": "The response uses a source-of-truth-driven workflow, verifies both implementation and contract, and runs the repo's validation/generation step to reconcile the two rather than editing only one side.",
       "assertions": [
-        "Mentions source of truth.",
-        "Mentions verifying both implementation and contract.",
-        "Avoids hand-wavy advice that ignores one side of the contract."
+        "Mentions identifying the contract owner / source of truth first.",
+        "Mentions verifying both implementation and contract, not just one.",
+        "Mentions running spec validation or generation as part of the fix."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-sdk-generation-only",
+      "prompt": "Generate a TypeScript client SDK from our existing openapi.yaml — nothing about the server or the spec itself is changing.",
+      "expected_behavior": "The response recognizes there is no server-contract change here, so the spec-sync workflow does not apply; it treats this as SDK/codegen tooling only, per the skill's own 'Do not use this skill when' list, and does not open unrelated handler or spec edits.",
+      "assertions": [
+        "Does not run the spec-vs-handler drift-repair workflow when no server contract is changing.",
+        "Does not propose editing openapi.yaml or handlers as part of a client-only SDK generation request.",
+        "Treats the task as SDK/codegen generation, not contract synchronization."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-internal-only-no-contract",
+      "prompt": "I refactored an internal helper function used by three background jobs. No HTTP endpoints or the OpenAPI spec are affected.",
+      "expected_behavior": "The response recognizes there is no HTTP contract surface in play and does not invent or touch an OpenAPI spec for internal-only code, per the skill's explicit out-of-scope case.",
+      "assertions": [
+        "Does not add, edit, or invent OpenAPI spec content for code with no HTTP surface.",
+        "States plainly that no contract sync is needed for this change.",
+        "Does not force this skill's workflow onto a change with no HTTP/OpenAPI surface."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

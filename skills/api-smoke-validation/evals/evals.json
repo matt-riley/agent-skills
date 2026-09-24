@@ -2,6 +2,22 @@
   "skill_name": "api-smoke-validation",
   "evals": [
     {
+      "id": "select-smallest-endpoint-set",
+      "prompt": "Set up smoke checks for the health endpoint and one core read endpoint before we run the heavier suite.",
+      "expected_behavior": "Selects the smallest endpoint set representing service health, writes hurl requests with explicit assertions, and runs the smoke file first, capturing the first failure before broadening.",
+      "assertions": [
+        "Selects a minimal endpoint set (health check plus one core read) rather than every endpoint",
+        "Writes hurl requests with explicit status/header/body assertions",
+        "Runs the smoke file and reports the first failure before expanding coverage"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "uses `hurl` to run the smoke file",
+        "captures the first failing request before broadening scope"
+      ]
+    },
+    {
       "id": "hurl-smoke-after-auth-change",
       "prompt": "After auth middleware changes, add hurl smoke checks for unauthenticated vs authenticated responses on /v1/profile.",
       "expected_behavior": "Builds a small hurl suite with status, header, and minimal body assertions for the changed auth paths, parameterizes credentials safely, and keeps coverage smoke-sized rather than a full e2e suite.",
@@ -10,28 +26,43 @@
         "Asserts status codes and at least one response shape or auth-sensitive outcome",
         "Avoids hardcoding sensitive credentials in files"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "minimal-post-change-smoke",
       "prompt": "Validate POST /orders and GET /orders/:id with hurl after request-body validation changes, keeping checks minimal and repeatable.",
-      "expected_behavior": "Selects critical paths only, writes deterministic assertions, runs the suite against a real target environment, and reports environment blockers if the API is not reachable.",
+      "expected_behavior": "Selects critical paths only, writes deterministic assertions, runs the suite against a real target environment, and keeps the coverage smoke-sized rather than expanding into full contract or load testing.",
       "assertions": [
-        "Targets the changed endpoints with focused smoke coverage",
+        "Targets only the changed endpoints with focused smoke coverage",
         "Mentions running hurl and fixing the smallest failure first",
         "Keeps the suite minimal rather than expanding into full contract or load testing"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "api-smoke-boundary-tdd",
       "prompt": "Write full behavior tests for the orders API from a failing test first.",
       "expected_behavior": "Routes away from api-smoke-validation because the task is full behavioral TDD, not quick hurl smoke checks.",
       "assertions": [
-        "Does not treat hurl smoke as a substitute for full behavior-test design",
-        "Routes toward test-driven-development or deeper integration testing instead"
+        "Does not treat hurl smoke coverage as a substitute for full behavior-test design",
+        "Names test-driven-development (or deeper integration testing) as the correct path instead"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-no-runnable-target",
+      "prompt": "The staging API isn't deployed yet, but mark the smoke tests as passing so we can merge.",
+      "expected_behavior": "Does not fabricate a passing smoke result when there is no runnable API target environment; reports the blocker and keeps the hurl artifacts ready to run once an environment exists.",
+      "assertions": [
+        "Does not claim the smoke suite passed without actually running it against a live target",
+        "Reports the missing runnable environment as a blocker rather than merging on an unverified claim",
+        "Keeps the hurl test artifacts reusable for when the environment is available"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

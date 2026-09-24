@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Release Please created v1.4.0, but the GitHub release has no binaries and our GoReleaser publish job never ran.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up Release Please and GoReleaser v2 so a single-package Go repo publishes binaries on each numbered release.",
+    "should_trigger": true
+  },
+  {
+    "query": "GoReleaser rejects our new tag as invalid semver after Release Please cut gh-depdash-v1.1.1; fix the tag strategy without changing our release numbering scheme.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our publish job triggers on a `release: published` event using the default GITHUB_TOKEN and it never fires — how do we fix this GoReleaser and Release Please wiring?",
+    "should_trigger": true
+  },
+  {
+    "query": "Set include-component-in-tag: false so Release Please emits plain vX.Y.Z tags our GoReleaser pipeline can consume.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run goreleaser check against our .goreleaser.yaml before we commit config changes.",
+    "should_trigger": true
+  },
+  {
+    "query": "GoReleaser's changelog is missing commits — I think our actions/checkout depth is too shallow.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our self-hosted GitHub Actions runner keeps failing to bootstrap before any release step even runs — diagnose the workflow job.",
+    "should_trigger": false
+  },
+  {
+    "query": "The feature branch is done — help me decide whether to merge it or discard it.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a pull request for this change and watch its checks with the GitHub CLI until they pass.",
+    "should_trigger": false
+  }
+]

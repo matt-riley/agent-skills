@@ -12,15 +12,31 @@
     "should_trigger": true
   },
   {
-    "query": "Design an entirely new test framework.",
+    "query": "My Go unit test is failing after I renamed a struct field; isolate it and show me the fix.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add repository test coverage for the new persistence method so it works against SQLite.",
+    "should_trigger": true
+  },
+  {
+    "query": "The CI test run is red but I can't reproduce it locally — step me through the debugging sequence.",
+    "should_trigger": true
+  },
+  {
+    "query": "This integration test passes alone but fails when run with the rest of the suite; check for shared state.",
+    "should_trigger": true
+  },
+  {
+    "query": "The main risk here is HTTP endpoint auth and response-shape behavior for the new handler.",
     "should_trigger": false
   },
   {
-    "query": "Explain TDD in theory only.",
+    "query": "These compile errors are all in the sqlc-generated package after a query file change.",
     "should_trigger": false
   },
   {
-    "query": "Review a finished implementation diff.",
+    "query": "Review the finished diff for this feature and tell me if it's ready to merge.",
     "should_trigger": false
   }
 ]

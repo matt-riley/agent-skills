@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Our copilot-instructions.md is two years old and no one has touched it since. Audit it and refresh what's stale.",
+    "should_trigger": true
+  },
+  {
+    "query": "Agents keep using npm in this repo even though we're on pnpm workspaces. Add a rule so they stop doing that.",
+    "should_trigger": true
+  },
+  {
+    "query": "This is a strict-tsconfig TypeScript repo but there's no typescript-specific instruction file yet. Create one.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our AGENTS.md has grown to 40 sections and covers everything from deploy gates to code style. Split it into focused per-path instruction files.",
+    "should_trigger": true
+  },
+  {
+    "query": "We have a non-obvious 1Password commit-signing requirement that isn't documented anywhere. Capture it so agents don't keep hitting rejected commits.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write learned rules into AGENTS.md from the mistakes agents made in the last three sessions.",
+    "should_trigger": true
+  },
+  {
+    "query": "Update the README so new contributors understand the project layout.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add an eslint rule that forbids `any` instead of writing it down somewhere.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the actual bug in the auth middleware, not the docs about it.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a reusable skill package that captures this instruction-upkeep workflow for other repos.",
+    "should_trigger": false
+  }
+]

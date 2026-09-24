@@ -10,17 +10,70 @@
         "Sets a max_iterations bound and convergence condition",
         "Requires structured evaluation output and logs each iteration"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
-      "id": "one-shot-review-boundary",
+      "id": "checklist-then-pattern-selection",
+      "prompt": "We're adding our first evaluation loop to a summarization agent. Where do we start?",
+      "expected_behavior": "Names the application behavior and success criteria first, chooses a strategy (outcome-based, LLM-as-judge, or rubric-based) from references/patterns.md, then runs the setup checklist in assets/eval-checklist.md before wiring the generate/evaluate/optimize loop — criteria and strategy selection happen before implementation, not after.",
+      "assertions": [
+        "Defines evaluation criteria and the target metric before describing implementation",
+        "Chooses one of the three named strategies (outcome-based, LLM-as-judge, rubric-based) explicitly",
+        "References the setup checklist (criteria, threshold, max iterations, logging) before wiring the loop",
+        "Keeps the generate, evaluate, and optimize steps isolated rather than blended together"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "extend-existing-loop-not-rebuild",
+      "prompt": "Our evaluator-optimizer loop already has criteria, a JSON-scoring judge, and max_iterations=4. We just need to add a convergence check that stops early if the score doesn't improve between iterations. Don't rebuild the rest.",
+      "expected_behavior": "Adds only the convergence check to the existing loop without redefining criteria, re-implementing the judge's structured output contract, or changing the already-set max_iterations bound.",
+      "assertions": [
+        "Scopes the change to the convergence/early-stop logic only",
+        "Does not restate or rewrite the existing criteria, judge, or max_iterations that already work",
+        "Confirms the loop still logs input, output, score, and critique per iteration after the change"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "parse-failure-fallback-required",
+      "prompt": "Our LLM-as-judge sometimes returns malformed JSON and the whole evaluation loop crashes. Fix the loop.",
+      "expected_behavior": "Adds a parse-failure fallback on the evaluate step that treats malformed judge output as a failing score by default rather than crashing the loop, and keeps that fallback logged like any other iteration.",
+      "assertions": [
+        "Adds explicit handling for malformed/unparseable evaluator output",
+        "Fallback treats a parse failure as failing rather than silently passing or crashing",
+        "The fallback path is still logged as part of the iteration trajectory"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "agentic-eval-boundary-one-shot-review",
       "prompt": "Review this completed PR diff once and list the implementation issues; do not propose an iterative evaluator.",
       "expected_behavior": "Routes a one-shot implementation review away from agentic-eval rather than inventing an evaluation loop.",
       "assertions": [
         "Does not design a reflection or evaluator-optimizer loop",
         "Routes to implementation-review for the one-shot PR review"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "recommends implementation-review rather than agentic-eval"
+      ]
+    },
+    {
+      "id": "agentic-eval-boundary-test-suite",
+      "prompt": "Just run our existing pytest suite and tell me if the coverage regressed.",
+      "expected_behavior": "Routes to verification-before-completion (or the existing test workflow) rather than designing a generate-evaluate-refine loop, since running a pre-existing test suite is explicitly out of scope for this skill.",
+      "assertions": [
+        "Does not propose an evaluator-optimizer or reflection loop for a plain test-suite run",
+        "Routes toward verification-before-completion or the project's existing testing workflow instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

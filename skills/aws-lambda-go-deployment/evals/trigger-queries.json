@@ -1,0 +1,46 @@
+[
+  {
+    "query": "Our Go Lambda was built on macOS and now fails in AWS with an exec-format or missing-bootstrap style startup error.",
+    "should_trigger": true
+  },
+  {
+    "query": "sam build produced a Go binary but Lambda invocation fails with 'exec format error'; help fix the packaging.",
+    "should_trigger": true
+  },
+  {
+    "query": "This Go Lambda zip has the wrong binary layout — the handler isn't named bootstrap and Lambda won't start it.",
+    "should_trigger": true
+  },
+  {
+    "query": "We're still targeting the go1.x runtime for a Go Lambda; should we migrate to provided.al2023 and what breaks?",
+    "should_trigger": true
+  },
+  {
+    "query": "We switched a Go function to Lambda arm64/Graviton and now the binary won't start; check GOARCH and the build.",
+    "should_trigger": true
+  },
+  {
+    "query": "Deployment succeeded but invocations fail immediately; check CloudWatch for INIT_START and START before assuming an app bug.",
+    "should_trigger": true
+  },
+  {
+    "query": "The Go Lambda boots fine now, but the Function URL returns errors — verify the event wiring next.",
+    "should_trigger": true
+  },
+  {
+    "query": "GitHub Actions fails in configure-aws-credentials with AccessDenied on sts:AssumeRoleWithWebIdentity for our Lambda deploy role.",
+    "should_trigger": false
+  },
+  {
+    "query": "Our SAM template has an invalid IAM resource ARN and the CloudFormation stack rolled back.",
+    "should_trigger": false
+  },
+  {
+    "query": "The Go code doesn't compile — there's an undefined variable in main.go before we even get to packaging.",
+    "should_trigger": false
+  },
+  {
+    "query": "The GitHub Actions runner ran out of disk space during a completely unrelated build job.",
+    "should_trigger": false
+  }
+]

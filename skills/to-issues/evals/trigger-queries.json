@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "Take this approved feature spec and slice it into tracer-bullet issues, marking which ones need human review versus which can run unattended.",
+    "should_trigger": true
+  },
+  {
+    "query": "Turn this GitHub issue and its comments into a set of dependency-ordered implementation tickets.",
+    "should_trigger": true
+  },
+  {
+    "query": "Split this plan into small vertical slices instead of one big feature ticket, and get my approval on granularity before you publish.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create the follow-up issues for the next implementation wave based on this parent epic, respecting the existing blocker relationships.",
+    "should_trigger": true
+  },
+  {
     "query": "Write the PRD for this feature before we decide how to split the work.",
     "should_trigger": false
   },

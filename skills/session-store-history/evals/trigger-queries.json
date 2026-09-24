@@ -12,6 +12,18 @@
     "should_trigger": true
   },
   {
+    "query": "Did I ever edit internal/auth/service.go in a previous session?",
+    "should_trigger": true
+  },
+  {
+    "query": "How did I handle the database migration rollback problem last time I ran into it?",
+    "should_trigger": true
+  },
+  {
+    "query": "Which session was tied to issue #118, and what did we conclude there?",
+    "should_trigger": true
+  },
+  {
     "query": "Search this repo for AuthService and show me the implementation.",
     "should_trigger": false
   },
@@ -20,7 +32,7 @@
     "should_trigger": false
   },
   {
-    "query": "Explain how session databases work in general.",
+    "query": "Find every place in the current checkout that imports the config loader.",
     "should_trigger": false
   }
 ]

@@ -10,7 +10,11 @@
         "Considers stale shell overrides as a first-class cause",
         "Re-runs package-scoped go build/test after the fix"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `go version` and `go env GOROOT GOTOOLDIR GOPATH GOVERSION`"
+      ]
     },
     {
       "id": "ci-tempdir-race",
@@ -21,7 +25,35 @@
         "Mentions TempDir cleanup, background writes, or waiting for finished events",
         "Avoids jumping to go-error-patterns style signature redesign"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "govulncheck-stdlib-patch",
+      "prompt": "govulncheck is red on a Dependabot PR but every finding is in the standard library. Do we need to add an allowlist?",
+      "expected_behavior": "Checks whether all findings are stdlib-only and already fixed in a later Go patch release, and updates the pinned Go toolchain instead of adding a govulncheck allowlist or changing workflow wiring.",
+      "assertions": [
+        "Confirms every finding is standard-library-only before proposing a fix",
+        "Prefers updating the repo's pinned Go toolchain over adding allowlists or workflow exceptions",
+        "Does not change workflow policy before checking for an available patch release"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "does not add a govulncheck allowlist or ignore entry as the first fix"
+      ]
+    },
+    {
+      "id": "scoped-package-fix",
+      "prompt": "go build ./... fails, but the actual break is isolated to the internal/payments package after my last edit.",
+      "expected_behavior": "Reproduces and fixes the failure at the affected package scope (go build/go test on internal/payments) rather than re-scanning or rewriting unrelated packages, and reruns only the necessary scoped command to confirm the fix.",
+      "assertions": [
+        "Scopes reproduction and the fix to the affected package rather than the whole repository",
+        "Does not opportunistically touch unrelated packages while diagnosing this failure",
+        "Reruns a package-scoped build/test command to confirm the fix rather than a full unrelated re-scan"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "route-away-error-covariance",
@@ -31,7 +63,8 @@
         "Does not treat this primarily as a GOROOT or CI-parity problem",
         "Points toward go-error-patterns or constructor-wrapping guidance"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

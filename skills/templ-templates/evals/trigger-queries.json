@@ -12,6 +12,26 @@
     "should_trigger": true
   },
   {
+    "query": "templ generate isn't picking up my latest markup changes — help fix the regeneration workflow.",
+    "should_trigger": true
+  },
+  {
+    "query": "Move this business logic out of the .templ file and into the handler where it belongs.",
+    "should_trigger": true
+  },
+  {
+    "query": "Wire this new templ component's typed data through the handler that renders it.",
+    "should_trigger": true
+  },
+  {
+    "query": "My Go build fails referencing missing symbols in a generated _templ.go file.",
+    "should_trigger": true
+  },
+  {
+    "query": "Regenerate and verify a templ layout component after editing its markup.",
+    "should_trigger": true
+  },
+  {
     "query": "Write React JSX for a client-side component.",
     "should_trigger": false
   },
@@ -21,6 +41,10 @@
   },
   {
     "query": "Add an OpenAPI endpoint schema.",
+    "should_trigger": false
+  },
+  {
+    "query": "Just update the CSS classes on this rendered page; no template markup changes needed.",
     "should_trigger": false
   }
 ]

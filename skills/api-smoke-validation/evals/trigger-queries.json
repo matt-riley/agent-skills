@@ -16,6 +16,18 @@
     "should_trigger": true
   },
   {
+    "query": "The health check endpoint needs a quick hurl smoke test before we deploy this branch.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a small hurl scenario to verify the new API key header on the core read endpoints.",
+    "should_trigger": true
+  },
+  {
+    "query": "We just merged endpoint changes; run the existing hurl smoke files to confirm nothing's broken before the heavier suite runs.",
+    "should_trigger": true
+  },
+  {
     "query": "Write full behavior tests for the orders API using TDD from the start.",
     "should_trigger": false
   },
@@ -24,11 +36,7 @@
     "should_trigger": false
   },
   {
-    "query": "This GitHub Actions deploy job failed on my PR; diagnose the failing step before changing YAML.",
-    "should_trigger": false
-  },
-  {
-    "query": "Keep the new HTTP endpoint and OpenAPI contract in sync after the handler change.",
+    "query": "This GitHub Actions deploy job failed on my PR; diagnose the failing step before changing any YAML.",
     "should_trigger": false
   }
 ]

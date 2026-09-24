@@ -12,15 +12,35 @@
     "should_trigger": true
   },
   {
-    "query": "Fix one TypeScript compiler error in a source file.",
+    "query": "Our monorepo's tsconfig files conflict with each other — consolidate the extends chain.",
+    "should_trigger": true
+  },
+  {
+    "query": "Turn on noImplicitAny across the repo without a giant breaking change.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me safely enable exactOptionalPropertyTypes in this codebase.",
+    "should_trigger": true
+  },
+  {
+    "query": "We want to move toward strict: true eventually — plan the incremental steps.",
+    "should_trigger": true
+  },
+  {
+    "query": "Reduce tsconfig drift across our workspace packages so overrides are explicit instead of hidden.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix one TypeScript compiler error in a source file; no config changes are needed.",
     "should_trigger": false
   },
   {
-    "query": "Add compile-time tests for API inference.",
+    "query": "Fix a Babel runtime build problem — no tsconfig change is involved.",
     "should_trigger": false
   },
   {
-    "query": "Fix a Babel runtime build problem with no tsconfig changes.",
+    "query": "The repo intentionally keeps a loose tsconfig and nobody asked to harden it — just fix this unrelated bug.",
     "should_trigger": false
   }
 ]

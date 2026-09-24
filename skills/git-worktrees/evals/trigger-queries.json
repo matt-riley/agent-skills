@@ -24,6 +24,14 @@
     "should_trigger": true
   },
   {
+    "query": "wt switch --create feature-x --base origin/main isn't firing my post-start hook; help me debug it.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need a throwaway worktree to test a risky refactor without touching my main checkout.",
+    "should_trigger": true
+  },
+  {
     "query": "Implement this feature on the current branch.",
     "should_trigger": false
   },
@@ -33,6 +41,10 @@
   },
   {
     "query": "Explain what git branches are.",
+    "should_trigger": false
+  },
+  {
+    "query": "Implementation in this worktree is done and tests are green -- how should I integrate the branch?",
     "should_trigger": false
   }
 ]

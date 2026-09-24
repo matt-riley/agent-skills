@@ -11,7 +11,8 @@
         "Writes only enough production code to pass the current test",
         "Defers cleanup/refactor until after green"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "bugfix-repro-test-first",
@@ -22,17 +23,56 @@
         "Uses the red-green-refactor cycle rather than fix-then-test",
         "Verifies the suite after the fix"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "one-test-at-a-time-edge-cases",
+      "prompt": "Add edge-case handling to the existing email validator for three new invalid-input cases.",
+      "expected_behavior": "Adds one failing test for one edge case, watches it fail, writes the minimal code to pass it, then moves to the next case — never writing all three tests or all the handling logic upfront.",
+      "assertions": [
+        "Writes and confirms one failing test at a time rather than all edge-case tests upfront",
+        "Writes only the minimal code needed for the current test before moving to the next case",
+        "Does not batch all production-code handling before the corresponding tests exist"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "delete-rule-unverified-code",
+      "prompt": "I already wrote a fix for parseAmount before writing any tests. Now let's add TDD coverage for it.",
+      "expected_behavior": "Applies the Delete Rule: deletes the unverified production code rather than adapting it, then rewrites the behavior test-first through the red-green-refactor cycle.",
+      "assertions": [
+        "Deletes the pre-existing unverified implementation rather than retrofitting tests around it",
+        "Writes a new failing test first and confirms it fails for the right reason",
+        "Rewrites the implementation test-first rather than reusing the original code path"
+      ],
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "route-away-verification",
       "prompt": "Rerun the parser tests before claiming the bug is fixed.",
-      "expected_behavior": "Does not treat this as a TDD authoring task; routes to verification-before-completion or a simple re-run of existing tests.",
+      "expected_behavior": "Does not treat this as a TDD authoring task; routes to verification-before-completion or a simple re-run of existing tests rather than starting a new red-green-refactor cycle.",
       "assertions": [
         "Does not start a red-green-refactor implementation cycle",
-        "Recognizes the ask is completion verification, not test-first design"
+        "Recognizes the ask is completion verification, not test-first design",
+        "Names verification-before-completion (or an equivalent fresh test re-run) as the correct path"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "route-away-docs-only",
+      "prompt": "Update the README's environment variable table to document the new REDIS_URL setting. No code changes.",
+      "expected_behavior": "Recognizes this is documentation-only with no executable logic and does not force a red-green-refactor cycle or ask for a failing test.",
+      "assertions": [
+        "Does not require a failing test before editing documentation",
+        "Does not invoke the RED-GREEN-REFACTOR workflow for a docs-only change",
+        "Completes the documentation edit directly"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

@@ -4,34 +4,67 @@
     {
       "id": "create-pr-and-watch-checks",
       "prompt": "Create a PR from this branch and watch required checks before handoff.",
-      "expected_behavior": "Uses gh to create or confirm the PR, anchors check status to the current pushed head SHA, and reports PR URL plus pass/fail/blocked status.",
+      "expected_behavior": "Confirms the current branch and head SHA, creates the PR with `gh pr create`, watches checks scoped to that exact head SHA (`gh pr checks --watch` or SHA-scoped run listing), and reports PR URL plus pass/fail/blocked status.",
       "assertions": [
-        "Uses GitHub CLI PR lifecycle commands rather than browser-only steps",
-        "Anchors check status to the current head SHA, not a stale run",
-        "Reports PR identifier/URL with a clear next-route if checks fail or reviews start"
+        "Confirms the current branch and head SHA with git before creating the PR",
+        "Uses `gh pr create` (with base/title/body) rather than browser-only steps",
+        "Watches checks with `gh pr checks --watch` or a SHA-scoped `gh run list --commit <head-sha>`, anchored to the current head SHA rather than a stale run",
+        "Reports the PR identifier/URL plus a clear next-route recommendation if checks fail or reviews should start"
       ],
-      "files": []
+      "files": [],
+      "deterministic_checks": [
+        "uses `gh pr create` to open the PR",
+        "uses `gh pr checks --watch` or SHA-scoped `gh run list --commit <sha>` to report status"
+      ],
+      "category": "tool-pattern"
     },
     {
       "id": "update-pr-metadata",
       "prompt": "Update PR #412 title/body for the latest push and tell me if checks are green.",
-      "expected_behavior": "Updates PR metadata with gh, re-checks status against the latest head SHA, and keeps scope limited to PR lifecycle (not failure triage).",
+      "expected_behavior": "Updates only the requested PR metadata with `gh pr edit`, re-checks status against the latest head SHA, and keeps scope limited to PR lifecycle work rather than diagnosing why any failing check failed.",
       "assertions": [
-        "Scopes work to PR metadata and check watching",
-        "Does not dive into workflow log root-cause diagnosis",
-        "References the current head SHA when reporting green/red status"
+        "Uses `gh pr edit` scoped to the requested title/body fields rather than recreating the PR",
+        "Does not dive into workflow log root-cause diagnosis for any failing check",
+        "References the current head SHA when reporting green/red status, not an earlier run"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
     },
     {
-      "id": "route-away-finish-branch",
-      "prompt": "Tests are green — help me decide whether to merge locally, open a PR, keep, or discard the branch.",
-      "expected_behavior": "Routes to finishing-a-development-branch instead of treating this as a pure gh PR create/watch task.",
+      "id": "handoff-report-outcome",
+      "prompt": "Give me the current PR and check status for this branch, then tell me what workflow to run next.",
+      "expected_behavior": "Reports the PR number/URL, the exact head SHA the status corresponds to, a clear pass/fail/blocked/running classification, and an explicit next-route recommendation to the correct downstream skill.",
       "assertions": [
-        "Does not default to gh pr create as the only option",
-        "Recognizes the integration decision belongs to finishing-a-development-branch"
+        "Reports a PR identifier (number and/or URL) and the exact head SHA assessed",
+        "Classifies check status as pass, fail, blocked, or still running rather than a vague summary",
+        "Gives an explicit next-route recommendation (e.g. review-comment-resolution, github-actions-failure-triage, or finishing-a-development-branch) matching the reported state"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-integration-decision",
+      "prompt": "Tests are green -- help me decide whether to merge locally, open a PR, keep, or discard the branch.",
+      "expected_behavior": "Recognizes this is the integration-decision task owned by finishing-a-development-branch and routes there instead of defaulting to `gh pr create` as the only path.",
+      "assertions": [
+        "Does not default to `gh pr create` as the automatic or only option",
+        "Recognizes the merge-vs-PR-vs-keep-vs-discard decision belongs to finishing-a-development-branch",
+        "Does not present this skill's workflow as a substitute for the integration decision"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-review-comment-adjudication",
+      "prompt": "Walk the open review comments on this PR and produce follow-up commits for each disposition.",
+      "expected_behavior": "Recognizes review-comment adjudication and fix batching is owned by review-comment-resolution and does not fold that work into the PR create/update/check-watch loop.",
+      "assertions": [
+        "Does not attempt to adjudicate or resolve individual review comments as part of this skill",
+        "Routes review-comment disposition and follow-up commit work to review-comment-resolution",
+        "Keeps any action here limited to PR metadata and check status only"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

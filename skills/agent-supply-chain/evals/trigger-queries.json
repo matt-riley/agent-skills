@@ -1,0 +1,38 @@
+[
+  {
+    "query": "Generate a SHA-256 integrity manifest for this plugin and verify it in CI.",
+    "should_trigger": true
+  },
+  {
+    "query": "Verify that our installed MCP tool bundle still matches the manifest we published last release.",
+    "should_trigger": true
+  },
+  {
+    "query": "Check this agent's tool directory for tampered or untracked files before we promote it to production.",
+    "should_trigger": true
+  },
+  {
+    "query": "Audit our agent plugin dependencies for unpinned versions and build a promotion gate that fails on any that aren't pinned.",
+    "should_trigger": true
+  },
+  {
+    "query": "Build a provenance chain so we can prove a plugin promoted from staging to production is exactly what code review approved.",
+    "should_trigger": true
+  },
+  {
+    "query": "Sign this plugin bundle and add a CI step that blocks deploy if the checksum doesn't match.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add tool allowlists and rate limits so this agent can't call dangerous APIs at runtime.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add an append-only audit trail and human approval for sensitive tool calls in this agent.",
+    "should_trigger": false
+  },
+  {
+    "query": "This is a one-off local script with no distributable package or promotion pipeline; just help me clean it up.",
+    "should_trigger": false
+  }
+]

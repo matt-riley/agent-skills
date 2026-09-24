@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "Migrate our Terraform remote state backend from local to S3 and use the native lockfile instead of DynamoDB.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a native `terraform test` or Terratest suite for this module before we merge it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our terraform apply is stuck because of a state lock — how do we recover safely?",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up Sentinel or OPA policy checks so unreviewed applies can't hit production.",
+    "should_trigger": true
+  },
+  {
     "query": "Diagnose a failing GitHub Actions job in a non-Terraform Node.js repo.",
     "should_trigger": false
   },

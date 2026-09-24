@@ -2,6 +2,18 @@
   "skill_name": "to-issues",
   "evals": [
     {
+      "id": "fetch-parent-issue-before-slicing",
+      "prompt": "Here's issue #482 as the parent epic for the billing retry feature — break it into implementation slices.",
+      "expected_behavior": "Fetches the referenced parent issue's body and comments before proposing slice boundaries, rather than slicing from the issue title or number alone, then presents the breakdown for approval.",
+      "assertions": [
+        "Reads the referenced issue's body and comments before proposing slice boundaries",
+        "Does not draft slices from the issue title or number alone",
+        "Presents the proposed breakdown for approval before creating any tracker issues"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
       "id": "vertical-slice-breakdown",
       "prompt": "Break this approved PRD into thin vertical implementation issues with dependencies, and show me the breakdown before publishing.",
       "expected_behavior": "Proposes tracer-bullet vertical slices (not horizontal layers), each with title, AFK/HITL type, dependencies, user-story coverage, and acceptance criteria, and waits for approval before publishing.",
@@ -10,28 +22,60 @@
         "Includes AFK versus HITL classification or equivalent human-review distinction",
         "Presents the breakdown for approval before creating tracker issues"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "dependency-ordered-publish",
-      "prompt": "Publish the approved issue slices to GitHub in dependency order with real blocker references.",
-      "expected_behavior": "Creates issues in dependency order so blockers reference real IDs, applies only verified labels, and does not invent tracker conventions.",
+      "id": "small-feature-not-over-sliced",
+      "prompt": "Break this small feature — add a 'remember me' checkbox to the login form — into issues.",
+      "expected_behavior": "Recognizes the work is small enough to need very few slices and does not manufacture unnecessary layer-based tickets like separate database, API, and UI issues for a single small outcome; still presents the minimal breakdown for approval.",
       "assertions": [
-        "Publishes or drafts in dependency order",
+        "Does not split a small, single-outcome feature into layer-based tickets such as 'database work' and 'UI work'",
+        "Produces the minimal number of vertical slices needed to stay independently demoable",
+        "Still presents the breakdown for approval before publishing rather than skipping approval because it is small"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "dependency-ordered-publish-matches-template",
+      "prompt": "Publish the approved issue slices to GitHub in dependency order with real blocker references.",
+      "expected_behavior": "Creates issues in dependency order using the issue-template shape so blockers reference real IDs, applies only verified labels, and does not invent tracker conventions.",
+      "assertions": [
+        "Publishes or drafts issues in dependency order",
+        "Each issue body follows the issue template's section structure",
         "Avoids inventing unverified labels or project fields",
         "Keeps blocker references concrete rather than circular or vague"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "each issue body includes a 'What to build' section",
+        "each issue body includes an 'Acceptance criteria' checklist",
+        "each issue body includes a 'Blocked by' section (or explicitly states none - can start immediately)"
+      ]
     },
     {
       "id": "to-issues-boundary-prd",
       "prompt": "Write the PRD for this feature before we decide how to split the work.",
-      "expected_behavior": "Routes away from to-issues because product framing is still missing.",
+      "expected_behavior": "Routes away from to-issues because product framing is still missing; recommends to-prd instead of guessing at slice boundaries.",
       "assertions": [
         "Does not invent implementation tickets when a PRD is still needed",
         "Routes toward to-prd or product-requirements work instead"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "to-issues-boundary-workflow-contracts",
+      "prompt": "Produce a reusable markdown handoff artifact for the planning and review phase, not tracker-native issues.",
+      "expected_behavior": "Recognizes the deliverable is a reusable markdown handoff artifact rather than issue-tracker tickets and routes to workflow-contracts instead.",
+      "assertions": [
+        "Does not force the output into issue-tracker ticket shape when a generic handoff artifact was requested",
+        "Routes toward workflow-contracts instead of producing GitHub issue bodies"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

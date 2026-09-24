@@ -1,0 +1,73 @@
+{
+  "skill_name": "agent-supply-chain",
+  "evals": [
+    {
+      "id": "generate-manifest-then-ci-verify",
+      "prompt": "Lock in the state of my-agent-plugin/ after code review, and make sure CI catches any tampering before deploy.",
+      "expected_behavior": "Inventories the plugin's files, generates an INTEGRITY.json manifest with per-file SHA-256 hashes and a chain hash after review, commits it to source control, then adds a CI verification step from references/ci-integration.md that fails the pipeline on MISSING, MODIFIED, or UNTRACKED files — manifest generation happens before CI verification is wired, not after.",
+      "assertions": [
+        "Generates the integrity manifest before adding or running the CI verification step",
+        "Manifest includes SHA-256 file hashes and a chain hash, not a single flat checksum",
+        "CI verification step fails the build on MODIFIED or UNTRACKED files",
+        "Recommends committing INTEGRITY.json to source control alongside the plugin"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "manifest file is named INTEGRITY.json",
+        "hash algorithm is SHA-256"
+      ]
+    },
+    {
+      "id": "verify-only-no-full-regenerate",
+      "prompt": "We already have an INTEGRITY.json for my-agent-plugin/ from last review. Just tell me if anything has changed since then — don't regenerate a fresh manifest or touch the plugin files.",
+      "expected_behavior": "Re-hashes the current plugin directory and compares it against the existing INTEGRITY.json using verify_manifest-style logic, reporting MISSING/MODIFIED/UNTRACKED entries, instead of unnecessarily regenerating and overwriting the manifest or editing plugin source.",
+      "assertions": [
+        "Compares current file hashes against the existing manifest rather than regenerating a new one from scratch",
+        "Does not modify plugin source files as part of a read-only verification request",
+        "Reports findings using MISSING, MODIFIED, or UNTRACKED categories",
+        "Does not re-run or duplicate work already captured in the existing manifest"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "promotion-gate-fails-closed",
+      "prompt": "Gate our plugin release pipeline on integrity so nothing gets promoted to production if it isn't clean.",
+      "expected_behavior": "Wires a promotion_check-style gate that requires integrity verification, required files present, and pinned dependencies to all pass before promotion, and fails closed (blocks promotion / does not load the artifact) on any verification error rather than defaulting to allow.",
+      "assertions": [
+        "Promotion gate checks integrity, required files, and pinned dependencies together",
+        "Gate fails closed (blocks promotion) when a check errors or does not pass",
+        "Does not promote or load the artifact when verification is inconclusive"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "dependency-pinning-audit",
+      "prompt": "Audit our agent's dependency versions and tell me which ones are unpinned so a different install could silently pull in different code.",
+      "expected_behavior": "Runs the dependency version audit pattern, lists unpinned or vulnerable packages with severity and fix suggestions, and ties the finding back to why unpinned dependencies break supply chain guarantees.",
+      "assertions": [
+        "Identifies unpinned dependency versions specifically, not just a generic dependency list",
+        "Explains that unpinned deps can produce different code on different installs",
+        "Suggests pinning as the remediation"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "agent-supply-chain-boundary-governance",
+      "prompt": "Add runtime tool allowlists and rate limits so this agent can't call dangerous APIs while it's running.",
+      "expected_behavior": "Routes away from agent-supply-chain because the task is runtime governance and policy enforcement, not package/plugin integrity verification.",
+      "assertions": [
+        "Does not generate an integrity manifest or promotion gate for a runtime-policy request",
+        "Routes toward agent-governance instead"
+      ],
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "recommends agent-governance rather than agent-supply-chain"
+      ]
+    }
+  ]
+}

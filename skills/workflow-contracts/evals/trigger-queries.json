@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "Convert this research memo into a durable planner-handoff artifact instead of leaving it as loose chat notes.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need the reviewer's decision captured as an explicit approve, revise, or blocked value instead of buried in prose comments.",
+    "should_trigger": true
+  },
+  {
+    "query": "Map this old ad hoc plan document into the v1 contract headings so the next phase can pick it up directly.",
+    "should_trigger": true
+  },
+  {
+    "query": "Give the implementation record stable frontmatter and headings instead of a freeform status update in Slack.",
+    "should_trigger": true
+  },
+  {
     "query": "Write a PRD for this idea before we create tickets.",
     "should_trigger": false
   },

@@ -3,7 +3,12 @@
   { "query": "Write a technical spec for the authentication redesign.", "should_trigger": true },
   { "query": "Run a readability pass on this README and give me a Flesch score.", "should_trigger": true },
   { "query": "Check these page titles and descriptions for truncation and clarity.", "should_trigger": true },
+  { "query": "Draft a migration guide for customers moving from v2 to v3 of our API.", "should_trigger": true },
+  { "query": "Review these 12 OpenAPI description strings for clarity, front-loading, and truncation fit.", "should_trigger": true },
+  { "query": "This onboarding doc feels dense and repetitive — can you audit the prose and tell me what's wrong with it?", "should_trigger": true },
+  { "query": "Write the outline and first draft of an RFC for splitting the notifications service.", "should_trigger": true },
   { "query": "Create a rollout plan with reviewers before anyone starts implementing.", "should_trigger": false },
   { "query": "Rewrite this rough feature request into a repo-grounded prompt I can reuse.", "should_trigger": false },
-  { "query": "Audit my GitHub profile and tell me which repos to pin.", "should_trigger": false }
+  { "query": "Audit my GitHub profile and tell me which repos to pin.", "should_trigger": false },
+  { "query": "Co-author our new operator runbook with feedback from an on-call engineer before we finalize it.", "should_trigger": false }
 ]

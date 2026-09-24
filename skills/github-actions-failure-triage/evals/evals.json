@@ -4,23 +4,68 @@
     {
       "id": "actions-log-first",
       "prompt": "Diagnose a failing GitHub Actions job with a run URL and failed check name.",
-      "expected_behavior": "Anchors the exact run/job/step/SHA, reads logs before editing, classifies the failure, and proposes the smallest justified fix.",
+      "expected_behavior": "Anchors the exact run/job/step/SHA before touching any file, reads the failed-step logs and surrounding setup context, maps the failure to the exact workflow file or reusable workflow, classifies the failure bucket, and only then proposes the smallest justified fix.",
       "assertions": [
-        "Requires concrete failing run evidence before editing",
-        "Maps failure to workflow file/action/reusable workflow/script",
-        "Separates workflow bugs from project/test/runtime failures"
+        "Gathers the failure anchor (run/job/step, head SHA, branch, triggering event) before proposing any edit",
+        "Reads the failed-step logs and nearby setup steps before editing anything",
+        "Maps the failure to the exact workflow file, called reusable workflow, action version, or repository script involved",
+        "Classifies the failure into a bucket (syntax, permissions, runner mismatch, matrix, cache/artifact, reusable-workflow contract, concurrency, or project bug) before proposing a fix"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "actions-boundary",
-      "prompt": "Plan a broad migration from CircleCI to GitHub Actions.",
-      "expected_behavior": "Does not invoke failure triage for migration planning.",
+      "id": "single-matrix-leg-scope",
+      "prompt": "Only the ubuntu-latest / node-20 matrix leg fails at the test step; isolate the failing job and keep the fix limited to that branch of the matrix.",
+      "expected_behavior": "Identifies the single failing matrix axis, applies the smallest change that fixes only that leg's include/exclude logic or branch-specific setup, and does not touch the rest of the workflow or rerun the full matrix.",
       "assertions": [
-        "States this is CI migration planning rather than failing-run triage",
-        "Routes to planning rather than speculatively editing GitHub Actions files"
+        "Identifies the single failing matrix axis rather than treating the whole matrix as broken",
+        "Scopes the fix to the failing leg's include/exclude logic or branch-specific setup",
+        "Does not modify unrelated jobs, steps, or matrix legs that were already passing",
+        "Reruns only the narrow matrix leg rather than the entire workflow to verify the fix"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "artifact-handoff-outcome",
+      "prompt": "The deploy job on PR #182 fails on Upload artifact with 'Artifact not found'; trace that run, fix the upload path, and do not touch the rest of the workflow.",
+      "expected_behavior": "Compares the producer and consumer path/name for the artifact handoff, applies the minimal fix to the exact path or name mismatch, runs workflow linting on the changed file, and reports the root cause, fix, and validation using the triage summary format.",
+      "assertions": [
+        "Compares the producing job's artifact upload path/name against the consuming job's expected path/name before fixing",
+        "Applies the smallest fix that resolves the exact path or name mismatch without restructuring the workflow",
+        "Runs workflow linting (action-validator or actionlint) on the changed workflow file when available",
+        "Summarizes evidence, the change made, validation performed, and any remaining blocker"
+      ],
+      "files": [],
+      "deterministic_checks": [
+        "action-validator or actionlint is run against the changed workflow file"
+      ],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-migration-planning",
+      "prompt": "Plan a broad migration from CircleCI to GitHub Actions for the monorepo, including parity mapping and a staged cutover.",
+      "expected_behavior": "Recognizes this is CI-platform migration planning rather than diagnosing a concrete failing run, and does not apply the failure-triage evidence workflow; routes to migration planning guidance instead.",
+      "assertions": [
+        "States this is CI migration/parity planning rather than failing-run triage",
+        "Does not anchor on or request a specific failing run/job/step evidence, since none is the trigger here",
+        "Does not speculatively edit GitHub Actions workflow files as if diagnosing a failure"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-local-repro-handoff",
+      "prompt": "I already know the failing job is `lint-and-test`; can you reproduce it locally with act and iterate on a fix before I push again?",
+      "expected_behavior": "Once root cause investigation would move to local reproduction with act as the fastest path, routes to github-actions-local-repro instead of continuing to iterate purely against hosted run evidence.",
+      "assertions": [
+        "Recognizes the request is for local reproduction via act, not remote log-based triage",
+        "Routes to github-actions-local-repro rather than performing the act-based repro loop itself",
+        "Does not claim to run act commands as part of this skill's own workflow"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

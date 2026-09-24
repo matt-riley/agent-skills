@@ -12,15 +12,39 @@
     "should_trigger": true
   },
   {
+    "query": "Diagnose why the deploy job started failing after a workflow edit.",
+    "should_trigger": true
+  },
+  {
+    "query": "The Upload artifact step on PR #182 fails with 'Artifact not found'; trace the run and fix the upload path only.",
+    "should_trigger": true
+  },
+  {
+    "query": "Only the ubuntu-latest / node-20 matrix leg fails at the test step; isolate why before touching the rest of the matrix.",
+    "should_trigger": true
+  },
+  {
+    "query": "A workflow started failing after actions/checkout was bumped; confirm whether it's the action input, checkout depth, or repo script before changing anything else.",
+    "should_trigger": true
+  },
+  {
+    "query": "A workflow that was green on main started failing on this PR after bumping an action version; find the exact cause before touching other jobs.",
+    "should_trigger": true
+  },
+  {
     "query": "Design a new CI pipeline from scratch.",
     "should_trigger": false
   },
   {
-    "query": "Address PR review comments and push fixes.",
+    "query": "Reproduce this failing Actions job locally with act before I push again.",
     "should_trigger": false
   },
   {
-    "query": "Set up a worktree for CI debugging.",
+    "query": "Set up an isolated worktree for CI debugging work.",
+    "should_trigger": false
+  },
+  {
+    "query": "Adjudicate the review feedback on PR #90 and push follow-up commits.",
     "should_trigger": false
   }
 ]

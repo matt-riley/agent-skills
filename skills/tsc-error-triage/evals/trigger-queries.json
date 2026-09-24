@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "Our tsc -b project-references build is failing with a wall of errors — find the first causal one.",
+    "should_trigger": true
+  },
+  {
+    "query": "A broken export is causing dozens of downstream type errors — find the root cause and fix it.",
+    "should_trigger": true
+  },
+  {
+    "query": "After merging main, tsc reports 40 new errors — group them and fix the shared cause first.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me triage these compiler errors without patching every leaf call site individually.",
+    "should_trigger": true
+  },
+  {
     "query": "Change tsconfig to enable strict mode.",
     "should_trigger": false
   },

@@ -13,7 +13,21 @@
         "Separates catalog-wide validation from target-skill eval commands.",
         "Uses the new skill path rather than hardcoded skill-creator eval paths when describing validation."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "read-template-and-standard-before-drafting",
+      "prompt": "Draft frontmatter and the Use this skill when / Do not use this skill when sections for a brand-new `cloudflare-d1-migrations`-adjacent skill about D1 query tuning.",
+      "expected_behavior": "Before drafting, checks skills/README.md and nearby skills (cloudflare-d1-migrations, repository-adapters) to establish the boundary, consults assets/skill-template.md for the canonical outline and references/catalog-standard.md for the frontmatter spec, then writes trigger language (description, Use/Do-not-use) before any workflow or support-file content.",
+      "assertions": [
+        "Checks skills/README.md or nearby skills for boundary overlap before drafting the new skill's content",
+        "Uses assets/skill-template.md's canonical outline and references/catalog-standard.md's frontmatter spec rather than inventing a new structure",
+        "Writes the frontmatter description plus Use this skill when / Do not use this skill when before workflow or support-file content",
+        "Produces a description that states both when to use it and, given the overlap with cloudflare-d1-query-tuning, when not to"
+      ],
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "upgrade-existing-skill",
@@ -26,7 +40,21 @@
         "Mentions evals and validation tooling.",
         "Mentions iterative improvement using real tasks."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "minimal-package-no-unneeded-scripts",
+      "prompt": "This new skill is just a short workflow with two examples — do I need references/, evals/, scripts/, and assets/ folders too?",
+      "expected_behavior": "Recommends the minimal useful package for the described scope: keep the short workflow in SKILL.md, skip references/evals/scripts/assets unless they clearly add value, and explicitly avoid adding scripts/ or empty scaffolding just to match the directory pattern.",
+      "assertions": [
+        "Does not recommend adding scripts/ by default for a simple two-example workflow",
+        "Explicitly says to skip support directories that would not add real signal here",
+        "Frames the decision as choosing the minimal useful package, not the full starter bundle unconditionally",
+        "Does not instruct creating empty or placeholder scaffolding files"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "surface-selection",
@@ -37,7 +65,34 @@
         "Mentions deciding whether the guidance belongs in a skill before drafting content.",
         "Mentions keeping the package minimal unless references, evals, scripts, or assets clearly add value."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "skill-creator-boundary-always-apply-rule",
+      "prompt": "This guidance should just always apply to every task in the repo, no matter what the user asks. Make it a skill.",
+      "expected_behavior": "Routes away from creating a skill because guidance that should always apply belongs in repository instruction files (AGENTS.md, copilot-instructions.md) rather than a skill package that has to be selected/triggered.",
+      "assertions": [
+        "Does not scaffold a new skill package for always-apply guidance",
+        "Points toward repository instruction files or agent-instructions instead",
+        "Explains that skills are selected/triggered per-task, which conflicts with an always-apply requirement"
+      ],
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "does not create a skills/<name>/SKILL.md for this request"
+      ]
+    },
+    {
+      "id": "skill-creator-boundary-named-agent-persona",
+      "prompt": "I need a named specialist persona — call it 'PR Reviewer Bot' — with its own voice and role for reviewing PRs. Package it as a skill.",
+      "expected_behavior": "Routes away from skill-creator's skill packaging because a named specialist role belongs in agents/, not skills/, per this skill's own Do not use this skill when list.",
+      "assertions": [
+        "Does not scaffold a skills/<name>/SKILL.md package for a named specialist persona",
+        "States that named specialist roles belong under agents/ instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

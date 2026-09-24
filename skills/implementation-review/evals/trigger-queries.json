@@ -12,15 +12,27 @@
     "should_trigger": true
   },
   {
-    "query": "Create an implementation plan for a feature.",
+    "query": "Review this PR against the approved plan and flag any scope drift or missing validation.",
+    "should_trigger": true
+  },
+  {
+    "query": "Compare the completed implementation to the linked issue's requirements and give a merge-readiness verdict.",
+    "should_trigger": true
+  },
+  {
+    "query": "I addressed the reviewer's requested changes — re-review the updated diff before we merge.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create an implementation plan for the new billing feature.",
     "should_trigger": false
   },
   {
-    "query": "Explain how pull request reviews work in general.",
+    "query": "Apply the reviewer's requested changes and push the fix branch.",
     "should_trigger": false
   },
   {
-    "query": "Write new code for the feature instead of reviewing it.",
+    "query": "The implementation is still being sketched out — no code exists yet, just an approach.",
     "should_trigger": false
   }
 ]

@@ -11,7 +11,8 @@
         "Avoids unsafe casts such as as unknown as to silence the compiler",
         "Mentions typecheck after the edit"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "honest-boundary-stop",
@@ -19,9 +20,35 @@
       "expected_behavior": "Stops when the boundary is generated, vendor-owned, or intentionally permissive; prefers unknown plus a guard over inventing a fake precise type.",
       "assertions": [
         "Does not force fake precision on generated or intentionally permissive boundaries",
-        "Mentions unknown plus narrowing or leaving the honest boundary alone"
+        "Mentions unknown plus narrowing or leaving the honest boundary alone",
+        "Does not hand-edit the generated OpenAPI client file"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "any-eliminator-inventory-before-edit",
+      "prompt": "There's an any on this exported helper; check whether we already model this shape elsewhere before typing it.",
+      "expected_behavior": "Inventories the targeted any site and reads adjacent types, and searches for an existing shared domain type, DTO, schema, or validator before inventing a new local type, per the skill's first-move and workflow steps.",
+      "assertions": [
+        "Reads the adjacent/existing types before writing a replacement type",
+        "Searches for an existing shared type, DTO, schema, or validator before creating a new local type",
+        "Only defines a new local type when no existing shared type fits"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "any-eliminator-scoped-not-broad-refactor",
+      "prompt": "This file has 15 any usages that all represent the same request-body shape; clean them all up.",
+      "expected_behavior": "Reuses one shared replacement type or validator across all 15 sites of the same shape instead of crafting bespoke local types for each, and keeps the edit local rather than expanding into an unrelated broader refactor.",
+      "assertions": [
+        "Reuses a single consistent replacement type/shape across the repeated any sites rather than 15 bespoke ad hoc types",
+        "Keeps the change scoped to the any-typed sites instead of an opportunistic wider refactor",
+        "Updates adjacent call sites only as needed to keep the typed surface coherent"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "any-eliminator-boundary-schema",
@@ -31,7 +58,19 @@
         "Does not treat the task as only local any replacement",
         "Routes toward schema-boundary-typing or runtime validation at the untrusted boundary"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "any-eliminator-boundary-type-tests",
+      "prompt": "The type surface is already truthful now; add compile-time regression tests locking the inference of this previously any-typed helper.",
+      "expected_behavior": "Recognizes the any-removal work is already done and routes the compile-time regression coverage request to type-test-authoring instead of continuing any-elimination work.",
+      "assertions": [
+        "Does not re-do any elimination when the type surface is already reported as truthful",
+        "Routes toward type-test-authoring for compile-time regression coverage"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

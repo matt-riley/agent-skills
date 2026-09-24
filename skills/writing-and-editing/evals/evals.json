@@ -10,7 +10,20 @@
         "Confirms or asks about the intended audience",
         "Proposes an outline before drafting body sections"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "draft-skips-outline-when-already-agreed",
+      "prompt": "The team already agreed on this RFC's outline (Problem, Proposal, Alternatives, Rollout) — just fill in the body sections, don't start from scratch.",
+      "expected_behavior": "Recognizes the outline is already settled and does not re-derive or re-propose one or re-ask already-answered audience questions; goes straight to drafting body sections against the given structure.",
+      "assertions": [
+        "Does not re-derive or challenge the already-agreed outline",
+        "Does not re-ask for audience or purpose information already established",
+        "Drafts body sections directly against the given structure instead of restarting from Stage 1"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "readability-audit-mode",
@@ -19,20 +32,23 @@
       "assertions": [
         "Recognizes this as a readability audit rather than a drafting task",
         "Mentions a Flesch Reading Ease score",
+        "Cites quoted evidence for reported issues rather than vague generalities",
         "Does not broaden into a plan or prompt rewrite"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "metadata-audit-mode",
       "prompt": "Review these repo descriptions and taglines for clarity and truncation fit.",
       "expected_behavior": "Classifies the task as metadata-audit mode, reviews the strings as short audience-facing fields, and provides concise rewrites when needed.",
       "assertions": [
-        "Recognizes the task as short-string review",
+        "Recognizes the task as short-string review rather than full-document prose review",
         "Mentions truncation or surface fit",
         "Provides concrete rewrites instead of vague advice"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "boundary-plan-review",
@@ -42,7 +58,8 @@
         "Recognizes that a reviewer-gated implementation plan belongs to plan-review",
         "Does not treat the plan request as a normal document drafting task"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
     },
     {
       "id": "boundary-reverse-prompt",
@@ -52,7 +69,19 @@
         "Recognizes that prompt or execution-brief shaping belongs to reverse-prompt",
         "Does not pretend the request is a normal document or prose audit"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-github-presence",
+      "prompt": "Overhaul my GitHub org profile page and repo community-health files so the whole surface looks more professional.",
+      "expected_behavior": "Routes to github-presence because the task is broader GitHub-surface setup and audit, not the writing itself.",
+      "assertions": [
+        "Recognizes this as a GitHub-surface presentation task rather than a writing-quality task",
+        "Does not apply draft/readability-audit/metadata-audit mode selection to a profile-surface overhaul"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

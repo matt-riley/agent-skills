@@ -4,23 +4,61 @@
     {
       "id": "tsconfig-incremental",
       "prompt": "Enable stricter TypeScript settings safely in a monorepo.",
-      "expected_behavior": "Inventories tsconfig chain, captures baseline commands/error counts, changes one concern at a time, and switches to tsc-error-triage if errors burst.",
+      "expected_behavior": "Inventories the tsconfig chain with tsc --showConfig or the nearest equivalent, captures the baseline typecheck command and compiler error count, then tightens one flag at a time rather than flipping strict: true outright.",
       "assertions": [
-        "Runs showConfig or equivalent inventory",
-        "Does not flip many flags at once",
-        "Preserves emit/module settings unless needed"
+        "Runs tsc --showConfig or an equivalent config inventory before editing",
+        "Captures a baseline compiler error count before changing flags",
+        "Changes one strictness flag at a time instead of enabling many flags at once",
+        "Does not touch emit, module, or resolution settings when the task is only about strictness"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "tsconfig-one-flag-at-a-time",
+      "prompt": "Enable noUncheckedIndexedAccess and exactOptionalPropertyTypes at the same time across the whole repo to save review cycles.",
+      "expected_behavior": "Pushes back on flipping multiple noisy flags simultaneously and lands them as separate batches, since noUncheckedIndexedAccess and exactOptionalPropertyTypes each ripple through different call sites and mixing them would make the diff unreviewable.",
+      "assertions": [
+        "Does not enable both flags in a single combined change",
+        "Proposes landing each flag as its own separate, reviewable batch",
+        "Explains why combining them would make the failure surface harder to diagnose"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "tsconfig-hardening-outcome",
+      "prompt": "Harden this tsconfig without breaking the build or the current package layout.",
+      "expected_behavior": "Delivers a config-only diff that keeps include/exclude/module/emit settings aligned with the actual build, re-runs the repo's typecheck (and build if emit is affected) after each meaningful change, and confirms the final config still matches the intended runtime and package layout.",
+      "assertions": [
+        "Keeps the diff scoped to configuration, separated from any source-code fixes",
+        "Re-runs the typecheck command (and build, if declarations/emit are affected) after each meaningful config change",
+        "Confirms the final config still matches the intended runtime and package layout before finishing"
+      ],
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "tsc-errors-boundary",
       "prompt": "There are 80 tsc errors after strict mode was enabled; fix them now.",
-      "expected_behavior": "Routes follow-on compiler failures to tsc-error-triage.",
+      "expected_behavior": "Recognizes the task has moved from config hardening to source-level compiler error remediation and routes to tsc-error-triage instead of continuing to widen the tsconfig.",
       "assertions": [
-        "Recognizes compiler-error triage is now primary",
-        "Stops further config hardening"
+        "Recognizes compiler-error triage is now the primary task",
+        "Stops further config hardening and defers to tsc-error-triage for the error-fixing work"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "tsconfig-boundary-no-harden-request",
+      "prompt": "The project intentionally keeps a loose tsconfig; just fix the type error in this one function, don't touch the config.",
+      "expected_behavior": "Does not use the tsconfig-hardening workflow when the repository intentionally uses a loose config and the user did not ask to harden it; fixes the local issue without proposing config changes.",
+      "assertions": [
+        "Does not propose tightening tsconfig flags when the user explicitly did not ask for hardening",
+        "Keeps the fix scoped to the one function without touching compiler options"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

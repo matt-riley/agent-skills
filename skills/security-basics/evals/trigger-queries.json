@@ -12,15 +12,39 @@
     "should_trigger": true
   },
   {
+    "query": "I'm adding an /admin/debug endpoint that dumps internal state. What do I need to lock down?",
+    "should_trigger": true
+  },
+  {
+    "query": "Review whether our structured logs might be capturing tokens or PII from request headers.",
+    "should_trigger": true
+  },
+  {
+    "query": "We trust X-Forwarded-For directly for rate limiting; is that safe behind our load balancer?",
+    "should_trigger": true
+  },
+  {
+    "query": "We're reworking session cookie handling and token storage; make sure it's hardened before release.",
+    "should_trigger": true
+  },
+  {
+    "query": "I found a hardcoded API key in this service while removing it in favor of env-based config — check nothing risky is left behind.",
+    "should_trigger": true
+  },
+  {
     "query": "Write a full threat model document for the company.",
     "should_trigger": false
   },
   {
-    "query": "Implement a whole auth system from scratch.",
+    "query": "Fix a typo in the marketing copy on the pricing page.",
     "should_trigger": false
   },
   {
-    "query": "Review a feature plan rather than code or security-sensitive behaviour.",
+    "query": "Our .env file is missing DATABASE_URL and the server won't start — help me fix the config.",
+    "should_trigger": false
+  },
+  {
+    "query": "Our API responses are slow under load; add response caching to the request handler.",
     "should_trigger": false
   }
 ]

@@ -10,7 +10,35 @@
         "Mentions failing fast on missing required config.",
         "Mentions a health check or start command validation loop."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "compare-loading-order-before-editing",
+      "prompt": "The server won't boot with 'missing required config'. Figure out what's wrong.",
+      "expected_behavior": "Before proposing any fix, the agent compares real environment variables and any local .env against .env.example and the repo's config loader, then inspects runtime binding files for drift, in that order.",
+      "assertions": [
+        "Reads/compares real env vars and .env against .env.example or the config loader before editing anything.",
+        "Inspects runtime config files such as wrangler.* only after the env/.env.example comparison, when relevant.",
+        "Does not propose a config edit before identifying which required variable or binding is actually missing."
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "compares against .env.example before editing the loader or .env"
+      ]
+    },
+    {
+      "id": "scoped-fix-not-full-rewrite",
+      "prompt": "One required env var (`STRIPE_SECRET_KEY`) isn't being picked up at startup. Fix it.",
+      "expected_behavior": "The agent diagnoses and fixes the single missing/misloaded variable without rewriting the whole config-loading system or touching unrelated variables.",
+      "assertions": [
+        "Scopes the fix to the one variable reported, not a full config-loader rewrite.",
+        "Does not add unrelated variables, feature flags, or refactor the loader beyond the fail-fast fix.",
+        "Confirms the fix with the existing start/health-check command rather than a broader rewrite of the verification approach."
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "production-secrets",
@@ -21,7 +49,8 @@
         "Mentions environment variables or a secrets manager.",
         "Mentions not committing secrets."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "worker-d1-binding-drift",
@@ -32,7 +61,32 @@
         "Mentions `wrangler.toml`, `wrangler.json`, or `wrangler.jsonc` and the `d1_databases` entry.",
         "Redirects away from `cloudflare-d1-migrations` unless schema-state drift is discovered."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-auth-exposure-not-config",
+      "prompt": "We're logging the Authorization header in plaintext on every request — is that a problem, and how do we fix it?",
+      "expected_behavior": "The response recognizes this is primarily a security/data-exposure concern, not environment/config drift, and routes to `security-basics` instead of treating it as a configuration-env task, even though headers and env-adjacent request handling are involved.",
+      "assertions": [
+        "Does not treat this as env/config loading drift or propose .env/.env.example changes as the fix.",
+        "Names or routes toward `security-basics` for the logging/credential-exposure guardrail.",
+        "Still gives a concrete recommendation (stop logging the header / scrub it) rather than refusing to answer."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-compose-stack-not-config",
+      "prompt": "I can't get my local multi-service stack (API, Postgres, Redis) up with Docker Compose — nothing starts.",
+      "expected_behavior": "The response recognizes the blocker is standing up the multi-service stack itself, not env-var/.env loading, and routes to `docker-compose-dev` rather than running the configuration-env workflow.",
+      "assertions": [
+        "Does not run the .env/.env.example comparison workflow as the primary fix for a Compose orchestration failure.",
+        "Names or routes toward `docker-compose-dev` for standing up the stack.",
+        "Only treats env loading as in-scope if the user later isolates a specific missing variable, not the whole orchestration problem."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

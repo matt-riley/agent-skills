@@ -1,0 +1,73 @@
+{
+  "skill_name": "ast-grep",
+  "evals": [
+    {
+      "id": "ast-grep-preview-before-rewrite",
+      "prompt": "Use ast-grep to rewrite `obj.val && obj.val()` to `obj.val?.()` in this TypeScript codebase.",
+      "expected_behavior": "Runs a scoped ast-grep search preview with an explicit language flag before any rewrite, inspects representative matches, and only then runs the rewrite command with the same explicit scoping.",
+      "assertions": [
+        "Runs an ast-grep search/preview command before any rewrite command",
+        "Specifies --lang ts explicitly on both the preview and rewrite commands",
+        "Applies the rewrite only after confirming the preview matches the intended pattern",
+        "Reviews the resulting diff for unintended changes using the safety checklist before finishing"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "command includes `--lang ts`",
+        "rewrite step uses `--rewrite` or `--rule`",
+        "the preview/search run happens strictly before the rewrite/apply run"
+      ]
+    },
+    {
+      "id": "ast-grep-scoped-not-repo-wide",
+      "prompt": "Only in src/components/, replace `React.FC<Props>` type annotations with the plain function-with-Props-arg form using ast-grep.",
+      "expected_behavior": "Scopes the ast-grep command to src/components/ only, does not widen to the whole repository or add unrelated glob/language targets beyond what was asked, and previews before rewriting.",
+      "assertions": [
+        "Command path scope is limited to src/components/, not the whole repository",
+        "Does not add unrelated languages or directories beyond what the user asked",
+        "Runs a single narrow preview rather than repeated broad scans before rewriting"
+      ],
+      "files": [],
+      "category": "efficiency",
+      "deterministic_checks": [
+        "command path argument is `src/components/`, not the repo root"
+      ]
+    },
+    {
+      "id": "ast-grep-clean-rewrite-diff",
+      "prompt": "Write and apply an ast-grep rule file to convert `require(...)` calls to ESM `import` statements in this JS package, then show me the result.",
+      "expected_behavior": "Builds a rule file, previews it with `ast-grep scan --rule`, applies it only after a clean preview, and the final diff contains only the intended require-to-import structural edits with no unrelated formatting churn.",
+      "assertions": [
+        "Produces a rule file used with `ast-grep scan --rule`",
+        "Final diff contains only require-to-import edits, no unrelated formatting changes",
+        "States explicit exclusions for generated/vendor/build directories",
+        "Summary states matched scope and any rollback/retry decisions"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "ast-grep-boundary-literal-string",
+      "prompt": "Find every occurrence of the exact string \"TODO: remove after migration\" in this repo.",
+      "expected_behavior": "Treats this as plain literal string search and uses a direct rg/glob search instead of building an ast-grep structural pattern or invoking the ast-grep workflow.",
+      "assertions": [
+        "Does not construct an ast-grep pattern or rule file for this request",
+        "Uses a direct rg/text search tool instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "ast-grep-boundary-debugging",
+      "prompt": "I have a failing test after a merge and don't know why it's broken — can you find the root cause?",
+      "expected_behavior": "Routes to systematic-debugging instead of treating this as an ast-grep search or rewrite task, since the main work is root-cause failure analysis, not structural code search.",
+      "assertions": [
+        "Does not propose ast-grep commands as the primary approach",
+        "Routes toward root-cause debugging methodology (systematic-debugging) instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

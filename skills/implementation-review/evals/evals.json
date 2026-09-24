@@ -3,25 +3,64 @@
   "evals": [
     {
       "id": "review-with-panel",
-      "prompt": "Please review this implementation with named reviewers and do not consider it done until every reviewer approves.",
-      "expected_behavior": "The response identifies the review target, gathers validation context, uses the reviewer panel consistently, and blocks completion until all required reviewers approve.",
+      "prompt": "Please review this implementation with named reviewers Jason and Freddy, and do not consider it done until every reviewer approves.",
+      "expected_behavior": "Freezes the review target, gathers diff and validation evidence, runs the exact named reviewer set on the same shared revision, has each return APPROVE or REQUEST_CHANGES, and blocks completion until all required reviewers approve.",
       "assertions": [
-        "Mentions reviewer set or approval gate.",
-        "Mentions validation status before approval.",
-        "Treats requested changes as blocking."
+        "Uses exactly the named reviewer set rather than substituting or dropping reviewers",
+        "Every reviewer evaluates the same frozen revision, diff, and validation summary",
+        "Each reviewer's verdict is APPROVE or REQUEST_CHANGES with rationale",
+        "Treats any REQUEST_CHANGES as blocking and does not report the review as done until all approve"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "review-focus",
       "prompt": "Do a code review focused on correctness and regression risk, not style nitpicks.",
-      "expected_behavior": "The response scopes the review to material issues such as correctness, validation gaps, rollout safety, and regressions.",
+      "expected_behavior": "Scopes the review to material issues such as correctness, validation gaps, rollout safety, and regressions rather than substituting style feedback for substantive findings.",
       "assertions": [
-        "Focuses on materially important issues.",
-        "Avoids style nitpicks as the primary output.",
-        "Mentions validation or rollout safety."
+        "Focuses on materially important issues (correctness, regressions, validation gaps, rollout safety, security)",
+        "Avoids style nitpicks as the primary output",
+        "Mentions validation status or rollout safety in the verdict"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "scoped-diff-review",
+      "prompt": "Review just the changes in this 40-line bugfix diff; don't audit the entire unrelated legacy module it happens to sit in.",
+      "expected_behavior": "Scopes review effort to the stated diff/file set, evaluating correctness, regression risk, and security within that scope, without performing an opportunistic full-module or full-repo audit beyond the review target.",
+      "assertions": [
+        "Reviews only the stated diff/file set rather than the whole legacy module",
+        "Still checks correctness, regression risk, and validation gaps within that scoped diff",
+        "Does not expand into an unrequested full-codebase audit"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "stale-revision-refreeze",
+      "prompt": "New commits landed on the branch since we started reviewing it. Finalize the review.",
+      "expected_behavior": "Notices the reviewed revision changed, re-freezes and re-gathers the diff and validation evidence for the current revision, and states the verdict against that current state rather than approving stale content.",
+      "assertions": [
+        "Does not finalize a verdict against the earlier, now-stale revision",
+        "Re-gathers diff and validation evidence for the current commit before finalizing",
+        "States the verdict is tied to the current, re-frozen revision"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-apply-feedback",
+      "prompt": "Apply the reviewer's requested changes and push a fix branch.",
+      "expected_behavior": "Recognizes this is carrying review feedback through to a code fix, not assessing an implementation, and routes to review-comment-resolution rather than silently rewriting code as part of implementation-review.",
+      "assertions": [
+        "Does not silently rewrite code as a substitute for producing a review outcome",
+        "States this belongs to review-comment-resolution (applying feedback) rather than implementation-review (assessing it)",
+        "Does not report fixes as applied unless the user explicitly asked for both review and fixes in one pass"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

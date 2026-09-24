@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "This D1 repository method does SELECT * and filters results in application code; push the filtering into SQL instead.",
+    "should_trigger": true
+  },
+  {
+    "query": "Check EXPLAIN QUERY PLAN for this D1 query before and after a rewrite to confirm it stops doing a full table scan.",
+    "should_trigger": true
+  },
+  {
+    "query": "Collapse repeated existence-check queries into a single EXISTS query for this D1 repository method.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our D1 pagination uses offset and gets slower as the offset grows; can we make it cursor-based without a schema change?",
+    "should_trigger": true
+  },
+  {
     "query": "Add a new index to this D1 table and promote the migration safely.",
     "should_trigger": false
   },

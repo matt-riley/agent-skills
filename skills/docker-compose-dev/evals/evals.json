@@ -2,15 +2,44 @@
   "skill_name": "docker-compose-dev",
   "evals": [
     {
+      "id": "compose-sequenced-bringup",
+      "prompt": "Bring up the docker compose stack and make sure migrations run before I test the API.",
+      "expected_behavior": "Follows the documented sequence: copies .env.example to .env if missing, brings the stack up, runs migrations explicitly since compose does not apply them automatically, then verifies the health endpoint before declaring it ready.",
+      "assertions": [
+        "Copies .env.example to .env when missing, without committing the .env file",
+        "Brings the stack up before running migrations",
+        "Runs migrations explicitly, noting compose up does not apply them automatically",
+        "Verifies the health endpoint or docker compose ps after migrations"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs a migration step explicitly, not assumed to be automatic"
+      ]
+    },
+    {
+      "id": "compose-scoped-service-fix",
+      "prompt": "Just the API container crashed and restarted a few times — don't tear down the whole stack, just check that service.",
+      "expected_behavior": "Investigates and fixes the single failing service (logs, health check, depends_on) without tearing down or rebuilding the entire compose stack.",
+      "assertions": [
+        "Checks logs and status for the specific failing service rather than the whole stack",
+        "Does not run a full docker compose down/rebuild when only one service is unhealthy",
+        "Scopes any fix to the failing service's config, ports, or dependencies"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
       "id": "compose-startup",
       "prompt": "I want a local stack with the app and its database using docker compose. What is the workflow?",
-      "expected_behavior": "The response gives a compose-oriented bring-up flow, mentions common operations, and includes a health/verification step.",
+      "expected_behavior": "The response gives a compose-oriented bring-up flow, mentions common operations, and includes a health/verification step, with an explicit teardown decision about volumes.",
       "assertions": [
         "Mentions compose bring-up commands or equivalent operations.",
         "Mentions verification of service health.",
-        "Mentions troubleshooting or invariants for the stack."
+        "States whether persistent volumes are preserved or destroyed on teardown."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "compose-debug",
@@ -21,7 +50,30 @@
         "Mentions the database/backend dependency explicitly.",
         "Includes a concrete next-step checklist."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "not-trigger-unit-test-sufficient",
+      "prompt": "This feature can be fully verified with an in-memory stub of the database — no real DB needed.",
+      "expected_behavior": "Should NOT force a docker-compose-dev workflow. Recognizes that in-memory/stub dependencies satisfy the change and does not recommend bringing up the real compose stack.",
+      "assertions": [
+        "Does not recommend standing up the compose stack when a stub/in-memory dependency is sufficient",
+        "Reserves the compose-backed workflow for integration/E2E needs, not this unit-level case"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "not-trigger-migration-authoring",
+      "prompt": "How do I write a database migration to add a new users table?",
+      "expected_behavior": "Should NOT apply the docker-compose-dev bring-up workflow. Routes to database-migrations for authoring the migration itself; docker-compose-dev only applies once the migration needs to be run against the real stack.",
+      "assertions": [
+        "Does not treat migration authoring as a compose bring-up task",
+        "Routes toward a database-migrations workflow for writing the migration"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

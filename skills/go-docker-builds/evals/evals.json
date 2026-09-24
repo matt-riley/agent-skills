@@ -2,6 +2,18 @@
   "skill_name": "go-docker-builds",
   "evals": [
     {
+      "id": "inspect-before-dockerfile",
+      "prompt": "Containerize this Go chi API for production — I want it small and secure.",
+      "expected_behavior": "Checks go.mod for the pinned Go version and any CGO usage before writing the Dockerfile, then picks the minimal base image (scratch for pure Go, alpine for CGO/CA certs) based on that.",
+      "assertions": [
+        "Checks go.mod for the Go version and CGO usage before writing the Dockerfile",
+        "Chooses scratch for pure Go or alpine when CGO/CA certs are needed, based on that inspection",
+        "Pins the Go version in the builder stage to match go.mod rather than using a floating tag"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
       "id": "new-pure-go-dockerfile",
       "prompt": "Write a Dockerfile for this Go API service at github.com/matt-riley/myapi. It uses Go 1.26, chi router, and has no CGO dependencies.",
       "expected_behavior": "Produces a multi-stage Dockerfile with golang:1.26-alpine builder, CGO_ENABLED=0, scratch final image, and CA certs copied.",
@@ -13,7 +25,12 @@
         "Strips debug info with -ldflags=\"-s -w\"",
         "Separates go mod download into its own layer"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "CGO_ENABLED=0",
+        "FROM scratch as final stage"
+      ]
     },
     {
       "id": "cgo-dockerfile-fix",
@@ -25,7 +42,24 @@
         "Changes final base image from scratch to alpine",
         "Adds ca-certificates and tzdata to final image"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "CGO_ENABLED=1",
+        "FROM alpine as final stage"
+      ]
+    },
+    {
+      "id": "add-healthcheck-minimal",
+      "prompt": "Add a health check to our existing Go Dockerfile — it already builds and runs fine.",
+      "expected_behavior": "Adds a HEALTHCHECK instruction (and a health subcommand note if the base is scratch) as a scoped, minimal change without restructuring the existing multi-stage build or base image choice.",
+      "assertions": [
+        "Adds only the HEALTHCHECK instruction and any strictly required supporting change",
+        "Does not rewrite the existing multi-stage layout or switch base images unless required for the health check itself",
+        "Notes that a scratch image needs a binary health subcommand since there is no shell for wget/curl"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "not-trigger-docker-compose",
@@ -35,7 +69,19 @@
         "Does not produce a production Dockerfile",
         "Routes to docker-compose-dev"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "not-trigger-build-outside-docker",
+      "prompt": "go build fails outside Docker with a GOROOT mismatch — nothing to do with the Dockerfile yet.",
+      "expected_behavior": "Should NOT apply Dockerfile authoring workflow. Routes to go-build-and-test for the toolchain/GOROOT diagnosis since the failure is outside Docker.",
+      "assertions": [
+        "Does not propose Dockerfile changes for a non-Docker toolchain failure",
+        "Routes to go-build-and-test for GOROOT/toolchain diagnosis"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

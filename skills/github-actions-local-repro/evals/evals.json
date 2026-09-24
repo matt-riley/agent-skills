@@ -4,35 +4,66 @@
     {
       "id": "act-narrow-job-repro",
       "prompt": "Reproduce this pull_request failure for job lint-and-test with act and patch only what breaks in that job.",
-      "expected_behavior": "Lints the workflow if possible, runs a narrow act command for the failing job/event, captures the first failing step, applies a minimal fix, and re-runs the same local command.",
+      "expected_behavior": "Lints the target workflow with action-validator first, runs a narrow act command targeting the exact event and job, captures the first failing step and error output before editing, applies a minimal fix, and re-runs the same local command until it passes.",
       "assertions": [
-        "Uses act (or equivalent local workflow runner) targeting the failing job",
-        "Captures failing-step evidence before broad edits",
-        "Keeps the fix scoped to the reproduced path",
-        "Avoids printing real secret values"
+        "Runs action-validator against the target workflow file before local execution",
+        "Uses a narrow act command such as `act pull_request -j lint-and-test` rather than running every job or event",
+        "Captures the first failing step and error output before making any edit",
+        "Keeps the fix scoped to the reproduced failing path",
+        "Avoids printing real secret values, using placeholder secret files or masked env values instead"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "narrow-act-flags-only",
+      "prompt": "The build job started failing after a workflow edit; run it locally with act, isolate the failing step, and fix minimally.",
+      "expected_behavior": "Maps the hosted failure to the minimal act inputs needed (event, workflow file, job, and only the matrix axis or env values required), rather than running the full workflow across all jobs and matrix legs.",
+      "assertions": [
+        "Targets only the specific failing job and event rather than running the whole workflow",
+        "Adds only the flags or env/matrix values required to reproduce the specific failing leg",
+        "Does not broaden the fix scope beyond the reproduced failing path"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "workflow-edit-regression",
       "prompt": "The build job started failing after a workflow edit; run it locally with act, isolate the failing step, and fix minimally.",
-      "expected_behavior": "Maps the hosted failure to local act inputs, reproduces the same step, and validates with the same act command after the patch.",
+      "expected_behavior": "Reproduces the same failing step locally, applies the smallest fix, and re-runs the identical local command to confirm the previously failing step now passes, while noting any known gap between local and hosted behavior.",
       "assertions": [
-        "Compares local failure to the hosted failing step",
-        "Re-runs the same local reproduction command after the fix",
-        "Calls out when local success may not guarantee hosted success"
+        "Compares the local failure to the hosted failing step to confirm the same step is being exercised",
+        "Re-runs the same local act command after the patch and confirms the previously failing step now passes",
+        "Calls out when local success may not guarantee hosted success (e.g. hosted-only services or policies)"
       ],
-      "files": []
+      "files": [],
+      "deterministic_checks": [
+        "the same `act` command used to reproduce the failure is re-run after the fix and reported as passing"
+      ],
+      "category": "outcome"
     },
     {
       "id": "route-away-hosted-only",
       "prompt": "The job only fails on org-managed runners with protected environment secrets; logs show AccessDenied to the environment gate.",
-      "expected_behavior": "Does not force a futile act loop; routes to github-actions-failure-triage or notes hosted-only/policy constraints.",
+      "expected_behavior": "Does not force a futile act loop against a failure that depends on hosted-only or org-policy behavior; routes to github-actions-failure-triage or clearly notes the hosted-only/policy constraint and stops.",
       "assertions": [
-        "Recognizes hosted-only or org-policy constraints",
-        "Does not insist act can fully reproduce protected-environment failures"
+        "Recognizes the failure depends on org-managed runner or protected-environment behavior that act cannot represent",
+        "Does not insist a local act run can fully reproduce a protected-environment or org-policy failure",
+        "Routes to github-actions-failure-triage or clearly hands off with the specific mismatch documented instead of continuing to iterate locally"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-direct-fix-no-repro-needed",
+      "prompt": "I already have the exact failing log line and the root cause is confirmed -- just apply the direct fix, no need to reproduce it again with act.",
+      "expected_behavior": "Recognizes the user already has definitive failing evidence and asked for a direct fix without a local repro loop, so it applies the fix directly instead of insisting on running act first.",
+      "assertions": [
+        "Does not force an act-based reproduction loop when the user already supplied definitive failing evidence and asked to skip it",
+        "Applies the requested direct fix rather than re-deriving root cause through local reproduction"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

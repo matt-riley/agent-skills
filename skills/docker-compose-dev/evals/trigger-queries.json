@@ -12,6 +12,18 @@
     "should_trigger": true
   },
   {
+    "query": "Bring up the docker compose stack, run migrations, and verify the health endpoint before I start testing.",
+    "should_trigger": true
+  },
+  {
+    "query": "The app container in our compose stack keeps restarting — help me check depends_on and health checks.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need to fully reset my local compose stack including wiping the database volume.",
+    "should_trigger": true
+  },
+  {
     "query": "Write a Kubernetes deployment manifest.",
     "should_trigger": false
   },
@@ -20,7 +32,7 @@
     "should_trigger": false
   },
   {
-    "query": "Add a database migration for a new table.",
+    "query": "The .env file has a typo in DATABASE_URL and the app won't start — I just need the env variable fixed, no compose changes.",
     "should_trigger": false
   }
 ]

@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "We've been discussing the offline sync feature for a while now — turn all of that into a PRD with user stories and implementation decisions.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a PRD for the new permissions model using what's already in this thread and the repo's current auth module.",
+    "should_trigger": true
+  },
+  {
+    "query": "Draft a product requirements doc for the checkout redesign so we can hand it to the team for triage.",
+    "should_trigger": true
+  },
+  {
+    "query": "Synthesize what we've decided about rate limiting into a PRD, including out-of-scope items — don't interview me unless something's missing.",
+    "should_trigger": true
+  },
+  {
     "query": "Break this approved PRD into implementation issues and open them in dependency order.",
     "should_trigger": false
   },
