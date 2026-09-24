@@ -5,6 +5,8 @@
   { "query": "Scaffold a new Neovim plugin called glimpse.nvim that previews file contents in a floating window.", "should_trigger": true },
   { "query": "Add a :Glimpse command and <leader>gp keymap with plenary tests.", "should_trigger": true },
   { "query": "Set up GitHub Actions CI with selene linting and plenary tests on stable and nightly Neovim.", "should_trigger": true },
+  { "query": "Generate a doc/trailblazer.txt vimdoc help file for this plugin from the existing README.", "should_trigger": true },
+  { "query": "Debug why require('trailblazer').setup() throws 'attempt to call a nil value' — the plugin loads but setup() crashes.", "should_trigger": true },
   { "query": "Fix the LSP configuration in my init.lua.", "should_trigger": false },
   { "query": "Why does lazy.nvim load the wrong version of this plugin?", "should_trigger": false },
   { "query": "Write a Lua script that parses JSON and prints the result.", "should_trigger": false },

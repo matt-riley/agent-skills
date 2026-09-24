@@ -2,24 +2,75 @@
   "skill_name": "grill-me",
   "evals": [
     {
-      "id": "pure-interrogation",
-      "prompt": "Grill me on my plan to refactor the notification service.",
-      "expected_behavior": "Runs one-question-at-a-time plan interrogation without creating documentation files.",
+      "id": "explore-codebase-before-asking",
+      "prompt": "Grill me on this plan to add caching to the search endpoint.",
+      "expected_behavior": "For any question answerable by examining the codebase, such as what caching library or endpoint structure already exists, explores the code directly instead of asking the user, and asks the user only about genuine unresolved decisions, one question at a time.",
       "assertions": [
-        "Asks one focused question at a time",
-        "Keeps the default session free of documentation side effects"
+        "Explores the codebase directly for questions the code can already answer, instead of asking the user",
+        "Asks the user only about decisions the codebase cannot resolve",
+        "Asks one question at a time rather than a wall of questions"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "explicit-documentation-mode",
-      "prompt": "Grill me and build CONTEXT.md as we resolve the domain language.",
-      "expected_behavior": "Enters documentation mode because the user explicitly requested CONTEXT.md, while retaining the one-question-at-a-time interrogation loop.",
+      "id": "no-reask-resolved-branches",
+      "prompt": "Continue grilling me — we already settled on Postgres for storage and REST for the API earlier in this conversation. Now dig into the caching strategy.",
+      "expected_behavior": "Does not re-ask about storage or API choices already resolved earlier in the conversation and moves directly to the next unresolved decision branch (caching strategy), continuing one question at a time.",
       "assertions": [
-        "Recognizes explicit documentation intent",
-        "Uses the CONTEXT.md format and updates only after terms are resolved"
+        "Does not re-ask about storage or API framing already resolved earlier in the conversation",
+        "Moves directly to the next unresolved decision branch, the caching strategy",
+        "Continues asking one question at a time rather than batching the remaining branches"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "documentation-mode-updates-only-after-resolution",
+      "prompt": "Grill me on order cancellation and update CONTEXT.md as we resolve domain terms.",
+      "expected_behavior": "Enters documentation mode because the user explicitly named CONTEXT.md, and updates CONTEXT.md inline only after each specific domain term is actually resolved through the interrogation, defining each term in one sentence, and offers an ADR only for a hard-to-reverse, surprising trade-off rather than every decision.",
+      "assertions": [
+        "Enters documentation mode because the user explicitly named CONTEXT.md",
+        "Updates CONTEXT.md only after a given domain term is resolved, not preemptively",
+        "Defines each domain term in one sentence",
+        "Offers an ADR only for a hard-to-reverse, surprising trade-off, not for every resolved decision"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-no-silent-documentation-side-effects",
+      "prompt": "Grill me on this plan to move the order service to event sourcing.",
+      "expected_behavior": "Runs pure interrogation only, one question at a time with a recommended answer each time, and does not create or update CONTEXT.md, CONTEXT-MAP.md, or any ADR file since the user never mentioned domain documentation.",
+      "assertions": [
+        "Does not create or update CONTEXT.md, CONTEXT-MAP.md, or ADR files",
+        "Keeps the session as pure interrogation with no documentation side effects",
+        "Still asks one question at a time with a recommended answer"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-vague-routes-to-reverse-prompt",
+      "prompt": "I don't really have a plan written down yet — help me figure out what I'm even trying to build before we talk it through.",
+      "expected_behavior": "Recognizes the request is too vague to interrogate and routes to reverse-prompt to sharpen the ask first, rather than starting a grill-me interrogation loop on an undefined plan.",
+      "assertions": [
+        "Does not start a one-question-at-a-time interrogation loop on an undefined plan",
+        "Routes toward reverse-prompt to sharpen the request first"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-reviewer-gated-approval",
+      "prompt": "Run this completed plan through unanimous reviewer-gated approval rounds with verdict tokens.",
+      "expected_behavior": "Routes to plan-review's structured reviewer-persona mode rather than treating this as a grill-me interrogation, since reviewer-gated multi-round approval is a distinct workflow.",
+      "assertions": [
+        "Does not run the grill-me one-question-at-a-time loop for a reviewer-gated approval request",
+        "Routes toward plan-review instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }
