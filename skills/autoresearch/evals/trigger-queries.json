@@ -1,0 +1,42 @@
+[
+  {
+    "query": "I want you to keep running experiments on my Go benchmark until you find a 10% speedup.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run experiments on src/compute.ts to reduce the npm run benchmark p95 latency. Keep going until I stop you.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to minimize go test -bench=. ns/op for BenchmarkSort. File a result log and tell me what you tried.",
+    "should_trigger": true
+  },
+  {
+    "query": "Hill-climb my Rust build time. The metric is time cargo build --release, lower is better. Only touch Cargo.toml and src/.",
+    "should_trigger": true
+  },
+  {
+    "query": "Autonomously try different approaches to raise our test coverage percentage and keep whichever commits actually improve the number.",
+    "should_trigger": true
+  },
+  {
+    "query": "Iteratively try config tweaks to reduce our API's p95 latency; branch off main, log every experiment, and report back when you hit diminishing returns.",
+    "should_trigger": true
+  },
+  {
+    "query": "Optimize our bundle size iteratively — measure with npm run build:size after each change, revert whatever doesn't shrink it, and keep going.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a failing test for the parseUser function before I implement it.",
+    "should_trigger": false
+  },
+  {
+    "query": "My CI pipeline is failing and I don't know why.",
+    "should_trigger": false
+  },
+  {
+    "query": "Try switching this lookup from an array scan to a Map and see if it's faster — just that one change, no loop needed.",
+    "should_trigger": false
+  }
+]

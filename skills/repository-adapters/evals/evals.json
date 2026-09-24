@@ -2,26 +2,71 @@
   "skill_name": "repository-adapters",
   "evals": [
     {
-      "id": "adapter-method-change",
-      "prompt": "I need to add a repository method and wire the DB adapter correctly. What should I preserve?",
-      "expected_behavior": "The response focuses on consumer-side interface contracts, adapter query changes, error mapping, and verification.",
+      "id": "adapter-regen-before-edit",
+      "prompt": "I changed the SQL query for GetUserByID; update the repository adapter to match.",
+      "expected_behavior": "Updates the query source first, regenerates via the repo's generator command, then updates the adapter implementation to call the new/changed query, and runs the test suite before finishing — in that order.",
       "assertions": [
-        "Mentions domain interface or adapter boundary.",
-        "Mentions error mapping rules.",
-        "Mentions verification after query changes."
+        "Updates the query source file before touching the adapter implementation",
+        "Runs the regeneration command (e.g. `make generate`) before editing the adapter by hand",
+        "Never hand-edits the generated query file directly",
+        "Runs tests after the adapter change"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `make generate` before modifying the adapter implementation",
+        "runs `make test` after the change"
+      ]
     },
     {
-      "id": "db-error-handling",
-      "prompt": "The DB now returns a duplicate-key error for this adapter path. How should the repository layer handle it?",
-      "expected_behavior": "The response maps DB-specific failures into domain-appropriate errors instead of leaking raw DB details upward.",
+      "id": "adapter-minimal-dialect-change",
+      "prompt": "Add a FindByEmail method only to the SQLite adapter for now; Postgres support can come later.",
+      "expected_behavior": "Scopes the change to the SQLite dialect and the shared domain interface as asked, without opportunistically implementing every other optional dialect adapter or unrelated methods.",
       "assertions": [
-        "Mentions domain-facing error mapping.",
-        "Avoids leaking raw DB-specific behavior as the final interface.",
-        "Keeps focus on the adapter layer."
+        "Adds the method to the domain interface and the SQLite adapter as requested",
+        "Does not implement unrequested dialect adapters or unrelated repository methods",
+        "Notes that optional dialects should skip cleanly in tests rather than failing"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "adapter-error-mapping-outcome",
+      "prompt": "The DB now returns a duplicate-key error for this adapter path. How should the repository layer handle it?",
+      "expected_behavior": "Maps the DB-specific uniqueness violation to the domain's ErrDuplicate (or equivalent) at the adapter boundary using %w-style wrapping, and never lets the raw DB error string leak into logs or API responses.",
+      "assertions": [
+        "Maps the DB error to a domain error type such as ErrDuplicate rather than passing it through",
+        "Uses %w-style wrapping so errors.Is/errors.As still work",
+        "Does not leak the raw DB error string in logs or responses"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "maps the DB uniqueness/constraint violation to a domain error like `ErrDuplicate`",
+        "error wrapping uses `%w`"
+      ]
+    },
+    {
+      "id": "adapter-boundary-migration",
+      "prompt": "Write the migration to add a deleted_at column to the users table.",
+      "expected_behavior": "Routes to database-migrations for the schema migration itself rather than treating this as adapter-layer work.",
+      "assertions": [
+        "Does not treat this as a repository-adapter change",
+        "Routes to database-migrations for the schema/migration work instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "adapter-boundary-d1-perf",
+      "prompt": "This Cloudflare D1-backed repository query is slow in production. Speed it up without touching the schema.",
+      "expected_behavior": "Routes to cloudflare-d1-query-tuning since the risk is D1 runtime query performance without schema or migration changes, not general adapter/domain-boundary work.",
+      "assertions": [
+        "Does not treat this as a general repository-adapter/domain-boundary task",
+        "Routes to cloudflare-d1-query-tuning instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }
