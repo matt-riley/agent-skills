@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "The API returns 500 intermittently in production and I can't reliably reproduce it locally.",
+    "should_trigger": true
+  },
+  {
+    "query": "I've tried three different patches and the test still fails — I need a real investigation, not another guess.",
+    "should_trigger": true
+  },
+  {
+    "query": "This regression appeared right after a dependency bump; help me find out why.",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm under deadline pressure and just want to try something to make this error go away.",
+    "should_trigger": true
+  },
+  {
     "query": "Rerun the failing test to confirm the fix worked.",
     "should_trigger": false
   },
@@ -20,7 +36,7 @@
     "should_trigger": false
   },
   {
-    "query": "Write a test for the new feature.",
+    "query": "The fix already passed in staging — write up the release notes.",
     "should_trigger": false
   }
 ]

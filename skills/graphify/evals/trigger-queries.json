@@ -1,0 +1,46 @@
+[
+  {
+    "query": "Turn this docs/ folder into a Graphify knowledge graph with community detection and an HTML export.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run `/graphify --update` to re-extract only the files I changed since the last build.",
+    "should_trigger": true
+  },
+  {
+    "query": "graphify-out/graph.json already exists — how does the AuthModule connect to the Database in this codebase?",
+    "should_trigger": true
+  },
+  {
+    "query": "Clone https://github.com/foo/bar and graphify it, merging it into our existing repo's graph.",
+    "should_trigger": true
+  },
+  {
+    "query": "Find the shortest path between AuthModule and PaymentService in our Graphify graph.",
+    "should_trigger": true
+  },
+  {
+    "query": "Explain the SwinTransformer node in our knowledge graph — what's it connected to?",
+    "should_trigger": true
+  },
+  {
+    "query": "Rerun clustering on the existing graph with `--cluster-only`, don't re-extract everything.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add this URL to our Graphify corpus and rebuild the graph.",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you explain how the authentication flow works in this codebase? We don't have any graph output and I don't need one.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the bug in the login handler; no graph work needed here.",
+    "should_trigger": false
+  },
+  {
+    "query": "Use LSP to find every reference to this function so I can see what calls it.",
+    "should_trigger": false
+  }
+]

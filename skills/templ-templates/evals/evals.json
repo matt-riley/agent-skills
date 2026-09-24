@@ -4,24 +4,79 @@
     {
       "id": "templ-edit-flow",
       "prompt": "I changed a .templ page component. What workflow should I follow to regenerate and verify the app?",
-      "expected_behavior": "The response identifies the template location, regeneration step, handler wiring checks, and verification steps.",
+      "expected_behavior": "Locates the target .templ file and its handler, edits markup/data usage only, regenerates with templ generate (or the repo's make templ-generate/make generate), then verifies with go build before running tests.",
       "assertions": [
-        "Mentions locating `.templ` files.",
-        "Mentions regeneration.",
-        "Mentions handler wiring or verification."
+        "Mentions locating the .templ file and its consuming handler before editing",
+        "Runs templ generate (or the repo's equivalent make target) after the markup edit",
+        "Verifies with go build ./... (or the repo's narrow build target) before running tests"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `templ generate`",
+        "runs `go build`"
+      ]
     },
     {
       "id": "templ-troubleshooting",
       "prompt": "The generated template code and the rendered page are out of sync after my change. What should I inspect?",
-      "expected_behavior": "The response focuses on template source, generation, and Go wiring instead of generic frontend debugging alone.",
+      "expected_behavior": "Diagnoses the stale-generation symptom by checking the source .templ file against the generated _templ.go output, confirms the handler was rebuilt (Go does not auto-detect .templ changes), and never hand-edits the generated file.",
       "assertions": [
-        "Mentions source template and generated output relationship.",
-        "Mentions Go handler wiring or route integration.",
-        "Mentions common pitfalls or invariants."
+        "Mentions the relationship between the source .templ file and the generated _templ.go output as the first thing to inspect",
+        "Identifies that Go does not auto-detect .templ changes and a rebuild/regenerate is required",
+        "States that *_templ.go must never be hand-edited"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "templ-scoped-single-prop-change",
+      "prompt": "Add one new optional prop to this templ component and pass it through from the handler.",
+      "expected_behavior": "Scopes the change to the one component's markup/parameters and the one handler call site that needs the new prop, regenerates, and verifies the build, without refactoring unrelated templates or hand-editing generated Go.",
+      "assertions": [
+        "Limits the edit to the targeted component and its handler wiring rather than touching unrelated templates",
+        "Regenerates with templ generate rather than hand-editing the generated Go file",
+        "Does not introduce unrelated refactors while adding the single prop"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "templ-content-type-outcome",
+      "prompt": "After editing this .templ file, make sure the page is wired up correctly end to end.",
+      "expected_behavior": "Confirms the handler sets Content-Type: text/html; charset=utf-8 on the rendered response, passes typed data from the handler into the template rather than computing it inside the template, and verifies with go build plus the repo's relevant tests.",
+      "assertions": [
+        "Confirms or sets Content-Type: text/html; charset=utf-8 on the handler response",
+        "Confirms data is computed in the handler/domain layer and passed as typed parameters, not computed inside the template",
+        "Runs go build and the repo's relevant tests as verification"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "sets `Content-Type: text/html; charset=utf-8`"
+      ]
+    },
+    {
+      "id": "templ-boundary-css-only",
+      "prompt": "Just update the CSS classes on this rendered page for spacing; no template markup or handler changes needed.",
+      "expected_behavior": "Recognizes this is pure CSS/asset work with no template edits, which is explicitly out of scope, and does not run the templ regeneration workflow for a change that touches no .templ markup.",
+      "assertions": [
+        "Does not run templ generate or treat this as a template-editing task",
+        "Does not touch handler wiring or *_templ.go files for a CSS-only change"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "templ-boundary-broader-codegen",
+      "prompt": "Set up broader code generation across our schema and query layer, not just templates.",
+      "expected_behavior": "Routes the broader schema/query code-generation work to the code-generation skill instead of applying the templ-specific regeneration workflow.",
+      "assertions": [
+        "Does not apply the templ-specific edit/regenerate workflow to schema/query code generation",
+        "Recommends the code-generation skill for the broader cross-cutting codegen work"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

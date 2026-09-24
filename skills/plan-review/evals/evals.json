@@ -4,13 +4,14 @@
     {
       "id": "approval-gated-plan",
       "prompt": "Create and review an implementation plan with named reviewers, and do not move to implementation until everyone approves.",
-      "expected_behavior": "The response drafts or updates the plan, gathers repo context, uses the reviewer prompt consistently, and blocks implementation until unanimous approval.",
+      "expected_behavior": "The response drafts or updates the plan artifact first, gathers repo context, then runs the reviewer set on that revision and blocks implementation until unanimous approval.",
       "assertions": [
-        "Mentions plan artifact or plan revision.",
-        "Mentions reviewer set or unanimous approval.",
-        "States implementation should wait for approval."
+        "Drafts or updates the plan artifact before requesting reviewer verdicts",
+        "Mentions reviewer set or unanimous approval",
+        "States implementation should wait for approval"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "strong-plan-criteria",
@@ -21,7 +22,8 @@
         "Mentions scope or risk control.",
         "Focuses on executable plan quality."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "unanimous-approval-round",
@@ -32,7 +34,11 @@
         "Requires all configured reviewers to agree in the same round",
         "Does not silently rewrite the plan without a revise path"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "verdicts use the literal tokens `[PLAN-APPROVED]` or `[PLAN-REVISE-NEEDED]`"
+      ]
     },
     {
       "id": "revise-then-rerun",
@@ -43,17 +49,31 @@
         "Instructs updating the plan and rerunning the full reviewer set",
         "Respects the three-round approval model"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "advisory-review-no-overkill",
+      "prompt": "Give me an implementation plan for adding rate limiting to the API. I just want a solid plan, no formal reviewer process.",
+      "expected_behavior": "Drafts the plan and pressure-tests it for feasibility, validation coverage, and scope discipline, but does not invent a structured multi-round Jason/Freddy verdict-token loop since reviewer-gated approval was not requested.",
+      "assertions": [
+        "Does not invoke the structured Jason/Freddy multi-round verdict-token process when it was not requested",
+        "Still pressure-tests the plan for feasibility, validation coverage, and scope discipline",
+        "Avoids unnecessary reviewer-loop ceremony beyond what was asked"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "route-away-informal-grill",
-      "prompt": "Stress-test this design and update CONTEXT.md as we go — no formal reviewer tokens.",
+      "prompt": "Stress-test this design and update CONTEXT.md as we go - no formal reviewer tokens.",
       "expected_behavior": "Routes to grill-me documentation mode instead of requiring the structured plan-review approval loop.",
       "assertions": [
         "Does not require [PLAN-APPROVED] tokens for an informal stress-test",
         "Recognizes grill-me as the better fit"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

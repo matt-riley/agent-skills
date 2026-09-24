@@ -10,18 +10,71 @@
         "Compares failing vs. passing case or inspects setup/recent changes",
         "Uses one hypothesis at a time and documents outcome"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "post-commit-regression",
       "prompt": "A feature that worked yesterday is broken after the last commit. Systematically find why.",
       "expected_behavior": "Uses git log/show to identify the change, compares before/after, forms and tests a hypothesis about the root cause (removed line, config change, etc.), verifies, and only then proposes the restoration or fix.",
       "assertions": [
-        "Inspects recent commits before guessing",
+        "Inspects recent commits (e.g. `git log --oneline -10`, `git diff`/`git show`) before guessing",
         "States root cause in terms of the specific change",
         "Avoids random patches"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `git log --oneline -10` (or equivalent recent-change inspection) before proposing a fix"
+      ]
+    },
+    {
+      "id": "stop-after-repeated-failures",
+      "prompt": "I've made three random tweaks trying to fix this flaky test and none of them worked. What now?",
+      "expected_behavior": "Stops making incremental random changes, per the guardrail against accumulating changes, and instead questions the design or escalates after 3+ consecutive failures rather than attempting a fourth guess.",
+      "assertions": [
+        "Does not propose a fourth random/incremental tweak",
+        "Explicitly stops and questions the underlying design or escalates, per the '3+ consecutive failures' rule",
+        "Returns to one-hypothesis-at-a-time investigation rather than continuing to guess"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "complete-debugging-outcome",
+      "prompt": "We think we fixed the intermittent 500 error. Show me it's actually resolved.",
+      "expected_behavior": "Confirms all validation criteria are met: root cause documented in one sentence with evidence, the cause verified via test/diff/trace, the fix minimal and addressing only that cause, the originally failing case now passing with no new regressions, and the fix reviewed or handed off.",
+      "assertions": [
+        "States the root cause in one sentence with supporting evidence",
+        "Confirms the fix is minimal and addresses only the root cause",
+        "Confirms the originally failing case now passes and no new regressions were introduced"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-explicit-known-fix",
+      "prompt": "We already root-caused this null-pointer bug — just apply the null check at line 42 like we discussed.",
+      "expected_behavior": "Acknowledges the already-diagnosed context and applies the specific requested fix, then moves to validation, rather than restarting the full root-cause investigation phases from scratch.",
+      "assertions": [
+        "Does not restart Phase 1 root-cause investigation when the user explicitly names a known, already-diagnosed fix",
+        "Acknowledges the given context and applies the requested change",
+        "Moves to validating the fix rather than re-investigating"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-documentation-typo",
+      "prompt": "There's a typo in the README's installation instructions — fix it.",
+      "expected_behavior": "Recognizes this is a documentation-only issue with no code behavior involved and fixes it directly rather than running the root-cause debugging phases.",
+      "assertions": [
+        "Does not invoke reproduction, hypothesis, or root-cause phases for a documentation typo",
+        "Fixes the text directly using ordinary editing, not the debugging workflow",
+        "Does not ask for error output or reproduction steps for a labeling/documentation issue"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

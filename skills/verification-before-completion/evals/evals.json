@@ -11,7 +11,8 @@
         "Does not rely on prior runs or code inspection alone",
         "Only makes the 'fixed' claim after evidence confirms it"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "linter-claim",
@@ -22,7 +23,47 @@
         "Treats 'should be clean' or partial checks as insufficient",
         "Quotes the actual 'no errors' or error count from output"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "reject-stale-prior-run",
+      "prompt": "I ran `go test ./...` five minutes ago and it passed. I've since changed one more file — can I say tests pass?",
+      "expected_behavior": "Refuses to rely on the earlier, now-stale run and re-runs the exact command fresh after the latest change, reading the full output before making any claim.",
+      "assertions": [
+        "Does not accept the five-minutes-ago run as sufficient evidence for the current state",
+        "Re-runs the exact command fresh after the latest file change",
+        "Reads the complete fresh output before allowing the claim"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "re-runs `go test ./...` fresh rather than citing the earlier run"
+      ]
+    },
+    {
+      "id": "scope-command-to-claim",
+      "prompt": "I need to confirm this one-line fix to a single function works. What's the minimal proof?",
+      "expected_behavior": "Scopes the verification command to the specific claim being made (the targeted test covering that function) rather than demanding unrelated extra work, while still running the full suite if the user's claim is broader (e.g. 'all tests pass').",
+      "assertions": [
+        "Identifies the narrowest command that actually proves the specific one-line-fix claim",
+        "Does not require unrelated, broader verification beyond what the claim needs",
+        "Would still require full-scope verification if the claim itself were broader (e.g. 'all tests pass')"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-root-cause-not-verification",
+      "prompt": "This test still flakes intermittently and I don't know why it fails. Help me figure it out.",
+      "expected_behavior": "Recognizes this is root-cause investigation, not confirming a fix, and routes to systematic-debugging rather than just rerunning the test and reporting pass/fail.",
+      "assertions": [
+        "Does not treat a single rerun-and-report as sufficient when the cause is unknown",
+        "Names systematic-debugging as the correct path for finding the root cause",
+        "Reserves verification-before-completion for confirming a fix once the cause is understood"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

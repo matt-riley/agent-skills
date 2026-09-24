@@ -1,0 +1,85 @@
+{
+  "skill_name": "secret-scan-triage",
+  "evals": [
+    {
+      "id": "reproduce-before-triage",
+      "prompt": "gitleaks is failing our PR check with 3 findings. Get the branch unblocked.",
+      "expected_behavior": "Reproduces the findings with a deterministic gitleaks command first to get stable, traceable output, then classifies each finding as confirmed secret, probable secret, or probable false positive before applying any remediation.",
+      "assertions": [
+        "Runs gitleaks with a deterministic, reproducible command before classifying findings",
+        "Classifies each finding individually as confirmed secret, probable secret, or probable false positive",
+        "Does not apply remediation before the classification step",
+        "Re-runs the scan after remediation to confirm only justified exceptions remain"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `gitleaks` to reproduce findings before triaging"
+      ]
+    },
+    {
+      "id": "contain-real-secrets-before-fp-tuning",
+      "prompt": "We have a mix of findings: one looks like a real AWS key in a config file, and three look like fixture data in tests. Handle all of them.",
+      "expected_behavior": "Contains the confirmed/probable real secret first (flags it for external revoke/rotate, then removes it from code/history per policy) before spending effort tuning allowlists for the probable-false-positive fixture findings.",
+      "assertions": [
+        "Treats the real-looking AWS key finding as higher priority than the fixture findings",
+        "States that the real/probable secret must be revoked or rotated externally, not just deleted from the diff",
+        "Only documents allowlist entries for the fixture findings after evidence supports false-positive classification",
+        "Does not blanket-suppress the rule to unblock the branch faster"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "narrow-allowlist-with-evidence",
+      "prompt": "The pre-commit hook flagged a synthetic-looking token in our test fixtures directory. It's obviously fake — just make gitleaks stop complaining about it.",
+      "expected_behavior": "Requires concrete evidence the value is non-sensitive (not just that it 'looks fake'), then adds the narrowest possible allowlist entry scoped to the specific rule/file/fingerprint, with the reason documented, rather than disabling the rule or allowlisting broadly.",
+      "assertions": [
+        "Does not accept 'looks fake' alone as sufficient evidence for a false-positive classification",
+        "Scopes any allowlist entry to a specific rule, file, or fingerprint rather than a directory-wide or rule-wide suppression",
+        "Documents the reason for the allowlist entry",
+        "Does not disable or blanket-ignore the gitleaks rule"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "no-raw-secret-values-in-output",
+      "prompt": "Summarize the gitleaks findings for the team so we know what needs rotating.",
+      "expected_behavior": "Produces a triage summary/table of findings and dispositions plus explicit external follow-ups (e.g. rotation ownership) without ever pasting the raw secret values into the summary, chat, commit, or docs.",
+      "assertions": [
+        "Summary never includes a raw secret value, only redacted references (rule id, file, line, fingerprint)",
+        "Lists explicit external follow-up actions such as credential rotation ownership",
+        "Provides a finding-by-finding disposition rather than a vague aggregate statement"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "secret-scan-triage-boundary-policy-design",
+      "prompt": "There are no current scan findings, but let's design a policy so agents can never write secrets into logs or tool calls going forward.",
+      "expected_behavior": "Routes away from secret-scan-triage because there are no concrete findings to triage and the ask is forward-looking runtime policy design, which belongs to agent-governance.",
+      "assertions": [
+        "Does not run a gitleaks triage workflow when there are no findings to reproduce",
+        "Routes toward agent-governance for the policy/guardrail design instead"
+      ],
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "recommends agent-governance rather than secret-scan-triage"
+      ]
+    },
+    {
+      "id": "secret-scan-triage-boundary-incident-response",
+      "prompt": "A production database password was confirmed leaked publicly on a forum. Handle the full incident response.",
+      "expected_behavior": "Routes away from secret-scan-triage's repository-scoped workflow for org-level incident response once the leak is confirmed outside repository scope, per the skill's Do not use this skill when list, while still noting the repo-side containment steps (rotate, remove) it can help with.",
+      "assertions": [
+        "Does not claim to own or execute org-level incident response",
+        "States that confirmed production leaks needing org-level handling route to the security incident owner / platform process",
+        "May still describe the repository-side containment (revoke/rotate, remove from code/history) as its own scoped contribution"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

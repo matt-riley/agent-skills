@@ -2,25 +2,64 @@
   "skill_name": "review-comment-resolution",
   "evals": [
     {
-      "id": "resolve-comments",
-      "prompt": "Resolve PR review comments, push the branch, and wait for checks.",
-      "expected_behavior": "Inventories comments, classifies each concern, fixes valid ones, validates, commits/pushes intended changes, and watches checks.",
+      "id": "classify-before-editing",
+      "prompt": "Go through the reviewer feedback on this branch, classify each thread before editing, and report which comments were intentionally not fixed because they were outdated or not actionable.",
+      "expected_behavior": "Fetches and inventories every in-scope review comment, classifies each one as valid, partially valid, not valid, superseded, or not actionable yet using the disposition guide, and inspects the actual code and nearby tests for each comment before accepting or rejecting it — before editing any file.",
       "assertions": [
-        "Classifies comments before editing",
-        "Does not assume every comment is correct",
-        "Waits for checks on the pushed head commit when access allows"
+        "Inventories and classifies every in-scope comment before making any code edit",
+        "Inspects the actual code and nearby tests for a comment before accepting or rejecting it",
+        "Does not assume a comment is correct without checking code context"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "summarize-only-boundary",
-      "prompt": "Summarize these PR review comments without making changes.",
-      "expected_behavior": "Does not enter the fix/push/check workflow for a summarize-only request.",
+      "id": "no-unrelated-cleanup-in-fix-batch",
+      "prompt": "While fixing this review comment about the missing null check, also clean up the unrelated formatting and rename a few variables in the same file since you're already in there.",
+      "expected_behavior": "Fixes only the concern raised in the review comment and keeps the commit scoped to that; does not mix unrelated formatting or rename cleanup into the review-comment fix batch, per the guardrail against mixing unrelated cleanup into the fix batch.",
       "assertions": [
-        "Keeps output review-only",
-        "Does not commit or push changes"
+        "Fixes only the null-check concern the comment raised",
+        "Does not stage or commit unrelated formatting or rename changes alongside the review-comment fix",
+        "If it mentions the unrelated cleanup at all, flags it as separate follow-up rather than including it in this batch"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "push-and-wait-for-checks",
+      "prompt": "Resolve the latest PR review comments on this branch and return the updated code plus the pushed commit SHA.",
+      "expected_behavior": "Fixes the accepted comments, runs the relevant validation commands, commits only the intended review-comment fixes, pushes the branch, and watches checks or workflows on the new head commit until they reach a terminal state, fixing any in-scope failure introduced by the change.",
+      "assertions": [
+        "Runs the repository's relevant validation commands before committing",
+        "Confirms the staged diff contains only the intended review-comment fixes",
+        "Pushes the branch and waits for checks on the new head commit to reach a terminal state",
+        "Reports the resulting commit SHA and check outcome"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-summarize-only",
+      "prompt": "Summarize these PR review comments without making changes.",
+      "expected_behavior": "Does not enter the fix/push/check workflow for a summarize-only request; routes toward a review-only deliverable such as implementation-review instead.",
+      "assertions": [
+        "Keeps output review-only and does not edit files",
+        "Does not commit or push changes",
+        "Does not classify comments as a precursor to editing when no editing was requested"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-apply-verbatim-without-assessment",
+      "prompt": "Apply every one of these review comments exactly as written — don't second-guess or classify them, just make the literal changes.",
+      "expected_behavior": "Recognizes this falls under the skill's own 'do not use when the user explicitly instructs applying every comment exactly as written without assessment' boundary, and either flags that skipping assessment forgoes the skill's evaluation step or applies the literal instruction while noting the assessment step was explicitly skipped rather than silently running the normal classify-then-fix workflow.",
+      "assertions": [
+        "Does not silently run the full classify/accept/reject workflow when the user explicitly waived assessment",
+        "States plainly that comments are being applied without independent validity assessment, per the user's explicit instruction"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

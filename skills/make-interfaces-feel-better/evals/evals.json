@@ -2,25 +2,65 @@
   "skill_name": "make-interfaces-feel-better",
   "evals": [
     {
-      "id": "ui-polish-existing",
-      "prompt": "Polish an existing card component that feels flat and misaligned.",
-      "expected_behavior": "Inspects existing styles, preserves the visual system, maps changes to concrete polish principles, and avoids new dependencies.",
+      "id": "ui-polish-inspect-first",
+      "prompt": "This settings card feels flat and slightly misaligned; polish it.",
+      "expected_behavior": "Inspects the current UI, styles, and shared design-system primitives/tokens before proposing any changes, separates structural issues from polish issues, then proposes concrete component-level diffs grouped by principle.",
       "assertions": [
-        "Separates detail polish from broad redesign",
-        "Uses existing tokens/utilities before adding patterns",
-        "Reports concrete before/after changes"
+        "Inspects existing component code/tokens before proposing changes, not before-the-fact guesses",
+        "Groups proposed changes by principle (typography, surfaces, motion, etc.) rather than a flat list",
+        "Uses existing design tokens/utilities rather than inventing new values"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "ui-polish-boundary",
+      "id": "ui-polish-no-new-motion-dep",
+      "prompt": "Add a smooth expand/collapse animation to this accordion item using whatever motion tooling is best.",
+      "expected_behavior": "Checks whether `motion`/`framer-motion` is already a dependency before reaching for it; if not present, uses CSS/native transitions instead of adding a new animation library just for this interaction, and avoids `transition: all`.",
+      "assertions": [
+        "Checks package.json for an existing motion library before recommending one",
+        "Does not add a new motion dependency purely for this transition when CSS transitions would do",
+        "Does not use `transition: all` or `will-change: all`"
+      ],
+      "files": [],
+      "category": "efficiency",
+      "deterministic_checks": [
+        "confirms whether `motion` or `framer-motion` is already a dependency before recommending motion-based patterns"
+      ]
+    },
+    {
+      "id": "ui-polish-review-output-shape",
+      "prompt": "Review this dashboard component for polish issues and give me a report, not code changes yet.",
+      "expected_behavior": "Produces a review grouped by principle using a markdown table with Before and After columns, cites the file/selector/component for each finding, and omits categories that were reviewed but needed no changes rather than padding the report.",
+      "assertions": [
+        "Groups findings by principle with a markdown table using Before and After columns",
+        "Cites the file, selector, or component for each finding",
+        "Omits reviewed categories that needed no changes rather than padding the report"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "ui-polish-boundary-accessibility",
       "prompt": "Make this modal screen-reader accessible and fix keyboard focus traps.",
-      "expected_behavior": "Does not treat accessibility compliance as visual feel polish.",
+      "expected_behavior": "Does not treat accessibility compliance as visual feel polish; handles it directly as an accessibility task or routes to a more appropriate specialist.",
       "assertions": [
         "Acknowledges accessibility is the primary task",
         "Does not focus on radius/shadows/motion as the main solution"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "ui-polish-boundary-no-context",
+      "prompt": "Design a brand-new settings page layout from scratch; nothing exists yet to react to.",
+      "expected_behavior": "Declines to apply polish-focused guidance since there is no existing UI to refine, and treats this as net-new product/IA design work, which is out of this skill's scope.",
+      "assertions": [
+        "Does not propose radius/shadow/motion polish changes with no existing UI to react to",
+        "States this is net-new design/IA work rather than interface-feel polish"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

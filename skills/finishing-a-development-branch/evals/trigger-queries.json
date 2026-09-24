@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "I'm done implementing the feature and all tests are green -- should I merge locally or open a PR?",
+    "should_trigger": true
+  },
+  {
+    "query": "Walk me through discarding this branch since the approach didn't pan out.",
+    "should_trigger": true
+  },
+  {
+    "query": "The worktree for issue-142 is done, tests pass -- tell me my options and execute the one I pick.",
+    "should_trigger": true
+  },
+  {
+    "query": "Feature is fully implemented and tests are consistently green; I need a clean decision point before handoff.",
+    "should_trigger": true
+  },
+  {
     "query": "Create a PR and watch checks for this ready branch.",
     "should_trigger": false
   },

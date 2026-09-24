@@ -1,0 +1,38 @@
+[
+  {
+    "query": "CI failed because gitleaks found two hits in our diff. Triage them and unblock the branch.",
+    "should_trigger": true
+  },
+  {
+    "query": "The pre-commit gitleaks hook flagged something in this test fixture file. Figure out if it's real.",
+    "should_trigger": true
+  },
+  {
+    "query": "We have a mix of real-looking API keys and synthetic tokens in gitleaks output; separate the false positives from actual exposure.",
+    "should_trigger": true
+  },
+  {
+    "query": "A manual gitleaks scan turned up findings in history. Walk through disposition and remediation for each.",
+    "should_trigger": true
+  },
+  {
+    "query": "This branch is blocked by a secret scan failure and we need evidence-based reasoning before adding any allowlist entries.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up gitleaks as our secret scanner for this repo from scratch, replacing truffleHog.",
+    "should_trigger": false
+  },
+  {
+    "query": "No scan findings right now, but can you do a general security hardening pass on our auth and secrets handling?",
+    "should_trigger": false
+  },
+  {
+    "query": "We think a production database credential was actually leaked publicly; coordinate the org-level incident response.",
+    "should_trigger": false
+  },
+  {
+    "query": "Design a policy engine for how our agents should handle secrets and credentials going forward.",
+    "should_trigger": false
+  }
+]

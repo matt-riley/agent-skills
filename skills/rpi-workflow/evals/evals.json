@@ -2,26 +2,63 @@
   "skill_name": "rpi-workflow",
   "evals": [
     {
-      "id": "non-trivial-change",
-      "prompt": "Use a research -> plan -> implement -> validate workflow for this non-trivial change and keep context disciplined.",
-      "expected_behavior": "The response sequences the work into phases, keeps research read-only, and requires validation before completion.",
+      "id": "research-plan-implement-validate-sequence",
+      "prompt": "This is a non-trivial refactor across the billing and notifications packages - use a research-plan-implement-validate workflow and don't skip steps.",
+      "expected_behavior": "Executes the phases in strict order: stays read-only during research, writes or updates plan.md before implementing, implements one phase at a time running planned checks, then validates against plan.md at the end.",
       "assertions": [
-        "Mentions the phased RPI-V flow explicitly.",
-        "Keeps research read-only before implementation.",
-        "Mentions validation before completion."
+        "Performs research read-only before any code changes",
+        "Creates or updates plan.md with phases and validation commands before implementation begins",
+        "Implements one meaningful phase at a time rather than all phases in a single pass",
+        "Runs validation and compares the result against plan.md after implementation"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "phase-boundaries",
+      "id": "phase-artifacts-and-checkpoints",
       "prompt": "I want to work one phase at a time and preserve artifacts between phases. What is the workflow?",
-      "expected_behavior": "The response explains artifact persistence, phase boundaries, and phase-specific verification instead of blurring the steps together.",
+      "expected_behavior": "Explains plan.md as the primary phase-tracking artifact and files/ for research notes, checkpoints, and handoffs, with verification scoped per phase rather than blurring the phases together.",
       "assertions": [
-        "Mentions artifact persistence or checkpoints.",
-        "Mentions one phase at a time.",
-        "Mentions verification per phase."
+        "Names plan.md as the primary phase-tracking artifact",
+        "Mentions files/ for research notes, checkpoints, or handoff notes",
+        "Describes verification scoped to each phase rather than only a single final check"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "minimal-research-scope",
+      "prompt": "Research this codebase before we plan the auth migration - but don't blow the context budget.",
+      "expected_behavior": "Stays read-only during research, prefers targeted searches and a small set of relevant files over loading broad context, and only writes research notes to files/ when they will help later phases or a handoff.",
+      "assertions": [
+        "Uses targeted searches and a small set of relevant files rather than loading broad or whole-repo context",
+        "Does not write to files/ speculatively when nothing needs to persist beyond the current turn",
+        "Stays read-only during the research phase"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-plan-only-request",
+      "prompt": "I just want a plan for the auth migration right now - don't implement or validate anything yet.",
+      "expected_behavior": "Routes to plan-review for the plan-only deliverable rather than running the full RPI-V cycle through implementation and validation.",
+      "assertions": [
+        "Does not proceed into implementation or validation phases when only a plan was requested",
+        "Routes toward plan-review for the plan-only deliverable instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-tiny-fix-skips-ceremony",
+      "prompt": "Just fix this one-line typo in the README right now.",
+      "expected_behavior": "Makes the direct one-line fix without invoking RPI-V phase ceremony, since the full workflow costs more than it saves for a tiny fix.",
+      "assertions": [
+        "Does not create or update plan.md for a one-line typo fix",
+        "Makes the fix directly rather than sequencing research/plan/implement/validate phases"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

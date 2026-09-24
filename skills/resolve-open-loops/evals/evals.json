@@ -1,0 +1,89 @@
+{
+  "skill_name": "resolve-open-loops",
+  "evals": [
+    {
+      "id": "parallel-retrieve-both-types-first",
+      "prompt": "The guard blocked me with 8 active items - use /resolve-open-loops to work through these.",
+      "expected_behavior": "Calls memory_search for both open_loop and assistant_goal types in parallel as the first move, before asking the user anything, then presents the combined list grouped by type.",
+      "assertions": [
+        "Calls memory_search with type=\"open_loop\" and type=\"assistant_goal\" (limit=50) in parallel as the first move",
+        "Presents the combined results as a numbered list grouped by type before asking the user anything",
+        "Each listed item shows id, a content summary, and scope (repo/global)"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "memory_search is called with type=\"open_loop\" and type=\"assistant_goal\""
+      ]
+    },
+    {
+      "id": "degraded-lore-surfaces-and-stops",
+      "prompt": "The guard blocked the session because of open loops, but I'm not sure Lore is even set up here - check and clear them.",
+      "expected_behavior": "Confirms Lore availability and, if memory_search reports Lore unavailable (extension not loaded, db locked), surfaces that error and stops rather than attempting direct database access or fabricating results.",
+      "assertions": [
+        "Checks Lore availability before or as part of the first memory_search call",
+        "If Lore is unavailable, surfaces the error and stops rather than attempting direct DB access",
+        "Does not fabricate open-loop content when the underlying tool is unavailable"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "one-at-a-time-triage-with-human-readable-resolution",
+      "prompt": "Walk me through the pending open_loop and assistant_goal memories for this repo so we can close them out.",
+      "expected_behavior": "Triages items one at a time or in small thematic groups, applies memory_forget with a human-readable supersededBy phrase for done/superseded/invalid items, leaves genuinely open items in place, and never bulk-forgets without confirmation.",
+      "assertions": [
+        "Never forgets all items in a single bulk call without the user reviewing the list first",
+        "Uses memory_forget with a human-readable supersededBy phrase (not a raw id) for resolved items",
+        "Leaves genuinely unfinished items in place rather than forgetting them",
+        "Re-runs memory_search after triage to confirm whether the guard will stand down"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "global-scope-requires-explicit-confirmation",
+      "prompt": "One of the open loops is scope=global about API key rotation policy - can you just clear it along with the repo-local ones?",
+      "expected_behavior": "Never forgets the global-scope item without an explicit separate confirmation from the user, even while clearing repo-scoped items in the same pass, and calls out the global item as different from the rest.",
+      "assertions": [
+        "Does not forget the global-scope item without an explicit separate confirmation from the user",
+        "Calls out the global-scope item as distinct from repo-scoped items before acting on it"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "scoped-retrieval-not-broad-history-search",
+      "prompt": "The guard fired with a handful of items - just show me what's open, don't dig through my whole memory history.",
+      "expected_behavior": "Retrieves only the active open_loop and assistant_goal items via the two scoped memory_search calls rather than searching broader memory history or unrelated memory types.",
+      "assertions": [
+        "Scopes retrieval to open_loop and assistant_goal types only, not a broad memory history search",
+        "Does not call memory_search for unrelated memory types or topics while resolving open loops"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-general-lore-search",
+      "prompt": "Search Lore for everything we know about the auth module.",
+      "expected_behavior": "Routes to a direct memory_search call for the topic instead of running the open-loop/assistant-goal triage workflow.",
+      "assertions": [
+        "Does not run the open_loop/assistant_goal triage workflow for a general knowledge search",
+        "Uses memory_search directly for the auth-module topic instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-repo-onboarding",
+      "prompt": "Onboard this new repo into Lore so it has history.",
+      "expected_behavior": "Routes to lore_onboard instead of the resolve-open-loops triage workflow, since onboarding a new repo's history is a different task.",
+      "assertions": [
+        "Does not run the open-loop/assistant-goal triage workflow for a repo-onboarding request",
+        "Routes toward lore_onboard instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

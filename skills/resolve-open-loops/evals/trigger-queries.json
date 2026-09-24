@@ -1,0 +1,42 @@
+[
+  {
+    "query": "The guard blocked me again - let's clear those open loops.",
+    "should_trigger": true
+  },
+  {
+    "query": "Before we start, let's do a quick Lore hygiene pass.",
+    "should_trigger": true
+  },
+  {
+    "query": "The stabilisation-guard fired with 12 active items - use /resolve-open-loops to work through these.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to do a pre-session sweep of my open goals before starting the refactor.",
+    "should_trigger": true
+  },
+  {
+    "query": "Half these open loops are stale - help me triage and mark the dead ones.",
+    "should_trigger": true
+  },
+  {
+    "query": "Walk me through the pending open_loop and assistant_goal memories for this repo so we can close them out.",
+    "should_trigger": true
+  },
+  {
+    "query": "Let's clear the Lore backlog before we start this new feature.",
+    "should_trigger": true
+  },
+  {
+    "query": "Search Lore for everything we know about the auth module.",
+    "should_trigger": false
+  },
+  {
+    "query": "Onboard this new repo into Lore so it has history.",
+    "should_trigger": false
+  },
+  {
+    "query": "Recall what we discussed about the database schema in our last session.",
+    "should_trigger": false
+  }
+]

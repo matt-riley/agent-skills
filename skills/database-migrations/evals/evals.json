@@ -2,26 +2,81 @@
   "skill_name": "database-migrations",
   "evals": [
     {
-      "id": "new-migration",
-      "prompt": "I need to add a new unique index and want the safe migration workflow.",
-      "expected_behavior": "The response identifies the migration tool, outlines create/apply/rollback steps, and calls out schema-change checklist items.",
+      "id": "reversible-migration-scaffold",
+      "prompt": "I need to add a new unique index. This repo uses goose with up/down migrations.",
+      "expected_behavior": "Identifies the migration tool and entrypoint before writing files, scaffolds the migration the repo's way, and implements both the up and down sections since the repo supports reversible migrations.",
       "assertions": [
-        "Mentions locating the repo migration tool.",
-        "Mentions create and rollback/apply steps.",
-        "Mentions invariants or checklist items for schema changes."
+        "Identifies the migration tool/entrypoint (goose or a repo wrapper) before creating files.",
+        "Implements both up and down sections since the repo is reversible.",
+        "Does not hand-write raw SQL files bypassing the tool's scaffolding when the tool already provides it."
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "migration-state-debug",
-      "prompt": "A migration is in a weird state in development. What should I inspect first?",
-      "expected_behavior": "The response focuses on migration state, tool-specific history/status, and safe recovery rather than ad hoc schema edits.",
+      "id": "codegen-downstream-outcome",
+      "prompt": "This repo's migrations feed sqlc code generation. I added a new column — make sure everything downstream is correct.",
+      "expected_behavior": "After the schema change, regenerates the downstream generated code (e.g. sqlc) and confirms migration status and relevant tests reflect the new column.",
       "assertions": [
-        "Mentions migration state/history.",
-        "Mentions safe recovery or rollback.",
-        "Does not recommend manual schema drift as the first fix."
+        "Regenerates downstream generated code (e.g. sqlc) after the schema change.",
+        "Confirms migration status/history shows the expected applied or pending state.",
+        "Runs the relevant tests/checks for the touched schema surface."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "the repo's generator (e.g. sqlc generate) is re-run after the migration"
+      ]
+    },
+    {
+      "id": "forward-only-stuck-recovery",
+      "prompt": "A migration is stuck halfway applied in a forward-only repo. What's the safe recovery?",
+      "expected_behavior": "Inspects migration status/history first, does not invent a down/rollback migration since the repo is forward-only, and proposes a new corrective forward migration as the recovery path.",
+      "assertions": [
+        "Inspects migration status/history before taking any recovery action.",
+        "Does not invent a down/rollback migration for a forward-only repo.",
+        "Proposes a new corrective forward migration as the recovery path, not a manual schema edit."
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "no down migration section is invented for a forward-only repo"
+      ]
+    },
+    {
+      "id": "status-only-efficiency",
+      "prompt": "I just need to check what's already applied before deciding anything — don't create a new migration yet.",
+      "expected_behavior": "Uses only the repo's status/history tooling to answer the question and does not scaffold a new migration file or make schema edits that weren't requested.",
+      "assertions": [
+        "Uses the repo's status/history tooling only to answer the question.",
+        "Does not create a new migration file or edit schema as part of this answer.",
+        "Stays scoped to the inspection request."
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "route-away-cloudflare-d1",
+      "prompt": "This repo uses Cloudflare D1 via Wrangler. I need to add and promote a migration safely across local, preview, and remote.",
+      "expected_behavior": "Recognizes Wrangler/D1 environment promotion is the sharper match and routes to cloudflare-d1-migrations instead of applying the generic migration workflow or inventing down migrations.",
+      "assertions": [
+        "Does not apply the generic database-migrations create/apply/rollback workflow as the primary path.",
+        "Names cloudflare-d1-migrations as the correct skill for Wrangler-based D1 local/preview/remote promotion.",
+        "Does not suggest down migrations, which D1 does not support."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "route-away-greenfield-schema",
+      "prompt": "Design a brand-new database schema from scratch for a service that has no migrations yet.",
+      "expected_behavior": "Recognizes this is out of scope per the skill's own 'Do not use this skill when' list (designing a brand new schema with no migration workflow yet) and says so rather than forcing migration create/apply tooling onto a greenfield design task.",
+      "assertions": [
+        "Does not force the migration create/apply/status workflow onto a greenfield schema design task.",
+        "States plainly that this is out of scope for database-migrations because there is no existing migration workflow yet."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

@@ -4,35 +4,62 @@
     {
       "id": "slow-query-no-schema",
       "prompt": "Tune a slow D1 query without changing schema or migration files.",
-      "expected_behavior": "The response treats the task as runtime D1 query tuning, inspects the exact D1 binding and environment first, and focuses on query or adapter rewrites instead of schema changes.",
+      "expected_behavior": "The response treats the task as runtime D1 query tuning, inspects the exact D1 binding and reproduces the slow path with EXPLAIN QUERY PLAN before rewriting, and focuses on query or adapter rewrites instead of schema changes.",
       "assertions": [
         "Mentions inspecting the exact D1 binding or Wrangler config before tuning.",
-        "Mentions reproducing the slow path or using EXPLAIN QUERY PLAN / wrangler d1 execute.",
+        "Reproduces the slow path and inspects EXPLAIN QUERY PLAN / wrangler d1 execute before proposing a rewrite.",
         "Avoids recommending schema, index, or migration changes as part of the tuning workflow."
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "environment-aware-repro",
+      "prompt": "This D1 query seems slow only in production; I've only reproduced it with `wrangler d1 execute --local` so far.",
+      "expected_behavior": "The response does not treat the local reproduction as proof of remote behavior and reproduces or measures in the environment where the slowness was reported before concluding the fix worked.",
+      "assertions": [
+        "States that local D1 timing is not proof that preview or remote has the same runtime characteristics.",
+        "Recommends reproducing or verifying the query path in the environment where the slowdown was actually observed.",
+        "Does not declare the tuning complete based on local-only results."
+      ],
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "n-plus-one-rewrite",
       "prompt": "This Worker does N+1 D1 lookups in a loop. I need a better query path without changing migrations.",
-      "expected_behavior": "The response identifies the access-pattern problem and recommends a set-based rewrite that stays within the no-schema constraint.",
+      "expected_behavior": "The response identifies the access-pattern problem and delivers a set-based rewrite that preserves the existing result contract while staying within the no-schema constraint.",
       "assertions": [
         "Mentions N+1 or repeated round trips as the performance issue.",
         "Suggests a set-based query, join, batch, or query consolidation rather than row-by-row follow-up lookups.",
-        "Keeps the focus on the D1 query or adapter layer."
+        "Confirms the rewrite preserves the original result shape/semantics and keeps the focus on the D1 query or adapter layer."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "scope-creep-efficiency",
+      "prompt": "While you're tuning this slow D1 query, also add response caching and restructure the whole repository layer.",
+      "expected_behavior": "The response stays scoped to the D1 query/adapter boundary tuning task and does not opportunistically add caching or restructure the repository layer beyond what the slow query requires, per the skill's guardrail to keep rewrites at the query/adapter boundary.",
+      "assertions": [
+        "Keeps the change scoped to the query/adapter path causing the slowdown.",
+        "Does not implement caching or a broader repository-layer restructuring as part of this tuning task.",
+        "Still validates the narrow fix with EXPLAIN QUERY PLAN or the repo's relevant tests."
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "schema-needed-redirect",
       "prompt": "This D1 query is slow and EXPLAIN QUERY PLAN still shows a wide scan. The only real fix looks like a new index, but I was asked not to change schema.",
-      "expected_behavior": "The response respects the no-schema constraint, says the real fix is out of scope, and redirects to the migration workflow instead of pretending a query-only change solved it.",
+      "expected_behavior": "The response respects the no-schema constraint, says the real fix is out of scope, and redirects to cloudflare-d1-migrations instead of pretending a query-only change solved it.",
       "assertions": [
         "States plainly that the no-schema constraint blocks the real fix.",
         "Redirects index or schema work to cloudflare-d1-migrations.",
         "Does not present a schema change as part of the current tuning workflow."
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }
