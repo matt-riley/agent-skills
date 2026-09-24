@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "Preview what Knip would remove before I apply any fixes to this package.",
+    "should_trigger": true
+  },
+  {
+    "query": "Why does Knip think this exported function is unused when I can see it being imported elsewhere?",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up a CI-friendly Knip check that fails the build when unused exports creep back in.",
+    "should_trigger": true
+  },
+  {
+    "query": "Trim unused npm dependencies from package.json using Knip's report.",
+    "should_trigger": true
+  },
+  {
     "query": "The test suite started failing after yesterday's merge and I need the root cause.",
     "should_trigger": false
   },
@@ -25,6 +41,10 @@
   },
   {
     "query": "Recover the dormant cleanup task from last week and continue from the prior plan.",
+    "should_trigger": false
+  },
+  {
+    "query": "Audit this repo for circular dependencies, duplication, and complexity hotspots.",
     "should_trigger": false
   }
 ]

@@ -1,0 +1,75 @@
+{
+  "skill_name": "graphify",
+  "evals": [
+    {
+      "id": "graphify-existing-graph-query-fast-path",
+      "prompt": "We already ran /graphify on this repo and graphify-out/graph.json exists. How does the AuthModule connect to the PaymentService?",
+      "expected_behavior": "Detects that graphify-out/graph.json already exists and the request is a natural-language question, so it skips the build steps entirely and runs `graphify query` (or the NetworkX fallback) immediately rather than rebuilding.",
+      "assertions": [
+        "Checks for graphify-out/graph.json before doing anything else",
+        "Does not rebuild or re-run corpus detection/extraction when the graph already exists and the request is a question",
+        "Runs `graphify query \"<question>\"` (or the NetworkX fallback) directly",
+        "Cites source_location when quoting a specific fact from the graph"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "checks for `graphify-out/graph.json` before rebuilding",
+        "runs `graphify query` instead of a fresh build when the graph already exists"
+      ]
+    },
+    {
+      "id": "graphify-update-not-full-rebuild",
+      "prompt": "I only changed a handful of files since the last graphify build. Update the graph without redoing the whole thing.",
+      "expected_behavior": "Uses the incremental `--update` flow to re-extract only new or changed files instead of running a full rebuild of the entire corpus.",
+      "assertions": [
+        "Uses `--update` (incremental re-extraction) rather than a full rebuild",
+        "Does not re-extract or re-process files that haven't changed"
+      ],
+      "files": [],
+      "category": "efficiency",
+      "deterministic_checks": [
+        "uses `/graphify <path> --update` rather than a full non-incremental rebuild"
+      ]
+    },
+    {
+      "id": "graphify-corpus-size-warning",
+      "prompt": "Build a Graphify knowledge graph for our entire monorepo, including a full HTML visualization.",
+      "expected_behavior": "Builds the graph following the documented workflow, warns before running heavy HTML visualization on a large graph, never invents an edge (uses AMBIGUOUS when unsure), and reports token cost and raw cohesion scores in the output.",
+      "assertions": [
+        "Warns about corpus size and/or heavy visualization before running HTML viz on a large graph",
+        "Does not invent edges; uses AMBIGUOUS when extraction is unsure",
+        "Shows token cost in the report",
+        "Shows raw cohesion scores rather than hiding them behind symbols"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "warns before running HTML viz on a graph with more than 5,000 nodes",
+        "report includes a token-cost figure and raw cohesion-score numbers"
+      ]
+    },
+    {
+      "id": "graphify-boundary-no-artifact-needed",
+      "prompt": "Can you explain how the authentication flow works in this codebase? We don't have any graph output and I don't need one.",
+      "expected_behavior": "Answers with ordinary direct codebase analysis (reading files, tracing calls) instead of building or invoking a Graphify graph, since no graph artifact is requested or already present.",
+      "assertions": [
+        "Does not run graphify detect/build/query commands for this request",
+        "Answers via direct codebase reading instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "graphify-boundary-code-intelligence",
+      "prompt": "Find every reference to this function using LSP so I can see what calls it.",
+      "expected_behavior": "Routes to code-intelligence for LSP-based symbol lookup rather than building or querying a Graphify graph.",
+      "assertions": [
+        "Does not propose graphify build/query for a routine LSP reference lookup",
+        "Routes to code-intelligence (LSP-based) instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

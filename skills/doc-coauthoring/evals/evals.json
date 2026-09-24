@@ -1,0 +1,78 @@
+{
+  "skill_name": "doc-coauthoring",
+  "evals": [
+    {
+      "id": "context-gathering-before-drafting",
+      "prompt": "Write a README for my new CLI tool aimed at first-time users.",
+      "expected_behavior": "Does not start drafting content immediately; first asks clarifying questions about audience, purpose, scope, and constraints, and confirms whether this is a new document or a revision before moving into Stage 2 structuring.",
+      "assertions": [
+        "Does not produce README body content before gathering audience, purpose, and scope",
+        "Confirms whether this is a new document or a revision of existing work",
+        "Sequences the response as context gathering (Stage 1) before structure or drafting (Stage 2)"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "skip-redundant-questions-already-answered",
+      "prompt": "Write a README for internal-tool-x aimed at platform engineers who need to get it running locally within 10 minutes. Keep it under 400 words and match the style of our other tool READMEs in docs/tools/. Here are my rough notes: [notes attached].",
+      "expected_behavior": "Recognizes that audience, purpose, length, and style constraints were already supplied and does not re-ask for them; only asks about genuinely missing inputs such as who can provide reader validation, then moves toward Stage 2 structuring.",
+      "assertions": [
+        "Does not re-ask for audience, purpose, or length constraints already stated in the prompt",
+        "Only requests genuinely missing information, such as a reader for validation",
+        "Moves toward drafting structure without restating information the user already gave"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "runbook-task-reorg-with-reader-validation",
+      "prompt": "Refactor our on-call runbook so it's organized by task instead of by system, and get an on-call engineer to test it before we call it done.",
+      "expected_behavior": "Produces a runbook reorganized around operator tasks, incorporates feedback from a real reader outside the original authoring team, and delivers a finalized document plus a summary of what changed based on that feedback.",
+      "assertions": [
+        "Final document is organized by task rather than by system, matching the stated goal",
+        "Incorporates feedback from at least one reader outside the original authoring team, such as an on-call engineer",
+        "Delivers a finalized document plus a summary of what changed based on reader feedback",
+        "Does not treat copyediting or polish as complete before structure and reader validation are settled"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "split-multi-audience-doc",
+      "prompt": "Our integration guide needs to serve both external customers and our internal support team at once — write it up.",
+      "expected_behavior": "Flags during context gathering that serving both audiences in one document risks being unfocused, and recommends either splitting into audience-specific documents or clearly scoping which audience the document primarily serves, per the skill's guardrail.",
+      "assertions": [
+        "Identifies that covering both external customers and internal support in one document risks satisfying neither",
+        "Recommends splitting into separate audience-scoped documents or explicitly narrowing scope to one primary audience",
+        "Raises this tension during context gathering rather than after a full draft already exists"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-one-off-typo-fix",
+      "prompt": "Can you fix this typo in the README where it says 'recieve' instead of 'receive'?",
+      "expected_behavior": "Makes the direct one-off fix without invoking the three-stage co-authoring workflow, per the skill's own 'Do not use this skill when' guidance for minor style or typo fixes.",
+      "assertions": [
+        "Makes the fix directly without asking about audience, purpose, or scope",
+        "Does not invoke Stage 1 context gathering for a single typo fix",
+        "Does not propose a reader-feedback or validation plan for a trivial correction"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-readability-audit-routes-to-writing-and-editing",
+      "prompt": "Run a readability audit on this doc and give me a Flesch Reading Ease score.",
+      "expected_behavior": "Recognizes this is a solo prose-quality audit rather than structured co-authoring, and routes to writing-and-editing's readability-audit mode instead of running the three-stage workflow.",
+      "assertions": [
+        "Does not initiate Stage 1 context gathering or a reader-testing workflow for an audit-only request",
+        "Identifies writing-and-editing (readability-audit mode) as the appropriate skill for this request",
+        "Does not draft new document content in response to an audit request"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

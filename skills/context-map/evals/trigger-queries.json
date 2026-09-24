@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Before you touch anything, map the files, tests, and reference patterns involved in adding a new Lore memory tool.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a context map for this refactor before we plan it: split the shared validation helper across skills/ and extensions/.",
+    "should_trigger": true
+  },
+  {
+    "query": "What files are likely involved in this multi-package TypeScript error, and which tests should I read first?",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm about to start a fix in the billing module but I don't know the blast radius yet - map it first.",
+    "should_trigger": true
+  },
+  {
+    "query": "Give me a pre-edit scoping pass over this feature before I start implementing.",
+    "should_trigger": true
+  },
+  {
+    "query": "What files do I need to see before touching the auth middleware?",
+    "should_trigger": true
+  },
+  {
+    "query": "Scope this bugfix across the layers it might touch before I start editing.",
+    "should_trigger": true
+  },
+  {
+    "query": "Just fix the typo in src/utils/format.ts line 42 - I already know exactly what to change.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write me a full phased implementation plan with rollout notes and validation commands for this feature.",
+    "should_trigger": false
+  },
+  {
+    "query": "I want to change 'the thing with the tokens' - what files would you need to look at?",
+    "should_trigger": false
+  }
+]

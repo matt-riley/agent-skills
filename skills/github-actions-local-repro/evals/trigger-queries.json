@@ -16,19 +16,35 @@
     "should_trigger": true
   },
   {
+    "query": "Lint this workflow with action-validator, then run it locally with act before I push another commit.",
+    "should_trigger": true
+  },
+  {
+    "query": "Reproduce this pull_request failure for job lint-and-test with act and patch only what breaks in that job.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to confirm this fix works before pushing again -- run the build job locally with act and compare it to the hosted failure.",
+    "should_trigger": true
+  },
+  {
+    "query": "act -l shows the jobs for this workflow; run just the failing one before I push a fix.",
+    "should_trigger": true
+  },
+  {
     "query": "Read the workflow logs and find the root cause first without a local repro loop.",
     "should_trigger": false
   },
   {
-    "query": "This failure depends on org-managed runner labels and protected environment secrets.",
-    "should_trigger": false
-  },
-  {
-    "query": "Create a PR from this branch and watch the required checks.",
+    "query": "This failure only happens on org-managed runner labels behind protected environment secrets.",
     "should_trigger": false
   },
   {
     "query": "Plan a CircleCI to GitHub Actions migration for the monorepo.",
+    "should_trigger": false
+  },
+  {
+    "query": "I already have the exact failing log line and root cause -- just apply the direct fix, no need to reproduce it again.",
     "should_trigger": false
   }
 ]

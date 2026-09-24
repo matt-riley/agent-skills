@@ -16,19 +16,27 @@
     "should_trigger": true
   },
   {
+    "query": "Write a failing test for the new discount calculation before you implement it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add this feature one test at a time — write the test, watch it fail, then make it pass.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a benchmark test first, then optimize this hot path, and keep every test green while you do it.",
+    "should_trigger": true
+  },
+  {
     "query": "Rerun the parser tests before claiming the bug is fixed.",
     "should_trigger": false
   },
   {
-    "query": "The test suite started failing after yesterday's merge and I need the root cause.",
+    "query": "The test suite started failing after yesterday's merge and I need the root cause before touching anything.",
     "should_trigger": false
   },
   {
-    "query": "Update the README and environment variable docs only — no executable logic.",
-    "should_trigger": false
-  },
-  {
-    "query": "Add coverage for this module using the repo's existing testing conventions without a TDD cycle.",
+    "query": "Update the README and environment variable docs only — no executable logic involved.",
     "should_trigger": false
   }
 ]

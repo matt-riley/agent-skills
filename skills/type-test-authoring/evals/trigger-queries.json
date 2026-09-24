@@ -12,6 +12,26 @@
     "should_trigger": true
   },
   {
+    "query": "This generic utility type's inference silently changed; lock it down with a compile-time test.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add @ts-expect-error fixtures to guard against invalid calls to this public API.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up the repo's first small type-test pattern for a widely used helper type.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a negative type test asserting the overload rejects an incompatible argument shape.",
+    "should_trigger": true
+  },
+  {
+    "query": "Protect this exported utility type's assignability rules before we ship a breaking change.",
+    "should_trigger": true
+  },
+  {
     "query": "Write runtime unit tests for this function.",
     "should_trigger": false
   },
@@ -21,6 +41,10 @@
   },
   {
     "query": "Add runtime validation for a webhook payload.",
+    "should_trigger": false
+  },
+  {
+    "query": "This repo has no type-test tooling and the bug only reproduces at runtime — just add a normal test for it.",
     "should_trigger": false
   }
 ]

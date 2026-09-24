@@ -16,11 +16,19 @@
     "should_trigger": true
   },
   {
-    "query": "Run Knip on this TypeScript monorepo and tell me which exports, files, or dependencies look unused.",
-    "should_trigger": false
+    "query": "Check whether this PR introduces new dead code in changed files using Fallow.",
+    "should_trigger": true
   },
   {
-    "query": "Find unused exports in this TS repo.",
+    "query": "Run `fallow health` on this repo before we cut a release, and wire it up as a CI gate.",
+    "should_trigger": true
+  },
+  {
+    "query": "Preview Fallow's auto-fix for the unused exports in packages/api, then apply only what's safe.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run Knip on this TypeScript monorepo and tell me which exports, files, or dependencies look unused.",
     "should_trigger": false
   },
   {
@@ -29,10 +37,6 @@
   },
   {
     "query": "tsc now reports 80 errors after enabling a stricter flag; help me triage them.",
-    "should_trigger": false
-  },
-  {
-    "query": "Map the files, tests, and patterns involved before we touch this feature.",
     "should_trigger": false
   }
 ]

@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "The repo uses goose for Postgres migrations; scaffold a new migration with an up and down section for adding a new table.",
+    "should_trigger": true
+  },
+  {
+    "query": "Check the migration status/history to see what's applied, pending, or failed before I touch anything.",
+    "should_trigger": true
+  },
+  {
+    "query": "This schema change feeds sqlc code generation; regenerate the generated code after the migration is applied.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our migration tool reports a partially applied migration in staging; help me figure out safe recovery.",
+    "should_trigger": true
+  },
+  {
     "query": "Design a brand new database schema from scratch.",
     "should_trigger": false
   },
@@ -21,6 +37,10 @@
   },
   {
     "query": "Tune a slow SQL query without changing schema.",
+    "should_trigger": false
+  },
+  {
+    "query": "This repo uses Cloudflare D1 via Wrangler; I need to add and promote a migration across local, preview, and remote.",
     "should_trigger": false
   }
 ]

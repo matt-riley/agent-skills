@@ -12,6 +12,26 @@
     "should_trigger": true
   },
   {
+    "query": "This dropdown's enter/exit animation feels abrupt; make it interruptible and smoother using our existing motion library.",
+    "should_trigger": true
+  },
+  {
+    "query": "The card's border radius and shadow look inconsistent with the rest of the design system; fix the visual polish.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our icon buttons have tiny hit areas and no hover or press feedback; tighten them up.",
+    "should_trigger": true
+  },
+  {
+    "query": "This modal doesn't feel intentional — the optical alignment is off and the divider looks like a drop shadow. Fix it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this screenshot of our settings panel and tell me what's making it feel unpolished, then fix it.",
+    "should_trigger": true
+  },
+  {
     "query": "Design a new onboarding flow from scratch.",
     "should_trigger": false
   },

@@ -4,36 +4,78 @@
     {
       "id": "create-worktree",
       "prompt": "Set up an isolated worktree for issue 42 from origin/main.",
-      "expected_behavior": "Inspects current worktrees and branch state, chooses safe names, creates a dedicated branch/worktree, and validates location.",
+      "expected_behavior": "Checks whether Worktrunk is installed (`wt --version`), inspects current worktrees and branch state, chooses names using repository conventions or the defaults, creates a dedicated branch/worktree, and confirms status inside it before task edits.",
       "assertions": [
-        "Starts with git worktree list and branch/base-ref checks",
-        "Uses repository naming conventions or default examples",
-        "Confirms git status inside the new worktree before task edits"
+        "Checks `wt --version` first to decide whether to prefer `wt` commands or fall back to raw git",
+        "Starts with `git worktree list` (or `wt list`) and `git branch --all` before creating anything",
+        "Fetches and verifies the intended base ref (e.g. origin/main) before branching from it",
+        "Confirms `git status` reflects the intended branch and checkout inside the new worktree before task edits begin"
       ],
-      "files": []
-    },
-    {
-      "id": "cleanup-worktree",
-      "prompt": "Clean up the stale worktree for an old PR without losing work.",
-      "expected_behavior": "Checks for uncommitted changes before removal and uses recovery cleanup guidance.",
-      "assertions": [
-        "Does not remove before checking status",
-        "Uses recovery-and-cleanup guidance",
-        "Prunes stale metadata only after preserving or confirming no local changes"
-      ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "configure-worktrunk",
       "prompt": "Configure wt for this repo so worktrees land in .worktrees/, a post-start hook runs npm ci, and commits get LLM-generated messages.",
-      "expected_behavior": "Confirms wt is installed, inspects existing config before writing, then sets worktree-path, project hooks, and commit generation using the Worktrunk references.",
+      "expected_behavior": "Confirms wt is installed, inspects existing config with `wt config show` before writing, then sets worktree-path, authors the post-start hook in .config/wt.toml, and adds a [commit.generation] block, verifying the round trip afterward.",
       "assertions": [
-        "Runs wt --version and wt config show before changing config",
-        "Sets worktree-path and authors hooks in the project .config/wt.toml",
-        "Adds a [commit.generation] block before relying on wt step commit",
-        "Verifies with wt config show and a throwaway wt switch --create / wt remove round trip"
+        "Runs `wt --version` and `wt config show` before changing any config",
+        "Sets `worktree-path` and authors the `post-start` hook in the project `.config/wt.toml`",
+        "Adds a `[commit.generation]` block before relying on `wt step commit` for LLM messages",
+        "Verifies with `wt config show` and a throwaway `wt switch --create` / `wt remove` round trip"
       ],
-      "files": []
+      "files": [],
+      "deterministic_checks": [
+        "runs `wt config show` before and after the config change",
+        "verifies with a throwaway `wt switch --create` followed by `wt remove`"
+      ],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "minimal-isolation-no-scope-creep",
+      "prompt": "Create a worktree for a small bugfix; don't set up hooks or LLM commits, I just need isolation.",
+      "expected_behavior": "Creates the isolated worktree/branch using the minimal necessary commands (wt switch --create or raw git worktree add) without configuring hooks, LLM commit generation, or other Worktrunk surfaces the user did not ask for.",
+      "assertions": [
+        "Does not configure `[commit.generation]`, project hooks, or other wt surfaces that were not requested",
+        "Limits the action to creating the branch and worktree the task needs",
+        "Does not re-scan or reconfigure the entire repository's worktree setup for a single small task"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "cleanup-worktree",
+      "prompt": "Clean up the stale worktree for an old PR without losing work.",
+      "expected_behavior": "Checks for uncommitted changes before removal, follows recovery-and-cleanup guidance, and only prunes stale metadata after confirming no local changes would be lost.",
+      "assertions": [
+        "Checks for uncommitted changes before removing the worktree",
+        "Uses the recovery-and-cleanup guidance rather than an ad hoc removal",
+        "Prunes stale metadata only after preserving or confirming there are no local changes to lose"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-single-quick-edit",
+      "prompt": "I just need to make one quick edit on my current branch, no isolation needed.",
+      "expected_behavior": "Recognizes a single quick edit on the current branch does not need worktree isolation and makes the edit directly on the current checkout instead of creating a worktree.",
+      "assertions": [
+        "Does not create a new worktree or branch for a single quick edit on the current branch",
+        "Performs the edit directly in the existing checkout"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-finished-implementation",
+      "prompt": "Tests pass and implementation is done in this worktree; what's the next step to integrate it?",
+      "expected_behavior": "Recognizes that once implementation is complete and tests are green, the integration decision (merge, PR, keep, discard) belongs to finishing-a-development-branch, and routes there instead of re-running worktree setup steps.",
+      "assertions": [
+        "Does not treat this as a new worktree-creation or configuration task",
+        "Routes the merge/PR/keep/discard decision to finishing-a-development-branch"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

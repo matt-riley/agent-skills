@@ -2,26 +2,84 @@
   "skill_name": "testing-workflows",
   "evals": [
     {
-      "id": "debug-test-failure",
-      "prompt": "My Go tests are failing after a generated-code change. What is the right debugging sequence?",
-      "expected_behavior": "The response starts with generation freshness, then isolates the failing test path, then checks integration/database concerns as needed.",
+      "id": "compile-error-then-isolate",
+      "prompt": "My Go tests fail with compile errors referencing a generated package. What's the right debug sequence and which commands do I run?",
+      "expected_behavior": "Follows the documented debugging sequence: fix the generated-package compile error before anything else, then isolate the specific failing test rather than re-running the whole suite.",
       "assertions": [
-        "Mentions generation before deeper debugging when relevant.",
-        "Mentions isolating a specific test or package.",
-        "Mentions DB or integration setup for integration failures."
+        "Runs `make generate` before retrying the test, since the failure is a compile error in a generated package",
+        "After generation is fixed, isolates with `go test -v -run TestName ./path/to/pkg` rather than jumping straight to the full suite",
+        "Presents the steps in the documented order (generate first, then isolate)"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "`make generate` runs before the test is retried",
+        "uses `go test -v -run TestName ./pkg/...` to isolate the failing test"
+      ]
     },
     {
-      "id": "new-feature-test-expectations",
-      "prompt": "I added a new feature in domain, repository, and HTTP layers. What test coverage should I expect?",
-      "expected_behavior": "The response maps expectations across domain/service, repository, and HTTP layers with order-independent test discipline.",
+      "id": "narrow-before-broad",
+      "prompt": "One test in the repository package is failing. Diagnose it.",
+      "expected_behavior": "Isolates and fixes the single failing test first with a narrow, verbose run, and only broadens to the full test target once that fix is confirmed.",
       "assertions": [
-        "Mentions multiple test layers.",
-        "Mentions order-independent or isolated tests.",
-        "Mentions new features require tests before merge."
+        "Runs the narrow failing test with `go test -v -run TestName ./path/to/pkg` before touching anything else",
+        "Does not immediately run `make test` (the full suite) before the isolated fix is confirmed",
+        "Re-runs the narrow test after the fix, then broadens to the repository's test target only afterward"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency",
+      "deterministic_checks": [
+        "runs `go test -v -run TestName` scoped to the failing package before any full-suite command"
+      ]
+    },
+    {
+      "id": "new-feature-coverage-readiness",
+      "prompt": "I added a new repository method for the orders feature. Make sure my test coverage is appropriate before I open a PR.",
+      "expected_behavior": "Confirms persistence-behavior coverage against a real or in-memory DB, keeps optional-DB tests skipping (not failing) when unavailable, and re-runs the broader test target before declaring the change ready.",
+      "assertions": [
+        "Confirms repository-layer tests exercise persistence behavior against at least one real or in-memory DB",
+        "States that tests for an optional/unavailable DB should skip rather than fail",
+        "Confirms the broader test target (e.g. `make test`) is run before claiming the change is ready",
+        "States new features require tests before merge"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "db-integration-failure",
+      "prompt": "An integration test is failing with a database connection error. What should I check?",
+      "expected_behavior": "Follows the documented DB-related failure step: verifies DATABASE_URL is set and migrations are applied before assuming a code defect.",
+      "assertions": [
+        "Checks whether DATABASE_URL is set",
+        "Checks whether migrations have been applied",
+        "Does not propose a code fix before ruling out DB setup issues"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "boundary-toolchain-build-failure",
+      "prompt": "The Go build fails with a toolchain version mismatch error, not a test failure — help me fix it.",
+      "expected_behavior": "Recognizes this is a build/toolchain problem rather than a test-debugging task and routes to go-build-and-test instead of applying the testing-workflows debugging sequence.",
+      "assertions": [
+        "Does not apply the test-failure debugging sequence (generate/isolate/DB checks) to a toolchain mismatch",
+        "States this belongs to go-build-and-test rather than testing-workflows",
+        "Does not fabricate a test command to run for a build-only failure"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-finished-diff-review",
+      "prompt": "All the domain and repository tests pass now. Review the overall diff and tell me if it's ready to merge.",
+      "expected_behavior": "Recognizes the testing work is done and the remaining ask is a merge-readiness review, routing to implementation-review rather than continuing the test-debugging workflow.",
+      "assertions": [
+        "Does not re-run the debugging sequence when tests already pass and the ask is about merge readiness",
+        "States this is a job for implementation-review, not testing-workflows",
+        "Does not fabricate a review verdict itself in place of the review skill"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

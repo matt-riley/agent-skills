@@ -16,6 +16,18 @@
     "should_trigger": true
   },
   {
+    "query": "Our LangChain agent can call any tool with no restrictions. Lock it down with a governance policy before we ship it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up an append-only audit trail so we can see every allowed, denied, and error event for our OpenAI Agents SDK tool calls.",
+    "should_trigger": true
+  },
+  {
+    "query": "Wire up most-restrictive-wins policy composition across org, team, and agent-level governance layers.",
+    "should_trigger": true
+  },
+  {
     "query": "Generate a SHA-256 integrity manifest for this plugin bundle and verify it in CI.",
     "should_trigger": false
   },
@@ -25,10 +37,6 @@
   },
   {
     "query": "I changed cookies, CORS, and auth. Please look for privacy and security footguns in the request path.",
-    "should_trigger": false
-  },
-  {
-    "query": "Do a static security review of this agent source tree without adding runtime policy controls.",
     "should_trigger": false
   }
 ]

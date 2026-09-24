@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "Run the local generate, format, vet, and test steps in CI order before I push this Go change.",
+    "should_trigger": true
+  },
+  {
+    "query": "We're about to publish a release image — confirm the tagging convention (vX.Y.Z, X.Y, X, latest) is correct.",
+    "should_trigger": true
+  },
+  {
+    "query": "CI is rejecting my PR even though everything passed locally — help me find what's different before I push again.",
+    "should_trigger": true
+  },
+  {
+    "query": "Confirm generated code is committed and the working tree is clean before I trigger the image publish workflow.",
+    "should_trigger": true
+  },
+  {
     "query": "Write me a Dockerfile for a Go app.",
     "should_trigger": false
   },

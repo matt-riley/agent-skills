@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Create an onboarding tour for new engineers joining this repo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Generate a PR review tour for branch feature/auth-refactor that highlights the changed files.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write an architecture tour for the tech lead persona covering module boundaries and data flow.",
+    "should_trigger": true
+  },
+  {
+    "query": "Build an RCA tour walking through how the null pointer bug happened and was fixed.",
+    "should_trigger": true
+  },
+  {
+    "query": "Walk me through this codebase in a way I can share with the whole team afterward.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a security-reviewer tour of the auth and payments modules.",
+    "should_trigger": true
+  },
+  {
+    "query": "Make a vibecoder-style quick tour of this repo, just the gist.",
+    "should_trigger": true
+  },
+  {
+    "query": "Explain how auth works in this codebase.",
+    "should_trigger": false
+  },
+  {
+    "query": "Map the files I need to read before refactoring the auth module.",
+    "should_trigger": false
+  },
+  {
+    "query": "Document the architecture and create ARCHITECTURE.md for this repo.",
+    "should_trigger": false
+  }
+]

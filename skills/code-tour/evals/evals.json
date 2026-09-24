@@ -1,0 +1,66 @@
+{
+  "skill_name": "code-tour",
+  "evals": [
+    {
+      "id": "discover-then-verify-then-validate",
+      "prompt": "Create an onboarding tour for new engineers joining this repo.",
+      "expected_behavior": "Reads the README and top-level directory structure before writing any step, verifies every referenced file and line number by reading it, writes the tour, then runs the validator script and fixes errors until it passes.",
+      "assertions": [
+        "Reads the README and explores top-level directory structure before writing any step",
+        "Reads every file it references to verify line numbers rather than guessing them",
+        "Runs `python skills/code-tour/scripts/validate_tour.py .tours/<name>.tour --repo-root .` after writing the tour and fixes errors until it passes"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "`python skills/code-tour/scripts/validate_tour.py .tours/<name>.tour --repo-root .` is run after writing the tour"
+      ]
+    },
+    {
+      "id": "valid-tour-artifact-shape",
+      "prompt": "Generate a PR review tour for the auth-refactor branch, highlighting the changed files.",
+      "expected_behavior": "Produces a .tours/<persona>-<focus>.tour file saved under .tours/ with a file/directory-anchored first step, repo-root-relative paths, and SMIG-structured step descriptions.",
+      "assertions": [
+        "Saves the output to .tours/<persona>-<focus>.tour as valid CodeTour JSON",
+        "The first step has a file or directory anchor, not a content-only step",
+        "Every file/directory path is repo-root-relative with no leading / or ./",
+        "Step descriptions follow Situation/Mechanism/Implication/Gotcha rather than only naming the file"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "focus-relevant-modules-in-large-repo",
+      "prompt": "Create a tour of this 100k-file monorepo for a new joiner.",
+      "expected_behavior": "For a repo with 100+ files, identifies the 2-3 modules most relevant to the new-joiner persona and reads those deeply instead of skimming the entire tree.",
+      "assertions": [
+        "Identifies the 2-3 modules most relevant to the new-joiner persona instead of skimming the whole 100+ file repo",
+        "Does not attempt to include every file or module in the tour"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-plain-chat-explanation",
+      "prompt": "Explain how the authentication flow works in this codebase.",
+      "expected_behavior": "Answers as a normal chat explanation; does not write a .tour file or invoke the code-tour workflow since no persisted walkthrough artifact was requested.",
+      "assertions": [
+        "Does not create a .tour file for a plain chat explanation",
+        "Answers directly in the response rather than triggering the code-tour workflow"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-architecture-doc-not-tour",
+      "prompt": "Document the architecture of this repo and create ARCHITECTURE.md.",
+      "expected_behavior": "Routes to acquire-codebase-knowledge since the deliverable is a Markdown architecture document, not a .tour file.",
+      "assertions": [
+        "Does not produce a .tour JSON file for this request",
+        "Routes to acquire-codebase-knowledge for ARCHITECTURE.md instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

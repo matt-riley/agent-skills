@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "Our lint rule flags several any usages in utility functions — narrow them without breaking behavior.",
+    "should_trigger": true
+  },
+  {
+    "query": "This function parameter is typed any but always receives a User object — give it the real type.",
+    "should_trigger": true
+  },
+  {
+    "query": "Tighten the any-typed return value of this helper using a discriminated union.",
+    "should_trigger": true
+  },
+  {
+    "query": "Replace the any in this generic keyed-access helper with a properly constrained generic.",
+    "should_trigger": true
+  },
+  {
     "query": "Add runtime validation for this untrusted JSON webhook input and derive the TypeScript type from the schema.",
     "should_trigger": false
   },

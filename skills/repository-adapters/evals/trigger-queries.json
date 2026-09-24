@@ -12,6 +12,26 @@
     "should_trigger": true
   },
   {
+    "query": "We're adding Postgres support to this repository interface that currently only has a SQLite adapter.",
+    "should_trigger": true
+  },
+  {
+    "query": "I changed a sqlc query and need the adapter regenerated and wired up correctly.",
+    "should_trigger": true
+  },
+  {
+    "query": "Map this unique-constraint violation from the DB into our domain ErrDuplicate type at the adapter boundary.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a FindByEmail method to the user repository and update every DB dialect adapter to implement it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Regenerate sqlc output after changing the query source, then update the adapter to call it.",
+    "should_trigger": true
+  },
+  {
     "query": "Design a new database schema migration.",
     "should_trigger": false
   },
@@ -21,6 +41,10 @@
   },
   {
     "query": "Explain repository patterns in abstract terms only.",
+    "should_trigger": false
+  },
+  {
+    "query": "This Cloudflare D1-backed repository query is slow in production. Speed it up without touching the schema.",
     "should_trigger": false
   }
 ]

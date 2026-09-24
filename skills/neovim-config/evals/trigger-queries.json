@@ -1,0 +1,38 @@
+[
+  {
+    "query": "Fix this Neovim worktree so vim.pack loads blink.cmp v1 and Copilot completions work again.",
+    "should_trigger": true
+  },
+  {
+    "query": "Validate why this Neovim checkout still opens the live config instead of the worktree when I launch nvim.",
+    "should_trigger": true
+  },
+  {
+    "query": "Update my statusline Lua so vim.ui.progress_status() renders correctly and the extmark highlight range stops clipping the brackets.",
+    "should_trigger": true
+  },
+  {
+    "query": "Migrate this plugin spec from lazy.nvim to vim.pack, pin the right upstream ref, and prove the config callback actually runs.",
+    "should_trigger": true
+  },
+  {
+    "query": "My LSP keymaps stopped working after I edited init.lua — help me figure out the wiring.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a new keymap and a treesitter textobject config to my Neovim setup.",
+    "should_trigger": true
+  },
+  {
+    "query": "Find the root cause of this failing Lua service test.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write onboarding documentation explaining how my Neovim config is laid out.",
+    "should_trigger": false
+  },
+  {
+    "query": "Scaffold a new Neovim plugin called glimpse.nvim with a :Glimpse command and plenary tests.",
+    "should_trigger": false
+  }
+]

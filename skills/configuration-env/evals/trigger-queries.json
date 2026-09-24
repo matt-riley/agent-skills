@@ -16,6 +16,18 @@
     "should_trigger": true
   },
   {
+    "query": "Our staging deploy keeps failing at boot with 'missing required env var DATABASE_URL'. Diagnose it.",
+    "should_trigger": true
+  },
+  {
+    "query": "I added a new required config value; make sure the service fails fast instead of starting with it unset.",
+    "should_trigger": true
+  },
+  {
+    "query": "Compare our .env against .env.example and tell me what's out of sync before I deploy.",
+    "should_trigger": true
+  },
+  {
     "query": "Set up Docker Compose for local Postgres.",
     "should_trigger": false
   },
@@ -24,7 +36,7 @@
     "should_trigger": false
   },
   {
-    "query": "Explain the theory behind environment variables.",
+    "query": "We're logging the Authorization header in plaintext, is that a problem?",
     "should_trigger": false
   }
 ]

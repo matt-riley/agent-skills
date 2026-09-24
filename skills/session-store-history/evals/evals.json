@@ -10,29 +10,68 @@
         "Mentions recent sessions or turns ordered by timestamp.",
         "Promises evidence-backed findings instead of answering from memory."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
-      "id": "conceptual-history-recall",
+      "id": "broad-to-narrow-query-sequence",
       "prompt": "Have I solved token refresh problems before?",
-      "expected_behavior": "The response expands the concept into related auth terms, searches broadly before narrowing, and cites the evidence surface it will use.",
+      "expected_behavior": "The agent translates the question into keyword, structured-filter, and synonym query shapes, starts broad with FTS/LIKE expansion in `session_store`, and only narrows with repo/branch/time/file filters once real candidates appear, per the documented workflow order.",
       "assertions": [
-        "Mentions query expansion with related terms or synonyms.",
-        "Mentions broad-to-narrow search behavior.",
-        "Mentions turns, checkpoints, refs, or files as evidence surfaces."
+        "Expands the query with synonyms or neighboring terms (e.g. auth, session, refresh) before narrowing.",
+        "States it is starting broad in `session_store` and narrowing once candidates appear, rather than issuing one narrow literal query first.",
+        "Cites the evidence surface used (turns, checkpoints, refs, or files)."
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "ref-tracing-request",
+      "id": "ref-tracing-uses-structured-join-not-full-scan",
       "prompt": "Which session was tied to PR #42?",
-      "expected_behavior": "The response routes to structured ref lookup first instead of broad free-text search and names the session/ref linkage it will inspect.",
+      "expected_behavior": "The agent routes directly to a structured join against `session_refs` (and `sessions`) for the known PR number instead of running a broad free-text keyword search across all turns first, since the user named a specific ref.",
       "assertions": [
-        "Mentions `session_refs` or ref-based lookup.",
+        "Prefers `session_refs`/structured join lookup over broad free-text search when a specific PR number is named.",
         "Keeps the task scoped to historical tracing rather than implementation.",
         "Mentions returning the linked session with supporting context."
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "no-match-states-uncertainty",
+      "prompt": "Have I ever worked on a payments-refund-retry system before? I honestly don't remember.",
+      "expected_behavior": "If `session_store` evidence does not support a confident answer after expanded search, the agent states the uncertainty or no-match explicitly rather than fabricating a plausible-sounding session from memory.",
+      "assertions": [
+        "Retries with expanded/synonym terms before concluding there is no history.",
+        "If no supporting evidence is found, states a clear no-match or uncertainty note instead of inventing a session.",
+        "Does not answer from model memory alone when `session_store` evidence is what was asked for."
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-current-workspace-search",
+      "prompt": "Find every place in the current checkout that imports the config loader.",
+      "expected_behavior": "The response recognizes this is current-repository exploration, not historical recall, and uses direct repo search tools instead of querying `session_store`, per the skill's own 'Do not use this skill when' list.",
+      "assertions": [
+        "Does not query `session_store` for a current-workspace code search.",
+        "Uses direct repo/code search tools instead.",
+        "Does not force this skill onto a task with no historical-session evidence need."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-no-harness-tooling",
+      "prompt": "What have I worked on before regarding rate limiting?",
+      "expected_behavior": "If the current harness does not expose a read-only SQL tool and `session_store` access, the agent states that limitation explicitly and asks for another evidence source instead of silently fabricating history or falling back to an unrelated database, per the skill's compatibility note and guardrails.",
+      "assertions": [
+        "States the limitation explicitly when no read-only SQL tool or session_store access is available.",
+        "Asks for another evidence source rather than guessing from memory.",
+        "Does not claim to have queried session_store when the tool access does not exist."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

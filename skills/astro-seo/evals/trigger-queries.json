@@ -12,6 +12,26 @@
     "should_trigger": true
   },
   {
+    "query": "Set up hreflang and multilingual sitemap handling for this Astro site.",
+    "should_trigger": true
+  },
+  {
+    "query": "Should we install @jdevalk/astro-seo-graph or keep our hand-rolled Astro SEO setup?",
+    "should_trigger": true
+  },
+  {
+    "query": "Add IndexNow and a schema endpoint to our Astro site for agent discoverability.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our Astro site's Open Graph images aren't generating correctly — help fix the pipeline.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review this Astro project's robots.txt, sitemap, and RSS feed wiring.",
+    "should_trigger": true
+  },
+  {
     "query": "Rewrite these meta descriptions for clarity and truncation only.",
     "should_trigger": false
   },

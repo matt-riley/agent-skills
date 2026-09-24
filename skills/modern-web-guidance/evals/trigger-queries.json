@@ -1,0 +1,50 @@
+[
+  {
+    "query": "Implement a dark mode toggle with system preference detection.",
+    "should_trigger": true
+  },
+  {
+    "query": "Build an accessible modal dialog with light dismiss.",
+    "should_trigger": true
+  },
+  {
+    "query": "Improve the Largest Contentful Paint score on this page.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement a form with autofill support and post-interaction validation.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a scroll-driven progress indicator to this article.",
+    "should_trigger": true
+  },
+  {
+    "query": "Style a branded <select> element that matches our design system.",
+    "should_trigger": true
+  },
+  {
+    "query": "Animate a dialog sliding in and fading out when it opens and closes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement passkey registration and conditional login for this sign-in page.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a GitHub Actions workflow to run tests on every push.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix a TypeScript compiler error in my API response type.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review this existing checkout UI for visual polish — tighten spacing and alignment.",
+    "should_trigger": false
+  },
+  {
+    "query": "Debug why clicking this button throws a runtime JavaScript error in production.",
+    "should_trigger": false
+  }
+]

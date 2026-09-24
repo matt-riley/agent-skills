@@ -12,15 +12,31 @@
     "should_trigger": true
   },
   {
-    "query": "Write a unit test for a pure function.",
+    "query": "Add auth-failure and validation-error test cases for the new POST /invoices endpoint.",
+    "should_trigger": true
+  },
+  {
+    "query": "The /users/:id handler test is failing after a middleware change; debug it with the real request/response output.",
+    "should_trigger": true
+  },
+  {
+    "query": "Extend integration coverage for the updated endpoint to also assert the DB side effects.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write end-to-end tests asserting status codes, auth enforcement, and response shape for this new route.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a unit test for this pure calculation function; no HTTP layer involved.",
     "should_trigger": false
   },
   {
-    "query": "Design a brand new API without tests.",
+    "query": "Update the OpenAPI spec to describe the new field — no handler or test changes needed.",
     "should_trigger": false
   },
   {
-    "query": "Review implementation approval workflow.",
+    "query": "These compile errors are coming from a stale generated mocks package before I even run the tests.",
     "should_trigger": false
   }
 ]

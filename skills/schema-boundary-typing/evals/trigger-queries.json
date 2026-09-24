@@ -12,15 +12,39 @@
     "should_trigger": true
   },
   {
-    "query": "Fix an internal type alias with no runtime input boundary.",
+    "query": "Type this Express route's request body properly instead of casting it with `as`.",
+    "should_trigger": true
+  },
+  {
+    "query": "We parse config from environment variables with no validation and type it as `any`; fix the boundary.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a schema for the response coming back from this third-party API before we trust its shape.",
+    "should_trigger": true
+  },
+  {
+    "query": "We have `any` scattered through this parser; the fix here needs a runtime check, not just a type assertion.",
+    "should_trigger": true
+  },
+  {
+    "query": "This repository already uses Zod everywhere else — use it to validate the incoming webhook body and export the inferred type.",
+    "should_trigger": true
+  },
+  {
+    "query": "Clean up this internal domain type alias; nothing external or untrusted flows into it.",
     "should_trigger": false
   },
   {
-    "query": "Enable stricter tsconfig flags.",
+    "query": "Enable stricter tsconfig flags across the project.",
     "should_trigger": false
   },
   {
-    "query": "Write unit tests for pure runtime behavior only.",
+    "query": "Write unit tests for pure runtime behavior only; no external input is involved.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add compile-time type tests to lock in this API's exported type shape.",
     "should_trigger": false
   }
 ]

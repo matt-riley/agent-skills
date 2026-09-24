@@ -1,0 +1,72 @@
+{
+  "skill_name": "agent-instructions",
+  "evals": [
+    {
+      "id": "audit-before-write",
+      "prompt": "Our AGENTS.md hasn't been touched in a year and agents keep making the same mistakes. Fix it.",
+      "expected_behavior": "Audits all existing instruction files and their last-update state first, identifies stale or overly generic sections and gaps, then applies the Discoverability Filter to each candidate line before writing or updating any file.",
+      "assertions": [
+        "Lists or reads existing instruction files and checks staleness before proposing new content",
+        "Applies the Discoverability Filter (would an agent find this by reading the repo?) to candidate lines",
+        "Only then writes or updates the instruction file content",
+        "Does not add a directory-structure overview or other repo-discoverable content as a new instruction line"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "three-question-check-trims-content",
+      "prompt": "Add everything you can think of to copilot-instructions.md so agents have maximum context about this repo.",
+      "expected_behavior": "Pushes back on the maximal-content framing: applies the 3-Question Check (non-discoverable, accurate, materially reduces mistakes) per line and keeps only lines that pass, rather than padding the file with tech-stack summaries, architecture rationale, or generic best-practice advice.",
+      "assertions": [
+        "Does not add tech-stack summaries, directory overviews, or generic best-practice statements",
+        "Explicitly filters candidate lines against non-discoverable / accurate / materially-useful criteria",
+        "Keeps the resulting file scoped to non-obvious, operationally significant, actionable content"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "typescript-instruction-file-structure",
+      "prompt": "Create a typescript.instructions.md for our strict-tsconfig repo covering the `unknown`-at-boundaries convention agents keep missing.",
+      "expected_behavior": "Produces a per-path instruction file with both `description` and `applyTo` in YAML frontmatter, containing only the non-discoverable convention (not a restatement of what tsconfig already enforces), with concrete file paths or examples from the repo.",
+      "assertions": [
+        "New instruction file includes both `description` and `applyTo` in YAML frontmatter",
+        "Does not restate what noImplicitAny/tsconfig already enforces on its own",
+        "States the non-obvious convention (unknown at boundaries, narrowed with guards) concretely",
+        "References real repository file paths or examples rather than generic advice"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "frontmatter includes both `description` and `applyTo` keys"
+      ]
+    },
+    {
+      "id": "no-tool-override-without-repo-cause",
+      "prompt": "Add a rule to AGENTS.md that forbids using curl and forces agents to always use our internal HTTP client, just as a general preference.",
+      "expected_behavior": "Pushes back per the guardrail against using instructions to forbid a tool or force a choice unless the repository genuinely cannot use the alternative; asks for or states the repository-specific reason (e.g. auth/interceptor requirements) before writing the rule, rather than encoding a blanket preference.",
+      "assertions": [
+        "Does not write a blanket tool-forbidding rule without a stated repository-specific reason",
+        "Either asks for the concrete reason the internal client is required or documents why curl is unsuitable here",
+        "Keeps the instruction actionable and tied to actual repository behavior, not a general preference"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "agent-instructions-boundary-skill-creator",
+      "prompt": "Turn our instruction-upkeep process (audit, discoverability filter, write, validate) into a reusable skill package other repos can install.",
+      "expected_behavior": "Routes away from agent-instructions because the deliverable is a reusable skill package, not a repository's own instruction file.",
+      "assertions": [
+        "Does not produce or edit an AGENTS.md / copilot-instructions.md file for this request",
+        "Routes toward skill-creator instead"
+      ],
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "recommends skill-creator rather than agent-instructions"
+      ]
+    }
+  ]
+}

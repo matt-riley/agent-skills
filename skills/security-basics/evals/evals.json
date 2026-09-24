@@ -10,18 +10,68 @@
         "Mentions log or PII or credential scrubbing.",
         "Mentions endpoint exposure or CORS/cookie safety."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "inventory-touchpoints-before-fixes",
+      "prompt": "I added a metrics endpoint and changed proxy headers. What should I be careful about?",
+      "expected_behavior": "Before proposing fixes, the agent inventories every auth, secret, input-trust, endpoint-exposure, and logging touchpoint in the change and runs the review checklist against each one, per the documented workflow order.",
+      "assertions": [
+        "Mentions trust of forwarded headers or proxy boundary.",
+        "Mentions protection of metrics/admin/debug endpoints.",
+        "Runs the touchpoint inventory / checklist step before jumping to a fix."
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "scoped-security-fix-not-rewrite",
+      "prompt": "This one handler logs the full request URL, which sometimes includes an API key in the query string. Fix just that.",
+      "expected_behavior": "The agent scrubs the specific leak (stop logging the full URL / redact the credential) without opportunistically rewriting unrelated logging, auth, or endpoint code that wasn't flagged.",
+      "assertions": [
+        "Fixes the specific URL/credential logging leak.",
+        "Does not expand into an unrelated refactor of the logging framework or other endpoints not mentioned.",
+        "Confirms the fix by checking that logs no longer include the credential."
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "sensitive-endpoint",
       "prompt": "I added a metrics endpoint and changed proxy headers. What should I be careful about?",
-      "expected_behavior": "The response warns about trust boundaries, spoofable headers, and protecting sensitive endpoints.",
+      "expected_behavior": "The response warns about trust boundaries, spoofable headers, and protecting sensitive endpoints, and confirms `/health`-style endpoints stay open but leak no internal state.",
       "assertions": [
         "Mentions trust of forwarded headers or proxy boundary.",
         "Mentions protection of metrics/admin/debug endpoints.",
         "Includes a concrete security checklist-style response."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-config-drift-not-security",
+      "prompt": "Our staging server won't start — it says a required env var is missing. Can you fix it?",
+      "expected_behavior": "The response treats this as configuration/env-loading drift, not a security review, and routes to `configuration-env` instead of running the auth/exposure/logging checklist, since there is no auth, secret, endpoint-exposure, or logging change in play — matching the skill's own 'not for general request-handling changes without a security dimension' scope note.",
+      "assertions": [
+        "Does not run the security review checklist (auth, CORS, logging scrub) for a plain startup/config failure.",
+        "Names or routes toward `configuration-env` for the missing-variable fix.",
+        "Does not force a security review onto a task with no security-sensitive surface."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-doc-only-not-security",
+      "prompt": "Fix a typo in the pricing page marketing copy.",
+      "expected_behavior": "The response makes the copy fix directly and does not pull in the security checklist, auth review, or logging-scrub workflow, since the change has no security-sensitive surface (pure copy/doc-only edit) per the skill's own 'Do not use this skill when' list.",
+      "assertions": [
+        "Does not invoke the security review checklist for a pure copy change.",
+        "Makes the requested text fix without adding unrelated auth/CORS/logging commentary.",
+        "Does not force this skill into a task with no auth, secret, endpoint, or logging dimension."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

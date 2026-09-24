@@ -12,6 +12,22 @@
     "should_trigger": true
   },
   {
+    "query": "Register a new Prometheus counter at startup and make sure GET /metrics returns it in Prometheus text format.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our /metrics endpoint returns 401; confirm the auth token requirement for this environment before we change anything.",
+    "should_trigger": true
+  },
+  {
+    "query": "Check whether /health is still reachable by the load balancer and free of internal-state leakage after a recent change.",
+    "should_trigger": true
+  },
+  {
+    "query": "Confirm our structured logs aren't leaking auth tokens or PII near the logging boundary we just touched.",
+    "should_trigger": true
+  },
+  {
     "query": "Explain Prometheus from first principles.",
     "should_trigger": false
   },
@@ -20,7 +36,7 @@
     "should_trigger": false
   },
   {
-    "query": "Write a new logging framework.",
+    "query": "Our API is returning intermittent 500 errors in production; walk through the whole request path to root-cause it.",
     "should_trigger": false
   }
 ]

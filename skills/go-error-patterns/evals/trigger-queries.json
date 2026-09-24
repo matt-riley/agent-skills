@@ -16,11 +16,19 @@
     "should_trigger": true
   },
   {
-    "query": "go test ./... only fails in CI after a Go version bump.",
-    "should_trigger": false
+    "query": "A shared helper in our Go monorepo requires func(string) error, but our new constructor returns *ConfigError. What's the idiomatic fix?",
+    "should_trigger": true
   },
   {
-    "query": "govulncheck is red with only standard-library findings after a toolchain pin change.",
+    "query": "Should a Go function return the error interface or a concrete *ValidationError pointer when only internal code uses the concrete methods?",
+    "should_trigger": true
+  },
+  {
+    "query": "We're about to merge the investment and protection Lambda binaries into one Go service — is that the right call?",
+    "should_trigger": true
+  },
+  {
+    "query": "go test ./... only fails in CI after a Go version bump.",
     "should_trigger": false
   },
   {

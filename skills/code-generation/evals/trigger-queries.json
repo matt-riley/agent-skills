@@ -12,15 +12,39 @@
     "should_trigger": true
   },
   {
+    "query": "sqlc query files changed; make sure the generated Go code is up to date before I open a PR.",
+    "should_trigger": true
+  },
+  {
+    "query": "The build points at a stale generated package after I edited the .proto file; fix it.",
+    "should_trigger": true
+  },
+  {
+    "query": "I updated an OpenAPI spec; make sure the generated client code matches before running tests.",
+    "should_trigger": true
+  },
+  {
+    "query": "Regenerate the templ files after editing a .templ template and confirm the diff is clean before committing.",
+    "should_trigger": true
+  },
+  {
+    "query": "After pulling latest main, `make generate` shows unexpected diffs in generated files — figure out why before I patch them.",
+    "should_trigger": true
+  },
+  {
     "query": "Design a new protobuf schema from scratch.",
     "should_trigger": false
   },
   {
-    "query": "Explain what code generation is.",
+    "query": "Explain what code generation is, conceptually.",
     "should_trigger": false
   },
   {
     "query": "Run the unit tests for this handwritten bug; no generator-backed files changed.",
+    "should_trigger": false
+  },
+  {
+    "query": "Refactor this hand-written utility function; nothing here is generator-backed.",
     "should_trigger": false
   }
 ]

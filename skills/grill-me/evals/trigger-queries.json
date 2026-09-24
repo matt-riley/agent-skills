@@ -1,18 +1,14 @@
 [
-  {
-    "query": "Grill me on my plan to refactor the notification service.",
-    "should_trigger": true
-  },
-  {
-    "query": "Grill me and build CONTEXT.md as we resolve the domain language.",
-    "should_trigger": true
-  },
-  {
-    "query": "Sharpen this vague request into a repo-grounded brief before we start.",
-    "should_trigger": false
-  },
-  {
-    "query": "Review this completed plan with unanimous reviewer-gated rounds and verdict tokens.",
-    "should_trigger": false
-  }
+  { "query": "Grill me on my plan to refactor the notification service.", "should_trigger": true },
+  { "query": "Grill me and build CONTEXT.md as we resolve the domain language.", "should_trigger": true },
+  { "query": "Stress-test my caching design before I commit to it.", "should_trigger": true },
+  { "query": "Grill me on order cancellation and update CONTEXT.md as we resolve domain terms.", "should_trigger": true },
+  { "query": "Grill me on this plan to split the monolith into two services.", "should_trigger": true },
+  { "query": "Interview me about this design until every decision branch is resolved before I start building.", "should_trigger": true },
+  { "query": "I want you to interrogate this architecture proposal one question at a time and push back where it's weak.", "should_trigger": true },
+  { "query": "Grill me on this feature plan and cross-reference claims against our existing ADRs in docs/adr/.", "should_trigger": true },
+  { "query": "Sharpen this vague request into a repo-grounded brief before we start.", "should_trigger": false },
+  { "query": "Review this completed plan with unanimous reviewer-gated rounds and verdict tokens.", "should_trigger": false },
+  { "query": "Write a README for this new interrogation tool we built, with feedback from a real reader.", "should_trigger": false },
+  { "query": "I don't really have a plan written down yet — help me figure out what I'm even trying to build before we talk it through.", "should_trigger": false }
 ]

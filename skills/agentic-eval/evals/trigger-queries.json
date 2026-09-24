@@ -8,11 +8,35 @@
     "should_trigger": true
   },
   {
+    "query": "Add rubric-based scoring with weighted accuracy, completeness, and style dimensions to our iterative content generator.",
+    "should_trigger": true
+  },
+  {
+    "query": "We need a convergence check and a max-iteration budget for the self-critique loop we're adding to the coding agent.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up LLM-as-judge scoring to compare two candidate summaries and pick the better one on each pass.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our critique loop just runs forever with no stopping condition. Help us bound it and log every iteration's score.",
+    "should_trigger": true
+  },
+  {
     "query": "Run the existing test suite and tell me whether the build passes.",
     "should_trigger": false
   },
   {
     "query": "Review this PR diff once and list the implementation issues.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write unit tests for this module using pytest.",
+    "should_trigger": false
+  },
+  {
+    "query": "This function throws intermittently in production; help me trace down the root cause.",
     "should_trigger": false
   }
 ]

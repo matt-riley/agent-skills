@@ -2,26 +2,71 @@
   "skill_name": "code-generation",
   "evals": [
     {
-      "id": "regenerate-before-test",
-      "prompt": "I edited query files and templates. What should happen before I run tests?",
-      "expected_behavior": "The response says generation should happen before build/test, identifies likely generation commands, and warns against editing generated files by hand.",
+      "id": "codegen-detect-contract-first",
+      "prompt": "I edited the .proto file for the user service; make sure everything downstream is regenerated correctly.",
+      "expected_behavior": "First inspects the repo's build docs, CI workflow, and .gitignore to detect whether generated output is committed, ignored, or CI-only, identifies the canonical generation entrypoint (wrapper target or direct CLI), then regenerates only the affected generator, and finally runs follow-on build/test checks.",
       "assertions": [
-        "Says generation should run before tests.",
-        "Mentions generator commands or make generate.",
-        "Warns not to edit generated files directly."
+        "Inspects .gitignore/CI config/build docs to determine the commit-vs-ignore contract before regenerating",
+        "Identifies the canonical generation command (wrapper or direct CLI) rather than guessing",
+        "Regenerates only the affected generator, not every generator in the repo",
+        "Runs a follow-on build/test check after regeneration"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "checks `.gitignore` for the generated output path before deciding whether to commit it",
+        "runs the affected generator's canonical command (e.g. `buf generate` or a repo wrapper) rather than every generator"
+      ]
     },
     {
-      "id": "generated-diff-check",
-      "prompt": "Generated files changed unexpectedly after regeneration. How should I verify the diff?",
-      "expected_behavior": "The response tells the user to inspect the diff/stat and trace the change back to generator inputs rather than patching generated output manually.",
+      "id": "codegen-no-forced-regen",
+      "prompt": "This bug is in a hand-written utility function; nothing generator-backed changed. Can you fix it?",
+      "expected_behavior": "Recognizes there are no generator-backed inputs and no stale-generation symptoms, so it does not force a regeneration pass as an unrelated first step — it fixes the hand-written code directly.",
       "assertions": [
-        "Mentions inspecting git diff or diff stat.",
-        "Suggests checking generator inputs/config.",
-        "Does not recommend hand-editing generated output."
+        "Does not run or propose a code-generation pass for this fix",
+        "Does not treat code-generation as a prerequisite when nothing generator-backed changed"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "codegen-diff-matches-contract",
+      "prompt": "Generated files changed unexpectedly after I ran the generator. How should I verify this is correct?",
+      "expected_behavior": "Inspects the diff/status, traces the unexpected change back to changed inputs, config drift, or tool-version drift rather than patching generated output by hand, and confirms the final diff matches the repo's committed-vs-ignored contract.",
+      "assertions": [
+        "Inspects the diff or git status of generated output rather than assuming it's correct",
+        "Traces unexpected diffs to changed inputs, config, or tool-version drift",
+        "Never recommends hand-editing the generated files",
+        "Confirms the result matches whether the repo expects generated output committed or ignored"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "never hand-edits generated output; changes go through generator inputs or config",
+        "uses git diff/status to inspect the generated-file change before deciding what to do"
+      ]
+    },
+    {
+      "id": "codegen-boundary-schema-design",
+      "prompt": "Design a brand-new OpenAPI spec format and versioning scheme for our future APIs from scratch.",
+      "expected_behavior": "Recognizes this is designing a schema/spec format from scratch, not running the repo's generator workflow, so it does not apply the code-generation regeneration workflow here.",
+      "assertions": [
+        "Does not treat this as a run/troubleshoot-the-generator task",
+        "Does not propose regeneration commands for a from-scratch spec design request"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "codegen-boundary-conceptual-question",
+      "prompt": "Explain how code generation works in general, conceptually.",
+      "expected_behavior": "Gives a short conceptual answer without invoking the repo-specific generator detection or regeneration workflow, since there is no generator input change or stale-output symptom driving actual repo work.",
+      "assertions": [
+        "Does not run repo generator detection commands for a purely conceptual question",
+        "Does not propose regenerating any repo artifacts"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

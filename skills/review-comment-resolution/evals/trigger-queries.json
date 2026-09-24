@@ -12,6 +12,26 @@
     "should_trigger": true
   },
   {
+    "query": "On PR #214, fix the review thread that shows the null-check bug, leave the style-only nit unresolved if it is not merge-blocking, push the branch, and wait for the rerun to finish.",
+    "should_trigger": true
+  },
+  {
+    "query": "Classify each reviewer comment on this branch before editing anything, then fix what's valid and report what's not actionable yet.",
+    "should_trigger": true
+  },
+  {
+    "query": "Resolve the latest PR review comments on this branch and return the updated code plus the pushed commit SHA.",
+    "should_trigger": true
+  },
+  {
+    "query": "Work through the copied review comments below, fix the ones that hold up, and push once everything passes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Apply the reviewer's feedback from these comment URLs, push the branch, and confirm the checks come back green.",
+    "should_trigger": true
+  },
+  {
     "query": "Review this diff and tell me if it is ready to merge.",
     "should_trigger": false
   },
@@ -21,6 +41,10 @@
   },
   {
     "query": "Fix a bug reported in an issue, not a PR review.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create the PR and watch checks for this branch.",
     "should_trigger": false
   }
 ]

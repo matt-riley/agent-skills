@@ -4,24 +4,56 @@
     {
       "id": "module-and-plan-debug",
       "prompt": "Debug this Terraform module and plan failure in our AWS stack.",
-      "expected_behavior": "Diagnoses failure mode first, loads only relevant Terraform references, and proposes HCL or state fixes with a validation plan (fmt/validate/plan).",
+      "expected_behavior": "Diagnoses failure mode first, loads only relevant Terraform references, and proposes HCL or state fixes validated with fmt/validate/plan in order.",
       "assertions": [
         "Treats the work as Terraform/OpenTofu infrastructure, not generic app CI",
         "Diagnoses a failure mode before dumping all reference material",
-        "Includes validation commands such as fmt, validate, or plan"
+        "Runs or recommends `terraform fmt -check`, `terraform validate`, and `terraform plan -out=tfplan` in that order"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "terraform fmt -check",
+        "terraform validate",
+        "terraform plan -out=tfplan"
+      ]
     },
     {
       "id": "provider-upgrade-moved",
       "prompt": "I'm upgrading the AWS provider from 4.x to 5.x; what breaking changes and moved blocks do I need?",
-      "expected_behavior": "Addresses provider upgrade risk, mentions version floors and moved/import patterns where relevant, and avoids blind apply advice.",
+      "expected_behavior": "Addresses provider upgrade risk, emits the mandatory Response Contract (assumptions, risk category, remediation, validation plan, rollback notes), and avoids blind apply advice.",
       "assertions": [
-        "Addresses provider upgrade or identity-churn risk",
-        "Mentions moved blocks, plan review, or pinning as risk controls",
+        "Addresses provider upgrade or identity-churn risk explicitly",
+        "Mentions `moved` blocks, plan review, or version pinning as risk controls",
+        "Includes the Response Contract's rollback notes for the state-affecting change",
         "Does not route to SAM/CloudFormation tooling"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "ci-drift-targeted-reference",
+      "prompt": "Local terraform plan differs from what CI produces, and our module versions aren't pinned. Diagnose the drift.",
+      "expected_behavior": "Identifies this as the CI-drift failure mode and loads only ci-cd-workflows.md and code-patterns.md rather than preloading every reference file, then proposes pinning and a reviewed CI plan artifact.",
+      "assertions": [
+        "Names CI drift as the diagnosed failure mode before proposing fixes",
+        "Does not preload or restate content from unrelated references such as testing-frameworks.md or code-intelligence-lsp.md for this failure mode",
+        "Recommends pinning provider/module versions and producing a reviewed plan artifact in CI"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "stuck-state-lock-recovery",
+      "prompt": "Our terraform apply is stuck because of a state lock and we can't tell if it's stale. What should we do?",
+      "expected_behavior": "Treats the lock as a state-corruption/recovery failure mode, checks whether the lock is genuinely stale before force-unlocking, and includes rollback notes per the Response Contract.",
+      "assertions": [
+        "Does not recommend `terraform force-unlock` as the first, unconditional action without checking whether the lock is stale",
+        "References state-management guidance for lock recovery",
+        "Includes rollback notes for the state-mutating recovery action"
+      ],
+      "files": [],
+      "category": "tool-pattern"
     },
     {
       "id": "route-away-non-iac-actions",
@@ -29,9 +61,22 @@
       "expected_behavior": "Routes to github-actions-failure-triage (or similar) instead of Terraform module workflows.",
       "assertions": [
         "Does not activate Terraform module authoring as the primary path",
-        "Recognizes non-IaC Actions triage as out of scope for terraform-skill"
+        "Recognizes non-IaC Actions triage as out of scope for terraform-skill and names the CI-triage skill instead"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "basic-hcl-syntax-direct-answer",
+      "prompt": "What is the basic HCL syntax for declaring a string variable with a default value?",
+      "expected_behavior": "Answers the basic HCL syntax question directly from model knowledge instead of invoking the full failure-mode diagnosis workflow or emitting the Response Contract, per the skill's own 'Do not use this skill when' guidance.",
+      "assertions": [
+        "Gives a direct HCL syntax answer without loading a reference file or diagnosing a failure mode",
+        "Does not emit the full mandatory Response Contract (version floor, risk category, rollback notes) for a plain syntax question",
+        "Does not treat this as a case requiring risk-tier validation commands"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

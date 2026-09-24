@@ -1,0 +1,63 @@
+{
+  "skill_name": "context-map",
+  "evals": [
+    {
+      "id": "discovery-order-before-grouping",
+      "prompt": "Map the files, tests, and patterns involved before I implement rate limiting on the API.",
+      "expected_behavior": "Follows the search-playbook discovery order to find entry points, trace dependencies, and find nearby tests and a reference pattern, then groups results into the context-map output structure.",
+      "assertions": [
+        "Follows the discovery order in references/search-playbook.md: entry points before dependencies before tests/patterns",
+        "Identifies nearby tests and at least one reference pattern, not just source files",
+        "Groups results into the context-map structure (entry points, dependencies, tests, reference patterns, risks) rather than a flat file list"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "smallest-sufficient-map",
+      "prompt": "Map the files involved in adding a small validation rule to the signup form.",
+      "expected_behavior": "Produces the smallest map that makes the next step obvious rather than exhaustively cataloguing the repo, and stops once a specific next action is clear.",
+      "assertions": [
+        "Produces the smallest map that makes the next step obvious rather than cataloguing the whole repo",
+        "Distinguishes confirmed files from likely follow-up files instead of dumping everything with equal weight",
+        "Stops once a specific next action (read a specific set of files, route to planning, or implement) is clear"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "map-names-real-files-with-next-action",
+      "prompt": "Create a context map for this cross-package TypeScript error before we plan the fix.",
+      "expected_behavior": "The final map names real files, tests, and reference patterns actually found by search, distinguishes confirmed from likely follow-up files, and states an explicit next action.",
+      "assertions": [
+        "Names real files, tests, and reference patterns rather than inventing ones not found by search",
+        "Distinguishes confirmed files from likely follow-up files",
+        "States an explicit next action: read specific files, route to planning, or proceed with a scoped implementation"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-already-scoped-edit",
+      "prompt": "I already know it's just src/handlers/webhook.go line 88 that needs the fix - make the change.",
+      "expected_behavior": "Skips the context-map workflow and edits directly, since the file and scope are already known and narrow.",
+      "assertions": [
+        "Does not produce a context-map with entry points/dependencies/tests sections for an already-scoped single-file edit",
+        "Proceeds directly to the edit instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-full-phased-plan",
+      "prompt": "Write the full phased implementation plan for this multi-service migration, with validation commands and rollout notes.",
+      "expected_behavior": "Routes to plan-review for the phased implementation plan and rollout notes instead of stopping at a pre-edit file/test scoping map.",
+      "assertions": [
+        "Does not stop at a context map when a full phased plan with rollout notes is requested",
+        "Routes to plan-review for the phased implementation plan instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

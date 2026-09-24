@@ -2,26 +2,71 @@
   "skill_name": "reverse-prompt",
   "evals": [
     {
-      "id": "rewrite-return",
-      "prompt": "Improve this prompt only: fix the flaky auth tests in this repo.",
-      "expected_behavior": "Returns a faithful repo-grounded brief with goal, scope, assumptions, deliverable, validation, and next phase without starting implementation.",
+      "id": "grounds-brief-in-repo-context",
+      "prompt": "Reverse-prompt this: add caching to the search endpoint.",
+      "expected_behavior": "Before finalizing the brief, looks at the repository to identify the actual search endpoint files or directories and existing caching conventions, and names exact files or directories in the brief rather than inventing generic placeholder paths.",
       "assertions": [
+        "Inspects repository structure or relevant files before finalizing the brief rather than guessing blind",
+        "Names exact files or directories in the brief when they can be grounded, or explicitly says they are unknown instead of inventing them",
+        "Fills the brief using the canonical shape: Goal, Constraints, Deliverables, Approval rule, Exact files or directories, Assumptions, Validation or checks, Recommended next phase"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "rewrite-return",
+      "prompt": "Improve this prompt only: audit @skills/README.md and tell me the best next prompt to use.",
+      "expected_behavior": "Returns a faithful repo-grounded brief with goal, scope, assumptions, deliverable, validation, and next phase without starting the audit itself, since prompt-help intent is explicit and execution intent is absent.",
+      "assertions": [
+        "Does not perform the README audit itself",
         "Does not silently execute when prompt-only intent is explicit",
         "Keeps assumptions and blockers explicit",
         "Includes validation and recommended next phase"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
     },
     {
-      "id": "rewrite-proceed",
-      "prompt": "Sharpen this prompt, then use the improved brief to move into planning: add a new skill for cache debugging.",
-      "expected_behavior": "First rewrites the request, then proceeds only into the requested next phase.",
+      "id": "rewrite-proceed-brief-completeness",
+      "prompt": "Reverse-prompt this request for this repo, then execute it: fix the failing handler tests under @pkg/api.",
+      "expected_behavior": "First produces a complete brief covering goal, constraints, deliverables, approval rule, exact files, assumptions, and validation, then proceeds directly into fixing the failing tests using that brief, without inventing requirements beyond what was asked.",
       "assertions": [
-        "Decides rewrite-and-proceed rather than return-only",
-        "Does not invent new requirements",
-        "Hands off to planning rather than immediate coding if planning was requested"
+        "Decides rewrite-and-proceed rather than return-only, since both prompt-help and action wording are present",
+        "The brief names @pkg/api as the exact target surface",
+        "Does not invent new requirements beyond fixing the failing handler tests",
+        "Proceeds into implementation only after the brief is formed, not before"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "the brief includes a Goal section",
+        "the brief includes a Constraints section",
+        "the brief includes a Deliverables section",
+        "the brief includes an Approval rule section",
+        "the brief includes a Recommended next phase section"
+      ]
+    },
+    {
+      "id": "boundary-already-specific-request",
+      "prompt": "Implement the feature now: add a 'Remember me' checkbox to the login form that sets a 30-day session cookie, per the ticket description above.",
+      "expected_behavior": "Recognizes the request is already specific enough to execute directly and does not insert a prompt-rewrite pass before starting the work.",
+      "assertions": [
+        "Does not produce a rewritten brief for a request that is already concrete and actionable",
+        "Proceeds toward direct implementation rather than a reverse-prompt pass"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-always-on-policy-not-situational",
+      "prompt": "This kind of prompt-sharpening should just be an always-on instruction baked into AGENTS.md, not something you invoke per request.",
+      "expected_behavior": "Recognizes that turning this into an always-on instruction or extension policy is out of scope for this situational skill, per its own guardrail against becoming an always-on prompt policy, and routes toward agent-instructions or a repo-instructions update instead.",
+      "assertions": [
+        "Does not silently rewrite this request as if it were a normal one-off reverse-prompt task",
+        "States that making the behavior always-on is a different kind of change (repo instructions/policy), not a per-request skill invocation"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

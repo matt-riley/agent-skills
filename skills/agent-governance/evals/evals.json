@@ -2,6 +2,19 @@
   "skill_name": "agent-governance",
   "evals": [
     {
+      "id": "governance-level-first-then-enforcement",
+      "prompt": "Our standard-risk production agent has no governance at all yet. Set it up from scratch: risk classification, policy, enforcement, and audit.",
+      "expected_behavior": "Follows the documented workflow order: classifies the risk level first, then defines a GovernancePolicy (allowed tools, blocked patterns, rate limits), then enforces at the tool boundary with @govern or framework-equivalent middleware, then wires audit logging — not enforcement code written before a policy exists.",
+      "assertions": [
+        "Classifies a governance level (open/standard/strict/locked) before writing any policy or enforcement code",
+        "Defines a GovernancePolicy object before wiring the enforcement decorator",
+        "Adds enforcement at the tool boundary rather than scattering checks inside business logic",
+        "Wires audit logging for allowed, denied, and error events only after policy and enforcement exist"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
       "id": "tool-allowlist-and-audit",
       "prompt": "Add tool allowlists, rate limits, and append-only audit logs to this production coding agent that calls external APIs.",
       "expected_behavior": "Chooses a governance level from risk, defines a policy with allowed tools and limits, enforces at the tool boundary, and wires audit events for allowed, denied, and error outcomes with fail-closed behavior.",
@@ -11,7 +24,8 @@
         "Includes audit trail or logging of allowed and denied events",
         "Mentions fail-closed behavior when governance checks error"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "multi-agent-trust-scoring",
@@ -22,7 +36,21 @@
         "Mentions human approval for sensitive tool operations",
         "Stays focused on runtime governance rather than package integrity hashing"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "add-rate-limit-without-rewriting-existing-policy",
+      "prompt": "Our agent already has a working GovernancePolicy (allowed_tools defined, @govern applied, audit trail wired). We just need a max_calls_per_request rate limit added on top. Don't touch anything else.",
+      "expected_behavior": "Adds the rate-limit field/check to the existing policy and enforcement path without redefining the already-working allowlist, re-adding the @govern decorator elsewhere, rewriting the audit trail, or introducing trust scoring/intent classification that was not asked for.",
+      "assertions": [
+        "Scopes the change to the rate-limit control only",
+        "Does not rewrite or restate the already-working allowlist or audit trail implementation",
+        "Does not add trust scoring, intent classification, or human-approval flows that were not requested",
+        "Confirms the rate limit denies at the configured threshold rather than only documenting the field"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "agent-governance-boundary-supply-chain",
@@ -32,7 +60,11 @@
         "Does not implement runtime tool allowlists for a manifest/integrity request",
         "Routes toward agent-supply-chain or integrity-manifest work instead"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "recommends agent-supply-chain rather than agent-governance"
+      ]
     }
   ]
 }

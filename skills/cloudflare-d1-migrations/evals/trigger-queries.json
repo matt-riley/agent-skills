@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "Add a migration that adds a NOT NULL column and use PRAGMA defer_foreign_keys where the migration temporarily violates foreign keys, then apply it locally first.",
+    "should_trigger": true
+  },
+  {
+    "query": "How do I create a new Wrangler D1 migration file and author SQLite-compatible SQL for it?",
+    "should_trigger": true
+  },
+  {
+    "query": "Our D1 migrations_table was renamed away from the default d1_migrations; how do I apply a new migration correctly against that ledger?",
+    "should_trigger": true
+  },
+  {
+    "query": "Compare pending D1 migrations across local, preview, and remote before promoting to production.",
+    "should_trigger": true
+  },
+  {
     "query": "I need to add a Postgres migration and figure out whether this repo supports down migrations.",
     "should_trigger": false
   },
@@ -24,19 +40,7 @@
     "should_trigger": false
   },
   {
-    "query": "Set up a new D1 binding in wrangler.jsonc and wire the environment variables, but do not touch migrations yet.",
-    "should_trigger": false
-  },
-  {
-    "query": "Fix the missing preview_database_id and D1 binding names in Wrangler so the Worker can boot again; there are still no migration or schema changes.",
-    "should_trigger": false
-  },
-  {
     "query": "My Worker has a D1 prepared statement bug at runtime, but schema and migration files are unchanged. Help me debug it.",
-    "should_trigger": false
-  },
-  {
-    "query": "The repo has a D1 database but no preview_database_id. Add one so preview deploys stop failing; there is still no migration or schema change.",
     "should_trigger": false
   },
   {

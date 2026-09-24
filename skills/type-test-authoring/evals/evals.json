@@ -4,23 +4,64 @@
     {
       "id": "type-test-regression",
       "prompt": "Add type regression tests for a public generic helper.",
-      "expected_behavior": "Matches existing type-test tooling, adds focused positive and negative assertions, avoids runtime-heavy tests, and runs the type-test/typecheck command.",
+      "expected_behavior": "Reads the nearest existing type test to match its tool and style (or inspects for an already-installed type-test tool if none exists), identifies the exact inference/assignability contract, and adds one positive and one negative case before broadening coverage.",
       "assertions": [
-        "Finds nearest existing type-test convention first",
-        "Uses @ts-expect-error or existing negative assertion helper",
-        "Does not introduce new tooling casually"
+        "Finds the nearest existing type-test convention or tool first before introducing a new one",
+        "Uses @ts-expect-error or an existing negative-assertion helper for the negative case",
+        "Adds one positive and one negative case rather than an exhaustive suite up front",
+        "Does not introduce new type-test tooling casually when an existing convention already fits"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "type-test-focused-not-exhaustive",
+      "prompt": "Add exhaustive type tests covering every overload and argument permutation of this helper.",
+      "expected_behavior": "Keeps the test small and focused on the contract that actually needs protecting (public/exported surface, the motivating regression) rather than generating a giant fixture file enumerating every permutation, per the skill's preference for small focused assertions.",
+      "assertions": [
+        "Prefers small, focused assertions over a giant fixture file enumerating every permutation",
+        "Focuses coverage on exported/intentionally shared types rather than every internal overload",
+        "Adds a regression case tied to the motivating bug rather than blanket exhaustive coverage"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "type-test-outcome-runs-and-fails-correctly",
+      "prompt": "Add a regression type test for the parseUser inference bug we just fixed.",
+      "expected_behavior": "Adds a positive case that encodes the correct inference and a negative case that fails for the right reason (via @ts-expect-error or an explicit non-assignability check), then runs the repository's type-test or typecheck command and confirms both cases behave as intended.",
+      "assertions": [
+        "Negative case fails for the intended type reason, not from unrelated compiler noise",
+        "Runs the repository's existing type-test command or nearest equivalent typecheck fixture command after adding the test",
+        "Test stays about types (minimal runtime logic) rather than mixing in behavior assertions"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "uses `@ts-expect-error` or an explicit non-assignability check"
+      ]
     },
     {
       "id": "runtime-test-boundary",
       "prompt": "Add unit tests for runtime behavior only; no type inference contract changed.",
-      "expected_behavior": "Does not use type-test workflow for ordinary runtime tests.",
+      "expected_behavior": "Does not use the type-test workflow for ordinary runtime tests since no static type contract is being protected; routes to a runtime test skill instead.",
       "assertions": [
-        "Recognizes runtime tests are primary",
-        "Does not add compile-time fixtures unnecessarily"
+        "Recognizes runtime tests are primary here, not a type contract",
+        "Does not add compile-time fixtures (@ts-expect-error, expectTypeOf) unnecessarily"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "type-test-boundary-runtime-dependent-contract",
+      "prompt": "This bug only shows up when the function actually runs against malformed data at runtime, not in the type checker — write a test for it.",
+      "expected_behavior": "Recognizes this is a runtime-dependent contract (a documented red flag for this skill) and recommends a runtime test instead of forcing a compile-time type-test fixture.",
+      "assertions": [
+        "Does not force a compile-time type-test fixture for a contract that only fails at runtime",
+        "Recommends a runtime test (optionally paired with a narrow typecheck fixture only for the static boundary)"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

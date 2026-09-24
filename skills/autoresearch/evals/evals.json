@@ -1,0 +1,73 @@
+{
+  "skill_name": "autoresearch",
+  "evals": [
+    {
+      "id": "setup-confirm-branch-baseline",
+      "prompt": "Hill-climb my Rust build time. Metric is `time cargo build --release`, lower is better. Only touch Cargo.toml and src/. Go until I stop you.",
+      "expected_behavior": "The agent summarizes goal, metric command, direction, and in/out-of-scope files in a confirmation table, then creates a dedicated `autoresearch/<tag>` branch, initializes `results.tsv`, and records the unmodified baseline as experiment 0 before making any code changes.",
+      "assertions": [
+        "Presents a setup table (goal, metric command, direction, in-scope/out-of-scope files) before starting.",
+        "Creates a dedicated branch named `autoresearch/<tag>` via `git checkout -b` rather than working on the current branch.",
+        "Runs the metric command on unmodified code and logs it as experiment 0 / baseline in `results.tsv` before editing anything."
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "creates branch with `git checkout -b autoresearch/<tag>`",
+        "records baseline as experiment `0` with status `baseline` before any edits"
+      ]
+    },
+    {
+      "id": "small-focused-experiments-git-revert",
+      "prompt": "Run the optimization loop on npm run benchmark for src/compute.ts. Keep going until I stop you.",
+      "expected_behavior": "Each experiment is a small, focused edit to in-scope files only, measured before the next hypothesis; a same-or-worse or crashing result is undone with `git revert HEAD --no-edit` (never `git reset --hard` or `--amend`), keeping the change history and results log reliable while avoiding large batched edits that would hide which change drove the metric.",
+      "assertions": [
+        "Keeps each experiment's edit small and focused rather than batching multiple unrelated changes into one experiment.",
+        "Reverts a non-improving or crashing experiment with `git revert HEAD --no-edit`, not `git reset --hard` or `--amend`.",
+        "Never edits files outside the declared in-scope set, even to make a failing metric run succeed."
+      ],
+      "files": [],
+      "category": "efficiency",
+      "deterministic_checks": [
+        "uses `git revert HEAD --no-edit` to discard a losing experiment",
+        "never uses `git reset --hard` or `git commit --amend` during the loop"
+      ]
+    },
+    {
+      "id": "phase-4-report-matches-log",
+      "prompt": "I want to minimize go test -bench=. ns/op for BenchmarkSort. File a result log and tell me what you tried.",
+      "expected_behavior": "When the loop ends, the agent prints the full `results.tsv` as a table, reports total/kept/discarded/crashed experiment counts plus baseline-vs-final metric and improvement percentage, shows the kept-commit git log, and the reported row/experiment counts match what was actually logged.",
+      "assertions": [
+        "Prints or summarizes the full `results.tsv` contents as part of the final report.",
+        "States baseline vs. final metric value and the improvement percentage.",
+        "The experiment/row counts in the summary match the number of rows actually appended to `results.tsv`, and the working tree reflects only the kept (improving) changes — discarded experiments are undone via their `git revert HEAD --no-edit` commits, not erased from history."
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-single-experiment-not-loop",
+      "prompt": "Try switching this lookup from an array scan to a Map and see if it's faster. Just that one change — no need to keep iterating.",
+      "expected_behavior": "Since this is a single targeted experiment to validate one hypothesis rather than a multi-experiment autonomous loop, the agent implements the change directly and measures it once, without spinning up an `autoresearch/<tag>` branch, a `results.tsv` journal, or an open-ended experiment loop.",
+      "assertions": [
+        "Does not create an `autoresearch/<tag>` branch or `results.tsv` journal for a single one-off change.",
+        "Implements and measures the one change directly instead of starting an autonomous multi-experiment loop.",
+        "Does not ask for a full experiment-loop setup table when only one hypothesis was requested."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-no-measurable-metric",
+      "prompt": "Can you refactor this module to be cleaner and easier to read? There's no benchmark for it, I just want it to read better.",
+      "expected_behavior": "Because there is no measurable numeric metric to hill-climb, the agent does not apply the autoresearch experiment-loop workflow (branch, results.tsv, keep/revert decisions); it treats this as a direct refactor or routes to a quality/readability-focused skill instead.",
+      "assertions": [
+        "Does not set up an autoresearch experiment branch or results.tsv for a purely qualitative refactor request.",
+        "Does not ask for a metric command or direction (lower/higher-is-better) that the task has no use for.",
+        "Performs or offers the refactor directly rather than forcing a hill-climbing loop onto a non-numeric goal."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

@@ -2,25 +2,82 @@
   "skill_name": "knip",
   "evals": [
     {
-      "id": "knip-unused-code-audit",
-      "prompt": "Audit this JS/TS workspace with Knip and tell me what looks safe to clean up first.",
-      "expected_behavior": "Recognizes Knip as the right codebase-health skill, asks for the repository or package scope if missing, and focuses on unused dependencies, exports, files, and unresolved imports before suggesting fixes.",
+      "id": "knip-report-before-fix",
+      "prompt": "Run Knip on this TypeScript monorepo and clean up whatever's unused.",
+      "expected_behavior": "Runs the smallest useful Knip report first, reads unused exports, files, dependencies, and unresolved imports as separate categories, and only moves to fix mode after the report is understood — never deletes straight off a first pass.",
       "assertions": [
-        "Identifies Knip as the primary tool for unused-code analysis in JS/TS projects",
-        "Separates report-first analysis from applying fixes",
-        "Mentions config, workspace scope, or entry-point questions before deleting anything"
+        "Runs a Knip report command before any deletion or fix command",
+        "Distinguishes unused exports, files, dependencies, and unresolved imports as separate categories rather than lumping them together",
+        "Does not run fix mode or delete code before confirming the report against a dry run/preview"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `npx knip` (or the repo's pinned Knip invocation) before any `--fix` run",
+        "treats exit code 1 as issues-found, not a tool failure"
+      ]
     },
     {
-      "id": "knip-boundary-check",
+      "id": "knip-scoped-package",
+      "prompt": "Just check the packages/api workspace for unused exports, not the whole monorepo.",
+      "expected_behavior": "Scopes the Knip invocation to the packages/api workspace rather than running a full-repo scan, using the narrowest scope that still answers the question.",
+      "assertions": [
+        "Scopes the Knip command to packages/api rather than the full monorepo",
+        "Does not propose config changes or full-repo entry-point rewrites for a scoped ask"
+      ],
+      "files": [],
+      "category": "efficiency",
+      "deterministic_checks": [
+        "command scope argument references `packages/api`"
+      ]
+    },
+    {
+      "id": "knip-fix-verified-clean",
+      "prompt": "After I remove the exports Knip flagged, confirm the fix actually worked.",
+      "expected_behavior": "Re-runs Knip after the cleanup and confirms the previously flagged exports no longer appear in the report, rather than assuming the deletion worked.",
+      "assertions": [
+        "Re-runs Knip after the code change to confirm the report changed as expected",
+        "States that the previously flagged export/file/dependency no longer appears in the flagged list"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "re-running `npx knip` after the fix reports the previously flagged export as used/resolved, not still listed as unused"
+      ]
+    },
+    {
+      "id": "knip-false-positive-triage",
+      "prompt": "Knip says this exported helper is unused but I think something dynamically imports it. What should I do?",
+      "expected_behavior": "Confirms the reachability story (dynamic imports, entry-point config, ignore rules) before deleting anything, and prefers fixing the config or entry-point model over blind deletion once a false positive is confirmed.",
+      "assertions": [
+        "Does not delete the export purely because Knip flagged it",
+        "Investigates dynamic-import or entry-point config reasons before concluding it is truly unused",
+        "Prefers a config-driven fix over an ad hoc ignore when a false positive is confirmed"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "knip-boundary-debugging",
       "prompt": "The test suite is failing after a refactor; use Knip to find the bug.",
       "expected_behavior": "Routes away from Knip because this is a debugging task, not unused-code analysis.",
       "assertions": [
         "Does not claim Knip is the right tool for runtime or test failure diagnosis",
         "Routes the task to systematic-debugging or another failure-analysis skill instead"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "knip-boundary-fallow",
+      "prompt": "Audit this JS/TS codebase for circular dependencies, duplication, and complexity hotspots.",
+      "expected_behavior": "Routes to fallow instead, since Knip's model is unused dependencies, exports, files, and unresolved imports, not duplication, circular-dependency, or complexity analysis.",
+      "assertions": [
+        "Does not treat this as a Knip unused-export/dependency task",
+        "Names fallow as the tool for duplication, circular dependencies, and complexity hotspots"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

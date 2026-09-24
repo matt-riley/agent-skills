@@ -2,25 +2,69 @@
   "skill_name": "schema-boundary-typing",
   "evals": [
     {
-      "id": "schema-boundary",
-      "prompt": "Add validation for an untrusted webhook payload in a TypeScript service.",
-      "expected_behavior": "Finds the boundary, reuses existing validator patterns, keeps input unknown until validation, derives or maps types, and tests invalid payloads.",
+      "id": "schema-boundary-webhook",
+      "prompt": "Add validation for an untrusted webhook payload in this TypeScript service; the repo already uses Zod elsewhere.",
+      "expected_behavior": "Finds the first boundary where the webhook body enters typed code, reuses the repo's existing Zod schema pattern instead of introducing a new library, keeps the payload `unknown` until validated, and derives the TypeScript type from the schema.",
       "assertions": [
-        "Validates at the first rejectable boundary",
-        "Reuses existing schema tools or a simple guard before adding dependencies",
-        "Runs typecheck and invalid-input tests"
+        "Uses the repository's existing Zod schema/validator pattern rather than introducing a new schema library",
+        "Keeps the payload typed as `unknown` until it passes validation",
+        "Derives or exports the TypeScript type from the schema rather than hand-writing a duplicate interface",
+        "Validates at the boundary (route handler/parse point), not deep inside downstream consumers"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "uses the repo's existing schema library (e.g. `z.object(...).parse(...)`) rather than adding a new dependency"
+      ]
     },
     {
-      "id": "internal-type-boundary",
-      "prompt": "Clean up this internal domain type alias; no external input is involved.",
-      "expected_behavior": "Does not apply schema-boundary guidance when there is no untrusted boundary.",
+      "id": "schema-boundary-no-new-dep",
+      "prompt": "This is a tiny one-off internal script that reads a single flag from a JSON file; is it worth adding a schema library for that?",
+      "expected_behavior": "Recognizes the boundary is small, one-off, and unlikely to be shared, so a simple local guard is enough — does not introduce a new schema dependency just to validate one field.",
       "assertions": [
-        "Identifies no runtime boundary",
-        "Avoids adding schema validation unnecessarily"
+        "Does not recommend adding a new schema/validator dependency for a small one-off boundary",
+        "Proposes a simple local guard instead",
+        "Still keeps the value `unknown` until the guard passes"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "schema-boundary-failure-shape",
+      "prompt": "Validate this JSON request body at the API edge and make sure invalid payloads fail the way the rest of the API expects.",
+      "expected_behavior": "Validates at the first rejectable boundary using the repo's schema tool, matches the existing error-handling convention (field errors, result-object, or thrown boundary error) rather than inventing a new failure shape, and re-runs typecheck/tests for valid and invalid input.",
+      "assertions": [
+        "Matches the repository's existing error-handling convention for invalid payloads rather than inventing a new shape",
+        "Tests both a valid and an invalid payload",
+        "Re-runs typecheck after deriving/exporting the validated type"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "the invalid-payload test asserts the same failure shape convention (field errors / result object / thrown error) already used elsewhere in the repo"
+      ]
+    },
+    {
+      "id": "schema-boundary-internal-type",
+      "prompt": "Clean up this internal domain type alias; nothing external or untrusted flows into it.",
+      "expected_behavior": "Recognizes there is no untrusted boundary here and does not add runtime schema validation just because a type alias changed.",
+      "assertions": [
+        "Does not add or propose runtime validation for a purely internal type with no untrusted input",
+        "Explains that schema-boundary-typing applies only at untrusted boundaries"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "schema-boundary-boundary-type-tests",
+      "prompt": "Add compile-time type tests that lock in this exported API's type shape so it can't silently change.",
+      "expected_behavior": "Routes to type-test-authoring instead, since this is about compile-time contract locking, not introducing runtime validation at an untrusted boundary.",
+      "assertions": [
+        "Does not propose adding a new runtime schema/validator for this request",
+        "Names type-test-authoring (or compile-time type regression testing) as the right approach instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

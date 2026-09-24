@@ -1,0 +1,87 @@
+{
+  "skill_name": "modern-web-guidance",
+  "evals": [
+    {
+      "id": "branded-select-static-reference",
+      "prompt": "Style a branded <select> element that matches our design system without a heavy JS library.",
+      "expected_behavior": "Checks the static references/css.md file for the current selectors/scoping pattern before improvising, and recommends the modern base-select appearance approach instead of a legacy JS-replacement select.",
+      "assertions": [
+        "Consults references/css.md (or an equivalent modern-web-guidance lookup) before proposing an implementation",
+        "Recommends appearance: base-select with ::picker(select) rather than a custom div-based dropdown",
+        "Adapts the pattern to the project's framework instead of pasting guide code verbatim"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "uses `appearance: base-select`"
+      ]
+    },
+    {
+      "id": "dynamic-retrieval-dialog-animation",
+      "prompt": "Animate a dialog sliding in and fading out when it opens and closes, using the native <dialog> element.",
+      "expected_behavior": "Uses the two-step dynamic retrieval flow (search then retrieve) via the modern-web-guidance CLI to find the specific animate-to/from-top-layer guide rather than inventing an animation approach from training memory.",
+      "assertions": [
+        "Runs `npx -y modern-web-guidance@latest search` with an action-oriented query before answering",
+        "Retrieves the matched guide id with `npx -y modern-web-guidance@latest retrieve` before implementing",
+        "Implements the top-layer/::backdrop animation pattern rather than a generic opacity-only transition"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `npx -y modern-web-guidance@latest search`",
+        "runs `npx -y modern-web-guidance@latest retrieve`"
+      ]
+    },
+    {
+      "id": "reuse-static-reference-for-visually-hidden",
+      "prompt": "Add a visually-hidden utility class for screen-reader-only text on this page.",
+      "expected_behavior": "Recognizes the topic is already covered by the static references/accessibility.md file and uses that directly instead of running the dynamic search/retrieve CLI flow for a topic the static references already answer.",
+      "assertions": [
+        "Does not invoke the dynamic search/retrieve CLI when the static accessibility reference already covers the pattern",
+        "Recommends the clip-path: inset(50%) visually-hidden pattern rather than position: absolute; clip: rect(0,0,0,0)"
+      ],
+      "files": [],
+      "category": "efficiency",
+      "deterministic_checks": [
+        "uses `clip-path: inset(50%)`"
+      ]
+    },
+    {
+      "id": "form-validation-outcome",
+      "prompt": "Add a form with autofill support and error messages that only appear after the user has interacted with a field.",
+      "expected_behavior": "Delivers a form implementation using post-interaction validation styling instead of the eager :invalid/:valid pseudo-classes, matching Baseline Widely Available guidance and noting any fallback for Newly/Limited Availability features used.",
+      "assertions": [
+        "Uses :user-invalid/:user-valid rather than :invalid/:valid for validation UX",
+        "Confirms the chosen features are Baseline Widely Available or explicitly calls out fallback needed for Newly/Limited Availability features",
+        "Notes verification via the project's lint/test/browser checks once code lands"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "uses `:user-invalid`"
+      ]
+    },
+    {
+      "id": "boundary-visual-polish-review",
+      "prompt": "Review this existing checkout UI for visual polish — tighten spacing, alignment, and shadow consistency.",
+      "expected_behavior": "Routes the concrete visual-polish review away from modern-web-guidance's API/pattern guidance and toward make-interfaces-feel-better, since this skill covers implementing platform patterns rather than polishing an existing UI's visual detail.",
+      "assertions": [
+        "Does not run the modern-web-guidance search/retrieve workflow for a pure visual-polish review",
+        "Recommends make-interfaces-feel-better for the concrete visual-polish task instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-runtime-error-debugging",
+      "prompt": "This dialog component throws a runtime TypeError as soon as it opens — figure out why and fix it.",
+      "expected_behavior": "Routes the runtime-error debugging task to systematic-debugging rather than treating it as a modern-web-guidance API selection question.",
+      "assertions": [
+        "Does not treat the runtime error investigation as a web-platform-pattern lookup task",
+        "Recommends systematic-debugging (or an equivalent debugging workflow) for the runtime error instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

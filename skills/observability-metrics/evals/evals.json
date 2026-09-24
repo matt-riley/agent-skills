@@ -2,26 +2,71 @@
   "skill_name": "observability-metrics",
   "evals": [
     {
-      "id": "metrics-validation",
-      "prompt": "I added a metric and changed observability auth. What should I validate locally?",
-      "expected_behavior": "The response checks health/metrics behavior, security exposure, and metric-specific validation steps.",
+      "id": "metrics-validation-first-move",
+      "prompt": "I added a metric and changed observability endpoint auth. What should I validate locally?",
+      "expected_behavior": "Curls /health and /metrics directly first and reads status/body before assuming application-level issues, then confirms auth posture and the new metric's presence.",
       "assertions": [
-        "Mentions health or metrics endpoint validation.",
-        "Mentions security or sensitive endpoint protection.",
-        "Mentions verifying the new metric itself."
+        "The first move is curling /health and /metrics directly, not reading application code first.",
+        "Confirms metrics auth/protection behavior for the current environment.",
+        "Confirms the new metric appears in the /metrics output."
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "curl -i http://localhost:<PORT>/health",
+        "curl -i http://localhost:<PORT>/metrics"
+      ]
     },
     {
-      "id": "observability-debug",
-      "prompt": "The service is up but my observability output looks wrong. What should I inspect first?",
-      "expected_behavior": "The response uses endpoint checks, logs, and troubleshooting steps specific to observability rather than generic debugging only.",
+      "id": "new-metric-outcome",
+      "prompt": "Add a new counter metric for failed payment attempts.",
+      "expected_behavior": "Registers the metric during app initialization (not per-request), instruments the right code path, and confirms it shows up in Prometheus text format without high-cardinality or sensitive labels.",
       "assertions": [
-        "Mentions troubleshooting health/metrics/logging.",
-        "Mentions local validation commands such as curl.",
-        "Keeps focus on observability surfaces."
+        "Registers the metric at startup, not per-request, to avoid duplicate-registration panics.",
+        "Confirms GET /metrics returns 200 with Prometheus text format (# HELP / # TYPE lines) including the new metric.",
+        "Avoids high-cardinality or sensitive label values on the metric."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "metric is registered once at startup, not inside the per-request handler",
+        "GET /metrics returns 200 with # HELP and # TYPE lines for the new metric"
+      ]
+    },
+    {
+      "id": "scoped-health-check-efficiency",
+      "prompt": "Just tell me if /health is returning 200 in staging right now — don't refactor the logging or metrics setup.",
+      "expected_behavior": "Performs only the targeted /health check requested and reports the result without restructuring metric registration, logging configuration, or other observability surfaces that weren't asked about.",
+      "assertions": [
+        "Performs the /health curl check the user asked for and reports the status/body.",
+        "Does not restructure metrics registration, instrumentation, or logging config as part of this answer.",
+        "Stays scoped to the liveness question rather than auditing the whole observability contract."
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "route-away-general-prod-debugging",
+      "prompt": "Our API is returning intermittent 500 errors in production and we're not sure why. Figure out what's going on.",
+      "expected_behavior": "Recognizes this is general production debugging where telemetry health is not clearly the question yet, rather than an observability-endpoint validation task, and does not assume the fix is metric registration or /metrics auth.",
+      "assertions": [
+        "Does not treat this purely as an observability-endpoint validation task by default.",
+        "Does not assume the root cause is metric registration or /metrics auth without evidence.",
+        "Keeps scope on root-causing the 500s (e.g. via systematic debugging) rather than only running health/metrics checks."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "route-away-secret-leak",
+      "prompt": "We just found an API token committed to the repo in plaintext. Rotate it and clean up the leak.",
+      "expected_behavior": "Recognizes secret handling and remediation is owned by security-basics / secret-scan-triage, not observability-endpoint validation, and does not redirect the task toward /health or /metrics checks.",
+      "assertions": [
+        "Does not perform /health or /metrics endpoint checks as the response to a secret leak.",
+        "Recognizes this is a secret-handling risk outside this skill's scope (security-basics)."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

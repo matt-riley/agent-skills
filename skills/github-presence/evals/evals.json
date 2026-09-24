@@ -4,35 +4,72 @@
     {
       "id": "personal-profile-recruiter-focused",
       "prompt": "I want to set up my GitHub profile to look good for recruiters. My username is 'jchen-dev'. I'm a full-stack developer at a fintech startup, working mostly with React, Node.js, and PostgreSQL. I want to seem professional but approachable.",
-      "expected_behavior": "Recognizes this as profile-mode GitHub presence work, accounts for personal profile surfaces, and includes README, bio, and pinned-repository guidance tailored to recruiter-facing positioning.",
+      "expected_behavior": "Recognizes this as profile-mode GitHub presence work, audits the current profile README/bio/pinned-repo state first, then generates or improves the profile README and gives concrete bio and pinned-repository recommendations tailored to recruiter-facing positioning.",
       "assertions": [
         "Treats the task as GitHub profile work rather than repository-only work",
         "Accounts for the personal profile README surface",
-        "Includes bio and pinned-repository recommendations"
+        "Includes concrete bio text and pinned-repository recommendations, not vague advice"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "organization-defaults",
       "prompt": "We're setting up our company's GitHub org. We need default community health files, issue templates, and a good org profile page in a .github repository.",
-      "expected_behavior": "Recognizes org-defaults mode, recommends the shared .github repository surfaces, and includes both templates and org profile guidance.",
+      "expected_behavior": "Recognizes org-defaults mode, keeps the shared .github repository surfaces distinct from any single repo's local files, and produces both templates and org profile guidance in the correct locations.",
       "assertions": [
-        "Distinguishes org-wide defaults from a single repository",
-        "Includes community health files and templates",
-        "Mentions the organization profile README surface"
+        "Distinguishes org-wide defaults from a single repository's local files",
+        "Includes community health files and templates placed in the org-wide .github repository",
+        "Mentions the organization profile README surface separately from repo-level READMEs"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
-      "id": "repo-open-source-polish",
+      "id": "repo-audit-before-generation",
       "prompt": "I just open-sourced a Python CLI tool called 'taskflow'. The repo has a basic README and a LICENSE but nothing else. Can you make it look professional?",
-      "expected_behavior": "Handles this as repository-mode GitHub presence work, audits README and community-file gaps, and recommends repo-surface improvements tailored to a small open-source project.",
+      "expected_behavior": "Classifies the target as repository mode, audits the current README quality, metadata, and community health file state before generating anything, then improves only the missing or weak surfaces that matter most for this project's size and audience.",
       "assertions": [
-        "Treats the task as repository presentation and health-file work",
-        "Identifies missing README-adjacent and community-health surfaces",
-        "Does not confuse the repo task with profile optimization"
+        "Audits the current README, metadata, and community-health-file state before generating new files",
+        "Identifies specifically which surfaces are missing (e.g. CONTRIBUTING, issue templates, badges) rather than assuming a generic bundle",
+        "Does not confuse the repo task with personal or org profile optimization"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "efficiency-scoped-audit",
+      "prompt": "This repo already has a solid README and CONTRIBUTING.md. I just want you to check if the pinned-repo choices and profile metadata are optimized -- don't regenerate anything that's already working.",
+      "expected_behavior": "Audits only the requested pinned-repo and metadata surfaces, leaves already-strong README/CONTRIBUTING content untouched, and does not regenerate a full generic presence bundle when most of the surface is already in good shape.",
+      "assertions": [
+        "Does not regenerate or rewrite README/CONTRIBUTING content that the user said is already solid",
+        "Scopes the audit and any changes to pinned repos and metadata as requested",
+        "Prioritizes the highest-impact missing pieces rather than producing an exhaustive generic bundle"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-prose-only-tagline",
+      "prompt": "Just polish the wording of this three-sentence project tagline, nothing else.",
+      "expected_behavior": "Recognizes this is a narrow prose-quality task with no broader GitHub-surface audit involved, and routes to writing-and-editing instead of running a github-presence audit.",
+      "assertions": [
+        "Does not run a broader profile/repository/org-defaults audit for a narrow wording request",
+        "Routes to writing-and-editing for prose-only polishing with no GitHub-surface audit attached"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-actions-failure",
+      "prompt": "Our README badge shows a failing GitHub Actions run -- diagnose why the workflow is red.",
+      "expected_behavior": "Recognizes this is a failing-run diagnosis task, not a GitHub-presentation task, and routes to github-actions-failure-triage instead of treating it as a badge/README styling issue.",
+      "assertions": [
+        "Does not treat the failing workflow run as a README/badge presentation problem",
+        "Routes to github-actions-failure-triage for the actual failure diagnosis"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

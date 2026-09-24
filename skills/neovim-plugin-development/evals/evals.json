@@ -12,7 +12,32 @@
         "Creates tests/ with minimal_init.lua",
         "Uses lua/<plugin>/ directory structure (not flat .lua file)"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "locate-structure-before-editing",
+      "prompt": "Add a `highlight` option to my existing Neovim plugin and a test for it.",
+      "expected_behavior": "Before editing, the agent identifies the plugin's actual entry point (lua/<plugin>/init.lua vs lua/<plugin>.lua) and checks whether tests and CI already exist, per the documented First move, rather than assuming a layout or bootstrapping new infrastructure that's already there.",
+      "assertions": [
+        "Identifies the existing entry point (lua/<plugin>/init.lua or lua/<plugin>.lua) before editing.",
+        "Checks whether tests/ and CI already exist before adding new infrastructure.",
+        "Merges the new `highlight` option into config defaults with `vim.tbl_deep_extend(\"force\", ...)` rather than replacing the whole config table."
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "scoped-feature-add-not-full-rewrite",
+      "prompt": "Add a :Glimpse command and <leader>gp keymap with plenary tests to my existing glimpse.nvim plugin.",
+      "expected_behavior": "The agent adds the one command, keymap, and its test in the appropriate feature module without restructuring the existing plugin layout, rewriting unrelated modules, or touching CI/docs unless the new command changes the documented interface.",
+      "assertions": [
+        "Adds the :Glimpse command, keymap, and plenary test scoped to this one feature.",
+        "Does not restructure or rewrite unrelated existing modules, CI workflows, or docs that weren't asked about.",
+        "Uses vim.keymap.set and vim.api.nvim_create_user_command rather than vim.cmd string registration."
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "add-ci-workflows",
@@ -24,7 +49,8 @@
         "Checks out plenary.nvim as a sibling directory",
         "Uses rhysd/action-setup-vim for Neovim installation"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "not-trigger-user-config",
@@ -34,7 +60,20 @@
         "Does not scaffold plugin structure",
         "Routes to neovim-config for user configuration editing"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-plugin-load-is-config-side",
+      "prompt": "Why does lazy.nvim load the wrong version of this plugin?",
+      "expected_behavior": "Even though a plugin is involved, a plugin-version-loading problem driven by the user's lazy.nvim spec, pinned ref, or lockfile is config-side, so the agent routes to neovim-config instead of treating it as plugin authoring/release work.",
+      "assertions": [
+        "Does not treat this as a plugin-authoring or release-automation task.",
+        "Routes to neovim-config for the lazy.nvim spec / pinned-ref investigation.",
+        "Does not scaffold or modify the plugin's own repository structure to answer this."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

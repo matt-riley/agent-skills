@@ -1,0 +1,50 @@
+[
+  {
+    "query": "Use ast-grep to rewrite obj.val && obj.val() to obj.val?.() in TypeScript, preview first",
+    "should_trigger": true
+  },
+  {
+    "query": "Author an ast-grep lint rule that flags console.log calls left in production code.",
+    "should_trigger": true
+  },
+  {
+    "query": "Replace every `var` declaration with `let` across this JS codebase using ast-grep, safely.",
+    "should_trigger": true
+  },
+  {
+    "query": "I need a structural codemod, not a regex, to rewrite oldFn(x) calls to newFn(x) across src/.",
+    "should_trigger": true
+  },
+  {
+    "query": "Search for `new Promise((resolve, reject) => ...)` patterns using sg and show me matches before rewriting.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write an ast-grep rule file to catch a deprecated API usage pattern in TS files and scan for it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Preview an ast-grep rewrite of this call pattern across the repo before applying it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Find all call sites matching this AST pattern across the codebase and give me JSON output for tooling.",
+    "should_trigger": true
+  },
+  {
+    "query": "Find the exact string \"obj.val && obj.val()\" in this repository.",
+    "should_trigger": false
+  },
+  {
+    "query": "My test is failing after a merge and I don't know why; help me find the root cause.",
+    "should_trigger": false
+  },
+  {
+    "query": "This request is pretty vague — help me turn it into an executable brief before we start coding.",
+    "should_trigger": false
+  },
+  {
+    "query": "Implement the new caching feature with a failing test first, then make it pass.",
+    "should_trigger": false
+  }
+]

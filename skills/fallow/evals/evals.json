@@ -10,7 +10,23 @@
         "Prefers a read-only report or audit before applying fixes",
         "Mentions config, package scope, exit-code handling, or false-positive triage before deletion"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "fallow-config-check-before-command-choice",
+      "prompt": "Give me a Fallow-based dead-code and duplication report for this monorepo.",
+      "expected_behavior": "The agent checks for an existing Fallow config before choosing a command family, reads the CLI reference to pick the right command for dead-code/duplication analysis, and runs a read-only analysis command before any fix.",
+      "assertions": [
+        "Checks for an existing fallow.config.* or package.json#fallow before running commands.",
+        "Selects the command family (dead code / duplication) based on the CLI reference rather than guessing a flag.",
+        "Runs a read-only analysis command, using `--format json --quiet` and redirecting stderr to /dev/null (not `2>&1`), before proposing any fix."
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "uses `--format json --quiet`, not `2>&1`, for machine-readable output"
+      ]
     },
     {
       "id": "fallow-safe-fix-preview",
@@ -21,17 +37,46 @@
         "Does not jump straight to destructive cleanup without a preview",
         "Mentions re-running analysis or tests after fixes"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "runs `fallow fix --dry-run` before `fallow fix --yes`"
+      ]
+    },
+    {
+      "id": "fallow-scoped-to-changed-files-only",
+      "prompt": "Gate this PR on Fallow: only flag new dead code introduced by the changed files, don't re-audit the whole monorepo.",
+      "expected_behavior": "The agent scopes the Fallow analysis to the changed-file/PR-gate command shape from `references/patterns.md` instead of running a full-repo audit, so the check stays fast and focused on what actually changed.",
+      "assertions": [
+        "Scopes the Fallow run to changed files / PR-gate mode rather than a full monorepo audit.",
+        "Does not propose re-auditing or fixing unrelated pre-existing findings outside the changed files.",
+        "Treats exit code 1 as issues-found, not a tool failure, when wiring the CI gate."
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "fallow-boundary-knip-or-debug",
       "prompt": "The test suite is failing after a refactor; use Fallow to find the bug. Also, should I use Knip instead?",
-      "expected_behavior": "Routes away from Fallow for runtime/test-failure diagnosis and does not treat Knip as interchangeable for this debugging task.",
+      "expected_behavior": "Routes away from Fallow for runtime/test-failure diagnosis (use systematic-debugging) and does not treat Knip as interchangeable for this debugging task.",
       "assertions": [
         "Does not claim Fallow is the right tool for runtime or test-failure diagnosis",
         "Routes the failure-analysis work toward debugging rather than dead-code cleanup"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "fallow-boundary-knip-scope-only",
+      "prompt": "I just need to find unused exports and unused npm dependencies in this TS repo — nothing about duplication or circular imports.",
+      "expected_behavior": "Since Fallow isn't named and the need is narrowly unused-only detection, the response routes to `knip` instead of defaulting to a full Fallow audit, per the fallow/knip routing boundary in skills/README.md.",
+      "assertions": [
+        "Does not default to Fallow when Fallow is not named and the scope is unused-only.",
+        "Names or routes toward `knip` for the unused-exports/unused-dependencies-only request.",
+        "Does not run duplication, circular-dependency, or boundary analysis that wasn't asked for."
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

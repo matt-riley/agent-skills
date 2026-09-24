@@ -4,23 +4,65 @@
     {
       "id": "tsc-root-cause",
       "prompt": "Fix a burst of TypeScript compiler errors after a refactor.",
-      "expected_behavior": "Finds the repo typecheck command, captures full output, groups errors by root cause, fixes source types before leaf call sites, and reruns typecheck.",
+      "expected_behavior": "Finds the repository's typecheck command (falling back to tsc --noEmit or tsc -b), runs it to capture the full output, groups errors by root symbol/module/config boundary, fixes the first causal error before touching downstream call sites, and re-runs the typecheck to confirm follow-on errors disappear.",
       "assertions": [
-        "Runs the repository typecheck command first",
-        "Groups errors by root symbol/module/config boundary",
-        "Avoids any/ts-ignore as the default fix"
+        "Runs the repository's typecheck command (or tsc --noEmit / tsc -b as the documented fallback) first",
+        "Groups errors by root symbol, module, or config boundary instead of treating each as independent",
+        "Fixes the first causal error (broken export, generic constraint, config mismatch) before editing downstream call sites",
+        "Re-runs the typecheck command after the fix to confirm follow-on errors disappeared"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs the repo's typecheck command, `tsc --noEmit`, or `tsc -b`"
+      ]
+    },
+    {
+      "id": "tsc-triage-collapse-not-leaf-by-leaf",
+      "prompt": "There are 60 compiler errors after a refactor; go through and fix each one file by file.",
+      "expected_behavior": "Declines to patch every leaf error independently and instead finds the one shared root cause (a broken export, generic constraint, or config mismatch) whose fix collapses the majority of the reported errors, per the skill's Iron Law.",
+      "assertions": [
+        "Does not fix errors file-by-file or leaf-by-leaf as a first step",
+        "Identifies and fixes the shared root-cause error first",
+        "Explains that one root-cause fix is expected to collapse many of the reported leaf errors"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "tsc-triage-outcome-no-suppression",
+      "prompt": "Fix these compiler errors properly — don't just make the red squiggles go away.",
+      "expected_behavior": "Delivers a fix that preserves runtime behavior, does not silence errors with any, @ts-ignore, or unsafe assertions unless the repo already documents that escape hatch, and confirms via a re-run that the targeted errors are gone with no new class of error introduced nearby.",
+      "assertions": [
+        "Does not silence errors with any, @ts-ignore, or unsafe assertions as the fix",
+        "Preserves runtime behavior while improving type correctness",
+        "Re-runs the typecheck command and confirms the targeted errors are gone with no new error class introduced"
+      ],
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "tsconfig-boundary",
       "prompt": "Enable noUncheckedIndexedAccess safely in this TypeScript repo.",
-      "expected_behavior": "Routes config hardening to tsconfig-hardening instead of compiler-error triage.",
+      "expected_behavior": "Routes the config-change request to tsconfig-hardening instead of applying the source-level compiler-error triage workflow, since no errors exist yet to triage.",
       "assertions": [
-        "Recognizes config change is the primary task",
-        "Does not start leaf compiler fixes before the config change exists"
+        "Recognizes the config change is the primary task, not error triage",
+        "Does not start leaf compiler fixes before the config change exists",
+        "Recommends tsconfig-hardening for the flag rollout"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "tsc-triage-boundary-no-typescript",
+      "prompt": "This service doesn't use TypeScript at all — help me understand why this Python script throws a null pointer style error.",
+      "expected_behavior": "Declines to apply the TypeScript compiler-error triage workflow because the repository has no meaningful typecheck command or TypeScript compiler signal.",
+      "assertions": [
+        "Does not attempt to run a TypeScript typecheck command or apply root-cause-first tsc triage",
+        "States the task is out of scope for this skill because there is no TypeScript compiler signal"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

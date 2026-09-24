@@ -20,11 +20,19 @@
     "should_trigger": true
   },
   {
-    "query": "Review the finished code diff.",
-    "should_trigger": false
+    "query": "Draft a rollout plan for this database migration and keep it read-only until I say implement.",
+    "should_trigger": true
   },
   {
-    "query": "Explain what project planning means.",
+    "query": "I want a hardened revision of the plan.md we already have, with explicit scope boundaries and validation commands.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use structured Jason and Freddy review with a three-round approval limit on this plan.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review the finished code diff.",
     "should_trigger": false
   },
   {
@@ -32,15 +40,11 @@
     "should_trigger": false
   },
   {
-    "query": "Stress-test this design and update CONTEXT.md as we go — no formal reviewer tokens.",
+    "query": "Stress-test this design and update CONTEXT.md as we go - no formal reviewer tokens.",
     "should_trigger": false
   },
   {
-    "query": "Give me a fast informal critique of this idea without a full review loop.",
-    "should_trigger": false
-  },
-  {
-    "query": "The plan is already approved — start implementing the tasks.",
+    "query": "The plan is already approved - start implementing the tasks.",
     "should_trigger": false
   }
 ]

@@ -1,0 +1,84 @@
+{
+  "skill_name": "git-signing-troubleshoot",
+  "evals": [
+    {
+      "id": "op-ssh-sign-buffer-error",
+      "prompt": "My signed commit fails with 'op-ssh-sign: failed to fill whole buffer'; diagnose it without bypassing 1Password signing.",
+      "expected_behavior": "Retries the real signed git command as the source of truth, reads gpg.format and gpg.ssh.program, confirms the configured signer exists at that path, then treats the buffer error as a 1Password app/SSH-agent interop issue and asks the user to unlock 1Password and confirm the SSH agent is enabled before retrying.",
+      "assertions": [
+        "Retries the real `git commit` (or `git tag -s`/`git push`) first and treats its result as the source of truth",
+        "Reads `git config --get gpg.format` and `git config --get gpg.ssh.program` to confirm SSH signing is configured and which program is expected",
+        "Confirms the configured signing program exists at the exact configured path",
+        "Treats 'failed to fill whole buffer' as a 1Password app/SSH-agent interop issue and asks the user to unlock 1Password and enable the SSH agent before retrying",
+        "Never suggests `--no-gpg-sign`, `commit.gpgsign=false`, or swapping to an alternate signing program"
+      ],
+      "files": [],
+      "deterministic_checks": [
+        "runs `git config --get gpg.format` and `git config --get gpg.ssh.program`",
+        "never suggests `--no-gpg-sign` or `commit.gpgsign=false`"
+      ],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "op-whoami-false-negative",
+      "prompt": "op whoami says not signed in, but I need to know whether my signed commit path is actually broken before I touch any config.",
+      "expected_behavior": "Does not treat `op whoami` as authoritative; runs the real signed git command as the actual test, and if it succeeds, reports signing is working and stops without changing any config or fetching unnecessary 1Password data.",
+      "assertions": [
+        "Does not conclude signing is broken based on `op whoami` output alone",
+        "Uses the real `git commit` (or equivalent) as the authoritative test",
+        "Does not change git signing config when the real command already succeeds",
+        "Does not fetch a full 1Password SSH key item payload just to confirm metadata; requests only fields like title/id if inspection is needed"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "precise-blocker-outcome",
+      "prompt": "Our repo uses SSH signing with 1Password and op-ssh-sign; troubleshoot the failure safely and do not suggest disabling signing.",
+      "expected_behavior": "Ends with either a confirmed working signed git operation, or a precise, evidence-backed external blocker (e.g. 1Password locked, SSH agent disabled, signer path missing) that the user must clear themselves, without ever weakening the signing requirement.",
+      "assertions": [
+        "Delivers either a verified working signed operation or a precise external blocker requiring user action",
+        "States the exact trusted signing configuration in use (format and program path)",
+        "Does not propose an alternate signing route or weaken the signing requirement as a resolution"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "boundary-refuse-bypass-request",
+      "prompt": "Just disable commit signing with --no-gpg-sign so I can push this right now.",
+      "expected_behavior": "Refuses to suggest or apply --no-gpg-sign, commit.gpgsign=false, or any other bypass; instead diagnoses the real signing blocker and reports it.",
+      "assertions": [
+        "Does not apply or recommend `--no-gpg-sign`, `commit.gpgsign=false`, or an alternate signing program to get the push through",
+        "Redirects to diagnosing the actual signing blocker instead of bypassing it"
+      ],
+      "files": [],
+      "deterministic_checks": [
+        "never suggests `--no-gpg-sign` or `commit.gpgsign=false` even when explicitly requested"
+      ],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-secret-scanning-not-signing",
+      "prompt": "GitHub rejected my push because secret scanning found an AWS key in the diff.",
+      "expected_behavior": "Recognizes the push rejection is caused by secret scanning, not a signing failure, and routes to secret-scan-triage instead of running the signing diagnostic workflow.",
+      "assertions": [
+        "Does not run the git signing diagnostic sequence for a secret-scanning rejection",
+        "Routes to secret-scan-triage for the actual blocker"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-signing-already-works",
+      "prompt": "Signing already works fine and the branch is pushed; create the PR and watch the checks.",
+      "expected_behavior": "Recognizes signing is not the blocker here and routes to github-cli-pr-workflow for the PR creation and check-watch task instead of running signing diagnostics.",
+      "assertions": [
+        "Does not run signing diagnostics when the user states signing already works",
+        "Routes to github-cli-pr-workflow for PR creation and check watching"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

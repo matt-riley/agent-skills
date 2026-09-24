@@ -12,15 +12,31 @@
     "should_trigger": true
   },
   {
+    "query": "This task spans a dozen files and several risky decisions - walk it through research, plan, implement, and validate phases with a plan.md.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want end-to-end disciplined execution on this migration: research the current state, write a plan, implement it in phases, then validate.",
+    "should_trigger": true
+  },
+  {
+    "query": "Let's do the full RPI-V cycle on this feature and keep artifacts under files/ for handoff later.",
+    "should_trigger": true
+  },
+  {
+    "query": "This is complex enough that I want explicit phase boundaries and durable progress artifacts, not one big edit.",
+    "should_trigger": true
+  },
+  {
     "query": "Just fix this one-line typo right now.",
     "should_trigger": false
   },
   {
-    "query": "Explain what project management is.",
+    "query": "Do an implementation review of the current diff only.",
     "should_trigger": false
   },
   {
-    "query": "Do an implementation review of the current diff only.",
+    "query": "I just want a plan for this feature right now, not the full implement-and-validate cycle.",
     "should_trigger": false
   }
 ]

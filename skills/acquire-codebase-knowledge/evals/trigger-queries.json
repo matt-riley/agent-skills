@@ -1,0 +1,46 @@
+[
+  {
+    "query": "Map this codebase for a new engineer onboarding.",
+    "should_trigger": true
+  },
+  {
+    "query": "Document this repo's architecture, conventions, and testing setup.",
+    "should_trigger": true
+  },
+  {
+    "query": "Onboard me to this repository - I need to understand the stack and structure.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create codebase docs covering stack, architecture, and concerns.",
+    "should_trigger": true
+  },
+  {
+    "query": "Give me a full architecture and conventions writeup with evidence citations for this project.",
+    "should_trigger": true
+  },
+  {
+    "query": "Produce STACK.md, ARCHITECTURE.md, and the other codebase knowledge docs for this repo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Focus just on documenting the architecture and testing layers of this codebase.",
+    "should_trigger": true
+  },
+  {
+    "query": "Onboard me to this TypeScript monorepo - map every workspace's stack and structure.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix the null pointer bug in the login handler.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a README for this CLI for first-time users.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a persisted onboarding tour with a step-by-step file walkthrough for new joiners.",
+    "should_trigger": false
+  }
+]

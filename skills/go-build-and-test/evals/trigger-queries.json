@@ -16,6 +16,22 @@
     "should_trigger": true
   },
   {
+    "query": "This Go test reads a local .env fixture file that's gitignored, and it fails in CI because the file doesn't exist there.",
+    "should_trigger": true
+  },
+  {
+    "query": "go build ./... fails after we bumped the pinned Go version in go.mod; the local go version doesn't seem to match.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our test suite is flaky only on Linux CI — looks related to t.TempDir() cleanup timing against a background write.",
+    "should_trigger": true
+  },
+  {
+    "query": "go vet reports different results locally than in CI even though go version looks the same — figure out why.",
+    "should_trigger": true
+  },
+  {
     "query": "Why does func(string) *ValidationError not satisfy func(string) error in Go?",
     "should_trigger": false
   },

@@ -28,7 +28,11 @@
     "should_trigger": true
   },
   {
-    "query": "OIDC AssumeRole AccessDenied during deploy auth before sam deploy runs.",
+    "query": "Our nested CloudFormation stack has a resource property type error that fails validation before it can deploy.",
+    "should_trigger": true
+  },
+  {
+    "query": "An SQS event source mapping needs partial batch failure reporting configured correctly in the SAM template.",
     "should_trigger": true
   },
   {

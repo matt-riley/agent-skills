@@ -2,6 +2,11 @@
   { "query": "Audit my GitHub profile and tell me how to make it look more professional.", "should_trigger": true },
   { "query": "Set up community health files and issue templates for this repo.", "should_trigger": true },
   { "query": "We're creating a company .github repo with org defaults and an org profile page.", "should_trigger": true },
+  { "query": "My repo README is thin and there's no LICENSE badge or contributing guide -- help me fix the public-facing presentation.", "should_trigger": true },
+  { "query": "Pick which repos I should pin on my profile and rewrite my bio to be more credible.", "should_trigger": true },
+  { "query": "Add a CODE_OF_CONDUCT.md, CONTRIBUTING.md, and a PR template to this repo.", "should_trigger": true },
+  { "query": "Review my org's profile README and pinned repos and make them feel more welcoming to new contributors.", "should_trigger": true },
   { "query": "Check these meta descriptions for truncation and rewrite them if needed.", "should_trigger": false },
-  { "query": "Diagnose this failing GitHub Actions run.", "should_trigger": false }
+  { "query": "Diagnose this failing GitHub Actions run.", "should_trigger": false },
+  { "query": "Change our org's billing plan and member permission roles.", "should_trigger": false }
 ]

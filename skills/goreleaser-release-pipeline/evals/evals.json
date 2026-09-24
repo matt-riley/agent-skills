@@ -1,0 +1,83 @@
+{
+  "skill_name": "goreleaser-release-pipeline",
+  "evals": [
+    {
+      "id": "read-configs-together-first",
+      "prompt": "Release Please created v1.4.0 but the GitHub release has no binaries and our GoReleaser publish job never ran.",
+      "expected_behavior": "Reads the release workflow, Release Please config, and .goreleaser.yaml together before editing any one file, checks whether release_created was true and the publish job actually ran before changing .goreleaser.yaml, and runs goreleaser check after any config edit.",
+      "assertions": [
+        "Reads the release workflow, Release Please config, and .goreleaser.yaml together before editing any one file in isolation",
+        "Checks whether the GoReleaser job ran at all (release_created, job condition, trigger) before assuming a .goreleaser.yaml schema bug",
+        "Runs `goreleaser check` after any .goreleaser.yaml change"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `goreleaser check` after editing .goreleaser.yaml"
+      ]
+    },
+    {
+      "id": "tag-format-fix-preserves-numbering",
+      "prompt": "GoReleaser rejects our tag gh-depdash-v1.1.1 as invalid semver. Fix the tag strategy without changing our release numbering scheme.",
+      "expected_behavior": "Sets include-component-in-tag: false in the Release Please config so tags become plain vX.Y.Z instead of component-prefixed, while preserving existing release numbers and history.",
+      "assertions": [
+        "Sets include-component-in-tag: false for the single-package repo",
+        "Resulting tag format is plain vX.Y.Z, not component-prefixed",
+        "Does not renumber or remove existing release history while fixing the tag format"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "include-component-in-tag: false",
+        "vX.Y.Z tag format"
+      ]
+    },
+    {
+      "id": "chain-publish-job-same-workflow",
+      "prompt": "Our publish job listens for a `release: published` event created by Release Please's default GITHUB_TOKEN, and it never fires.",
+      "expected_behavior": "Moves the publish job into the same workflow as Release Please, gates it on steps.release.outputs.release_created, passes tag_name forward, and notes that GITHUB_TOKEN-created tags can suppress downstream workflow triggers (recommending a PAT only if a separate trigger is truly required).",
+      "assertions": [
+        "Chains the publish job into the same workflow as Release Please rather than relying on a separate release:published trigger",
+        "Gates the publish job on steps.release.outputs.release_created",
+        "Passes steps.release.outputs.tag_name into the publish job instead of re-deriving the tag",
+        "Notes that GITHUB_TOKEN-created tags can suppress downstream workflow runs"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "scoped-fix-not-pipeline-redesign",
+      "prompt": "Just fix why our last GoReleaser publish job had no release assets — don't redesign our whole CI pipeline.",
+      "expected_behavior": "Anchors on the specific failure mode (release with no assets), checks whether the GoReleaser job ran before touching .goreleaser.yaml, and limits the fix to the tag/trigger/gating issue rather than restructuring the whole release pipeline or renumbering releases.",
+      "assertions": [
+        "Checks whether the GoReleaser job ran at all before rewriting .goreleaser.yaml",
+        "Limits the fix to the specific tag/trigger/gating cause rather than restructuring the whole CI pipeline",
+        "Does not remove or renumber existing releases while making the fix"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "route-away-runner-triage",
+      "prompt": "Our self-hosted GitHub Actions runner keeps failing to bootstrap before any release step even runs — diagnose the workflow job.",
+      "expected_behavior": "Recognizes this is generic runner/environment triage with no release-pipeline-specific evidence and routes to github-actions-failure-triage instead of applying release-pipeline design changes.",
+      "assertions": [
+        "Does not treat this as a GoReleaser or Release Please tag/publish-job design problem",
+        "Routes to github-actions-failure-triage for the runner/bootstrap diagnosis"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "route-away-branch-decision",
+      "prompt": "The feature branch is done — should I merge it or discard it before cutting a release?",
+      "expected_behavior": "Does not treat branch merge/discard as a release-pipeline task and routes to finishing-a-development-branch instead.",
+      "assertions": [
+        "Does not treat the branch merge/discard decision as release-pipeline work",
+        "Routes to finishing-a-development-branch"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

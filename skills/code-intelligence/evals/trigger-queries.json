@@ -1,0 +1,46 @@
+[
+  {
+    "query": "Find all callers of parseConfig in the Go codebase before I refactor it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Rename UserSession everywhere it's used safely.",
+    "should_trigger": true
+  },
+  {
+    "query": "LSP returned empty for this symbol - is the server actually down or is this a usage issue?",
+    "should_trigger": true
+  },
+  {
+    "query": "Which tool should I use to find where rate-limiting is implemented - grep or something smarter?",
+    "should_trigger": true
+  },
+  {
+    "query": "Go to the definition of the validateToken function and show me its callers.",
+    "should_trigger": true
+  },
+  {
+    "query": "Check whether a TypeScript language server is available before I start refactoring this module.",
+    "should_trigger": true
+  },
+  {
+    "query": "Find every reference to the RateLimiter class using the language server, not just text matches.",
+    "should_trigger": true
+  },
+  {
+    "query": "Prove that ast-grep is genuinely missing before you fall back to grep for this search.",
+    "should_trigger": true
+  },
+  {
+    "query": "Count how many times TODO appears in this repo.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rewrite every callback-based function to async/await using a structural codemod across the repo.",
+    "should_trigger": false
+  },
+  {
+    "query": "Before I edit the auth module, map all the related files, tests, and patterns.",
+    "should_trigger": false
+  }
+]

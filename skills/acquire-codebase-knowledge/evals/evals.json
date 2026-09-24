@@ -1,0 +1,68 @@
+{
+  "skill_name": "acquire-codebase-knowledge",
+  "evals": [
+    {
+      "id": "scan-then-intent-docs-before-source",
+      "prompt": "Map this codebase and produce the full docs/codebase knowledge base.",
+      "expected_behavior": "Runs scripts/scan.py first, then reads intent documents (README, ARCHITECTURE, top-level docs) before opening any source files, following the four-phase checklist in order.",
+      "assertions": [
+        "Runs `python3 skills/acquire-codebase-knowledge/scripts/scan.py --output docs/codebase/.codebase-scan.txt` (or the repo's equivalent skills path) before reading source files",
+        "Reads README/intent documents (PRD, TRD, ROADMAP, SPEC, DESIGN) and summarizes stated project intent before reading source code",
+        "Follows the checklist phases (scan, investigate, populate, validate) in order rather than skipping to populating docs"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "`python3 skills/acquire-codebase-knowledge/scripts/scan.py --output docs/codebase/.codebase-scan.txt` runs before other file reads"
+      ]
+    },
+    {
+      "id": "seven-docs-with-evidence",
+      "prompt": "Onboard me to this repo - create the full codebase knowledge base.",
+      "expected_behavior": "Produces exactly the seven required documents in docs/codebase/ with evidence lists citing concrete file paths, marks unknowns [TODO] and intent-dependent items [ASK USER] instead of guessing, and ends with a numbered [ASK USER] list.",
+      "assertions": [
+        "Creates exactly STACK.md, STRUCTURE.md, ARCHITECTURE.md, CONVENTIONS.md, INTEGRATIONS.md, TESTING.md, CONCERNS.md in docs/codebase/",
+        "Every non-trivial claim has an evidence file-path citation",
+        "Unknowns are marked [TODO] and intent-dependent items are marked [ASK USER] rather than assumed",
+        "Final response lists [ASK USER] items as numbered questions and calls out any intent-vs-reality divergence"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "focus-area-mode-scoping",
+      "prompt": "Document only the architecture and testing layers of this codebase - I don't need the rest right now.",
+      "expected_behavior": "Runs Phase 1 scan in full, fully completes ARCHITECTURE.md and TESTING.md first, and keeps the other five documents present but marked [TODO] rather than fully investigating every area.",
+      "assertions": [
+        "Fully completes ARCHITECTURE.md and TESTING.md before the non-focus documents",
+        "Non-focus documents keep required sections present but marked [TODO] rather than being fully researched",
+        "Still runs Phase 1 (scan + intent documents) in full even in focus-area mode",
+        "Still runs the Phase 4 validation loop across all seven documents before finishing"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-pre-edit-scope-not-full-mapping",
+      "prompt": "Before I touch the payments module, map the files and tests I'll need to read.",
+      "expected_behavior": "Routes to context-map for a targeted pre-edit file/test scoping pass instead of producing the full seven-document codebase knowledge base.",
+      "assertions": [
+        "Does not create the seven docs/codebase files for a narrow pre-edit scoping request",
+        "Routes to context-map for the targeted file/test map instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-quick-file-summary",
+      "prompt": "What does the formatPrice function in src/utils/currency.ts do?",
+      "expected_behavior": "Answers directly by reading the single file rather than running the acquire-codebase-knowledge scan-and-document workflow.",
+      "assertions": [
+        "Reads the single named file directly instead of running scripts/scan.py or building docs/codebase",
+        "Does not create any files under docs/codebase for a single-function question"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

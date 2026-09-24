@@ -1,0 +1,71 @@
+{
+  "skill_name": "neovim-config",
+  "evals": [
+    {
+      "id": "target-checkout-before-repro",
+      "prompt": "Validate why this Neovim checkout still opens the live config instead of the worktree when I launch nvim.",
+      "expected_behavior": "Before trusting any repro or smoke test, the agent confirms the real config root and points `nvim` at the target checkout via `XDG_CONFIG_HOME` (set to the parent `.config` directory, not the repo root) and `NVIM_APPNAME`, rather than relying on `cd` alone.",
+      "assertions": [
+        "Identifies the real config root and plugin manager before proposing a fix.",
+        "Sets `XDG_CONFIG_HOME` (to the parent `.config` dir) and `NVIM_APPNAME` to target the intended checkout rather than relying on `cd` alone.",
+        "Does not trust a repro result until it confirms which checkout `nvim` actually loaded."
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "sets XDG_CONFIG_HOME and NVIM_APPNAME before launching nvim to reproduce"
+      ]
+    },
+    {
+      "id": "smallest-truthful-validation-scope",
+      "prompt": "Add a new keymap and a treesitter textobject config to my Neovim setup, and make sure it doesn't break anything.",
+      "expected_behavior": "The agent keeps the smallest truthful implementation and validation scope: it implements the keymap/textobject change where the plugin lives, validates with the smallest mode that proves the behavior, and stops probing once the wiring is confirmed instead of re-running every repo-wide validator or restructuring unrelated config.",
+      "assertions": [
+        "Scopes the change to the requested keymap/treesitter config without opportunistically restructuring unrelated plugin wiring.",
+        "Chooses the smallest validation mode that proves the change (targeted check) rather than an exhaustive re-validation of the whole config.",
+        "Excludes nested `.worktrees/**` when running repo-wide `stylua`/`selene` checks so duplicate checkouts don't produce false failures."
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "vim-pack-fix-proves-config-callback",
+      "prompt": "Fix this Neovim worktree so vim.pack loads blink.cmp v1 and Copilot completions work again.",
+      "expected_behavior": "The fix pins blink.cmp to `branch = \"v1\"` (or `version = vim.version.range(\"^1\")`) using a real upstream ref, reacquires the current Copilot client rather than caching it, and the validation proves the plugin's `config` callback side effect actually ran and Copilot completions work — not just that the package is installed.",
+      "assertions": [
+        "Pins blink.cmp to `branch = \"v1\"` or an equivalent `^1` version range with a real upstream ref, not a lazy.nvim shorthand.",
+        "Reacquires the current attached Copilot client per request instead of caching a stale client reference.",
+        "Validation confirms the `config` callback's side effect and working completions, not merely that the package appears installed."
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "pins blink.cmp with `branch = \"v1\"` or `version = vim.version.range(\"^1\")`"
+      ]
+    },
+    {
+      "id": "boundary-generic-lua-test-failure",
+      "prompt": "Find the root cause of this failing Lua service test — it's part of our backend, unrelated to any Neovim setup.",
+      "expected_behavior": "Because the failure is not specific to a Neovim Lua configuration, the agent does not apply neovim-config's checkout/XDG/plugin-wiring workflow and instead uses generic root-cause debugging (`systematic-debugging`).",
+      "assertions": [
+        "Does not apply XDG_CONFIG_HOME/NVIM_APPNAME checkout-targeting steps to a non-Neovim Lua test failure.",
+        "Routes toward `systematic-debugging` for the generic root-cause investigation instead.",
+        "Does not treat this as a plugin-manager or startup-wiring problem."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-plugin-authoring-not-user-config",
+      "prompt": "Scaffold a new Neovim plugin called glimpse.nvim that previews file contents in a floating window, with plenary tests and CI.",
+      "expected_behavior": "Building a new Neovim plugin (structure, plenary tests, CI, doc/ generation) is `neovim-plugin-development`'s surface, not user-level config editing, so the agent routes there instead of treating this as init.lua/lazy.nvim wiring work.",
+      "assertions": [
+        "Does not treat plugin scaffolding (lua/<plugin>/init.lua, tests/, CI) as a user-level config change.",
+        "Routes toward `neovim-plugin-development` for building and testing the new plugin.",
+        "Does not apply the XDG/checkout-targeting validation steps meant for editing an existing user config."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    }
+  ]
+}

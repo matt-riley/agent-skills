@@ -2,6 +2,36 @@
   "skill_name": "ci-images",
   "evals": [
     {
+      "id": "run-local-checks-in-order",
+      "prompt": "I changed formatting and generated code in this Go repo. Run what CI runs before I push.",
+      "expected_behavior": "Runs the local CI-equivalents in the documented order — generated code check, formatting, static analysis, then tests — fixing each failing stage before moving to the next, rather than running them in arbitrary order or skipping ahead.",
+      "assertions": [
+        "Runs local CI-equivalent commands in the documented order: generation, formatting, static analysis, tests",
+        "Fixes the first failing stage before moving to the next stage",
+        "Confirms `git diff` is clean for generated output as part of the sequence"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "make generate",
+        "make fmt (or gofmt -l .)",
+        "make vet (or go vet ./...)",
+        "make test"
+      ]
+    },
+    {
+      "id": "readiness-check-without-publishing",
+      "prompt": "Just tell me if I'm ready to push and release — don't actually trigger the image publish.",
+      "expected_behavior": "Runs the local pre-flight checks and reports pass/fail per stage and release readiness, without triggering the actual image publish workflow or performing unrelated regeneration beyond what CI parity requires.",
+      "assertions": [
+        "Runs local CI-equivalent checks and reports readiness per stage",
+        "Does not trigger or document triggering the actual image publish workflow when only asked to check readiness",
+        "Does not perform unnecessary extra work (e.g. re-running generation repeatedly) beyond confirming a clean tree"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
       "id": "release-readiness-check",
       "prompt": "I updated generated code and release automation. Validate the local CI equivalents and tell me if the image release is safe to publish.",
       "expected_behavior": "The response identifies the local CI-equivalent commands to run, checks generated artifacts and tests, and states the release-readiness outcome with any blockers.",
@@ -10,7 +40,8 @@
         "Mentions tests or CI-equivalent checks.",
         "Calls out image tagging or release publish expectations."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "stale-generated-output",
@@ -21,7 +52,19 @@
         "Says the working tree should be checked before publish.",
         "Does not recommend publishing immediately without fixes."
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "route-away-failing-run-triage",
+      "prompt": "Our last GitHub Actions run failed on the deploy step — dig into the failed job logs and find the root cause.",
+      "expected_behavior": "Should NOT apply the local CI-parity pre-flight workflow. Routes to github-actions-failure-triage since this is diagnosing an already-failing Actions run, not validating local checks before pushing.",
+      "assertions": [
+        "Does not treat this as a local CI-parity pre-flight task",
+        "Routes to github-actions-failure-triage for the failing run diagnosis"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

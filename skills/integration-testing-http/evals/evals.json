@@ -2,26 +2,72 @@
   "skill_name": "integration-testing-http",
   "evals": [
     {
-      "id": "extend-http-tests",
-      "prompt": "I changed an endpoint and need to update the end-to-end HTTP integration tests. What should those tests assert?",
-      "expected_behavior": "The response focuses on status codes, auth, request/response shapes, and the changed contract rather than only unit-level details.",
-      "assertions": [
-        "Mentions request/response contract assertions.",
-        "Mentions auth or middleware if relevant.",
-        "Mentions running the existing integration suite."
-      ],
-      "files": []
-    },
-    {
       "id": "debug-http-failure",
       "prompt": "The integration test for my HTTP route is failing after a middleware change. How should I debug it?",
-      "expected_behavior": "The response suggests isolating the failing route/test, checking middleware interactions, and preserving integration-level expectations.",
+      "expected_behavior": "Runs the targeted integration test with verbose request/response output first and reads the real output before proposing any fix, per the documented first move.",
       "assertions": [
-        "Mentions isolating the failing integration test.",
-        "Mentions middleware or auth interactions.",
-        "Keeps focus on end-to-end HTTP behavior."
+        "Runs the targeted test with `-v` (or the repo's verbose flag) before proposing a fix",
+        "Reads the actual request/response output rather than guessing",
+        "Mentions middleware or auth interactions as the likely cause given the change"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `go test -v -run TestE2E ./path/to/server/pkg/` (or equivalent targeted, verbose command) before proposing a fix"
+      ]
+    },
+    {
+      "id": "new-endpoint-full-contract-coverage",
+      "prompt": "I added POST /orders. Write the integration tests it needs.",
+      "expected_behavior": "Covers every concern the skill requires for a touched endpoint: status codes for happy path and documented errors, auth enforcement, request validation, response schema, and side effects.",
+      "assertions": [
+        "Asserts the happy-path status code and documented error status codes",
+        "Asserts unauthenticated and invalid-token requests are rejected if the endpoint requires auth",
+        "Asserts missing/invalid request fields return a 400 with an error body",
+        "Asserts response schema (required fields, correct types) and relevant side effects (DB state, events)"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "asserts unauthenticated request returns 401",
+        "asserts invalid/missing required fields return 400"
+      ]
+    },
+    {
+      "id": "scoped-rerun-after-single-endpoint-change",
+      "prompt": "The whole integration suite went red after I added one new endpoint. What do I run first?",
+      "expected_behavior": "Runs the targeted test for the new endpoint first with verbose output, and only widens to the full suite if shared middleware or handlers were affected — not as the first step.",
+      "assertions": [
+        "Runs the narrow, targeted test for the new/changed endpoint before the full suite",
+        "Only widens to the broader suite after confirming shared middleware/handlers are implicated",
+        "Does not rewrite unrelated existing tests while chasing this failure"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "boundary-pure-unit-logic",
+      "prompt": "Write a test for this pure discount-calculation function — it doesn't touch HTTP at all.",
+      "expected_behavior": "Recognizes this is unit-level domain logic with no HTTP involvement and routes to testing-workflows rather than building an HTTP integration test.",
+      "assertions": [
+        "Does not stand up an HTTP request/response test for pure domain logic",
+        "States this belongs to testing-workflows (the unit-test layer), not integration-testing-http",
+        "Does not add auth or endpoint-contract assertions that don't apply"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-spec-only-change",
+      "prompt": "Update the OpenAPI description text for an existing field; no handler or behavior change.",
+      "expected_behavior": "Recognizes this is a spec-only documentation change with no handler work, and routes to http-api-openapi rather than writing new HTTP integration tests.",
+      "assertions": [
+        "Does not add or modify integration tests for a spec-text-only change",
+        "States this belongs to http-api-openapi rather than integration-testing-http",
+        "Does not treat the spec edit as an endpoint contract change requiring new test coverage"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

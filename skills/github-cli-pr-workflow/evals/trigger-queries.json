@@ -16,11 +16,27 @@
     "should_trigger": true
   },
   {
+    "query": "Push this branch and open a PR against main with a short summary.",
+    "should_trigger": true
+  },
+  {
+    "query": "Change the base branch on PR #88 to develop using gh.",
+    "should_trigger": true
+  },
+  {
+    "query": "Confirm the PR checks are scoped to the SHA I just pushed, not an earlier run.",
+    "should_trigger": true
+  },
+  {
+    "query": "Open a PR for this pushed branch and make sure the CI status I report matches the newest commit, not a stale rerun.",
+    "should_trigger": true
+  },
+  {
     "query": "Help me choose whether to merge, PR, keep, or discard this branch.",
     "should_trigger": false
   },
   {
-    "query": "This workflow run failed — diagnose the root cause from the logs.",
+    "query": "This workflow run failed -- diagnose the root cause from the logs.",
     "should_trigger": false
   },
   {

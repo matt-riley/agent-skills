@@ -8,20 +8,30 @@
       "assertions": [
         "Treats UPDATE_ROLLBACK_FAILED as more than a simple retry",
         "Uses stack events or drift evidence before recovery actions",
+        "Only uses `aws cloudformation continue-update-rollback` after the drifted resource is stable and understood",
         "Keeps focus on SAM/CloudFormation rather than Go binary packaging"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "aws cloudformation continue-update-rollback is used only after drift is understood, not as the first action"
+      ]
     },
     {
       "id": "validate-before-deploy",
       "prompt": "Fix this SAM template validation error; resources need portable ARNs without hardcoding account/region.",
       "expected_behavior": "Runs or recommends sam validate --lint first, fixes schema/property/wiring issues, and prefers !Sub with AWS::AccountId/AWS::Region over hardcoded ARNs.",
       "assertions": [
-        "Prioritizes sam validate --lint before repeated deploys",
-        "Mentions dynamic ARNs or avoiding hardcoded account/region",
-        "Confirms SAM transform headers when relevant"
+        "Prioritizes `sam validate --lint` before repeated deploys",
+        "Uses `!Sub` with `AWS::AccountId`/`AWS::Region` instead of hardcoded account or region values",
+        "Confirms SAM transform headers (`AWSTemplateFormatVersion`, `Transform: AWS::Serverless-2016-10-31`) when relevant"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "sam validate --lint reports no errors before redeploying",
+        "!Sub with AWS::AccountId and AWS::Region replaces any hardcoded ARN"
+      ]
     },
     {
       "id": "oidc-assumerole-denied",
@@ -33,7 +43,20 @@
         "Uses references/oidc-assumerole-triage.md rather than widening the trust policy",
         "Re-verifies the auth step before moving on to CloudFormation triage"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "narrow-schema-fix-scope",
+      "prompt": "sam validate --lint reports one property-type error on a single resource. Fix just that, don't rewrite the template.",
+      "expected_behavior": "Makes the minimal targeted fix to the reported resource's property and re-validates, instead of restructuring unrelated resources or the whole template.",
+      "assertions": [
+        "Scopes the fix to the single reported failing resource/property",
+        "Does not touch unrelated resources or restructure the template beyond what's needed",
+        "Re-runs `sam validate --lint` to confirm the narrow fix rather than jumping straight to `sam deploy`"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "route-away-lambda-bootstrap",
@@ -41,9 +64,21 @@
       "expected_behavior": "Routes to aws-lambda-go-deployment because packaging/runtime is the primary blocker, not SAM template wiring.",
       "assertions": [
         "Does not keep iterating on SAM template schema as the main fix",
-        "Routes toward aws-lambda-go-deployment or Lambda packaging guidance"
+        "Routes toward `aws-lambda-go-deployment` or Lambda packaging guidance"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "route-away-terraform-state-lock",
+      "prompt": "Debug this Terraform module and remote state lock issue in the same AWS account we deploy SAM into.",
+      "expected_behavior": "Recognizes the infrastructure in question is Terraform-managed, not SAM/CloudFormation-managed, and routes to terraform-skill instead of applying SAM template or stack-recovery guidance.",
+      "assertions": [
+        "Does not propose sam validate/deploy or CloudFormation stack-event triage for a Terraform state-lock problem",
+        "Names `terraform-skill` as the correct skill for Terraform state and module issues"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

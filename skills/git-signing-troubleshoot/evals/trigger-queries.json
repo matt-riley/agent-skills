@@ -1,0 +1,50 @@
+[
+  {
+    "query": "My signed commit fails with 'op-ssh-sign: failed to fill whole buffer'; diagnose it without bypassing 1Password signing.",
+    "should_trigger": true
+  },
+  {
+    "query": "A signed git commit failed even though 1Password is open; check the trusted SSH signing path and tell me whether the issue is Git config or 1Password interop.",
+    "should_trigger": true
+  },
+  {
+    "query": "op whoami says not signed in, but I need to know whether my signed commit path is actually broken before I touch any config.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our repo uses SSH signing with 1Password and op-ssh-sign; troubleshoot the failure safely and do not suggest disabling signing.",
+    "should_trigger": true
+  },
+  {
+    "query": "git push is rejected with a GPG signing error -- figure out why without turning off commit signing.",
+    "should_trigger": true
+  },
+  {
+    "query": "Confirm whether gpg.ssh.program actually points at a real op-ssh-sign binary before we blame Git.",
+    "should_trigger": true
+  },
+  {
+    "query": "git tag -s keeps failing to sign; diagnose the SSH signing path.",
+    "should_trigger": true
+  },
+  {
+    "query": "The commit signing error mentions op-ssh-sign; before touching git config, tell me if the real git commit actually succeeds or fails.",
+    "should_trigger": true
+  },
+  {
+    "query": "Signing already works fine and the branch is pushed; create the PR and watch the checks.",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHub rejected my push because secret scanning found an AWS key in the diff.",
+    "should_trigger": false
+  },
+  {
+    "query": "Just disable commit signing with --no-gpg-sign so I can push this right now.",
+    "should_trigger": true
+  },
+  {
+    "query": "Tests pass and signing isn't an issue -- help me decide whether to merge this branch locally or open a PR.",
+    "should_trigger": false
+  }
+]

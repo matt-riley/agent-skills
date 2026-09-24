@@ -2,27 +2,84 @@
   "skill_name": "finishing-a-development-branch",
   "evals": [
     {
-      "id": "ready-merge",
-      "prompt": "Tests are all green on feature/auth-jwt in a worktree. Help me finish the branch.",
-      "expected_behavior": "Announces the skill, verifies tests and clean worktree, presents the four options clearly, and executes the chosen integration path (or waits for user choice) with proper validation and cleanup where applicable.",
+      "id": "merge-locally-option",
+      "prompt": "Tests are all green on feature/auth-jwt in a worktree. Merge it locally into main.",
+      "expected_behavior": "Announces the skill, confirms the worktree is clean and tests pass, then executes Option 1: checkout base, pull, merge the feature branch, re-verify tests, delete the feature branch, and clean up the worktree.",
       "assertions": [
         "Announces use of the finishing-a-development-branch skill",
-        "Confirms tests are passing before presenting options 1-3",
-        "Lists the four options (merge locally, push+PR, keep, discard)",
-        "Respects the test gate (does not offer merge/PR/keep on red)"
+        "Confirms tests pass and the worktree is clean before merging",
+        "Runs the merge-locally sequence: checkout base, pull, merge feature branch, re-verify tests",
+        "Deletes the feature branch (`git branch -d`) and cleans up the worktree only after a successful merge"
       ],
-      "files": []
+      "files": [],
+      "deterministic_checks": [
+        "feature branch is deleted locally only after the merge succeeds and tests are re-verified"
+      ],
+      "category": "tool-pattern"
     },
     {
-      "id": "discard-on-red",
-      "prompt": "The branch has failing tests and the approach didn't work. Discard it.",
-      "expected_behavior": "Allows Option 4 (Discard) even when tests are failing, requires explicit 'discard' confirmation, force-deletes the branch and cleans the worktree, and reports completion.",
+      "id": "push-and-pr-option",
+      "prompt": "Tests are green -- push this branch and open a PR instead of merging locally.",
+      "expected_behavior": "Executes Option 2: pushes the branch, creates a PR with a summary and test evidence, and keeps the worktree active for follow-up rather than merging or deleting anything.",
       "assertions": [
-        "Recognizes that Options 1-3 are blocked by failing tests",
-        "Still offers and executes Discard (Option 4) with confirmation",
-        "Performs branch deletion and worktree cleanup"
+        "Pushes the branch and creates a PR with a summary and test evidence",
+        "Keeps the worktree active for follow-up review cycles rather than cleaning it up",
+        "Does not merge locally or delete the branch, since Option 2 keeps the worktree",
+        "Does not re-run the full test suite beyond what already confirmed green, since tests were already validated as the gate"
       ],
-      "files": []
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "keep-as-is-option",
+      "prompt": "Tests pass, but I'm not ready to merge or open a PR yet -- just keep the branch as-is for now.",
+      "expected_behavior": "Executes Option 3: reports the branch and worktree location clearly and performs no cleanup or integration action, leaving the branch exactly as it is.",
+      "assertions": [
+        "Reports the branch and worktree location clearly",
+        "Performs no cleanup, merge, or push action",
+        "Reminds the user that cleanup/integration is still a pending task"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "discard-requires-confirmation",
+      "prompt": "The branch has failing tests and the approach didn't work. Discard it.",
+      "expected_behavior": "Recognizes Options 1-3 are blocked because tests are failing, but Option 4 (Discard) remains available; requires the user to explicitly type 'discard' before force-deleting the branch and cleaning up the worktree.",
+      "assertions": [
+        "Recognizes that Options 1-3 (merge, PR, keep) are blocked while tests are failing",
+        "Still offers Option 4 (Discard) despite the failing tests",
+        "Requires the explicit typed word 'discard' as confirmation before deleting anything",
+        "Force-deletes the branch and cleans up the worktree only after that confirmation, then reports completion"
+      ],
+      "files": [],
+      "deterministic_checks": [
+        "the user must type the word \"discard\" before the branch is force-deleted"
+      ],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-tests-not-yet-run",
+      "prompt": "I just finished writing the feature -- I haven't run the tests yet, but can you go ahead and decide whether to merge, PR, keep, or discard?",
+      "expected_behavior": "Does not present Options 1-3 since tests have not been run yet; runs or requests the relevant tests first (or reports that pass/fail status must be established) before offering the integration decision, though Option 4 could still be raised if the user wants to abandon the work.",
+      "assertions": [
+        "Does not present merge/PR/keep options before tests have been run and confirmed passing",
+        "Either runs the relevant tests or clearly states that test status must be established first",
+        "Does not claim the branch is ready to integrate without a confirmed passing test run"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "boundary-route-pr-workflow",
+      "prompt": "Create a PR and watch checks for this ready branch.",
+      "expected_behavior": "Recognizes the user already decided on the PR integration path, so it routes straight to github-cli-pr-workflow for PR creation and check-watching rather than re-presenting the four-option decision from scratch.",
+      "assertions": [
+        "Does not re-present the full merge/PR/keep/discard decision when the user already chose the PR path",
+        "Routes PR creation and check-watching to github-cli-pr-workflow"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

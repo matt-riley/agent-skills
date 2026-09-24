@@ -2,6 +2,22 @@
   "skill_name": "workflow-contracts",
   "evals": [
     {
+      "id": "template-first-then-validate-script",
+      "prompt": "Turn today's implementation wave into an execution record artifact, and confirm it's actually valid before you hand it off.",
+      "expected_behavior": "Picks the matching v1 template from assets/ (execution-record-v1.md) first, keeps its frontmatter keys and stable headings, fills fields from concrete evidence per references/contract-spec.md, then runs scripts/validate-contracts.mjs to mechanically confirm required frontmatter, status values, and headings before treating the handoff as done.",
+      "assertions": [
+        "Selects the execution-record v1 template from assets/ before writing free-form content",
+        "Keeps the template's stable frontmatter keys and headings unchanged",
+        "Runs scripts/validate-contracts.mjs (or explicitly instructs running it) after populating the artifact",
+        "Does not declare the handoff complete before that validation step"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `scripts/validate-contracts.mjs`"
+      ]
+    },
+    {
       "id": "planner-handoff-v1",
       "prompt": "Turn this approved plan into a v1 planner handoff with status ready, task_id, validation commands, and a next action the executor can start immediately.",
       "expected_behavior": "Uses the planner-handoff v1 template shape with required frontmatter (contract_type, contract_version, created_by, status) and concrete next action rather than freeform chat prose.",
@@ -10,7 +26,8 @@
         "Requires or fills contract_version v1 and shared frontmatter keys",
         "Makes status and next action explicit instead of burying them in prose"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
     },
     {
       "id": "review-outcome-contract",
@@ -21,7 +38,21 @@
         "Makes the decision status explicit (for example revise)",
         "Keeps accepted versus unresolved comments distinguishable"
       ],
-      "files": []
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "leave-blocked-rather-than-invent",
+      "prompt": "Write the execution record for this implementation wave, but we don't actually have validation command output yet and the blocker isn't fully diagnosed.",
+      "expected_behavior": "Fills only the fields supported by concrete evidence and explicitly marks the artifact status as draft/blocked with the real open blocker, rather than fabricating validation command results or wishful prose to make it look complete, and does not invent a fourth artifact shape to work around the missing evidence.",
+      "assertions": [
+        "Does not fabricate validation command output or results that were not actually run",
+        "Leaves the status explicitly draft or blocked rather than falsely marking it ready",
+        "Does not invent a new artifact shape or parser to route around missing evidence",
+        "States the concrete blocker instead of vague filler prose"
+      ],
+      "files": [],
+      "category": "efficiency"
     },
     {
       "id": "workflow-contracts-boundary-prd",
@@ -31,7 +62,22 @@
         "Does not force a workflow-contract template for PRD authoring",
         "Routes toward to-prd or product-requirements work instead of inventing a handoff contract"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary",
+      "deterministic_checks": [
+        "recommends to-prd rather than workflow-contracts"
+      ]
+    },
+    {
+      "id": "workflow-contracts-boundary-issues",
+      "prompt": "This contract is already approved. Break it into individually trackable GitHub issues for the team.",
+      "expected_behavior": "Routes away from workflow-contracts because breaking an approved contract into tickets is to-issues' job, not a new contract artifact to draft.",
+      "assertions": [
+        "Does not draft another workflow-contracts artifact for an already-approved contract",
+        "Routes toward to-issues instead"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }

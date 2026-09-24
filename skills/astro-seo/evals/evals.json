@@ -2,25 +2,63 @@
   "skill_name": "astro-seo",
   "evals": [
     {
-      "id": "astro-seo-audit",
+      "id": "astro-seo-first-move",
       "prompt": "Audit the SEO on this Astro site and propose the first changes.",
-      "expected_behavior": "Confirms Astro config/site origin first, audits technical SEO surfaces, and separates metadata copy review from implementation.",
+      "expected_behavior": "Confirms this is an Astro site and reads astro.config.* (site origin, adapter, i18n) before proposing any canonical, sitemap, or OG change, treating a missing or local-only site config as blocking.",
       "assertions": [
-        "Reads astro.config/package setup before proposing canonical or sitemap work",
-        "Checks metadata, structured data, OG, sitemap/robots/RSS, and indexing surfaces",
-        "Mentions writing-and-editing only for generated short strings or prose follow-up"
+        "Reads astro.config.* and confirms the production site origin before proposing canonical/sitemap/OG work",
+        "Checks package.json and whether @jdevalk/astro-seo-graph is already installed",
+        "Treats a missing or local-only site config as a blocking issue rather than proceeding anyway"
       ],
-      "files": []
+      "files": [],
+      "category": "tool-pattern"
     },
     {
-      "id": "astro-seo-boundary",
+      "id": "astro-seo-minimal-path",
+      "prompt": "Our Astro site already has a working hand-rolled SEO setup with good metadata and a sitemap, but we're missing structured data and llms.txt. Fix the gaps.",
+      "expected_behavior": "Recommends the smallest coherent implementation path: preserve the existing hand-rolled setup where it already works and add only the missing structured data and llms.txt pieces, rather than replacing the whole stack.",
+      "assertions": [
+        "Does not propose replacing the existing SEO stack when it already satisfies the working requirements",
+        "Scopes the implementation to the actually missing pieces (structured data, llms.txt)",
+        "Only suggests @jdevalk/astro-seo-graph if it materially simplifies the missing pieces, not as a default rip-and-replace"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "astro-seo-audit-outcome",
+      "prompt": "Audit the SEO on this Astro site and propose the first changes, then implement the missing pieces.",
+      "expected_behavior": "Audits the major SEO surfaces (metadata, structured data, OG images, sitemap/robots/RSS, indexing, agent-discovery surfaces), implements the missing pieces, and verifies canonical/metadata/schema/OG output on representative pages before finishing.",
+      "assertions": [
+        "Covers head metadata/canonicals, structured data, OG images, sitemap/robots/RSS, and indexing surfaces in the audit",
+        "Runs the project's Astro validation path (astro check and/or npm run build) or confirms it was run",
+        "Verifies resulting canonical, metadata, schema, and OG output on representative pages rather than assuming correctness",
+        "Mentions writing-and-editing only for generated short strings or prose follow-up, not as the primary deliverable"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "astro-seo-boundary-copy-review",
       "prompt": "Check these title tags and descriptions for truncation and rewrite weak ones.",
-      "expected_behavior": "Routes the copy-only task away from Astro technical SEO.",
+      "expected_behavior": "Routes the copy-only metadata review away from Astro technical SEO implementation and toward writing-and-editing in metadata-audit mode.",
       "assertions": [
         "Does not treat copy-only metadata review as an Astro SEO implementation task",
-        "Recommends writing-and-editing metadata-audit mode"
+        "Recommends writing-and-editing in metadata-audit mode instead of auditing the SEO system"
       ],
-      "files": []
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "astro-seo-boundary-non-astro",
+      "prompt": "Set up SEO for a Next.js app — metadata, sitemap, and structured data.",
+      "expected_behavior": "Declines to apply Astro-specific SEO workflow because the project is not an Astro site, and does not force Astro-specific tooling like @jdevalk/astro-seo-graph onto a Next.js codebase.",
+      "assertions": [
+        "Does not apply the Astro-specific SEO workflow or recommend @jdevalk/astro-seo-graph for a non-Astro project",
+        "States the skill is scoped to Astro sites rather than proceeding with generic SEO advice under this skill's workflow"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     }
   ]
 }
