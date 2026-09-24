@@ -38,7 +38,7 @@
       "files": [],
       "category": "outcome",
       "deterministic_checks": [
-        "uses `@ts-expect-error`"
+        "uses `@ts-expect-error` or an explicit non-assignability check"
       ]
     },
     {

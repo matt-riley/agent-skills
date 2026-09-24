@@ -56,7 +56,7 @@
       "expected_behavior": "Recognizes this falls under the skill's own 'do not use when the user explicitly instructs applying every comment exactly as written without assessment' boundary, and either flags that skipping assessment forgoes the skill's evaluation step or applies the literal instruction while noting the assessment step was explicitly skipped rather than silently running the normal classify-then-fix workflow.",
       "assertions": [
         "Does not silently run the full classify/accept/reject workflow when the user explicitly waived assessment",
-        "States plainly that comments are being applied without independent validity assessment, per the user's explicit instruction"
+        "Either flags that skipping assessment forgoes the skill's evaluation step, or states plainly that comments are being applied without independent validity assessment per the user's explicit instruction — not both required, but not neither"
       ],
       "files": [],
       "category": "negative-boundary"

@@ -41,7 +41,7 @@
   },
   {
     "query": "Just disable commit signing with --no-gpg-sign so I can push this right now.",
-    "should_trigger": false
+    "should_trigger": true
   },
   {
     "query": "Tests pass and signing isn't an issue -- help me decide whether to merge this branch locally or open a PR.",

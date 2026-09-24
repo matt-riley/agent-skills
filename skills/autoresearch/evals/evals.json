@@ -40,7 +40,7 @@
       "assertions": [
         "Prints or summarizes the full `results.tsv` contents as part of the final report.",
         "States baseline vs. final metric value and the improvement percentage.",
-        "The experiment/row counts in the summary match the number of rows actually appended to `results.tsv`, and only kept (improving) commits remain on the branch."
+        "The experiment/row counts in the summary match the number of rows actually appended to `results.tsv`, and the working tree reflects only the kept (improving) changes — discarded experiments are undone via their `git revert HEAD --no-edit` commits, not erased from history."
       ],
       "files": [],
       "category": "outcome"

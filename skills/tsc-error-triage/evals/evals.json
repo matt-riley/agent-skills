@@ -14,7 +14,7 @@
       "files": [],
       "category": "tool-pattern",
       "deterministic_checks": [
-        "runs `tsc --noEmit`"
+        "runs the repo's typecheck command, `tsc --noEmit`, or `tsc -b`"
       ]
     },
     {
