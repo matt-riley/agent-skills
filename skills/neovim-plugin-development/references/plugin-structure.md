@@ -196,7 +196,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: nvim-lua/plenary.nvim
-          path: plenary.nvim
+          # Sibling of the plugin checkout: tests add `../plenary.nvim` to
+          # runtimepath, so vendoring it inside the repo would break the
+          # documented minimal_init.lua bootstrap.
+          path: ../plenary.nvim
       - run: make test
       - uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main' && matrix.nvim-version == 'stable'
@@ -210,7 +213,7 @@ Key rules:
 - Run lint on every push; run tests on PRs and main.
 - Test against both `stable` and `nightly` Neovim.
 - Publish rendered docs to GitHub Pages on main push.
-- Check out `plenary.nvim` as a sibling directory for test dependencies.
+- Check out `plenary.nvim` as a sibling directory (`../plenary.nvim`) for test dependencies — not inside the plugin repo.
 
 ## Documentation
 

@@ -73,7 +73,7 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 1. **Scaffold or locate structure** — Use `lua/<plugin>/init.lua` as the entry point, optional `plugin/` autoload, `doc/`, `tests/`, and CI under `.github/workflows/`. Read `references/plugin-structure.md` for the full tree, entry-point and registration patterns.
 2. **Configuration defaults** — Merge user opts with `vim.tbl_deep_extend("force", ...)`, keep defaults on `M.config`, make `setup()` idempotent. Details and examples in `references/plugin-structure.md`.
 3. **Tests (plenary.nvim)** — Add behavior-focused `*_spec.lua` under `tests/`, run via `make test` with a `minimal_init.lua` that does not load the user's full config. Spec and Makefile patterns in `references/plugin-structure.md`.
-4. **CI** — Lint with selene + stylua; test on stable and nightly Neovim with plenary checked out as a sibling. Workflow shapes in `references/plugin-structure.md`.
+4. **CI** — Lint with selene + stylua; test on stable and nightly Neovim with plenary checked out as a sibling of the plugin repo (`../plenary.nvim`). Workflow shapes in `references/plugin-structure.md`.
 5. **Documentation** — Maintain `doc/<plugin>.txt` vimdoc; optionally generate HTML or convert from markdown with panvimdoc/lemmy-help. Templates in `references/plugin-structure.md`.
 6. **Release** — Tag `v*` releases via GitHub Actions; keep `lua/` and `doc/` at repo root for lazy.nvim compatibility. Release workflow in `references/plugin-structure.md`.
 
@@ -91,6 +91,8 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 - **Must** provide sensible defaults for every configurable option.
 - **Must** make `setup()` idempotent — safe to call multiple times.
 - **Must not** load the user's full Neovim config during tests; use `minimal_init.lua`.
+- **Must not** restructure, rewrite, or replace existing modules, CI workflows, or docs that the request did not ask about — add the requested feature and stop.
+- **Must** check `plenary.nvim` out as a sibling of the plugin repo (`../plenary.nvim`), never inside it, so `require('plenary')` resolves without vendoring the dependency.
 - **Should** keep each feature in its own `lua/<plugin>/<feature>.lua` module.
 - **Should** test behavior, not internal implementation details.
 - **Should** run CI on both `stable` and `nightly` Neovim.
