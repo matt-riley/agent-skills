@@ -1,0 +1,6 @@
+{
+  "name": "fixture-tsc-error-triage",
+  "private": true,
+  "type": "module",
+  "scripts": { "typecheck": "tsc --noEmit" }
+}

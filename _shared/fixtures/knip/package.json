@@ -1,0 +1,9 @@
+{
+  "name": "fixture-knip",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/main.ts",
+  "dependencies": {
+    "left-pad": "1.3.0"
+  }
+}
