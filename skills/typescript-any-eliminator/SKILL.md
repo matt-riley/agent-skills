@@ -24,6 +24,7 @@ metadata:
 - The `any` appears in generated code or third-party declarations that should not be hand-edited.
 - The repository intentionally documents a permissive boundary and the task is not to tighten it.
 - The work primarily requires behavior-changing refactors rather than truthful type replacement.
+- The task is enabling or hardening compiler strictness flags (such as `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `strictNullChecks`) and fixing the resulting fallout — this produces index-access, optional-property, and null-narrowing errors unrelated to `any` and belongs to compiler-flag triage, not `any` replacement.
 
 ## Inputs to gather
 
@@ -90,6 +91,7 @@ Do not force a fake precise type when the right answer is to keep the boundary p
 - Route to [`schema-boundary-typing`](../schema-boundary-typing/SKILL.md) when truthful `any` removal depends on runtime validation at an untrusted input boundary.
 - Route to [`type-test-authoring`](../type-test-authoring/SKILL.md) after the type surface is truthful and you need compile-time regression coverage for inference or assignability.
 - If compiler failures remain after `any` cleanup, route causal error triage to [`tsc-error-triage`](../tsc-error-triage/SKILL.md).
+- Route whole-repo compiler strictness-flag rollouts (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, and similar) and their fallout to [`tsc-error-triage`](../tsc-error-triage/SKILL.md) instead of treating them as `any` elimination work.
 
 ## Validation
 
@@ -100,6 +102,7 @@ Do not force a fake precise type when the right answer is to keep the boundary p
 - Smoke test:
   - should trigger: "Replace any in this API helper with a truthful type."
   - should not trigger: "Add runtime validation for this untrusted JSON input." (→ `schema-boundary-typing`)
+  - should not trigger: "Harden our tsconfig with `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` across every package, then fix the fallout." (→ `tsc-error-triage`)
 
 ## Examples
 
