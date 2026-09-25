@@ -20,11 +20,188 @@
       "expected_behavior": "Stops when the boundary is generated, vendor-owned, or intentionally permissive; prefers unknown plus a guard over inventing a fake precise type.",
       "assertions": [
         "Does not force fake precision on generated or intentionally permissive boundaries",
-        "Mentions unknown plus narrowing or leaving the honest boundary alone",
-        "Does not hand-edit the generated OpenAPI client file"
+        "Mentions unknown plus narrowing or leaving the honest boundary alone"
       ],
       "files": [],
       "category": "outcome"
+    },
+    {
+      "id": "any-eliminator-boundary-schema",
+      "prompt": "Add runtime validation for this untrusted JSON webhook and derive the TypeScript type from the schema.",
+      "expected_behavior": "Routes away from pure any elimination when the real work is schema-boundary runtime validation.",
+      "assertions": [
+        "Does not treat the task as only local any replacement",
+        "Routes toward schema-boundary-typing or runtime validation at the untrusted boundary"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "record-any-to-explicit-shape",
+      "prompt": "Our analytics module types every event payload as an index signature:\n\n```ts\ntype EventPayload = Record<string, any>;\n\nexport function track(name: string, payload: EventPayload) {\n  queue.push({ name, payload, ts: Date.now() });\n}\n```\n\nWe only ever send these keys: userId (string), plan ('free' | 'pro'), and optional count (number). Tighten the type without touching the queueing behavior.",
+      "expected_behavior": "Replaces the index signature with an explicit payload type covering the three known keys and leaves the queueing behavior unchanged.",
+      "assertions": [
+        "Defines an explicit payload type with userId: string, plan: 'free' | 'pro', and optional count?: number",
+        "Does not keep Record<string, any> or swap it for Record<string, unknown> for these known keys",
+        "Leaves the track() queueing behavior (name, payload, ts) unchanged",
+        "Does not add a cast or widening to make the change compile"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "generic-keyed-access-constraint",
+      "prompt": "This helper is typed with any:\n\n```ts\nexport function pick<T>(obj: T, key: string): any {\n  return (obj as any)[key];\n}\n```\n\nTighten it so callers still get a useful return type and passing an unknown key becomes a compile error.",
+      "expected_behavior": "Uses a constrained generic such as K extends keyof T returning T[K], removing the cast without changing runtime indexing.",
+      "assertions": [
+        "Changes the key parameter to a constrained generic such as K extends keyof T",
+        "Returns T[K] (or equivalent) rather than any",
+        "Removes the (obj as any) cast",
+        "Does not change runtime behavior; the function still indexes the same object"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "discriminated-union-message",
+      "prompt": "The websocket handler accepts any message:\n\n```ts\nexport function handleMessage(msg: any) {\n  if (msg.type === 'ping') return pong(msg.id);\n  if (msg.type === 'join') return join(msg.room, msg.user);\n  throw new Error('unknown type');\n}\n```\n\nWe control the wire format and only these two message shapes are valid.",
+      "expected_behavior": "Replaces any with a discriminated union over the literal type field covering exactly the two shapes, preserving both runtime branches.",
+      "assertions": [
+        "Defines a discriminated union with a literal type field ('ping' | 'join') covering exactly the two shapes",
+        "Keeps both runtime branches (ping to pong, join to join) intact",
+        "Does not use any, object, or a plain Record<string, unknown> as the final message type",
+        "States that the invalid-input throw remains reachable for unexpected input"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "reuse-existing-shared-dto",
+      "prompt": "In src/billing/invoice-export.ts the CSV exporter takes any:\n\n```ts\nexport function toCsv(row: any): string {\n  return [row.id, row.customerName, row.totalCents].join(',');\n}\n```\n\nThe repo already exports this from src/billing/types.ts:\n\n```ts\nexport interface Invoice {\n  id: string;\n  customerName: string;\n  totalCents: number;\n  currency: string;\n}\n```\n\nTighten the exporter.",
+      "expected_behavior": "Imports and reuses the existing Invoice type rather than inventing a narrower local duplicate.",
+      "assertions": [
+        "Imports the existing Invoice type instead of declaring a new local interface or type",
+        "Types the row parameter as Invoice",
+        "Does not create a narrower duplicate type that drops fields such as currency",
+        "Keeps the CSV output expression unchanged"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "untrusted-input-unknown-guard",
+      "prompt": "This handler runs on the server:\n\n```ts\napp.post('/webhook', (req, res) => {\n  const body: any = req.body;\n  process(body.event, body.data);\n});\n```\n\nThe body comes from the network and is untrusted.",
+      "expected_behavior": "Uses unknown plus a guard or validator before use instead of a confident type, and keeps the boundary validation honest.",
+      "assertions": [
+        "Changes the body type to unknown rather than any or a confident interface",
+        "Adds a guard or validation step before process() is called",
+        "Does not treat the payload as trustworthy without validation",
+        "Mentions routing boundary validation to a schema or validator owner where appropriate"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "generated-client-boundary",
+      "prompt": "A teammate found explicit any in src/generated/api-client.ts, which our OpenAPI generator emits. The file starts with '// AUTO-GENERATED - DO NOT EDIT'. They want the any usages hand-edited to precise types.",
+      "expected_behavior": "Declines to hand-edit the generated file and points the fix at the generator, spec, or a wrapper boundary.",
+      "assertions": [
+        "Refuses to hand-edit the generated file",
+        "Explains that the fix belongs in the generator, the OpenAPI spec, or a wrapper/boundary layer",
+        "Does not propose replacing the any values inside the generated file",
+        "Keeps the recommendation scoped instead of launching a broad TypeScript redesign"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "vendor-dts-boundary",
+      "prompt": "We vendored a third-party SDK and its declarations contain any:\n\n```ts\n// types/vendor/legacy-widget.d.ts\ndeclare module 'legacy-widget' {\n  export function render(target: any, options: any): void;\n}\n```\n\nThe team wants these replaced with precise types.",
+      "expected_behavior": "Leaves vendor-owned declarations alone or confines narrowing to a local wrapper, reporting the ownership boundary.",
+      "assertions": [
+        "Does not rewrite the vendor .d.ts declarations by hand",
+        "Proposes either documenting the boundary or narrowing in a local wrapper module",
+        "States that the package owner is responsible for the declaration fix",
+        "Does not suggest as unknown as or another cast to hide the boundary"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "callback-signature-replacement",
+      "prompt": "This upload helper forwards callbacks typed as any:\n\n```ts\nexport function upload(file: Buffer, onProgress: any, onDone: any) {\n  const task = client.upload(file);\n  task.on('progress', onProgress);\n  task.on('done', onDone);\n  return task;\n}\n```\n\nWe know the callback shapes: progress reports (percent: number), done reports (url: string, bytes: number).",
+      "expected_behavior": "Replaces both callback anys with precise function signatures, leaving the event wiring unchanged.",
+      "assertions": [
+        "Types onProgress as a function taking a percent: number or an equivalent progress object",
+        "Types onDone as a function taking url: string and bytes: number or an equivalent result object",
+        "Does not replace the callback anys with Function, object, or (...) => any",
+        "Leaves the task event wiring unchanged"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "no-cast-shortcut",
+      "prompt": "tsc reports an error because this value is any and we need a string:\n\n```ts\nconst label: string = config.displayName; // config is typed any\n```\n\nThe team suggests the quickest fix is `config.displayName as unknown as string`. Apply a fix that is actually truthful.",
+      "expected_behavior": "Narrows the source declaration of config rather than double-casting, and explains why the cast hides the problem.",
+      "assertions": [
+        "Does not use 'as unknown as' or another double cast",
+        "Corrects the type at the source (the declaration of config) instead of asserting at the use site",
+        "Keeps runtime behavior unchanged",
+        "Explains why the cast would hide the real problem"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "dont-move-any-to-caller",
+      "prompt": "A function parameter is any and the team wants the error gone by widening the caller instead:\n\n```ts\nexport function render(row: any) { return row.title; }\n\nexport function renderAll(rows: any[]) { return rows.map(render); }\n```\n\nTheir suggestion is to change renderAll's parameter to any[] and leave render alone.",
+      "expected_behavior": "Rejects moving any outward and introduces a narrow shared shape used by both functions.",
+      "assertions": [
+        "Rejects the suggestion to widen renderAll's parameter to any[]",
+        "Proposes a narrow shared shape (interface or generic) used by both render and renderAll",
+        "Does not relocate any to a different parameter, return type, or caller",
+        "Keeps render's runtime behavior of reading .title unchanged"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "catch-unknown-narrowing",
+      "prompt": "This error handler casts to reach into the error object:\n\n```ts\ntry { await send() } catch (err: any) {\n  return { message: err.message };\n}\n```\n\nTighten it without losing the message.",
+      "expected_behavior": "Treats the caught value as unknown and narrows with a guard or instanceof before reading message.",
+      "assertions": [
+        "Treats the caught value as unknown (or relies on catch's implicit unknown) rather than any",
+        "Adds a narrowing check such as instanceof Error before reading .message",
+        "Returns an equivalent result for Error inputs",
+        "Does not use as any or as unknown as Error to bypass narrowing"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "not-trigger-tsconfig-hardening",
+      "prompt": "Harden our tsconfig with noUncheckedIndexedAccess and exactOptionalPropertyTypes across every package in the monorepo, then fix the fallout.",
+      "expected_behavior": "Routes compiler-option hardening to tsconfig-hardening rather than treating it as any-elimination work.",
+      "assertions": [
+        "Routes the task to tsconfig hardening or states that compiler-option hardening is out of scope for any elimination",
+        "Does not propose any-elimination replacements as the primary approach",
+        "Names the compiler options as the subject of the change"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "not-trigger-type-test-authoring",
+      "prompt": "Write compile-time regression tests that assert our narrowed generic infers string and rejects number, using expect-type or similar.",
+      "expected_behavior": "Routes compile-time regression coverage to type-test-authoring; no any removal is required.",
+      "assertions": [
+        "Routes to the type-test-authoring skill or states that compile-time regression coverage is a separate task",
+        "Does not search for or propose any replacements as the main work",
+        "Focuses on inference and assignability assertions"
+      ],
+      "files": [],
+      "category": "negative-boundary"
     },
     {
       "id": "any-eliminator-inventory-before-edit",
@@ -49,28 +226,6 @@
       ],
       "files": [],
       "category": "efficiency"
-    },
-    {
-      "id": "any-eliminator-boundary-schema",
-      "prompt": "Add runtime validation for this untrusted JSON webhook and derive the TypeScript type from the schema.",
-      "expected_behavior": "Routes away from pure any elimination when the real work is schema-boundary runtime validation.",
-      "assertions": [
-        "Does not treat the task as only local any replacement",
-        "Routes toward schema-boundary-typing or runtime validation at the untrusted boundary"
-      ],
-      "files": [],
-      "category": "negative-boundary"
-    },
-    {
-      "id": "any-eliminator-boundary-type-tests",
-      "prompt": "The type surface is already truthful now; add compile-time regression tests locking the inference of this previously any-typed helper.",
-      "expected_behavior": "Recognizes the any-removal work is already done and routes the compile-time regression coverage request to type-test-authoring instead of continuing any-elimination work.",
-      "assertions": [
-        "Does not re-do any elimination when the type surface is already reported as truthful",
-        "Routes toward type-test-authoring for compile-time regression coverage"
-      ],
-      "files": [],
-      "category": "negative-boundary"
     }
   ]
 }
