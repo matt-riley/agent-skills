@@ -2,6 +2,209 @@
   "skill_name": "astro-seo",
   "evals": [
     {
+      "id": "astro-seo-audit",
+      "prompt": "Audit the SEO on this Astro site and propose the first changes.",
+      "expected_behavior": "Confirms Astro config/site origin first, audits technical SEO surfaces, and separates metadata copy review from implementation.",
+      "assertions": [
+        "Reads astro.config/package setup before proposing canonical or sitemap work",
+        "Checks metadata, structured data, OG, sitemap/robots/RSS, and indexing surfaces",
+        "Mentions writing-and-editing only for generated short strings or prose follow-up"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "astro-seo-boundary",
+      "prompt": "Check these title tags and descriptions for truncation and rewrite weak ones.",
+      "expected_behavior": "Routes the copy-only task away from Astro technical SEO.",
+      "assertions": [
+        "Does not treat copy-only metadata review as an Astro SEO implementation task",
+        "Recommends writing-and-editing metadata-audit mode"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "missing-site-config-blocking",
+      "prompt": "Here is our Astro config:\n\n```js\n// astro.config.mjs\nexport default defineConfig({\n  integrations: [sitemap()],\n});\n```\n\nAdd canonical tags, a sitemap, and Open Graph image URLs to the site.",
+      "expected_behavior": "Treats the missing production site origin as blocking before canonical, sitemap, or OG URL work.",
+      "assertions": [
+        "Flags the missing or local-only site value as a blocking prerequisite",
+        "Does not proceed as if canonical, sitemap, or OG URLs were already valid",
+        "Points the fix at the site field in astro.config",
+        "Explains which outputs depend on the origin (canonicals, sitemaps, OG URLs)"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "preserve-hand-rolled-stack",
+      "prompt": "Our Astro site already has hand-rolled canonical tags, a working sitemap integration, and valid Article JSON-LD in the blog layout. A teammate wants to rip it out and install @jdevalk/astro-seo-graph. Should we?",
+      "expected_behavior": "Audits the existing setup first and does not assume every finding requires replacing the stack.",
+      "assertions": [
+        "Audits what the existing hand-rolled setup already covers before recommending replacement",
+        "Does not recommend wholesale replacement purely because the package exists",
+        "Recommends the package only for gaps it materially simplifies",
+        "Keeps the answer tied to the described Astro files rather than generic SEO advice"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "install-seo-graph-when-missing",
+      "prompt": "This Astro project has no head metadata component, no JSON-LD, no IndexNow, and no build-time SEO validation. Nothing SEO-related is installed yet. What should we set up?",
+      "expected_behavior": "Recommends installing the Astro SEO package as the default spine and names what it covers.",
+      "assertions": [
+        "Recommends installing @jdevalk/astro-seo-graph as the default spine",
+        "Names the covered surfaces such as head metadata, schema, IndexNow, redirects, and build-time validation",
+        "Branches on install when missing rather than upgrading",
+        "Mentions validating with astro check or the project build"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "no-ssr-hydration-for-meta",
+      "prompt": "Our Astro site is statically built and meta tags are missing on some pages. I was thinking of switching to SSR with a client-only head component to fix it. Does that sound right?",
+      "expected_behavior": "Rejects adding SSR or client hydration to solve an SEO problem a static build already handles.",
+      "assertions": [
+        "Rejects switching to SSR or client hydration for this problem",
+        "Explains that a static Astro build can emit the metadata at build time",
+        "Points at the head layout, component, or config as the correct fix location",
+        "Does not accept the proposed approach"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "i18n-hreflang",
+      "prompt": "Our Astro config declares i18n with 'en' and 'de' locales, and content lives in src/content/<locale>/. We rank only in English. Set up the locale alternates correctly.",
+      "expected_behavior": "Reads the i18n config and wires hreflang alternates plus per-locale canonicals.",
+      "assertions": [
+        "Checks the Astro i18n configuration before proposing changes",
+        "Covers hreflang alternate links for each declared locale",
+        "Uses per-locale canonical URLs rather than one shared canonical",
+        "Does not invent locales beyond the two declared"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "json-ld-article",
+      "prompt": "Our Astro blog layout outputs title, description, and date frontmatter but no structured data. Add Article structured data properly.",
+      "expected_behavior": "Adds JSON-LD built from real frontmatter fields in the blog layout rather than hardcoded text.",
+      "assertions": [
+        "Adds JSON-LD structured data in the layout or head output",
+        "Derives values from the existing title, description, and date frontmatter",
+        "Uses an appropriate schema type such as BlogPosting or Article",
+        "Does not hardcode placeholder content into the structured data"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "og-image-route",
+      "prompt": "We want a unique Open Graph image per blog post on a statically built Astro site. What is the right implementation path?",
+      "expected_behavior": "Proposes build-time OG image generation with absolute URLs derived from the site origin.",
+      "assertions": [
+        "Proposes build-time OG image generation rather than runtime SSR",
+        "Notes that OG image URLs must be absolute and depend on the configured site origin",
+        "Covers both og:image and the Twitter card metadata",
+        "Keeps the recommendation tied to Astro routes or the existing SEO library"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "canonical-paginated-index",
+      "prompt": "Search Console reports duplicate content across our paginated blog index: /blog, /blog/2, /blog/3. Each page currently emits the same canonical pointing at /blog. Fix the canonical strategy.",
+      "expected_behavior": "Gives each paginated page its own canonical and avoids collapsing them onto page one.",
+      "assertions": [
+        "Points out that the shared canonical is the cause of the duplicate report",
+        "Gives each paginated page a self-referential canonical",
+        "Does not keep all pages pointing at /blog",
+        "Mentions the crawl or indexing surface rather than only rewriting copy"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "indexnow-manual-setup",
+      "prompt": "Set up IndexNow for our Astro site so new posts get submitted automatically.",
+      "expected_behavior": "Covers the package path plus the manual key and verification work the repo cannot automate.",
+      "assertions": [
+        "Recommends the Astro SEO package as the implementation path where appropriate",
+        "Calls out the manual setup the repo cannot automate, such as key management and verification",
+        "Describes validating the generated key file or submission output",
+        "Does not claim full automation of search engine registration"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "build-validation-warnings",
+      "prompt": "Our CI runs `npm run build || true` and the build prints SEO validation warnings about missing descriptions. Fix the pipeline so those warnings actually matter.",
+      "expected_behavior": "Surfaces build-time SEO warnings explicitly instead of letting a passing build hide them.",
+      "assertions": [
+        "Removes or replaces the swallow-everything pattern so failures surface",
+        "Runs the project build or astro check as the validation step",
+        "States that SEO validation warnings should be visible in CI, not hidden behind a passing build",
+        "Ties the fix to the CI or build script rather than to metadata copy"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "rss-alternate-links",
+      "prompt": "We publish an RSS feed at /rss.xml but our head does not reference it. Wire up feed discovery correctly.",
+      "expected_behavior": "Adds RSS autodiscovery alternate links with absolute URLs derived from the site origin.",
+      "assertions": [
+        "Adds a link rel=alternate element for the RSS feed",
+        "Uses the correct feed MIME type such as application/rss+xml",
+        "Ensures the feed URL is absolute from the configured site origin",
+        "Verifies the feed path matches the published route"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "llms-txt-and-schema-endpoints",
+      "prompt": "An AI crawler audit flagged that our Astro docs site exposes nothing for agent discovery. What should we add?",
+      "expected_behavior": "Covers the agent-discovery surfaces the skill owns: schema endpoints, schema maps, llms.txt, and markdown alternates.",
+      "assertions": [
+        "Covers agent-discovery surfaces such as llms.txt, schema endpoints or schema maps, and markdown alternates",
+        "Ties each surface to a real Astro route or generated file",
+        "Distinguishes these surfaces from classic search-engine metadata",
+        "Recommends validating the generated routes or files"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "non-astro-project-not-trigger",
+      "prompt": "Audit the SEO of our Next.js marketing site and fix the metadata setup.",
+      "expected_behavior": "Declines the Astro-specific workflow because the project is not Astro.",
+      "assertions": [
+        "States that the Astro SEO workflow does not apply to a Next.js project",
+        "Does not prescribe Astro config, integrations, or Astro-specific recipes",
+        "Offers generic or framework-appropriate guidance instead of forcing the Astro path"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "generic-strategy-not-trigger",
+      "prompt": "Give me a content marketing strategy for my personal blog — what topics should I write about to grow traffic?",
+      "expected_behavior": "Routes away from the Astro SEO implementation skill because there is no repository or technical SEO work.",
+      "assertions": [
+        "Does not treat the request as Astro SEO implementation work",
+        "States that the task is broad content strategy rather than technical SEO",
+        "Does not invent repository files or Astro config to modify"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
       "id": "astro-seo-first-move",
       "prompt": "Audit the SEO on this Astro site and propose the first changes.",
       "expected_behavior": "Confirms this is an Astro site and reads astro.config.* (site origin, adapter, i18n) before proposing any canonical, sitemap, or OG change, treating a missing or local-only site config as blocking.",
@@ -24,41 +227,6 @@
       ],
       "files": [],
       "category": "efficiency"
-    },
-    {
-      "id": "astro-seo-audit-outcome",
-      "prompt": "Audit the SEO on this Astro site and propose the first changes, then implement the missing pieces.",
-      "expected_behavior": "Audits the major SEO surfaces (metadata, structured data, OG images, sitemap/robots/RSS, indexing, agent-discovery surfaces), implements the missing pieces, and verifies canonical/metadata/schema/OG output on representative pages before finishing.",
-      "assertions": [
-        "Covers head metadata/canonicals, structured data, OG images, sitemap/robots/RSS, and indexing surfaces in the audit",
-        "Runs the project's Astro validation path (astro check and/or npm run build) or confirms it was run",
-        "Verifies resulting canonical, metadata, schema, and OG output on representative pages rather than assuming correctness",
-        "Mentions writing-and-editing only for generated short strings or prose follow-up, not as the primary deliverable"
-      ],
-      "files": [],
-      "category": "outcome"
-    },
-    {
-      "id": "astro-seo-boundary-copy-review",
-      "prompt": "Check these title tags and descriptions for truncation and rewrite weak ones.",
-      "expected_behavior": "Routes the copy-only metadata review away from Astro technical SEO implementation and toward writing-and-editing in metadata-audit mode.",
-      "assertions": [
-        "Does not treat copy-only metadata review as an Astro SEO implementation task",
-        "Recommends writing-and-editing in metadata-audit mode instead of auditing the SEO system"
-      ],
-      "files": [],
-      "category": "negative-boundary"
-    },
-    {
-      "id": "astro-seo-boundary-non-astro",
-      "prompt": "Set up SEO for a Next.js app — metadata, sitemap, and structured data.",
-      "expected_behavior": "Declines to apply Astro-specific SEO workflow because the project is not an Astro site, and does not force Astro-specific tooling like @jdevalk/astro-seo-graph onto a Next.js codebase.",
-      "assertions": [
-        "Does not apply the Astro-specific SEO workflow or recommend @jdevalk/astro-seo-graph for a non-Astro project",
-        "States the skill is scoped to Astro sites rather than proceeding with generic SEO advice under this skill's workflow"
-      ],
-      "files": [],
-      "category": "negative-boundary"
     }
   ]
 }
