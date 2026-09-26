@@ -75,7 +75,7 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 1. **Scaffold or locate structure** — Use `lua/<plugin>/init.lua` as the entry point, optional `plugin/` autoload, `doc/`, `tests/`, and CI under `.github/workflows/`. Read `references/plugin-structure.md` for the full tree, entry-point and registration patterns.
 2. **Configuration defaults** — Merge user opts with `vim.tbl_deep_extend("force", ...)`, keep defaults on `M.config`, make `setup()` idempotent. Details and examples in `references/plugin-structure.md`.
 3. **Tests (plenary.nvim)** — Add behavior-focused `*_spec.lua` under `tests/`, run via `make test` with a `minimal_init.lua` that does not load the user's full config. Spec and Makefile patterns in `references/plugin-structure.md`.
-4. **CI** — Lint with selene + stylua; test on stable and nightly Neovim with plenary checked out as a sibling of the plugin repo (`../plenary.nvim`). Workflow shapes in `references/plugin-structure.md`.
+4. **CI** — Lint with selene + stylua; test on stable and nightly Neovim with plenary checked out via its own `actions/checkout` step (`repository: nvim-lua/plenary.nvim`, `path:` inside the workspace, e.g. `plenary.nvim`) — never committed to the repo. Point `minimal_init.lua`'s runtimepath at that same checkout path so the workflow's checkout location and the test bootstrap's expectation stay in sync. Workflow shapes in `references/plugin-structure.md`.
 5. **Documentation** — Maintain `doc/<plugin>.txt` vimdoc; optionally generate HTML or convert from markdown with panvimdoc/lemmy-help. Templates in `references/plugin-structure.md`.
 6. **Release** — Tag `v*` releases via GitHub Actions; keep `lua/` and `doc/` at repo root for lazy.nvim compatibility. Release workflow in `references/plugin-structure.md`.
 
@@ -98,6 +98,9 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 - **Must** prefer the smallest possible diff for the literal request: add a new file/module where possible, and touch existing files only for the minimal registration point strictly required (e.g., one `require`/one command registration line) rather than editing unrelated existing modules.
 - **Must not** modify plugin source under `lua/<plugin>/` when the request is scoped to CI, linting, or test-bootstrap only — CI-only work is limited to `.github/workflows/`, `Makefile` lint/test targets, and `tests/minimal_init.lua` (or an equivalent test bootstrap file). If the plugin truly lacks a hook needed to test it, surface that as a question instead of silently editing source.
 - **Must** check `plenary.nvim` out as a sibling of the plugin repo (`../plenary.nvim`), never inside it, so `require('plenary')` resolves without vendoring the dependency.
+
+- **Must** distinguish "vendoring" (committing a dependency's source into the plugin repo's git history, e.g. a checked-in `plenary.nvim/` directory or submodule) from "fetching at CI time" (an ephemeral `actions/checkout` or `git clone` step inside a workflow run, nothing written to the repo). A CI workflow that clones `plenary.nvim` as a job step is required for tests to run on a fresh runner and is **not** vendoring — do not skip this step when a request says "do not vendor test dependencies".
+- **Must** make CI workflows self-sufficient for a fresh runner: explicitly install/checkout every tool the job needs (Neovim stable + nightly via an action like `rhysd/action-setup-vim`, `stylua` via a dedicated action or `cargo install stylua`, and `plenary.nvim` via a second `actions/checkout` step with `repository: nvim-lua/plenary.nvim` and an explicit `path:` inside the workspace, e.g. `path: plenary.nvim`). Do not assume any tool or dependency is already present on the runner.
 - **Should** keep each feature in its own `lua/<plugin>/<feature>.lua` module.
 - **Should** test behavior, not internal implementation details.
 - **Should** run CI on both `stable` and `nightly` Neovim.
@@ -107,6 +110,9 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 
 - Run `make lint` (selene + stylua) and confirm no issues.
 - Run `make test` and confirm all plenary tests pass.
+
+- For CI-only requests, verify the workflow itself installs/checks out every runtime dependency it needs (Neovim, stylua, plenary.nvim) as job steps rather than assuming any are pre-installed — a workflow that only passes because the dev machine already has these cached will fail on a fresh GitHub-hosted runner.
+- Confirm no dependency (e.g. `plenary.nvim`) is committed into the repository's git history — checking it out as an ephemeral CI step is expected and is not vendoring.
 - Open Neovim, run `:help <plugin>` and confirm the docs render correctly.
 - Open Neovim, run `:lua require("<plugin>").setup()` and confirm no errors.
 - Smoke test:

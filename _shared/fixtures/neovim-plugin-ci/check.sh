@@ -13,16 +13,55 @@ grep -q "stable" "$WF" || { echo "FAIL: workflow does not run on stable Neovim";
 grep -q "stylua" "$WF" || { echo "FAIL: workflow does not lint with stylua"; exit 1; }
 
 # Plenary must be a sibling checkout, not vendored inside the repo.
-if grep -Eq "path:[[:space:]]*\.?/?plenary\.nvim[[:space:]]*$" "$WF"; then
-  echo "FAIL: plenary.nvim is checked out inside the repository"
+# Plenary must be fetched at CI time (never committed) and the bootstrap must
+# look for it where the workflow puts it. Either layout is fine; a mismatch is not.
+python3 - "$WF" tests/minimal_init.lua <<'PY'
+import re
+import sys
+
+workflow = open(sys.argv[1], encoding="utf-8").read()
+bootstrap = open(sys.argv[2], encoding="utf-8").read()
+
+step = re.search(r"repository:\s*nvim-lua/plenary\.nvim(.*?)(?:\n\s*-\s|\Z)", workflow, re.S)
+if not step:
+    print("FAIL: the workflow never checks out nvim-lua/plenary.nvim")
+    raise SystemExit(1)
+
+path_match = re.search(r"path:\s*([^\s#]+)", step.group(1))
+workflow_path = path_match.group(1).strip() if path_match else "plenary.nvim"
+
+boot_match = re.search(r"([\w./-]*plenary\.nvim)", bootstrap)
+if not boot_match:
+    print("FAIL: minimal_init.lua never references plenary.nvim")
+    raise SystemExit(1)
+boot_path = boot_match.group(1)
+
+# Compare where each side expects to find plenary. Either location is valid,
+# but both must agree: the bootstrap has to look where the workflow put it.
+def prefix_of(path: str) -> str:
+    """'plenary.nvim' and '/plenary.nvim' mean the workspace root; '../x' the parent."""
+    # Bootstrap paths are captured from strings like getcwd() .. "/plenary.nvim",
+    # so a leading slash is an artefact of concatenation, not an absolute path.
+    path = path.lstrip("/")
+    marker = "plenary.nvim"
+    pre = path[: path.find(marker)].rstrip("/")
+    return "" if pre in ("", "/") else pre
+
+if prefix_of(workflow_path) != prefix_of(boot_path):
+    print(f"FAIL: workflow checks out plenary at '{workflow_path}' but the "
+          f"bootstrap expects '{boot_path}'")
+    raise SystemExit(1)
+PY
+[ $? -eq 0 ] || exit 1
+
+if [ -d plenary.nvim ]; then
+  echo "FAIL: plenary.nvim is vendored into the repository"
   exit 1
 fi
-grep -Eq "path:[[:space:]]*\.\./plenary\.nvim[[:space:]]*$" "$WF" \
-  || { echo "FAIL: plenary.nvim is not checked out as a sibling (../plenary.nvim)"; exit 1; }
 
 [ -f tests/minimal_init.lua ] || { echo "FAIL: tests/minimal_init.lua is missing"; exit 1; }
-grep -q "\.\./plenary\.nvim" tests/minimal_init.lua \
-  || { echo "FAIL: minimal_init.lua does not put ../plenary.nvim on runtimepath"; exit 1; }
+grep -q "plenary\.nvim" tests/minimal_init.lua \
+  || { echo "FAIL: minimal_init.lua does not put plenary on runtimepath"; exit 1; }
 
 if grep -Eq "command!|vim\.cmd\(\"command" tests/minimal_init.lua 2>/dev/null; then
   echo "FAIL: bootstrap uses vim.cmd command strings"
