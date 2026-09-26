@@ -1,0 +1,6 @@
+{
+  "name": "fixture-ts-generated-boundary",
+  "private": true,
+  "type": "module",
+  "scripts": { "typecheck": "tsc --noEmit" }
+}

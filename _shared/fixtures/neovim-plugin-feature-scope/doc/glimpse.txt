@@ -1,0 +1,6 @@
+*glimpse.txt*  Preview files in a floating window.
+
+==============================================================================
+INTRODUCTION                                              *glimpse-intro*
+
+Glimpse renders a preview of the current file.

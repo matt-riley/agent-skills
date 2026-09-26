@@ -35,6 +35,11 @@ GORELESER = os.environ.get(
 )
 
 
+def skill_for(fixture: Path) -> str:
+    """Fixture directory name is not always the skill name (see the SKILL file)."""
+    marker = fixture / "SKILL"
+    return marker.read_text(encoding="utf-8").strip() if marker.is_file() else fixture.name
+
 def fixtures() -> list[Path]:
     return sorted(
         p for p in FIXTURES.iterdir()
@@ -82,17 +87,26 @@ def link_catalog(workspace: Path) -> None:
 
 
 def run_agent(workspace: Path, prompt: str, skill: str, model: str,
-              timeout: int, baseline: bool) -> dict:
+              timeout: int, baseline: bool, isolated_home: bool = False) -> dict:
+    """Run the agent in the workspace.
+
+    `--excluded-tools=skill` does NOT remove the user-level skill index this
+    CLI carries, so --baseline is only meaningful with an isolated config
+    home (--isolated-home). Then the only skills the agent can see are the
+    ones staged in the workspace.
+    """
     cmd = [
         "copilot", "-p", prompt,
         "--output-format", "json", "--allow-all-tools", "--no-ask-user",
         "--stream", "off", "--model", model,
     ]
-    if baseline:
-        cmd.append("--excluded-tools=skill")
+    env = dict(os.environ)
+    if isolated_home:
+        home = Path(tempfile.mkdtemp(prefix="copilot-home-"))
+        env["COPILOT_HOME"] = str(home)
     try:
         proc = subprocess.run(cmd, cwd=workspace, capture_output=True, text=True,
-                              timeout=timeout)
+                              timeout=timeout, env=env)
         tail = (proc.stdout or "")[-2000:]
         return {"exit_code": proc.returncode, "tail": tail}
     except subprocess.TimeoutExpired:
@@ -110,6 +124,11 @@ def main() -> int:
     ap.add_argument("--timeout", type=int, default=900)
     ap.add_argument("--baseline", action="store_true",
                     help="run the agent with the skill disabled")
+    ap.add_argument("--isolated-home", action="store_true",
+                    help="run the agent with a fresh COPILOT_HOME so only "
+                         "workspace skills are visible (required for --baseline)")
+    ap.add_argument("--repeat", type=int, default=1,
+                    help="run each fixture N times and report a pass rate")
     ap.add_argument("--keep", action="store_true", help="keep scratch workspaces")
     ap.add_argument("--output-root", default=str(RESULTS))
     args = ap.parse_args()
@@ -137,26 +156,35 @@ def main() -> int:
 
     for fixture in selected:
         task = (fixture / "TASK.md").read_text(encoding="utf-8").strip()
-        prompt = f"Use the {fixture.name} skill for this task if relevant.\n\n{task}"
-        workspace = Path(tempfile.mkdtemp(prefix=f"fixture-{fixture.name}-"))
-        prepare_task(fixture, workspace)
-        if not args.baseline:
-            link_catalog(workspace)
-        agent = run_agent(workspace, prompt, fixture.name, args.model,
-                          args.timeout, args.baseline)
-        passed, line = run_check(fixture, workspace)
-        if not args.keep:
-            shutil.rmtree(workspace, ignore_errors=True)
-        print(f"  {fixture.name:<32} {'PASS' if passed else 'FAIL':<6} {line[:70]}")
+        prompt = f"Use the {skill_for(fixture)} skill for this task if relevant.\n\n{task}"
+        attempts = []
+        for _ in range(max(1, args.repeat)):
+            workspace = Path(tempfile.mkdtemp(prefix=f"fixture-{fixture.name}-"))
+            prepare_task(fixture, workspace)
+            if not args.baseline:
+                link_catalog(workspace)
+            agent = run_agent(workspace, prompt, skill_for(fixture), args.model,
+                              args.timeout, args.baseline, args.isolated_home)
+            passed, line = run_check(fixture, workspace)
+            if not args.keep:
+                shutil.rmtree(workspace, ignore_errors=True)
+            attempts.append({"passed": passed, "check_output": line,
+                             "agent_exit": agent["exit_code"],
+                             "agent_tail": agent["tail"][-400:]})
+        wins = sum(a["passed"] for a in attempts)
+        rate = wins / len(attempts)
+        last = attempts[-1]["check_output"]
+        print(f"  {fixture.name:<32} {rate:.2f} ({wins}/{len(attempts)})", flush=True)
         summary["cases"].append({
-            "fixture": fixture.name, "passed": passed, "check_output": line,
-            "agent_exit": agent["exit_code"], "agent_tail": agent["tail"][-400:],
-            "workspace": str(workspace) if args.keep else "",
+            "fixture": fixture.name, "attempts": attempts,
+            "passed": wins, "runs": len(attempts), "pass_rate": rate,
+            "check_output": last,
         })
 
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    rate = sum(c["passed"] for c in summary["cases"]) / len(summary["cases"])
-    print(f"\npass rate: {rate:.2f} ({sum(c['passed'] for c in summary['cases'])}/{len(summary['cases'])})")
+    total_passed = sum(c["passed"] for c in summary["cases"])
+    total_runs = sum(c["runs"] for c in summary["cases"])
+    print(f"\npass rate: {total_passed / total_runs:.2f} ({total_passed}/{total_runs})")
     print(f"summary: {out_dir / 'summary.json'}")
     return 0
 
