@@ -64,6 +64,8 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 
 ## First move
 
+0. Before making any edit, list every file you plan to touch and cross-check that list against the request's explicit exclusions ("do not touch docs", "do not restructure modules/workflow", "do not vendor dependencies", etc.). Drop any file from the plan that isn't strictly necessary for the literal request.
+
 1. If the plugin does not exist yet, scaffold the canonical structure: `lua/<name>/init.lua`, `plugin/`, `doc/`, `Makefile`.
 2. If the plugin exists, identify the entry point and the specific feature or fix being made.
 3. Check whether tests exist and CI is configured before adding new infrastructure.
@@ -92,6 +94,9 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 - **Must** make `setup()` idempotent — safe to call multiple times.
 - **Must not** load the user's full Neovim config during tests; use `minimal_init.lua`.
 - **Must not** restructure, rewrite, or replace existing modules, CI workflows, or docs that the request did not ask about — add the requested feature and stop.
+- **Must** treat any explicit user exclusion (e.g., "do not touch docs", "do not restructure the workflow", "do not vendor dependencies") as an absolute override of this skill's default workflow steps — even when a default step (like updating `doc/<plugin>.txt` after adding a command) would normally apply, skip it if the user excluded it.
+- **Must** prefer the smallest possible diff for the literal request: add a new file/module where possible, and touch existing files only for the minimal registration point strictly required (e.g., one `require`/one command registration line) rather than editing unrelated existing modules.
+- **Must not** modify plugin source under `lua/<plugin>/` when the request is scoped to CI, linting, or test-bootstrap only — CI-only work is limited to `.github/workflows/`, `Makefile` lint/test targets, and `tests/minimal_init.lua` (or an equivalent test bootstrap file). If the plugin truly lacks a hook needed to test it, surface that as a question instead of silently editing source.
 - **Must** check `plenary.nvim` out as a sibling of the plugin repo (`../plenary.nvim`), never inside it, so `require('plenary')` resolves without vendoring the dependency.
 - **Should** keep each feature in its own `lua/<plugin>/<feature>.lua` module.
 - **Should** test behavior, not internal implementation details.
