@@ -37,6 +37,18 @@ _shared/fixtures/<skill-name>/
 - The broken state must fail, and a genuine fix must pass. Verify both by hand
   when adding a fixture; there is no automated fix-direction test yet.
 
+## Agent harness traps
+
+- **Copy the skill into the workspace, never symlink it.** The agent may only
+  read inside its workspace, so a linked `references/*.md` fails with
+  permission denied and the skill is silently reduced to its `SKILL.md`.
+  That alone took the `neovim-plugin-ci` fixture from 0/3 to 2/3.
+- **Isolate the agent config home.** This Copilot CLI carries a user-level
+  skill index and extensions, so a staged skill leaked into a workspace with
+  none and both arms looked identical. Use `--isolated-home` for comparisons.
+- **Check the agent output, not just the exit code**, when a result is
+  surprising: the run that "failed" may have been a permission error.
+
 ## Usage
 
 ```bash

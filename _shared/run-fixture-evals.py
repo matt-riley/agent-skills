@@ -74,16 +74,18 @@ def prepare_task(fixture: Path, workspace: Path) -> None:
     )
 
 
-def link_catalog(workspace: Path) -> None:
-    """Expose the catalog as a repo-level skill source for this workspace.
+def link_catalog(workspace: Path, skill: str) -> None:
+    """Copy the skill under test into the workspace.
 
-    Copilot discovers repo skills under `.agents/skills`; a symlink keeps the
-    comparison honest without touching the user-level skill directory.
+    A symlink to the catalog is not enough: the agent may only read inside the
+    workspace, so a linked `references/*.md` fails with permission denied and
+    the skill's detail never reaches it. Copying keeps every file readable.
     """
-    target = workspace / ".agents" / "skills"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    if not target.exists():
-        target.symlink_to(SKILLS)
+    source = SKILLS / skill
+    target = workspace / ".agents" / "skills" / skill
+    if source.is_dir() and not target.exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(source, target)
 
 
 def run_agent(workspace: Path, prompt: str, skill: str, model: str,
@@ -162,7 +164,7 @@ def main() -> int:
             workspace = Path(tempfile.mkdtemp(prefix=f"fixture-{fixture.name}-"))
             prepare_task(fixture, workspace)
             if not args.baseline:
-                link_catalog(workspace)
+                link_catalog(workspace, skill_for(fixture))
             agent = run_agent(workspace, prompt, skill_for(fixture), args.model,
                               args.timeout, args.baseline, args.isolated_home)
             passed, line = run_check(fixture, workspace)
