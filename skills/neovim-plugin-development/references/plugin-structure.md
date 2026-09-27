@@ -130,16 +130,25 @@ Use `make test` to run:
 
 ```makefile
 test:
-	nvim --headless -c "lua require('plenary.test_harness').test_directory('tests/', { minimal_init = 'tests/minimal_init.lua' })"
+	nvim --headless --noplugin -u tests/minimal_init.lua -c "PlenaryBustedDirectory tests/ { minimal_init = 'tests/minimal_init.lua' }"
 ```
+
+Two details make this work on a fresh runner, and both are easy to miss:
+
+- `PlenaryBustedDirectory` quits and exits non-zero when a spec fails. A bare
+  `test_directory()` call returns a boolean to Lua and leaves the editor
+  running, so a `make test` built on it hangs forever. Note that `nvim -c`
+  still exits 0 when a `-c` command errors, so a broken bootstrap can look green.
+- Plenary's command only exists once its plugin file is sourced, which is why
+  the bootstrap below calls `runtime! plugin/plenary.vim`.
 
 The `minimal_init.lua` bootstraps plenary and the plugin without loading the user's full config:
 
 ```lua
 -- tests/minimal_init.lua
-vim.cmd([[set runtimepath+=.]])
+vim.opt.runtimepath:prepend(vim.fn.getcwd())
 vim.cmd([[set runtimepath+=../plenary.nvim]])
-vim.cmd([[set runtimepath+=../nvim-treesitter]])
+vim.cmd([[runtime! plugin/plenary.vim]])
 ```
 
 Key rules:

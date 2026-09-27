@@ -99,11 +99,31 @@ if ! grep -qE "^test:" Makefile 2>/dev/null; then
   echo "FAIL: no 'test' target to run the plenary suite"
   exit 1
 fi
-if ! ( cd "$WORKSPACE" && make test > /tmp/fixture-neovim-test.log 2>&1 ); then
-  echo "FAIL: make test does not pass with plenary present"
-  tail -3 /tmp/fixture-neovim-test.log 2>/dev/null
-  exit 1
-fi
+# Bounded: a test target that never quits nvim must fail, not hang the check.
+python3 - "$WORKSPACE" <<'PY'
+import subprocess
+import sys
+
+try:
+    proc = subprocess.run(["make", "test"], cwd=sys.argv[1], capture_output=True,
+                          text=True, timeout=180)
+except subprocess.TimeoutExpired:
+    print("FAIL: make test did not finish within 180s (the target never quits nvim)")
+    raise SystemExit(1)
+output = (proc.stdout or "") + (proc.stderr or "")
+if proc.returncode != 0:
+    tail = output.strip().splitlines()[-3:]
+    print("FAIL: make test does not pass with plenary present")
+    for line in tail:
+        print("   ", line[:160])
+    raise SystemExit(1)
+# nvim exits 0 even when a -c command errors, so a Makefile that never ran the
+# suite would otherwise pass. Require evidence that specs actually executed.
+if "glimpse_spec" not in output and "Success" not in output:
+    print("FAIL: make test exited 0 but no spec appears to have run")
+    raise SystemExit(1)
+PY
+[ $? -eq 0 ] || exit 1
 
 ACTUAL=$(shasum -a 256 tests/glimpse_spec.lua | cut -d' ' -f1)
 [ "$ACTUAL" = "8e8c6bc634a789561df4c41cbbe9b36ca0dfbc4fc106e1b64f348ee2b8fb3a49" ] || { echo "FAIL: the existing spec was modified"; exit 1; }
