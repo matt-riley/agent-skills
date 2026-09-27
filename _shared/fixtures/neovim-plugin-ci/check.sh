@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Deterministic check for the neovim-plugin-ci fixture.
 set -uo pipefail
-WORKSPACE="${1:-$(cd "$(dirname "$0")" && pwd)}"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+WORKSPACE="${1:-$SCRIPT_DIR}"
 cd "$WORKSPACE" || { echo "FAIL: no workspace $WORKSPACE"; exit 1; }
 
 WF=$(ls .github/workflows/*.y*ml 2>/dev/null | head -1)
@@ -70,6 +71,37 @@ fi
 
 if ! nvim --headless -u tests/minimal_init.lua -c "qa" >/dev/null 2>&1; then
   echo "FAIL: the test bootstrap does not load under nvim --headless"
+  exit 1
+fi
+
+# A wired-up workflow that cannot actually run the tests is not done. Put
+# plenary where the workflow says the runner fetches it, then run the suite.
+PLENARY_CACHE="$(cd "$SCRIPT_DIR/../.deps" && pwd)/plenary.nvim"
+[ -d "$PLENARY_CACHE" ] || { echo "FAIL: plenary cache missing at $PLENARY_CACHE"; exit 1; }
+DEST=$(python3 - "$WF" <<'PY'
+import re
+import sys
+
+text = open(sys.argv[1], encoding="utf-8").read()
+step = re.search(r"repository:\s*nvim-lua/plenary\.nvim(.*?)(?:\n\s*-\s|\Z)", text, re.S)
+match = re.search(r"path:\s*([^\s#]+)", step.group(1)) if step else None
+print(match.group(1) if match else "plenary.nvim")
+PY
+)
+case "$DEST" in
+  ../*) PLENARY_DEST="$(dirname "$WORKSPACE")/$(basename "$DEST")" ;;
+  *)    PLENARY_DEST="$WORKSPACE/$(basename "$DEST")" ;;
+esac
+rm -rf "$PLENARY_DEST"
+cp -R "$PLENARY_CACHE" "$PLENARY_DEST"
+
+if ! grep -qE "^test:" Makefile 2>/dev/null; then
+  echo "FAIL: no 'test' target to run the plenary suite"
+  exit 1
+fi
+if ! ( cd "$WORKSPACE" && make test > /tmp/fixture-neovim-test.log 2>&1 ); then
+  echo "FAIL: make test does not pass with plenary present"
+  tail -3 /tmp/fixture-neovim-test.log 2>/dev/null
   exit 1
 fi
 

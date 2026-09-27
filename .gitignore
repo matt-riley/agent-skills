@@ -5,3 +5,4 @@ node_modules/
 instructions/
 copilot-instructions.md
 .skillopt-sleep/
+_shared/fixtures/.deps/
