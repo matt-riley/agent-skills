@@ -1,6 +1,6 @@
 ---
 name: schema-boundary-typing
-description: "Introduce or refine runtime schema validation at untrusted boundaries so static TypeScript types stay truthful."
+description: "Introduce or refine runtime schema validation at untrusted boundaries so static TypeScript types stay truthful. Use when API, storage, or parsing input flows into typed code without runtime validation."
 license: GNU GPL v3
 metadata:
   version: 1.3.1 # x-release-please-version

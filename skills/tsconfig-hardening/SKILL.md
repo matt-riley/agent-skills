@@ -1,6 +1,6 @@
 ---
 name: tsconfig-hardening
-description: "Tighten and rationalize TypeScript configuration safely, especially when enabling stricter compiler checks incrementally."
+description: "Tighten and rationalize TypeScript configuration safely, especially when enabling stricter compiler checks incrementally. Use when enabling strict flags, untangling a tsconfig chain, or fixing module-resolution or emit config drift."
 license: GNU GPL v3
 metadata:
   version: 1.3.1 # x-release-please-version

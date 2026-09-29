@@ -42,7 +42,6 @@ metadata:
 - The required variable, binding, or loader changes needed for the service to start with the expected configuration contract.
 - Startup or `/health` verification showing the configuration was accepted, or an explicit blocker listing the missing required config.
 
-
 ## Catalog position
 
 Keep this easy to reach for startup failures, env drift, and deployment/config debugging.
@@ -126,7 +125,7 @@ A healthy response confirms the configuration was accepted.
 
 Run the verification commands above and confirm the service starts successfully, the health endpoint responds, and missing required variables still fail fast.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

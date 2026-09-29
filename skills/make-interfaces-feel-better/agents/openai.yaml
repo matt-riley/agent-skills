@@ -1,6 +1,5 @@
 interface:
   display_name: Make Interfaces Feel Better
-  short_description: Polish existing interfaces when the UI feels off through better
-    radius, shadows, typography, motion, and micro-interactions.
+  short_description: "Polish existing interfaces when the UI feels off through better radius, shadows, typography, motion, and micro-interactions. Use when asked to make an existing UI feel more refined, or to tighten hover, press, and enter/exit details."
 policy:
   allow_implicit_invocation: true

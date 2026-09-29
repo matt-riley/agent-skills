@@ -96,11 +96,6 @@ metadata:
 - Consolidated blocker and optional findings tied to correctness, regression risk, security, rollout safety, and stated requirements.
 - A clear review verdict for the requested mode: advisory, blocked by requested changes, or approved under the required reviewer rule.
 
-
-## Workflow
-
-See the body and references for review rounds and consolidation steps.
-
 ## Guardrails
 
 - **Must** focus on materially important issues: correctness, regression risk, validation gaps, rollout safety, security issues, and unintended scope changes.

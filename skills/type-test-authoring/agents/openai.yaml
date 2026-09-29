@@ -1,6 +1,5 @@
 interface:
   display_name: Type Test Authoring
-  short_description: Write compile-time type tests that protect public TypeScript
-    APIs, inference behavior, and negative cases.
+  short_description: "Write compile-time type tests that protect public TypeScript APIs, inference behavior, and negative cases. Use when locking down generic helpers, utility types, or an inference regression with tsd, expectTypeOf, or @ts-expect-error fixtures."
 policy:
   allow_implicit_invocation: true

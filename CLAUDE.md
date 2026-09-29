@@ -22,6 +22,7 @@ Run from the repo root.
 
 ```bash
 npm run validate          # python _shared/validate-skills.py skills — primary repo-wide check
+npm run test:validators   # authoring-contract regression tests (node + python unittest); needs `npm run validate:setup` once
 npm run link:user          # bash scripts/link-user-skills.sh — symlink skills/ into ~/.agents/skills and ~/.copilot/skills
 ```
 

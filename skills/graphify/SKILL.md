@@ -63,7 +63,6 @@ Check whether `graphify-out/graph.json` already exists. If it does and the user'
 - Confirm the graph outputs exist on disk after each step
 - Check that extraction produced nodes before proceeding to clustering
 
-
 ## Default build workflow
 
 For a new graph, read [`references/default-build-workflow.md`](references/default-build-workflow.md) and follow it in order. It contains the complete usage surface, installation and interpreter setup, detection and corpus-size checks, semantic extraction rules, graph construction, clustering, labeling, exports, cleanup, reporting, and support message.

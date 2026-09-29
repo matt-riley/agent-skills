@@ -60,16 +60,11 @@ Common locations: `internal/`, `templates/`, `web/`, or alongside handlers.
 - Template-to-handler wiring that passes typed data cleanly and preserves `Content-Type: text/html; charset=utf-8` for rendered responses.
 - Build and test evidence showing the regenerated templates compile and behave as expected.
 
-
 ## Handler wiring
 
 - Handlers call generated template render functions.
 - Set response `Content-Type: text/html; charset=utf-8`.
 - Pass data from handler/domain into templates via typed parameters — do not compute data inside templates.
-
-## Workflow
-
-See the body and references for templ template authoring and regeneration steps.
 
 ## Guardrails
 
@@ -91,7 +86,7 @@ See the body and references for templ template authoring and regeneration steps.
 - Confirm generated Go output changed only as expected and was not hand-edited.
 - Run `go build` or the repo's narrow build target, then relevant tests for handlers or pages touched.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

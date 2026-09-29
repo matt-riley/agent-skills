@@ -1,6 +1,6 @@
 ---
 name: tsc-error-triage
-description: "Diagnose and resolve TypeScript compiler errors by finding the smallest root-cause fix before editing call sites."
+description: "Diagnose and resolve TypeScript compiler errors by finding the smallest root-cause fix before editing call sites. Use when tsc failures burst after a refactor, upgrade, or config change and leaf-by-leaf patching would be wasteful."
 license: GNU GPL v3
 metadata:
   version: 1.3.1 # x-release-please-version

@@ -88,11 +88,6 @@ metadata:
 - Implementation progress delivered one meaningful phase at a time against the documented plan.
 - A validation summary comparing the final result to the plan, including residual risks, deviations, or follow-up work that must persist.
 
-
-## Workflow
-
-See the body and references for the Research -> Plan -> Implement -> Validate phases.
-
 ## Guardrails
 
 - **Must not** make code changes during the research phase.

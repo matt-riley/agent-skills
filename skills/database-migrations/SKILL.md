@@ -63,11 +63,6 @@ Inspect the repo contract before suggesting commands or file edits. Determine wh
 - New or corrected migration artifacts created through the repo's expected scaffolding or generation path.
 - Migration status/history plus downstream code-generation or test evidence confirming the expected schema state.
 
-
-## Workflow
-
-See the body and references for migration create/apply/rollback steps.
-
 ## Guardrails
 
 - Never assume every repo supports `down` migrations. Detect whether the contract is forward-only or reversible first.
@@ -82,7 +77,7 @@ See the body and references for migration create/apply/rollback steps.
 - Any required code generation or schema-dependent checks have been re-run.
 - Relevant tests/checks pass for the touched schema surface.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need phrasing examples for new migrations or migration-state recovery.
 - Read `references/edge-cases.md` when the repo uses generated migrations, forward-only history, or environment-specific recovery rules.

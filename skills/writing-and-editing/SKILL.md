@@ -86,7 +86,6 @@ metadata:
 - Audience-aware structure or grouped feedback that stays aligned to the chosen `draft`, `readability-audit`, or `metadata-audit` mode.
 - A final pass result for the selected mode without drifting into unrelated review or planning workflows.
 
-
 ## Guardrails
 
 - **Must** classify the task correctly before applying guidance.

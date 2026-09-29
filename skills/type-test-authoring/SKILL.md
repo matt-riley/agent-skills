@@ -1,6 +1,6 @@
 ---
 name: type-test-authoring
-description: "Write compile-time type tests that protect public TypeScript APIs, inference behavior, and negative cases."
+description: "Write compile-time type tests that protect public TypeScript APIs, inference behavior, and negative cases. Use when locking down generic helpers, utility types, or an inference regression with tsd, expectTypeOf, or @ts-expect-error fixtures."
 license: GNU GPL v3
 metadata:
   version: 1.3.1 # x-release-please-version

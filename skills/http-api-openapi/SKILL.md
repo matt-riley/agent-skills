@@ -61,11 +61,6 @@ Determine the repo's contract flow before editing anything: spec-first, code-fir
 - A documented behavior-to-contract alignment for auth requirements, request validation, response schemas, status codes, and error shapes.
 - Spec validation, generation, and/or API test evidence confirming the handler behavior and OpenAPI contract stay in sync.
 
-
-## Workflow
-
-See the body and references for OpenAPI/handler sync steps.
-
 ## Guardrails
 
 - Do not hand-edit generated OpenAPI output in code-first repos; change the source inputs that own it.
@@ -80,7 +75,7 @@ See the body and references for OpenAPI/handler sync steps.
 - Handler behavior, tests, and contract artifacts agree on auth, schemas, and status codes.
 - Any generated contract files or checked-in specs show only the expected diff.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need examples of drift repair or endpoint changes that must keep contract and implementation aligned.
 - Read `references/edge-cases.md` when the repo lacks a spec, uses generated specs, or the request may really be SDK generation or a non-HTTP change.
