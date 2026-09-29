@@ -83,7 +83,6 @@ metadata:
 - A short evidence-backed answer naming the most relevant sessions, timestamps, refs, and matched snippets when useful.
 - A clear uncertainty or no-match note when the available session evidence does not support a stronger claim.
 
-
 ## Guardrails
 
 - **Must** use the read-only `session_store` database for cross-session history instead of the scratch `session` database.

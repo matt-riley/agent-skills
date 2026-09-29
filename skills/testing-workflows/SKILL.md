@@ -42,7 +42,6 @@ metadata:
 - New or updated tests for the touched domain, repository, or handler behavior at the correct scope.
 - Broader test-run evidence showing the fix or feature is ready beyond the isolated case.
 
-
 ## Workflow
 
 Use the most specific path for the task; fall through to the debugging sequence when tests fail for unclear reasons. Layer in `integration-testing-http` when the problem is specifically endpoint contracts, auth behaviour, or request/response assertions over HTTP.

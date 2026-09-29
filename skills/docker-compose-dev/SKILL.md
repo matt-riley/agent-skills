@@ -40,7 +40,6 @@ metadata:
 - Running service state confirmed via `docker compose ps`, logs, and/or the repo's health endpoint.
 - An explicit teardown/reset outcome, including whether persistent volumes were preserved or intentionally destroyed.
 
-
 ## Quick start
 
 ```bash
@@ -108,7 +107,7 @@ Use `-v` only when you want to destroy all data (e.g. start fresh with a clean D
 - Confirm migrations and required seed/setup steps were applied deliberately, not assumed.
 - Before teardown, decide whether volumes should be preserved or intentionally destroyed.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

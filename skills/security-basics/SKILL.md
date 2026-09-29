@@ -43,7 +43,6 @@ metadata:
 - Checklist-backed confirmation that no hardcoded secrets, unsafe trust boundaries, leaked internals, or unprotected sensitive endpoints remain.
 - Targeted validation evidence for authorization failures, invalid input handling, and scrubbed logs or responses.
 
-
 ## Authentication & secrets
 
 - Auth tokens, passwords, and API keys must come from environment variables or a secrets manager — never hardcode them.
@@ -102,7 +101,7 @@ Before merging code that touches auth, request handling, or data exposure:
 - Confirm no secrets, tokens, credentials, private data, or sensitive endpoint outputs were added to logs or public responses.
 - Confirm authorization failures, invalid input, and cross-origin/cookie behavior are covered where relevant.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

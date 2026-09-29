@@ -97,7 +97,6 @@ metadata:
 - Reviewer-by-reviewer verdicts on the current plan revision, with required changes separated from optional suggestions.
 - A final planning status of approved, blocked for revision, or advisory-only, plus the next implementation step.
 
-
 ## Guardrails
 
 - **Must** keep planning and research read-only unless the user explicitly asks for implementation.

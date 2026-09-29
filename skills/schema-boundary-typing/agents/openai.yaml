@@ -1,6 +1,5 @@
 interface:
   display_name: Schema Boundary Typing
-  short_description: Introduce or refine runtime schema validation at untrusted boundaries
-    so static TypeScript types stay truthful.
+  short_description: "Introduce or refine runtime schema validation at untrusted boundaries so static TypeScript types stay truthful. Use when API, storage, or parsing input flows into typed code without runtime validation."
 policy:
   allow_implicit_invocation: true

@@ -41,7 +41,6 @@ metadata:
 - DB-to-domain error mapping preserved or corrected for the touched operations so adapter callers keep the expected contract.
 - Test evidence for the primary adapter path, with optional dialects skipping cleanly when unavailable.
 
-
 ## Architecture pattern
 
 ```
@@ -100,7 +99,7 @@ Map DB-level errors to domain errors **at the adapter boundary** — never let D
 make test     # SQLite (or primary DB) must pass; optional DBs skip when unavailable
 ```
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

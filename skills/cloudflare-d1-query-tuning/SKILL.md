@@ -80,7 +80,6 @@ First confirm the problem is runtime query shape or D1 access behavior, not a mi
 - A query or adapter rewrite that reduces scans, over-fetching, or round trips without changing schema or result semantics.
 - Validation showing the tuned path preserves behavior and passes the repo's affected tests or checks.
 
-
 ## Guardrails
 
 - **Must** inspect the exact D1 binding and environment before measuring or rewriting the query.

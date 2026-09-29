@@ -40,7 +40,6 @@ metadata:
 - Release-readiness status showing generated artifacts are current and the working tree only contains intended changes.
 - Confirmed image publishing trigger and tag set (`vX.Y.Z`, `X.Y`, `X`, `latest`) for the release path under review.
 
-
 ## CI checks → local equivalents
 
 CI fails fast on these in order. Run them locally before pushing:
@@ -93,7 +92,7 @@ Standard tagging strategy on release:
 - Confirm generated output is current and `git diff` only contains intended changes.
 - For image publishing, verify the release trigger and tag set without publishing from a dirty tree.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

@@ -41,7 +41,6 @@ metadata:
 - New or updated metric registration and instrumentation wired at startup instead of per request.
 - Verification that health output, Prometheus metric text, and sensitive-exposure constraints match the repo's observability contract.
 
-
 ## Standard endpoints
 
 | Endpoint       | Purpose                               | Default auth                     |
@@ -106,7 +105,7 @@ curl -i -H "Authorization: Bearer $AUTH_TOKEN" http://localhost:<PORT>/metrics
 
 Run the verification commands above and confirm health status, Prometheus text format, authentication behavior, and sensitive-data constraints match the repository contract.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

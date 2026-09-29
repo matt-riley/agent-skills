@@ -78,11 +78,6 @@ metadata:
 - Generated or improved README, community-health, or template files in the correct GitHub location for that surface.
 - A concrete list of metadata, pinned-repo, or other manual GitHub settings changes that cannot be expressed through files alone.
 
-
-## Workflow
-
-See the body and references for GitHub presence audit and improvement steps.
-
 ## Guardrails
 
 - **Must** distinguish profile surfaces from repository surfaces before generating files.

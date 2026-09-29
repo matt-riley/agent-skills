@@ -77,7 +77,6 @@ metadata:
 - Implemented or recommended Astro SEO changes such as config/component updates or an `@jdevalk/astro-seo-graph` install/upgrade path.
 - Validation evidence from representative pages or generated artifacts showing the expected canonical, metadata, schema, and crawl-surface output.
 
-
 ## Guardrails
 
 - **Must not** proceed with canonical, sitemap, or OG URL work without verifying the production `site` origin.
