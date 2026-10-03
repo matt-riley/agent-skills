@@ -15,11 +15,10 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-    uses: matt-riley/matt-riley-ci/.github/workflows/release-please.yml@4ff76b1a606b1fbba163119a65bf7b05f91ab9b6 # v3.0.1
+    uses: matt-riley/matt-riley-ci/.github/workflows/release-please.yml@cb986078a5bd4775e5fb05348f3618e41fedf4de # v4
     with:
       config-file: release-please-config.json
       manifest-file: .release-please-manifest.json
-      cancel-in-progress: true
     secrets:
       token: ${{ secrets.RELEASE_PLEASE_TOKEN || github.token }}
 
