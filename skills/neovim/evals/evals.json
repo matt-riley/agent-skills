@@ -1,0 +1,558 @@
+{
+  "skill_name": "neovim",
+  "evals": [
+    {
+      "id": "scaffold-new-plugin",
+      "prompt": "Write the entry point for a new Neovim plugin called trailblazer.nvim. Output one code block containing only lua/trailblazer/init.lua with: a setup() that merges user options over defaults, and a :Trail user command registered through the API that prints a placeholder message. Keep it under about 60 lines and do not implement the MRU storage, save/load, or tests.",
+      "expected_behavior": "Produces a compact, complete entry-point file: setup() with merged defaults and API-based command registration.",
+      "assertions": [
+        "Shows the contents of lua/trailblazer/init.lua in a single code block",
+        "Defines a setup() function that merges user options over defaults",
+        "Registers the :Trail command with vim.api.nvim_create_user_command",
+        "Keeps the file compact rather than implementing storage, save/load, or tests"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "add-ci-workflows",
+      "prompt": "Set up CI with selene, stylua, and plenary for this Neovim plugin repo. It's called waystone.nvim.",
+      "expected_behavior": "Creates .github/workflows/lint.yml and test.yml with selene, stylua, and plenary on stable + nightly.",
+      "assertions": [
+        "Creates lint workflow with selene and stylua",
+        "Creates test workflow with plenary on stable and nightly Neovim",
+        "Checks out plenary.nvim as a sibling directory",
+        "Uses rhysd/action-setup-vim for Neovim installation"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "user-config-uses-config-path",
+      "prompt": "Fix the LSP configuration in my init.lua \u2014 mason-lspconfig isn't setting up gopls correctly.",
+      "expected_behavior": "Treats this as user-config work and follows the config path (real config root, plugin manager, matching validation) rather than plugin development.",
+      "assertions": [
+        "Does not scaffold plugin structure",
+        "Follows the config path for user configuration editing"
+      ],
+      "files": [],
+      "category": "routing"
+    },
+    {
+      "id": "command-and-keymap-via-api",
+      "prompt": "Add a :Glimpse command and a <leader>gp keymap to my existing plugin, glance.nvim. Make sure both are testable.",
+      "expected_behavior": "Registers the command with vim.api.nvim_create_user_command and the keymap with vim.keymap.set rather than vim.cmd strings.",
+      "assertions": [
+        "Registers the command with vim.api.nvim_create_user_command",
+        "Registers the keymap with vim.keymap.set",
+        "Does not define the command or keymap with vim.cmd string syntax",
+        "Places the registration in the plugin module or plugin/ entry point"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "setup-idempotent",
+      "prompt": "Users who call require('glance').setup() twice end up with duplicate autocommands and keymaps. Fix setup() so repeated calls are safe.",
+      "expected_behavior": "Makes setup() idempotent so repeated calls do not duplicate registrations.",
+      "assertions": [
+        "Makes setup() idempotent and safe to call multiple times",
+        "Guards against duplicate autocommand or keymap registration",
+        "Does not rely on telling users to call setup only once"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "deep-merge-config-defaults",
+      "prompt": "When a user passes setup({ window = { border = 'rounded' } }) the nested defaults under window disappear. Keep the defaults while honouring the override.",
+      "expected_behavior": "Merges user options over defaults with a deep merge while keeping defaults on the module config table.",
+      "assertions": [
+        "Uses vim.tbl_deep_extend('force', ...) or an equivalent deep merge",
+        "Keeps defaults on the module config table such as M.config",
+        "Does not replace the defaults table wholesale with the user options",
+        "Preserves unspecified nested defaults"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "plenary-minimal-init",
+      "prompt": "Our plenary tests pass locally but fail in CI, apparently because the test bootstrap loads the developer's full Neovim config.",
+      "expected_behavior": "Uses a minimal_init.lua that does not load the user config and runs tests through the repo's make target.",
+      "assertions": [
+        "Uses a minimal_init.lua that does not load the user's full config",
+        "Runs the specs through the repo's make test or equivalent target",
+        "Places specs under tests/ using the plenary structure"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "ci-stable-and-nightly",
+      "prompt": "Set up GitHub Actions for my plugin waystone.nvim so lint and tests both run, including against a development Neovim build.",
+      "expected_behavior": "Creates lint and test workflows that run selene plus stylua and plenary tests on stable and nightly Neovim.",
+      "assertions": [
+        "Run lint with selene and stylua",
+        "Run plenary tests on both stable and nightly Neovim",
+        "Checks out plenary.nvim as a sibling directory",
+        "Installs Neovim through a setup action or equivalent pinned install"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "vimdoc-help-file",
+      "prompt": "Our plugin ships without documentation, so :help glance fails. Add proper help documentation.",
+      "expected_behavior": "Maintains a vimdoc file under doc/ with help tags so :help works after install.",
+      "assertions": [
+        "Creates or updates doc/<plugin>.txt vimdoc",
+        "Includes help tags and a header compatible with :help",
+        "States that :help <plugin> should render after the change",
+        "Avoids putting the only documentation in README markdown"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "release-tags-lazy-compatibility",
+      "prompt": "Set up release automation for my plugin and make sure it still installs cleanly for lazy.nvim users.",
+      "expected_behavior": "Tags v* releases and keeps lua/ and doc/ at the repo root for lazy.nvim compatibility.",
+      "assertions": [
+        "Tags releases as v* through GitHub Actions or an equivalent workflow",
+        "Keeps lua/ and doc/ at the repository root",
+        "Does not move runtime files into a nested packaging directory",
+        "Connects the release path to lazy.nvim installation compatibility"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "module-per-feature-split",
+      "prompt": "My plugin's init.lua has grown to 600 lines covering commands, highlighting, and state. Restructure it.",
+      "expected_behavior": "Splits features into their own lua/<plugin>/<feature>.lua modules while keeping init.lua as the entry point.",
+      "assertions": [
+        "Splits features into separate lua/<plugin>/<feature>.lua modules",
+        "Keeps init.lua as the module entry point",
+        "Keeps setup() and config defaults reachable from the entry point",
+        "Does not leave all logic in the single init.lua file"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "reject-vim-cmd-command-strings",
+      "prompt": "A contributor suggests defining our commands with vim.cmd('command! Glimpse lua require(\"glance\").glimpse()') because it is shorter than the API call. Should we take it?",
+      "expected_behavior": "Rejects vim.cmd string definitions in favour of the Neovim API for commands and keymaps.",
+      "assertions": [
+        "Rejects the vim.cmd string approach for command definition",
+        "Recommends vim.api.nvim_create_user_command instead",
+        "Gives a concrete reason such as escaping, testability, or error visibility",
+        "Does not accept the suggestion on brevity grounds"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "tests-assert-behaviour",
+      "prompt": "Our plugin tests assert that internal helper functions were called with specific arguments. A refactor broke them all even though behaviour is unchanged. Fix the test approach.",
+      "expected_behavior": "Rewrites tests to assert observable behaviour rather than internal implementation details.",
+      "assertions": [
+        "Rewrites tests to assert observable behaviour",
+        "Avoids asserting that internal helpers were called with specific arguments",
+        "Keeps the specs in the plenary structure under tests/",
+        "Explains that implementation-coupled tests make refactors look like regressions"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "partial-opts-preserve-defaults",
+      "prompt": "A user calls setup({ highlight = false }) and every other default stops working. Trace what is wrong and fix it.",
+      "expected_behavior": "Deep-merges the partial options over defaults so the other defaults survive, including explicit false values.",
+      "assertions": [
+        "Deep-merges the partial options over the defaults",
+        "Keeps the other defaults working after a partial setup call",
+        "Preserves an explicit false value rather than treating it as unset",
+        "Keeps the resolved config on the module config table"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "generate-vimdoc-from-markdown",
+      "prompt": "We maintain our documentation in README.md but want doc/glance.txt vimdoc too. How should we wire that up?",
+      "expected_behavior": "Uses a markdown-to-vimdoc tool or an explicit vimdoc source, kept in doc/ and runnable from the repo tooling.",
+      "assertions": [
+        "Uses a markdown-to-vimdoc path such as panvimdoc or lemmy-help, or maintains vimdoc directly",
+        "Keeps the generated help at doc/<plugin>.txt",
+        "Wires generation into the Makefile or CI so the file stays current",
+        "Verifies :help <plugin> renders in Neovim"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "plugin-load-failure-uses-config-path",
+      "prompt": "My plugin is failing to load and I think lazy.nvim is picking up the wrong checkout or XDG path. Where do I start?",
+      "expected_behavior": "Treats the config-side load failure with the config path rather than as plugin development.",
+      "assertions": [
+        "Follows the config path for the config-side load failure",
+        "Does not scaffold plugin structure or plugin tests as the fix",
+        "Identifies the checkout or XDG path selection as the likely cause"
+      ],
+      "files": [],
+      "category": "routing"
+    },
+    {
+      "id": "user-command-completion-and-bang",
+      "prompt": "Add a :Glimpse command to my plugin that accepts an optional buffer number, supports a bang to force-refresh, and completes open buffers when tab-completing the argument.",
+      "expected_behavior": "Registers the command through the API with nargs, bang, and a completion function rather than parsing arguments by hand.",
+      "assertions": [
+        "Uses vim.api.nvim_create_user_command with nargs and bang enabled",
+        "Supplies a completion callback that lists open buffers",
+        "Reads the optional buffer argument from the command opts table",
+        "Avoids hand-parsing the command line string for the bang or argument"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "healthcheck-module",
+      "prompt": "Users ask for a way to confirm my plugin is wired up correctly. Add a :checkhealth provider to glance.nvim.",
+      "expected_behavior": "Adds a health module under lua/<plugin>/health.lua that reports config and dependency state through the health API.",
+      "assertions": [
+        "Creates a health module at lua/<plugin>/health.lua",
+        "Uses the health report API such as vim.health.start and vim.health.ok or warn",
+        "Reports meaningful state such as resolved config and dependency availability",
+        "States that :checkhealth <plugin> should show the report"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "deprecated-api-migration",
+      "prompt": "I need to rename a public function in my plugin without breaking users on the old name. What is the right way to handle the rename?",
+      "expected_behavior": "Keeps the old entry point as a wrapper that emits a deprecation warning through the API, with a documented removal path.",
+      "assertions": [
+        "Keeps the old function name working as a wrapper rather than removing it outright",
+        "Emits the warning with vim.deprecate rather than a bare print or error",
+        "States a removal version or timeframe for the old name",
+        "Documents the rename in the help file under doc/<plugin>.txt"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "spec-state-leakage",
+      "prompt": "My plenary specs pass individually but fail when run together. The plugin module keeps state between specs. How should the tests be structured?",
+      "expected_behavior": "Resets plugin state between specs so test order does not determine the result.",
+      "assertions": [
+        "Identifies shared module state as the cause of order-dependent failures",
+        "Resets state between specs, for example in before_each",
+        "Avoids relying on spec execution order to isolate state",
+        "Keeps the specs behaviour-focused rather than asserting internal call details"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "locate-structure-before-editing",
+      "prompt": "Add a `highlight` option to my existing Neovim plugin and a test for it.",
+      "expected_behavior": "Before editing, the agent identifies the plugin's actual entry point (lua/<plugin>/init.lua vs lua/<plugin>.lua) and checks whether tests and CI already exist, per the documented First move, rather than assuming a layout or bootstrapping new infrastructure that's already there.",
+      "assertions": [
+        "Identifies the existing entry point (lua/<plugin>/init.lua or lua/<plugin>.lua) before editing.",
+        "Checks whether tests/ and CI already exist before adding new infrastructure.",
+        "Merges the new `highlight` option into config defaults with `vim.tbl_deep_extend(\"force\", ...)` rather than replacing the whole config table."
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "scoped-feature-add-not-full-rewrite",
+      "prompt": "Add a :Glimpse command and <leader>gp keymap with plenary tests to my existing glimpse.nvim plugin.",
+      "expected_behavior": "The agent adds the one command, keymap, and its test in the appropriate feature module without restructuring the existing plugin layout, rewriting unrelated modules, or touching CI/docs unless the new command changes the documented interface.",
+      "assertions": [
+        "Adds the :Glimpse command, keymap, and plenary test scoped to this one feature.",
+        "Does not restructure or rewrite unrelated existing modules, CI workflows, or docs that weren't asked about.",
+        "Uses vim.keymap.set and vim.api.nvim_create_user_command rather than vim.cmd string registration."
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "neovim-config-worktree-loads-live-config",
+      "prompt": "I have a Neovim config checkout at ~/code/nvim-config and I launch nvim from that directory, but it still loads my live ~/.config/nvim config instead of the checkout. Set up the repro so I am actually testing the checkout.",
+      "expected_behavior": "Explains that cwd does not select the config, redirects configuration to the checkout explicitly, and validates by launching nvim.",
+      "assertions": [
+        "States that the working directory does not determine which Neovim config loads",
+        "Redirects configuration to the checkout with XDG_CONFIG_HOME or an equivalent explicit config path, rather than relying on cd",
+        "Selects an app namespace with NVIM_APPNAME or explains why a dedicated namespace avoids clobbering the live config",
+        "Includes a validation step that launches nvim and confirms the checkout's config loaded"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "neovim-config-real-tty-for-ui-symptoms",
+      "prompt": "The dashboard on Neovim startup shows the wrong layout and the statusline colours are off. When I run nvim --headless nothing appears. How should I validate the fix?",
+      "expected_behavior": "Uses a real TTY for UI-sensitive startup states instead of trusting a headless run.",
+      "assertions": [
+        "Recommends a real TTY for dashboard, colour, and first-screen behaviour",
+        "Explains that headless runs can miss UI-sensitive startup state",
+        "Does not treat the empty headless output as proof the config is correct"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "neovim-config-vim-pack-migration-pinned-ref",
+      "prompt": "Migrate this lazy.nvim plugin spec to vim.pack:\n\n```lua\n{ 'saghen/blink.cmp', branch = 'v1', opts = {} }\n```\n\nGive me the vim.pack entry.",
+      "expected_behavior": "Uses a real upstream repo with a verifiable pinned ref instead of lazy.nvim shorthand, keeping the blink v1 pin.",
+      "assertions": [
+        "Uses the real upstream repository rather than a lazy.nvim shorthand name",
+        "Pins blink.cmp to the v1 branch or an equivalent version range",
+        "Avoids copying lazy.nvim-only spec keys into the vim.pack entry",
+        "Mentions verifying the reviewed target ref rather than trusting pack output blindly"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-copilot-client-reacquire",
+      "prompt": "My Copilot completions work on the first request and then stop until I restart Neovim. The integration caches the Copilot client reference at setup time.",
+      "expected_behavior": "Reacquires the currently attached Copilot client per request instead of caching it.",
+      "assertions": [
+        "Recommends reacquiring the attached Copilot client on each request",
+        "States that caching the client reference causes the stale behaviour",
+        "Validates the fix on the real attach path rather than assuming it works"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-blink-reload-from-lspattach",
+      "prompt": "Reloading blink.cmp sources from my LspAttach handler throws an assertion about unknown providers.",
+      "expected_behavior": "Checks blink.cmp.config.sources.providers before reloading, since blink.reload asserts on unknown providers.",
+      "assertions": [
+        "Checks blink.cmp.config.sources.providers before calling reload",
+        "Explains that blink.reload asserts on unknown providers",
+        "Avoids reloading providers that are not registered"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-vim-nil-after-json-decode",
+      "prompt": "After vim.json.decode() some entries are vim.NIL and my list operations break with a type error.",
+      "expected_behavior": "Normalizes vim.NIL values after decoding before using the list.",
+      "assertions": [
+        "Normalizes vim.NIL values after vim.json.decode",
+        "Performs the normalization before list operations",
+        "Does not treat vim.NIL as an ordinary table or list element"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-treesitter-capture-list-unwrap",
+      "prompt": "On Neovim 0.12 my treesitter query handler errors when it calls :range() on a capture from iter_matches().",
+      "expected_behavior": "Unwraps the capture slot list before calling node methods on 0.12+.",
+      "assertions": [
+        "Identifies that capture slots are lists on Neovim 0.12+",
+        "Unwraps the capture before calling node methods such as :range()",
+        "Keeps the query logic indexed against the actual capture semantics"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-progress-status-percent-escaping",
+      "prompt": "My statusline renders vim.ui.progress_status() with broken or doubled % markers.",
+      "expected_behavior": "Treats progress_status output as already statusline-formatted and stops double-escaping percent markers.",
+      "assertions": [
+        "States that vim.ui.progress_status() already returns statusline-formatted text",
+        "Stops double-escaping the % markers",
+        "Validates the rendered statusline rather than only the string value"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-extmark-range-index-math",
+      "prompt": "I set a highlight extmark using positions from string.find() and the highlighted range clips the surrounding brackets.",
+      "expected_behavior": "Converts from 1-based inclusive string.find positions to 0-based end-exclusive extmark columns.",
+      "assertions": [
+        "Explains that extmark columns are 0-based and end-exclusive",
+        "Explains that string.find positions are 1-based and inclusive",
+        "Adjusts the computed range so the brackets are not clipped",
+        "Checks the rendered highlight as the final verification"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-shutdown-time-lsp-helpers",
+      "prompt": "A helper my LSP config relies on is nil during Neovim teardown, even though it works while editing.",
+      "expected_behavior": "Preloads the runtime helper on the LSP setup path instead of assuming LspAttach runs at teardown.",
+      "assertions": [
+        "Recommends preloading the helper on the LSP setup path",
+        "States that LspAttach is not guaranteed to run during teardown",
+        "Verifies shutdown behaviour, not only in-editor behaviour"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-worktrees-pollute-validators",
+      "prompt": "Running stylua --check . and selene . fails in my Neovim config repo, apparently because of nested .worktrees checkouts.",
+      "expected_behavior": "Excludes nested .worktrees before trusting repo-wide validator output.",
+      "assertions": [
+        "Excludes nested .worktrees/** from the repo-wide validators",
+        "Identifies the duplicate checkouts as the cause of the failures",
+        "Scopes validation to the intended config path before trusting the results"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "neovim-config-explicit-false-lost-in-merge",
+      "prompt": "I set a plugin option to false, but after my config merge it behaves as if the option were still true.",
+      "expected_behavior": "Preserves explicit false values with a ~= nil check rather than an and/or fallback.",
+      "assertions": [
+        "Recommends checking ~= nil when merging option values",
+        "Warns against and/or ternaries that discard explicit false",
+        "Keeps the resolved value as false rather than falling back to a default"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-isolated-headless-repro",
+      "prompt": "I need a repeatable headless repro of a vim.pack startup problem that will not disturb my live Neovim installation.",
+      "expected_behavior": "Isolates all XDG directories together so synthetic plugins and lockfile state cannot leak into the live config.",
+      "assertions": [
+        "Isolates XDG_CONFIG_HOME, XDG_DATA_HOME, XDG_STATE_HOME, and XDG_CACHE_HOME together",
+        "Explains that partial isolation can leak synthetic plugins or lockfile entries into the live config",
+        "Uses the isolated environment for the headless run"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "neovim-config-pack-config-callback-missing",
+      "prompt": "After migrating to vim.pack the plugin is installed and its command exists, but the side effects from its config callback never happen.",
+      "expected_behavior": "Verifies the config callback side effect rather than treating package presence as proof of a working migration.",
+      "assertions": [
+        "States that package presence or an exposed command does not prove the config callback ran",
+        "Recommends verifying the config callback side effect directly",
+        "Checks the pinned ref or review output as part of the diagnosis"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "neovim-config-not-trigger-generic-lua-debug",
+      "prompt": "A failing Lua unit test in my file-sync service is throwing a nil index error. Help me find the root cause.",
+      "expected_behavior": "Routes generic debugging away from the Neovim config skill.",
+      "assertions": [
+        "Routes to systematic debugging rather than the Neovim config workflow",
+        "Does not prescribe XDG, NVIM_APPNAME, or startup validation steps",
+        "Treats the failure as general Lua application code"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "neovim-config-not-trigger-config-docs",
+      "prompt": "Write onboarding documentation that explains how our Neovim config is laid out and why certain plugins were chosen.",
+      "expected_behavior": "Routes documentation work away from the config-editing workflow.",
+      "assertions": [
+        "Routes to the documentation co-authoring skill",
+        "Does not perform runtime validation or config edits as the primary work",
+        "Treats the task as explanation rather than behaviour change"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "neovim-config-pack-review-pinned-ref",
+      "prompt": "I ran a vim.pack update and it reported success, but the plugin is still on an older commit than the ref I pinned in my spec. Walk me through proving which ref is actually checked out.",
+      "expected_behavior": "Verifies the reviewed target ref against the pack output rather than trusting the success message.",
+      "assertions": [
+        "States that a successful pack update does not by itself prove the pinned ref is checked out",
+        "Inspects the pack review output or the on-disk plugin state to confirm the resolved ref",
+        "Ties the check back to the ref declared in the plugin spec",
+        "Avoids suggesting a reinstall as the first step without diagnosis"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "neovim-config-ftplugin-option-leak",
+      "prompt": "I set buffer-local options in after/ftplugin for one filetype, and when I open a second buffer of a different filetype the options stay applied. What is going on and how should the config be structured?",
+      "expected_behavior": "Explains buffer-local option leakage across filetypes and keeps the settings scoped to the intended ftplugin surface.",
+      "assertions": [
+        "Identifies that buffer-local options set for one filetype can persist when switching buffers",
+        "Keeps the setting scoped to the ftplugin or after/ftplugin file for the intended filetype",
+        "Uses buffer-local option assignment rather than global option assignment",
+        "Suggests verifying by opening buffers of both filetypes"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-lsp-root-dir-monorepo",
+      "prompt": "gopls attaches to every buffer in my monorepo and resolves imports against the repository root, not the module I am editing. My LSP config uses a single root marker. How should the root resolution be fixed?",
+      "expected_behavior": "Adjusts LSP root resolution to the real project boundary instead of one repository-wide marker.",
+      "assertions": [
+        "Identifies the single root marker as the cause of the wrong workspace root",
+        "Proposes root resolution based on the real module or project boundary",
+        "Keeps the fix inside the LSP setup path rather than adding a second plugin manager or overriding user state",
+        "Validates by checking the attached client's resolved root in the affected buffer"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-statusline-nil-provider",
+      "prompt": "My statusline throws errors on startup about a nil value from an LSP or diagnostic component, but only sometimes. How should I diagnose and fix it?",
+      "expected_behavior": "Traces the nil provider on the real startup path and validates in a real TTY, since the failure is UI-sensitive and intermittent.",
+      "assertions": [
+        "Treats the intermittent failure as needing a real TTY startup check rather than only a headless run",
+        "Traces which statusline component returns nil before changing the rendering code",
+        "Guards the component against missing LSP or diagnostic state",
+        "Confirms the fix by starting Neovim and checking the rendered statusline"
+      ],
+      "files": [],
+      "category": "outcome"
+    },
+    {
+      "id": "neovim-config-target-checkout-before-repro",
+      "prompt": "Validate why this Neovim checkout still opens the live config instead of the worktree when I launch nvim.",
+      "expected_behavior": "Before trusting any repro or smoke test, the agent confirms the real config root and points `nvim` at the target checkout via `XDG_CONFIG_HOME` (set to the parent `.config` directory, not the repo root) and `NVIM_APPNAME`, rather than relying on `cd` alone.",
+      "assertions": [
+        "Identifies the real config root and plugin manager before proposing a fix.",
+        "Sets `XDG_CONFIG_HOME` (to the parent `.config` dir) and `NVIM_APPNAME` to target the intended checkout rather than relying on `cd` alone.",
+        "Does not trust a repro result until it confirms which checkout `nvim` actually loaded."
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "sets XDG_CONFIG_HOME and NVIM_APPNAME before launching nvim to reproduce"
+      ]
+    },
+    {
+      "id": "neovim-config-smallest-truthful-validation-scope",
+      "prompt": "Add a new keymap and a treesitter textobject config to my Neovim setup, and make sure it doesn't break anything.",
+      "expected_behavior": "The agent keeps the smallest truthful implementation and validation scope: it implements the keymap/textobject change where the plugin lives, validates with the smallest mode that proves the behavior, and stops probing once the wiring is confirmed instead of re-running every repo-wide validator or restructuring unrelated config.",
+      "assertions": [
+        "Scopes the change to the requested keymap/treesitter config without opportunistically restructuring unrelated plugin wiring.",
+        "Chooses the smallest validation mode that proves the change (targeted check) rather than an exhaustive re-validation of the whole config.",
+        "Excludes nested `.worktrees/**` when running repo-wide `stylua`/`selene` checks so duplicate checkouts don't produce false failures."
+      ],
+      "files": [],
+      "category": "efficiency"
+    }
+  ]
+}

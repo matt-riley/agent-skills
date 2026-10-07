@@ -1,0 +1,5 @@
+interface:
+  display_name: "Neovim"
+  short_description: "Edit, debug, and validate Neovim Lua configurations, and develop, test, and release Neovim Lua plugins. Use for init.lua and plugin-manager work (vim.pack, lazy.nvim), LSP/completion wiring, treesitter, startup behavior, or for building plugins with plenary tests, GitHub Actions CI, vimdoc, and release automation."
+policy:
+  allow_implicit_invocation: true

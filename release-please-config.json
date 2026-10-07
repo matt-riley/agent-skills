@@ -509,26 +509,6 @@
         }
       ]
     },
-    "skills/neovim-config": {
-      "package-name": "neovim-config",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
-    "skills/neovim-plugin-development": {
-      "package-name": "neovim-plugin-development",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/resolve-open-loops": {
       "package-name": "resolve-open-loops",
       "skip-github-release": true,
@@ -651,6 +631,16 @@
     },
     "skills/http-api": {
       "package-name": "http-api",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "SKILL.md"
+        }
+      ]
+    },
+    "skills/neovim": {
+      "package-name": "neovim",
       "skip-github-release": true,
       "extra-files": [
         {

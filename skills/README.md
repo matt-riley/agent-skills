@@ -145,8 +145,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Developer experience and tooling
 
-- `neovim-config` — configure and extend a Neovim setup with plugins, keymaps, and LSP wiring
-- `neovim-plugin-development` — develop, test, and release Neovim Lua plugins with plenary, CI, and docs
+- `neovim` — configure a Neovim setup (plugins, keymaps, LSP wiring) and develop, test, and release Neovim Lua plugins
 - `grill-me` — interrogate a plan or design; when the user explicitly mentions CONTEXT.md, ADRs, or a domain glossary, use its documentation mode
 - `ast-grep` — run structural code search and rewrite using ast-grep patterns
 - `modern-web-guidance` — apply current web platform guidance for a specific framework or API decision
@@ -236,8 +235,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | autonomous numeric-metric optimization with an experiment branch, `results.tsv`, and keep/revert decisions | `autoresearch` | Iterative hill-climbing is the main mechanism |
 | structural code search, codemod rewrites, or ast-grep patterns | `ast-grep` | Syntax-aware search and rewrite is the speciality |
 | modern web platform patterns, HTML, CSS, forms, or web API guidance | `modern-web-guidance` | Current web platform guidance prevents legacy patterns |
-| Neovim config, plugins, LSP wiring, or startup behavior | `neovim-config` | Neovim Lua configuration is the speciality |
-| developing a Neovim Lua plugin | `neovim-plugin-development` | Plugin structure, plenary tests, CI, and documentation |
+| Neovim config, plugins, LSP wiring, or startup behavior | `neovim` | Neovim Lua configuration is the speciality |
+| developing a Neovim Lua plugin | `neovim` | Plugin structure, plenary tests, CI, and documentation |
 | AWS Lambda Go packaging, bootstrap, or deployment | `aws-lambda-go-deployment` | Lambda runtime and IAM config for Go is the focus |
 | code navigation, symbol lookup, or LSP vs grep routing decisions | `code-intelligence` | Routing layer for LSP over text search is the main value |
 
@@ -258,7 +257,6 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
 - `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
 - `code-intelligence` is a routing overlay that ensures LSP is used when available; it should not be selected as the primary skill for work that has a more specific match.
-- `neovim-config` owns editing user-level Neovim configuration (init.lua, lazy.nvim specs, LSP wiring); `neovim-plugin-development` owns building, testing, and releasing Neovim Lua plugins — these are complementary but distinct surfaces.
 - `testing-workflows` owns Go build failures, toolchain mismatches, and CI-parity issues; `go-cli-development` owns CLI project structure, subcommand patterns, goreleaser, and Homebrew distribution — building vs authoring are different concerns.
 - `go-docker-builds` owns production Dockerfiles for Go services; `docker-compose-dev` owns local multi-service development stacks — production images vs local dev environments are different workflows.
 
@@ -276,4 +274,3 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `agent-governance` and `agent-supply-chain` are complementary: governance controls runtime behavior; supply chain controls artifact integrity. Both often apply to the same agent project.
 - `go-cli-development` pairs with `goreleaser-release-pipeline` when the release pipeline itself needs debugging; prefer `go-cli-development` for CLI authoring and `goreleaser-release-pipeline` for release-pipeline-specific failures.
 - `go-docker-builds` pairs with `testing-workflows` when a Docker build fails; check toolchain state with `testing-workflows` before debugging the Dockerfile.
-- `neovim-plugin-development` pairs with `neovim-config` when a plugin's user-facing configuration layer needs updating alongside the plugin itself.

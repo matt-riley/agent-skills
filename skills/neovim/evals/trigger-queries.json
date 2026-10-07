@@ -1,5 +1,53 @@
 [
   {
+    "query": "Create a new Neovim plugin called trailblazer.nvim that adds a :Trail command.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a highlight option and test to my Neovim plugin.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up CI with selene, stylua, and plenary for this Neovim plugin repo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Scaffold a new Neovim plugin called glimpse.nvim that previews file contents in a floating window.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a :Glimpse command and <leader>gp keymap with plenary tests.",
+    "should_trigger": true
+  },
+  {
+    "query": "Set up GitHub Actions CI with selene linting and plenary tests on stable and nightly Neovim.",
+    "should_trigger": true
+  },
+  {
+    "query": "Generate a doc/trailblazer.txt vimdoc help file for this plugin from the existing README.",
+    "should_trigger": true
+  },
+  {
+    "query": "Debug why require('trailblazer').setup() throws 'attempt to call a nil value' \u2014 the plugin loads but setup() crashes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Fix the LSP configuration in my init.lua.",
+    "should_trigger": true
+  },
+  {
+    "query": "Why does lazy.nvim load the wrong version of this plugin?",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a Lua script that parses JSON and prints the result.",
+    "should_trigger": false
+  },
+  {
+    "query": "Document this REST API with an OpenAPI spec.",
+    "should_trigger": false
+  },
+  {
     "query": "Fix this Neovim worktree so vim.pack loads blink.cmp v1 and Copilot completions work again.",
     "should_trigger": true
   },
@@ -45,11 +93,11 @@
   },
   {
     "query": "Why does lazy.nvim load the wrong version of a plugin I am developing?",
-    "should_trigger": false
+    "should_trigger": true
   },
   {
     "query": "Add a :Trail command to my new Neovim plugin and write plenary tests.",
-    "should_trigger": false
+    "should_trigger": true
   },
   {
     "query": "Review this Neovim config's README for clarity.",
@@ -68,7 +116,7 @@
     "should_trigger": true
   },
   {
-    "query": "My LSP keymaps stopped working after I edited init.lua — help me figure out the wiring.",
+    "query": "My LSP keymaps stopped working after I edited init.lua \u2014 help me figure out the wiring.",
     "should_trigger": true
   },
   {
@@ -81,6 +129,6 @@
   },
   {
     "query": "Scaffold a new Neovim plugin called glimpse.nvim with a :Glimpse command and plenary tests.",
-    "should_trigger": false
+    "should_trigger": true
   }
 ]

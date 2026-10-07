@@ -51,8 +51,6 @@
   "skills/goreleaser-release-pipeline": "1.0.2",
   "skills/grill-me": "2.0.1",
   "skills/modern-web-guidance": "2.0.1",
-  "skills/neovim-config": "1.0.2",
-  "skills/neovim-plugin-development": "1.1.1",
   "skills/resolve-open-loops": "2.0.1",
   "skills/sam-cloudformation": "3.0.0",
   "skills/secret-scan-triage": "1.0.2",
@@ -64,5 +62,6 @@
   "skills/verification-before-completion": "2.0.1",
   "skills/workflow-contracts": "2.0.1",
   "skills/graphify": "0.2.1",
-  "skills/http-api": "1.4.1"
+  "skills/http-api": "1.4.1",
+  "skills/neovim": "1.1.1"
 }

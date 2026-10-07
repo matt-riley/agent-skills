@@ -1,14 +1,4 @@
----
-name: neovim-config
-description: "Use when editing, debugging, or validating a Neovim Lua configuration — including plugin management (vim.pack, lazy.nvim), LSP/completion wiring, treesitter, statusline, or startup behavior."
-license: GNU GPL v3
-metadata:
-  version: 1.0.2 # x-release-please-version
-  category: workflow
-  audience: general-coding-agent
-  maturity: draft
-  kind: task
----
+<!-- Merged from the former `neovim-config` skill. -->
 
 # Neovim config
 
@@ -130,4 +120,4 @@ Use this skill when the task targets a Neovim Lua configuration and the work dep
 
 ## Reference files
 
-- [`references/runtime-checks.md`](references/runtime-checks.md) - compact lookup table for config-targeting, `vim.pack`, Blink, Copilot, treesitter, and statusline validation checks.
+- [`references/neovim-config-runtime-checks.md`](references/neovim-config-runtime-checks.md) - compact lookup table for config-targeting, `vim.pack`, Blink, Copilot, treesitter, and statusline validation checks.

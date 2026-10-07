@@ -1,6 +1,6 @@
 ---
-name: neovim-plugin-development
-description: "Develop, test, and release Neovim Lua plugins. Use when building a new Neovim plugin, adding features to an existing plugin, setting up CI with GitHub Actions, writing plenary tests, generating documentation, or configuring release automation — not for editing user-level Neovim config."
+name: neovim
+description: "Edit, debug, and validate Neovim Lua configurations, and develop, test, and release Neovim Lua plugins. Use for init.lua and plugin-manager work (vim.pack, lazy.nvim), LSP/completion wiring, treesitter, startup behavior, or for building plugins with plenary tests, GitHub Actions CI, vimdoc, and release automation."
 license: GNU GPL v3
 metadata:
   version: 1.1.1 # x-release-please-version
@@ -10,12 +10,13 @@ metadata:
   kind: task
 ---
 
-# Neovim plugin development
+# Neovim
 
-Use this skill when developing, testing, or releasing a Neovim Lua plugin. It covers plugin structure, Lua module conventions, testing with plenary.nvim, CI with GitHub Actions, documentation with doc/ files, and release automation.
+Use this skill for Neovim Lua work: a user's configuration (the config path, in `references/neovim-config.md`) or a plugin you are developing, testing, or releasing. It covers plugin structure, Lua module conventions, testing with plenary.nvim, CI with GitHub Actions, documentation with doc/ files, and release automation.
 
 ## Use this skill when
 
+- Editing, debugging, or validating a Neovim Lua config (`init.lua`, `lua/`, `after/`, plugin specs, lockfiles, LSP/completion, treesitter, startup behavior), or a checkout loading the wrong config — follow `references/neovim-config.md` and validate with `references/neovim-config-runtime-checks.md`.
 - Creating a new Neovim plugin from scratch.
 - Adding a feature, command, or keymap to an existing Neovim plugin.
 - Writing or debugging tests for a Neovim plugin using plenary.nvim.
@@ -26,9 +27,7 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 
 ## Do not use this skill when
 
-- Editing or debugging a user's Neovim configuration (`init.lua`, `lazy.nvim` plugin specs, LSP wiring) — use [`neovim-config`](../neovim-config/SKILL.md).
 - The task is general Lua scripting outside the Neovim plugin API.
-- The plugin fails to load but the issue is config-side (wrong checkout, lazy.nvim spec, XDG paths) — use [`neovim-config`](../neovim-config/SKILL.md).
 - The main task is writing a README or documentation for a non-Neovim project — use [`writing-and-editing`](../writing-and-editing/SKILL.md).
 
 ## Routing boundary
@@ -39,8 +38,8 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 | Adding a `:MyCommand` user command to an existing plugin | Yes | — |
 | Writing plenary tests for a plugin's Lua module | Yes | — |
 | Setting up CI with selene, stylua, and plenary for a plugin repo | Yes | — |
-| Fixing `init.lua` config — LSP, keymaps, colorscheme, lazy.nvim specs | No | [`neovim-config`](../neovim-config/SKILL.md) |
-| Debugging why `lazy.nvim` loads the wrong plugin version | No | [`neovim-config`](../neovim-config/SKILL.md) |
+| Fixing `init.lua` config — LSP, keymaps, colorscheme, lazy.nvim specs | Yes, config path | — |
+| Debugging why `lazy.nvim` loads the wrong plugin version | Yes, config path | — |
 
 ## Inputs to gather
 
@@ -119,8 +118,8 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
   - should trigger: "Create a new Neovim plugin called `trailblazer.nvim` that adds a `:Trail` command."
   - should trigger: "Add a `highlight` option and test to my Neovim plugin."
   - should trigger: "Set up CI with selene, stylua, and plenary for this Neovim plugin repo."
-  - should not trigger: "Fix the LSP configuration in my `init.lua`." (→ `neovim-config`)
-  - should not trigger: "Why does lazy.nvim load the wrong version of this plugin?" (→ `neovim-config`)
+  - should trigger: "Fix the LSP configuration in my `init.lua`." (config path)
+  - should trigger: "Why does lazy.nvim load the wrong version of this plugin?" (config path)
 
 ## Examples
 
@@ -131,4 +130,4 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 ## Reference files
 
 - [`references/plugin-structure.md`](references/plugin-structure.md) — plugin layout, config defaults, plenary tests, CI workflows, vimdoc, and release automation
-- [`../neovim-config/SKILL.md`](../neovim-config/SKILL.md) — Adjacent skill for editing user-level Neovim configuration (init.lua, lazy.nvim specs, LSP wiring).
+- [`references/neovim-config.md`](references/neovim-config.md) — the config path: user-level Neovim configuration (init.lua, plugin managers, LSP wiring, startup validation).

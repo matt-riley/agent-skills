@@ -1,6 +1,6 @@
 # Neovim plugin structure, tests, CI, and docs
 
-Lookup detail for `neovim-plugin-development`. Keep the main skill focused on activation and workflow; use this file when scaffolding or hardening layout, plenary tests, CI, vimdoc, or releases.
+Lookup detail for `neovim`. Keep the main skill focused on activation and workflow; use this file when scaffolding or hardening layout, plenary tests, CI, vimdoc, or releases.
 
 ## Plugin structure
 
