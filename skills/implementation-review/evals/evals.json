@@ -61,6 +61,31 @@
       ],
       "files": [],
       "category": "negative-boundary"
+    },
+    {
+      "id": "two-axis-review",
+      "prompt": "Review my branch against issue #42 before I merge it.",
+      "expected_behavior": "Reviews the diff on two separate axes: Standards (documented repo standards plus labelled smell-baseline judgement calls) and Spec (issue #42 requirements, quoting spec lines). Reports them under separate headings without re-ranking across axes, with path:line findings tagged by severity.",
+      "assertions": [
+        "Reports Standards and Spec findings under separate headings",
+        "Spec findings quote the requirement line from the issue they refer to",
+        "Smell-baseline findings are labelled as judgement calls, not hard violations",
+        "Does not merge or re-rank findings across the two axes"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "blast-radius-safety-fact",
+      "prompt": "This small diff changes how we evict cache entries. Review it; I don't fully trust it.",
+      "expected_behavior": "Names the single fact the change is safe because of, looks beyond the diff for breakage a symbol search would miss, and states how far the fact was proven on the evidence ladder (asserted, pointed at line, walked the bad case, ran code), marking it unproven when no code was run.",
+      "assertions": [
+        "Names one specific fact the change's safety depends on",
+        "States how far that fact was proven, or marks it unproven",
+        "Considers effects outside the diff (persisted data, other readers, flags) rather than only listing callers"
+      ],
+      "files": [],
+      "category": "outcome"
     }
   ]
 }

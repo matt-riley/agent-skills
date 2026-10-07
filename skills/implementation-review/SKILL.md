@@ -72,14 +72,18 @@ metadata:
    - If the user names reviewer models or agents, use exactly that reviewer set.
    - If the user requires an approval gate, the implementation is not final until every required reviewer approves.
    - If the user only asked for review, still stress-test for correctness, regressions, validation gaps, security issues, rollout safety, and scope drift.
+   - When invoked from a review command (`/review`, `/pr`), stay read-only and report every finding as `path:line`, tagged with its severity and verdict impact.
+   - When you choose the reviewers yourself, prefer a different model family from the one that wrote the change; same-family reviewers tend to share its blind spots. Say which family reviewed if it matters.
 
-4. **Run review rounds on a single shared revision.**
-   - Every reviewer must see the same revision, diff, and validation summary.
-   - Each reviewer should return: `APPROVE` or `REQUEST_CHANGES`, required changes, optional suggestions, and approval rationale.
-   - Load `references/reviewer-prompt.md` when preparing reviewer prompts.
+4. **Review on two separate axes, against one shared revision.**
+   - **Standards:** does the diff follow the repo's documented standards (`AGENTS.md`, `CONTRIBUTING.md`, `CODING_STANDARDS.md`, lint configs)? Cite the file and rule for each violation. Add the smell baseline in `references/reviewer-prompt.md` as labelled judgement calls ("possible Feature Envy"), never hard violations. A documented repo standard overrides the baseline, and anything tooling already enforces is skipped.
+   - **Spec:** does the diff do what the issue, plan, or PR description asked? Report missing or partial requirements, behaviour nobody asked for (scope creep), and requirements that look implemented but wrong, quoting the spec line for each. With no spec, say so and skip this axis.
+   - Run the two axes as separate reviewers (parallel subagents when the harness has them) so one does not mask the other. Report them under separate headings and do not re-rank findings across axes.
+   - Every reviewer sees the same revision, diff, and validation summary and returns `APPROVE` or `REQUEST_CHANGES`, required changes, optional suggestions, and rationale. Load `references/reviewer-prompt.md` when preparing reviewer prompts.
+   - **Blast radius:** name the one fact the change is safe because of (for example "this call only drops already-dead cache entries"), then look past the diff for what grep will not show: wire formats, persisted data, flags, other readers of the same bytes. Push that fact as far down this ladder as is cheap and say where it stopped: (1) asserted, (2) pointed at a real `file:line`, (3) walked the bad case and showed it cannot happen, (4) ran a script or test that calls the real code. Anything short of (4) is reported as **unproven**.
 
 5. **Consolidate findings without blurring review and implementation.**
-   - Merge duplicate findings; prioritize blockers over optional polish.
+   - Merge duplicate findings within an axis; prioritize blockers over optional polish.
    - If any reviewer requests changes, surface those findings and stop — do not execute the fixes unless the user explicitly asked for both review and fixes in one pass.
    - When the user has addressed the requested changes, re-run the full reviewer set on the updated revision before considering the review complete.
    - Do not drop, swap, or skip reviewers mid-process unless the user explicitly changes the review panel.
@@ -94,17 +98,15 @@ metadata:
 
 - A frozen review target (diff, branch, PR, commit range, or file set) paired with the current validation evidence for that revision.
 - Consolidated blocker and optional findings tied to correctness, regression risk, security, rollout safety, and stated requirements.
+- `## Standards` and `## Spec` findings reported separately, each as `path:line` with severity.
+- The safety fact and how far it was proven (or **unproven**).
 - A clear review verdict for the requested mode: advisory, blocked by requested changes, or approved under the required reviewer rule.
-
-
-## Workflow
-
-See the body and references for review rounds and consolidation steps.
 
 ## Guardrails
 
 - **Must** focus on materially important issues: correctness, regression risk, validation gaps, rollout safety, security issues, and unintended scope changes.
-- **Must not** substitute style nitpicks for substantive review findings.
+- **Must not** substitute style nitpicks for substantive review findings; smell-baseline hits stay labelled judgement calls, never blockers on their own.
+- **Must not** merge or re-rank Standards and Spec findings into one list.
 - **Must not** silently rewrite code as a substitute for producing a clear review outcome.
 - **Must** preserve existing user changes and unrelated work while assessing the review target.
 - **Should** compare the implementation against the approved plan or requirements when those exist.
