@@ -33,7 +33,7 @@
   },
   {
     "query": "Write the PRD for this feature before we decide how to split the work.",
-    "should_trigger": false
+    "should_trigger": true
   },
   {
     "query": "Produce a structured markdown handoff for planning and review instead of tracker tickets.",
@@ -45,6 +45,50 @@
   },
   {
     "query": "Rewrite this under-specified ask before deciding whether tickets should exist yet.",
+    "should_trigger": false
+  },
+  {
+    "query": "Turn this feature discussion into a PRD and open an issue for it using what you can verify from the repo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Turn everything we know about the billing retry flow into a PRD and publish it to the repo's issue tracker.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use the current conversation and the codebase to write a PRD for offline draft sync; don't interview me unless something is genuinely blocking.",
+    "should_trigger": true
+  },
+  {
+    "query": "Synthesize this feature discussion into a PRD with extensive user stories, implementation decisions, testing decisions, and out-of-scope items.",
+    "should_trigger": true
+  },
+  {
+    "query": "We've been discussing the offline sync feature for a while now \u2014 turn all of that into a PRD with user stories and implementation decisions.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write a PRD for the new permissions model using what's already in this thread and the repo's current auth module.",
+    "should_trigger": true
+  },
+  {
+    "query": "Draft a product requirements doc for the checkout redesign so we can hand it to the team for triage.",
+    "should_trigger": true
+  },
+  {
+    "query": "Synthesize what we've decided about rate limiting into a PRD, including out-of-scope items \u2014 don't interview me unless something's missing.",
+    "should_trigger": true
+  },
+  {
+    "query": "Help me rewrite this vague feature request before we decide whether it needs a PRD.",
+    "should_trigger": false
+  },
+  {
+    "query": "Turn this approved plan into a v1 planner handoff artifact for the executor.",
+    "should_trigger": false
+  },
+  {
+    "query": "Map the repository first because we do not understand the system well enough to describe the work.",
     "should_trigger": false
   }
 ]

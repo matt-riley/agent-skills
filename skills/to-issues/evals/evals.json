@@ -3,7 +3,7 @@
   "evals": [
     {
       "id": "fetch-parent-issue-before-slicing",
-      "prompt": "Here's issue #482 as the parent epic for the billing retry feature — break it into implementation slices.",
+      "prompt": "Here's issue #482 as the parent epic for the billing retry feature \u2014 break it into implementation slices.",
       "expected_behavior": "Fetches the referenced parent issue's body and comments before proposing slice boundaries, rather than slicing from the issue title or number alone, then presents the breakdown for approval.",
       "assertions": [
         "Reads the referenced issue's body and comments before proposing slice boundaries",
@@ -27,7 +27,7 @@
     },
     {
       "id": "small-feature-not-over-sliced",
-      "prompt": "Break this small feature — add a 'remember me' checkbox to the login form — into issues.",
+      "prompt": "Break this small feature \u2014 add a 'remember me' checkbox to the login form \u2014 into issues.",
       "expected_behavior": "Recognizes the work is small enough to need very few slices and does not manufacture unnecessary layer-based tickets like separate database, API, and UI issues for a single small outcome; still presents the minimal breakdown for approval.",
       "assertions": [
         "Does not split a small, single-outcome feature into layer-based tickets such as 'database work' and 'UI work'",
@@ -56,15 +56,15 @@
       ]
     },
     {
-      "id": "to-issues-boundary-prd",
+      "id": "to-issues-prd-first-when-framing-missing",
       "prompt": "Write the PRD for this feature before we decide how to split the work.",
-      "expected_behavior": "Routes away from to-issues because product framing is still missing; recommends to-prd instead of guessing at slice boundaries.",
+      "expected_behavior": "Recognizes product framing is still missing and writes the PRD first (PRD step) instead of guessing at slice boundaries.",
       "assertions": [
         "Does not invent implementation tickets when a PRD is still needed",
-        "Routes toward to-prd or product-requirements work instead"
+        "Routes toward the PRD step or product-requirements work instead"
       ],
       "files": [],
-      "category": "negative-boundary"
+      "category": "routing"
     },
     {
       "id": "to-issues-boundary-workflow-contracts",
@@ -76,6 +76,70 @@
       ],
       "files": [],
       "category": "negative-boundary"
+    },
+    {
+      "id": "to-prd-reads-context-before-drafting",
+      "prompt": "Turn everything we know about the billing retry flow into a PRD using the conversation and repo context; only ask if something is blocking.",
+      "expected_behavior": "Reads the current conversation and the relevant repository surfaces first, inspects the implementation enough to name the major modules likely to change, and only then drafts the PRD \u2014 asking a targeted question only if something materially blocking is missing.",
+      "assertions": [
+        "Reads the current conversation and relevant repository surfaces before drafting",
+        "Inspects the codebase enough to name concrete modules or surfaces likely to change before writing Implementation Decisions",
+        "Does not open with a broad interview; any question asked is targeted at a materially blocking gap"
+      ],
+      "files": [],
+      "category": "tool-pattern"
+    },
+    {
+      "id": "to-prd-targeted-question-not-broad-interview",
+      "prompt": "We've fully discussed the offline sync feature: problem, target users, constraints, and rollout plan are all above. Write the PRD, but we haven't decided yet whether conflict resolution should be last-write-wins or manual merge, and that changes the user stories.",
+      "expected_behavior": "Recognizes that problem, users, constraints, and rollout are already settled and does not re-ask about them; asks only the one targeted question about conflict-resolution strategy because it materially changes the user stories and scope, then proceeds to draft.",
+      "assertions": [
+        "Does not re-ask about problem, target users, constraints, or rollout already given in the prompt",
+        "Asks at most one targeted question, about the conflict-resolution strategy, because it materially changes scope",
+        "Does not stall the whole PRD waiting on unrelated details that were already provided"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "to-prd-prd-follows-template-section-order",
+      "prompt": "Synthesize this feature discussion into a PRD with extensive user stories, implementation decisions, testing decisions, and out-of-scope items.",
+      "expected_behavior": "Produces a PRD using the required section order from the PRD template, with a user-facing Problem Statement and Solution, an extensive User Stories list covering edge cases and failure paths, Implementation and Testing Decisions grounded in repo evidence with no file paths or code snippets, and an explicit Out of Scope section.",
+      "assertions": [
+        "Problem Statement and Solution are written from the user's perspective, not implementation detail",
+        "User Stories list is extensive and covers edge cases, operator/admin roles, or failure/recovery paths where relevant",
+        "Implementation Decisions and Testing Decisions contain no file paths or code snippets",
+        "Out of Scope section is explicit and present"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "the PRD's section headings appear in this order: Problem Statement, Solution, User Stories, Implementation Decisions, Testing Decisions, Out of Scope",
+        "Implementation Decisions contains no file paths (no '/' path fragments) and no code blocks"
+      ]
+    },
+    {
+      "id": "to-prd-publication-blocker-without-verified-labels",
+      "prompt": "Synthesize this feature discussion into a PRD and publish it to the issue tracker if labels and templates are known.",
+      "expected_behavior": "Produces a complete PRD markdown artifact and only publishes with verified tracker conventions such as real issue labels or templates; otherwise stops at the markdown artifact and surfaces the publication blocker explicitly rather than inventing labels like needs-triage.",
+      "assertions": [
+        "Produces a complete PRD artifact suitable for issue-tracker handoff",
+        "Does not invent issue labels such as needs-triage that are not verified in the project",
+        "States a publish-or-blocker decision explicitly rather than silently assuming tracker fields exist"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "to-prd-skip-prd-when-it-exists",
+      "prompt": "Break this approved PRD into independently grabbable implementation issues.",
+      "expected_behavior": "Recognizes the PRD already exists and goes straight to slicing instead of re-authoring it.",
+      "assertions": [
+        "Does not re-author or re-synthesize a PRD when the task is ticket breakdown",
+        "Routes toward slicing instead"
+      ],
+      "files": [],
+      "category": "routing"
     }
   ]
 }

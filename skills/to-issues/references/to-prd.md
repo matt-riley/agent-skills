@@ -1,14 +1,4 @@
----
-name: to-prd
-description: "Use when the user wants a PRD synthesized from current repository and conversation context, especially for issue-tracker handoff. Not when writing-and-editing, workflow-contracts, or codebase discovery is the better fit."
-license: GNU GPL v3
-metadata:
-  version: 2.0.1 # x-release-please-version
-  category: authoring
-  audience: general-coding-agent
-  maturity: draft
-  kind: task
----
+<!-- Merged from the former `to-prd` skill. -->
 
 # To PRD
 
@@ -37,7 +27,7 @@ Use this skill when the goal is to turn what is already known — repository con
 | Write or refactor a broad shared document with multi-round collaboration | No | [`writing-and-editing`](../writing-and-editing/SKILL.md) |
 | Map the repository first because the system is not understood well enough to describe the work | No | [`acquire-codebase-knowledge`](../acquire-codebase-knowledge/SKILL.md) |
 | Rewrite an under-specified ask into a clearer brief before deciding whether a PRD is even needed | No | [`reverse-prompt`](../reverse-prompt/SKILL.md) |
-| Break an approved PRD into independently trackable tickets | No | [`to-issues`](../to-issues/SKILL.md) |
+| Break an approved PRD into independently trackable tickets | Yes, after this step | - |
 
 ## Inputs to gather
 
@@ -63,7 +53,7 @@ Use this skill when the goal is to turn what is already known — repository con
 
 1. Read the current conversation and the relevant repository surfaces before asking anything new.
 2. Pull the domain terms, module boundaries, interfaces, and test prior art that should shape the PRD.
-3. Start from [`assets/prd-template.md`](assets/prd-template.md), filling the user-facing sections first.
+3. Start from [`assets/to-prd-prd-template.md`](assets/to-prd-prd-template.md), filling the user-facing sections first.
 
 ## Workflow
 
@@ -77,7 +67,7 @@ Use this skill when the goal is to turn what is already known — repository con
 
 ## Outputs
 
-- A completed PRD using [`assets/prd-template.md`](assets/prd-template.md).
+- A completed PRD using [`assets/to-prd-prd-template.md`](assets/to-prd-prd-template.md).
 - An extensive user-story list that covers the feature's main actors and meaningful edge cases.
 - Implementation and testing decisions grounded in repository context and prior art.
 - Either a published issue or a ready-to-paste PRD markdown artifact plus any explicit publication blocker.
@@ -93,7 +83,7 @@ Use this skill when the goal is to turn what is already known — repository con
 
 ## Validation
 
-- Confirm the PRD uses the section order from [`assets/prd-template.md`](assets/prd-template.md).
+- Confirm the PRD uses the section order from [`assets/to-prd-prd-template.md`](assets/to-prd-prd-template.md).
 - Confirm `Problem Statement` and `Solution` are written from the user's perspective.
 - Confirm `Implementation Decisions` and `Testing Decisions` are grounded in repository context and mention no file paths or code snippets.
 - Confirm any publish step uses only verified issue-template or label conventions; otherwise leave the output as markdown plus a blocker note.
@@ -108,5 +98,5 @@ Use this skill when the goal is to turn what is already known — repository con
 
 ## Reference files
 
-- [`assets/prd-template.md`](assets/prd-template.md) - starter PRD scaffold with the required section order.
-- [`references/checklist.md`](references/checklist.md) - final quality and publication checklist before treating the PRD as done.
+- [`assets/to-prd-prd-template.md`](assets/to-prd-prd-template.md) - starter PRD scaffold with the required section order.
+- [`references/to-prd-checklist.md`](references/to-prd-checklist.md) - final quality and publication checklist before treating the PRD as done.

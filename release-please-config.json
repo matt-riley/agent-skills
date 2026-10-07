@@ -629,16 +629,6 @@
         }
       ]
     },
-    "skills/to-prd": {
-      "package-name": "to-prd",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/typescript-any-eliminator": {
       "package-name": "typescript-any-eliminator",
       "skip-github-release": true,

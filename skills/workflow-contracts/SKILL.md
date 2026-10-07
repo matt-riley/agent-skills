@@ -34,7 +34,7 @@ Use this skill when a task needs a durable handoff artifact instead of a chat su
 | Create or consume a structured plan, review, or execution artifact in this repo | Yes | - |
 | Create or revise a reusable skill package | No | [`skill-creator`](../skill-creator/SKILL.md) |
 | Write global policy that should always apply even when no artifact is produced | No | global instructions or a scoped instruction file |
-| Produce requirements before creating the contract | No | [`to-prd`](../to-prd/SKILL.md) |
+| Produce requirements before creating the contract | No | [`to-issues`](../to-issues/SKILL.md) |
 | Break an approved contract into independently trackable tickets | No | [`to-issues`](../to-issues/SKILL.md) |
 
 ## Inputs to gather
@@ -112,7 +112,7 @@ Use this skill when a task needs a durable handoff artifact instead of a chat su
 
 - Smoke test:
   - should trigger: "Turn this approved plan into a v1 execution handoff with blockers."
-  - should not trigger: "Write a PRD for this idea before we create tickets." (→ `to-prd`)
+  - should not trigger: "Write a PRD for this idea before we create tickets." (→ `to-issues`)
 
 ## Examples
 

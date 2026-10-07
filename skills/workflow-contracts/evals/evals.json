@@ -60,12 +60,12 @@
       "expected_behavior": "Routes away from workflow-contracts because the task is PRD authoring, not a durable plan/review/execution handoff.",
       "assertions": [
         "Does not force a workflow-contract template for PRD authoring",
-        "Routes toward to-prd or product-requirements work instead of inventing a handoff contract"
+        "Routes toward to-issues or product-requirements work instead of inventing a handoff contract"
       ],
       "files": [],
       "category": "negative-boundary",
       "deterministic_checks": [
-        "recommends to-prd rather than workflow-contracts"
+        "recommends to-issues rather than workflow-contracts"
       ]
     },
     {

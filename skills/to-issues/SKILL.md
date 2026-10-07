@@ -1,6 +1,6 @@
 ---
 name: to-issues
-description: "Use when the user wants to turn a plan, spec, PRD, or approved idea into independently grabbable issue-tracker slices. Not when the work still needs a PRD, repository discovery, or a generic handoff artifact."
+description: "Use when the user wants to turn a plan, spec, PRD, or approved idea into independently grabbable issue-tracker slices, or first needs a PRD synthesized from repository and conversation context for that handoff. Not when repository discovery or a generic handoff artifact is the real need."
 license: GNU GPL v3
 metadata:
   version: 2.0.1 # x-release-please-version
@@ -17,13 +17,13 @@ Use this skill when the goal is to break already-shaped work into issue-tracker 
 ## Use this skill when
 
 - The user wants to turn a plan, spec, PRD, or approved feature idea into implementation issues.
+- The user wants a PRD synthesized from current repository and conversation context, usually as the step before ticket breakdown.
 - The next step is creating dependency-aware tickets rather than refining the product narrative.
 - The work should be split into small vertical slices instead of broad layer-by-layer tasks.
 - The output should either be published to the issue tracker or left as ready-to-paste issue bodies.
 
 ## Do not use this skill when
 
-- The work still needs a PRD or broader product framing before it can be split into tickets — use [`to-prd`](../to-prd/SKILL.md).
 - The codebase is not understood well enough to describe the slices responsibly — use [`acquire-codebase-knowledge`](../acquire-codebase-knowledge/SKILL.md).
 - The user needs a reusable markdown handoff artifact rather than tracker-native issues — use [`workflow-contracts`](../workflow-contracts/SKILL.md).
 - The ask is still too vague to tell whether issue slicing is the right next step — use [`reverse-prompt`](../reverse-prompt/SKILL.md).
@@ -33,7 +33,7 @@ Use this skill when the goal is to break already-shaped work into issue-tracker 
 | Situation | Use this skill? | Route instead |
 | --- | --- | --- |
 | Break an existing plan or PRD into implementation tickets with dependencies | Yes | - |
-| Create the product-facing requirements document before any ticket breakdown exists | No | [`to-prd`](../to-prd/SKILL.md) |
+| Create the product-facing requirements document before any ticket breakdown exists | Yes, PRD step first | - |
 | Produce a structured markdown handoff for planning, review, or execution | No | [`workflow-contracts`](../workflow-contracts/SKILL.md) |
 | Explore the repository because the current architecture is still unclear | No | [`acquire-codebase-knowledge`](../acquire-codebase-knowledge/SKILL.md) |
 | Rewrite an under-specified ask before deciding whether tickets should exist yet | No | [`reverse-prompt`](../reverse-prompt/SKILL.md) |
@@ -66,6 +66,7 @@ Use this skill when the goal is to break already-shaped work into issue-tracker 
 
 ## Workflow
 
+0. **PRD step, only when product framing is missing.** Synthesize a PRD from what is already known instead of interviewing: follow `references/to-prd.md`, fill `assets/to-prd-prd-template.md` in its section order, and check it with `references/to-prd-checklist.md`. Ask only questions whose answers change scope. Skip this step when a PRD, spec, or approved plan already exists.
 1. Start from the source artifact already in context. If the user supplied an issue reference, fetch its body and comments before slicing.
 2. Identify the outcomes, user stories, and scope boundaries that the issues need to cover.
 3. Break the work into tracer-bullet vertical slices using [`references/slicing-guide.md`](references/slicing-guide.md):
@@ -100,7 +101,7 @@ Use this skill when the goal is to break already-shaped work into issue-tracker 
 - Do not publish issues before the user approves the proposed breakdown.
 - Do not invent labels such as `needs-triage`, project fields, or tracker conventions unless they are verified in the target project.
 - Do not close or modify a parent issue as part of this skill.
-- If the source material is still too fuzzy to slice responsibly, stop and route to [`to-prd`](../to-prd/SKILL.md) or [`reverse-prompt`](../reverse-prompt/SKILL.md) instead of guessing.
+- If the source material is still too fuzzy to slice responsibly, run the PRD step first or route to [`reverse-prompt`](../reverse-prompt/SKILL.md) instead of guessing.
 
 ## Validation
 
@@ -109,7 +110,7 @@ Use this skill when the goal is to break already-shaped work into issue-tracker 
 - Confirm the publish order matches dependency order and does not create circular blockers.
 - Confirm any tracker labels, templates, or metadata are applied only when they are verified.
 - should trigger: "Break this approved PRD into implementation issues and open them in dependency order."
-- should not trigger: "Write the PRD for this feature before we decide how to split the work."
+- should trigger: "Write the PRD for this feature before we decide how to split the work." (PRD step)
 
 ## Examples
 

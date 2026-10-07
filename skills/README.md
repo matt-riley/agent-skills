@@ -141,8 +141,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Writing, docs, and planning artifacts
 
-- `to-prd` — generate a Product Requirements Document from a feature idea or conversation
-- `to-issues` — convert a conversation, PRD, or plan into well-formed GitHub issues
+- `to-issues` — synthesize a PRD when framing is missing, then convert a conversation, PRD, or plan into well-formed GitHub issues
 - `skill-creator` — create, upgrade, and standardise reusable skills with frontmatter, layering guidance, evals, and validation
 
 ### Developer experience and tooling
@@ -205,7 +204,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | a bug that resists quick diagnosis | `systematic-debugging` | Root-cause methodology beats random patch attempts |
 | post-deploy API smoke checks | `api-smoke-validation` | Smoke validation is the primary delivery gate |
 | mapping or documenting an unfamiliar codebase | `acquire-codebase-knowledge` | Produces 7 structured knowledge docs in docs/codebase/ |
-| a PRD from a feature idea or conversation | `to-prd` | PRD generation is the deliverable |
+| a PRD from a feature idea or conversation | `to-issues` | PRD generation is the deliverable |
 | converting a plan or PRD into GitHub issues | `to-issues` | Issue creation is the deliverable |
 | Go build, vet, or test issues | `go-build-and-test` | Go module and toolchain handling is the speciality |
 | building or releasing a Go CLI tool | `go-cli-development` | Go CLI structure, subcommands, flags, goreleaser, and Homebrew |
