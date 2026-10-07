@@ -143,7 +143,6 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Writing, docs, and planning artifacts
 
-- `doc-coauthoring` — co-author technical documentation with a domain expert in an iterative Q&A loop
 - `to-prd` — generate a Product Requirements Document from a feature idea or conversation
 - `to-issues` — convert a conversation, PRD, or plan into well-formed GitHub issues
 - `skill-creator` — create, upgrade, and standardise reusable skills with frontmatter, layering guidance, evals, and validation
@@ -236,7 +235,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | defining or enforcing explicit entry/exit contracts for multi-step workflows | `workflow-contracts` | Contract-shaped workflow boundaries are the main risk |
 | a mandatory pre-completion verification checklist | `verification-before-completion` | Evidence-gated sign-off is the main mechanism |
 | creating or updating AGENTS.md, copilot-instructions.md, or per-path instruction guides | `agent-instructions` | Instruction-file setup and maintenance is the deliverable |
-| co-authoring technical documentation with iterative Q&A | `doc-coauthoring` | Document structure and prose co-authorship is the main need |
+| co-authoring technical documentation with iterative Q&A | `writing-and-editing` (co-author mode) | Document structure and prose co-authorship is the main need |
 | a pre-edit context map or survey of likely files and patterns | `context-map` | Contextual file-and-pattern mapping is the main deliverable |
 | creating a guided code tour or narrative walkthrough | `code-tour` | Step-by-step `.tour` file creation is the deliverable |
 | autonomous numeric-metric optimization with an experiment branch, `results.tsv`, and keep/revert decisions | `autoresearch` | Iterative hill-climbing is the main mechanism |

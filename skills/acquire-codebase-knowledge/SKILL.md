@@ -183,7 +183,7 @@ Use these sections during Phase 2 to inform investigation questions and identify
 
 - Smoke test:
   - should trigger: "Map this repo's architecture and onboarding path for a new engineer."
-  - should not trigger: "Write a README for this CLI for first-time users." (→ `doc-coauthoring`)
+  - should not trigger: "Write a README for this CLI for first-time users." (→ `writing-and-editing`)
 
 ## Examples
 

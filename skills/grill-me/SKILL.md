@@ -25,7 +25,7 @@ Use this skill to relentlessly interrogate a plan or design until every branch o
 
 - The request is under-specified and needs sharpening before interrogation — route to [`reverse-prompt`](../reverse-prompt/SKILL.md).
 - A completed plan needs formal reviewer-gated, multi-round approval — route to [`plan-review`](../plan-review/SKILL.md).
-- The user wants standalone documentation (README, guide, or runbook) — route to [`doc-coauthoring`](../doc-coauthoring/SKILL.md).
+- The user wants standalone documentation (README, guide, or runbook) — route to [`writing-and-editing`](../writing-and-editing/SKILL.md).
 
 ## Routing boundary
 

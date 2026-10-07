@@ -429,16 +429,6 @@
         }
       ]
     },
-    "skills/doc-coauthoring": {
-      "package-name": "doc-coauthoring",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/fallow": {
       "package-name": "fallow",
       "skip-github-release": true,

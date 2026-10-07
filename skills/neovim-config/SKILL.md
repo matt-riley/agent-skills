@@ -26,7 +26,7 @@ Use this skill when the task targets a Neovim Lua configuration and the work dep
 
 - The bug is not specific to a Neovim Lua configuration and needs generic root-cause investigation first. Use [`systematic-debugging`](../systematic-debugging/SKILL.md).
 - The task is general Lua application code outside a Neovim config surface. Use the repo's normal language workflow or [`systematic-debugging`](../systematic-debugging/SKILL.md).
-- The main goal is writing or restructuring documentation about the config rather than changing or validating behavior. Use [`doc-coauthoring`](../doc-coauthoring/SKILL.md).
+- The main goal is writing or restructuring documentation about the config rather than changing or validating behavior. Use [`writing-and-editing`](../writing-and-editing/SKILL.md).
 
 ## Routing boundary
 
@@ -35,7 +35,7 @@ Use this skill when the task targets a Neovim Lua configuration and the work dep
 | Update plugin specs, keymaps, LSP/completion setup, treesitter, statusline, or startup wiring in a Neovim Lua config | Yes | - |
 | Validate a worktree checkout, `vim.pack` migration, or startup regression that depends on loading the right Neovim config | Yes | - |
 | Generic debugging for an app or runtime bug where Neovim config is only incidental | No | [`systematic-debugging`](../systematic-debugging/SKILL.md) |
-| Documentation, onboarding, or explanation work for the config | No | [`doc-coauthoring`](../doc-coauthoring/SKILL.md) |
+| Documentation, onboarding, or explanation work for the config | No | [`writing-and-editing`](../writing-and-editing/SKILL.md) |
 
 ## Inputs to gather
 

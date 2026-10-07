@@ -1,8 +1,5 @@
 interface:
   display_name: Writing and Editing
-  short_description: Draft structured documents, audit prose readability, and review
-    short audience-facing metadata strings — solo writing quality work. Use when the
-    primary task is writing, editing, or copy quality, not iterative co-authoring
-    with reader feedback (use doc-coauthoring for that).
+  short_description: "Draft, co-author, and edit documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary task is writing quality: a new or restructured doc, iterative co-authoring with reader feedback, a readability pass, or copy review."
 policy:
   allow_implicit_invocation: true

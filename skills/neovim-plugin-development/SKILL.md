@@ -29,7 +29,7 @@ Use this skill when developing, testing, or releasing a Neovim Lua plugin. It co
 - Editing or debugging a user's Neovim configuration (`init.lua`, `lazy.nvim` plugin specs, LSP wiring) — use [`neovim-config`](../neovim-config/SKILL.md).
 - The task is general Lua scripting outside the Neovim plugin API.
 - The plugin fails to load but the issue is config-side (wrong checkout, lazy.nvim spec, XDG paths) — use [`neovim-config`](../neovim-config/SKILL.md).
-- The main task is writing a README or documentation for a non-Neovim project — use [`doc-coauthoring`](../doc-coauthoring/SKILL.md).
+- The main task is writing a README or documentation for a non-Neovim project — use [`writing-and-editing`](../writing-and-editing/SKILL.md).
 
 ## Routing boundary
 

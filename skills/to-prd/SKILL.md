@@ -1,6 +1,6 @@
 ---
 name: to-prd
-description: "Use when the user wants a PRD synthesized from current repository and conversation context, especially for issue-tracker handoff. Not when doc-coauthoring, workflow-contracts, or codebase discovery is the better fit."
+description: "Use when the user wants a PRD synthesized from current repository and conversation context, especially for issue-tracker handoff. Not when writing-and-editing, workflow-contracts, or codebase discovery is the better fit."
 license: GNU GPL v3
 metadata:
   version: 2.0.1 # x-release-please-version
@@ -23,7 +23,7 @@ Use this skill when the goal is to turn what is already known — repository con
 
 ## Do not use this skill when
 
-- The user wants a broader documentation workflow with iterative co-authoring and reader feedback — use [`doc-coauthoring`](../doc-coauthoring/SKILL.md).
+- The user wants a broader documentation workflow with iterative co-authoring and reader feedback — use [`writing-and-editing`](../writing-and-editing/SKILL.md).
 - The task needs an implementation handoff, review artifact, or execution contract rather than a product-facing PRD — use [`workflow-contracts`](../workflow-contracts/SKILL.md).
 - The codebase is still poorly understood and repository-level discovery is the real blocker — use [`acquire-codebase-knowledge`](../acquire-codebase-knowledge/SKILL.md).
 - The ask is mainly to sharpen or restructure a vague request before planning or implementation — use [`reverse-prompt`](../reverse-prompt/SKILL.md).
@@ -34,7 +34,7 @@ Use this skill when the goal is to turn what is already known — repository con
 | --- | --- | --- |
 | Turn an already-discussed feature into a PRD body for issue tracking or review | Yes | - |
 | Produce a reusable markdown handoff artifact for planning, review, or execution | No | [`workflow-contracts`](../workflow-contracts/SKILL.md) |
-| Write or refactor a broad shared document with multi-round collaboration | No | [`doc-coauthoring`](../doc-coauthoring/SKILL.md) |
+| Write or refactor a broad shared document with multi-round collaboration | No | [`writing-and-editing`](../writing-and-editing/SKILL.md) |
 | Map the repository first because the system is not understood well enough to describe the work | No | [`acquire-codebase-knowledge`](../acquire-codebase-knowledge/SKILL.md) |
 | Rewrite an under-specified ask into a clearer brief before deciding whether a PRD is even needed | No | [`reverse-prompt`](../reverse-prompt/SKILL.md) |
 | Break an approved PRD into independently trackable tickets | No | [`to-issues`](../to-issues/SKILL.md) |

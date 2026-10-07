@@ -45,7 +45,6 @@ Skill-specific behavioral flags may be added under `metadata` as documented opti
 
 | Optional field | Status | Meaning | Used by |
 | --- | --- | --- | --- |
-| `metadata.reader_testing` | **Documented optional extension** | Signals that reader-testing is a required stage in the skill workflow. Valid value: `required`. | `doc-coauthoring` |
 | `metadata.version` | **Release-managed skills only** | Mirrors the skill's semver from Release Please. Set via `# x-release-please-version` comment. Do not bump manually. | Release-managed skills |
 
 **Do not add arbitrary skill-specific fields** to `metadata` without documenting them here first. If a field applies to only one skill and does not change how the validator or authoring system reasons about the skill, consider moving it to a `references/` file instead.
@@ -67,12 +66,6 @@ The following `metadata` keys are explicitly banned because they carry upstream 
 ## Special-case decisions
 
 The historical special cases for imported skills (`acquire-codebase-knowledge`, `agent-governance`, `agent-supply-chain`) have been normalized to the local contract (category/audience/maturity/kind + license at top level, provenance moved to PROVENANCE.md or commit history where appropriate). No further exceptions are active.
-
-### `doc-coauthoring`
-
-This skill uses `metadata.reader_testing: required` as a skill-specific behavioral flag.
-
-**Resolution:** This is the accepted pattern for skill-specific behavioral extensions. The field is documented in the optional extensions table above. Future skill-specific flags should follow the same pattern: add to `metadata`, document here, and add a validator check if the field is meaningful to automation.
 
 ## Description and body policy
 
@@ -119,22 +112,6 @@ metadata:
   audience: general-coding-agent
   maturity: draft
   kind: task
----
-```
-
-### Stable skill with documented optional extension
-
-```yaml
----
-name: my-skill
-description: "Use when <trigger phrase>."
-license: GNU GPL v3
-metadata:
-  category: authoring
-  audience: general-coding-agent
-  maturity: stable
-  kind: task
-  reader_testing: required
 ---
 ```
 

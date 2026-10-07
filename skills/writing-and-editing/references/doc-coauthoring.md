@@ -1,15 +1,4 @@
----
-name: doc-coauthoring
-description: "Use when user wants to write, refactor, or expand documentation through iterative co-authoring with reader feedback — README, guides, API docs, runbooks, specification documents. Not for solo writing, readability audits, or metadata review (use writing-and-editing for those)."
-license: GNU GPL v3
-metadata:
-  version: 1.0.2 # x-release-please-version
-  category: authoring
-  audience: general-coding-agent
-  maturity: draft
-  kind: task
-  reader_testing: required
----
+<!-- Merged from the former `doc-coauthoring` skill. -->
 
 # Doc-Coauthoring
 
@@ -89,7 +78,7 @@ Documentation authoring proceeds through three stages. Each stage has a clear in
 - Related documents and integration points
 - Success criteria for reader validation
 
-**Reference**: See [`references/stage-1-context-gathering.md`](references/stage-1-context-gathering.md) for detailed guidance and checklist.
+**Reference**: See [`references/doc-coauthoring-stage-1-context-gathering.md`](references/doc-coauthoring-stage-1-context-gathering.md) for detailed guidance and checklist.
 
 ### Stage 2: Refinement & Structure
 
@@ -104,7 +93,7 @@ Documentation authoring proceeds through three stages. Each stage has a clear in
 - Placeholder notes for sections needing review or expansion
 - Links to related documentation
 
-**Reference**: See [`references/stage-2-refinement-structure.md`](references/stage-2-refinement-structure.md) for detailed guidance on organizing content, handling multiple audiences, and drafting sections.
+**Reference**: See [`references/doc-coauthoring-stage-2-refinement-structure.md`](references/doc-coauthoring-stage-2-refinement-structure.md) for detailed guidance on organizing content, handling multiple audiences, and drafting sections.
 
 ### Stage 3: Reader Testing
 
@@ -119,7 +108,7 @@ Documentation authoring proceeds through three stages. Each stage has a clear in
 - Verification that all audiences can extract their needed information
 - Final review and publication
 
-**Reference**: See [`references/stage-3-reader-testing.md`](references/stage-3-reader-testing.md) for guidance on planning reader sessions, capturing feedback, and prioritizing changes.
+**Reference**: See [`references/doc-coauthoring-stage-3-reader-testing.md`](references/doc-coauthoring-stage-3-reader-testing.md) for guidance on planning reader sessions, capturing feedback, and prioritizing changes.
 
 ## Outputs
 
@@ -162,8 +151,8 @@ The skill workflow is complete when:
 
 ## Reference files
 
-- [`references/stage-1-context-gathering.md`](references/stage-1-context-gathering.md) — context gathering checklist and detailed guidance for Stage 1
-- [`references/stage-2-refinement-structure.md`](references/stage-2-refinement-structure.md) — guidance on organizing content and drafting sections in Stage 2
-- [`references/stage-3-reader-testing.md`](references/stage-3-reader-testing.md) — guidance on planning reader sessions and prioritizing changes in Stage 3
-- [`assets/document-scaffold-template.md`](assets/document-scaffold-template.md) — reusable document scaffold template
-- [`assets/feedback-capture-template.md`](assets/feedback-capture-template.md) — reader testing feedback capture template
+- [`references/doc-coauthoring-stage-1-context-gathering.md`](references/doc-coauthoring-stage-1-context-gathering.md) — context gathering checklist and detailed guidance for Stage 1
+- [`references/doc-coauthoring-stage-2-refinement-structure.md`](references/doc-coauthoring-stage-2-refinement-structure.md) — guidance on organizing content and drafting sections in Stage 2
+- [`references/doc-coauthoring-stage-3-reader-testing.md`](references/doc-coauthoring-stage-3-reader-testing.md) — guidance on planning reader sessions and prioritizing changes in Stage 3
+- [`assets/doc-coauthoring-document-scaffold-template.md`](assets/doc-coauthoring-document-scaffold-template.md) — reusable document scaffold template
+- [`assets/doc-coauthoring-feedback-capture-template.md`](assets/doc-coauthoring-feedback-capture-template.md) — reader testing feedback capture template

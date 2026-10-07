@@ -1,6 +1,6 @@
 ---
 name: writing-and-editing
-description: "Draft structured documents, audit prose readability, and review short audience-facing metadata strings — solo writing quality work. Use when the primary task is writing, editing, or copy quality, not iterative co-authoring with reader feedback (use doc-coauthoring for that)."
+description: "Draft, co-author, and edit documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary task is writing quality: a new or restructured doc, iterative co-authoring with reader feedback, a readability pass, or copy review."
 license: GNU GPL v3
 metadata:
   version: 1.3.1 # x-release-please-version
@@ -18,6 +18,7 @@ metadata:
 - The user wants to draft, rewrite, or substantially restructure a document such as a proposal, spec, RFC, README, migration guide, onboarding doc, or runbook.
 - The user wants a readability audit on already-written multi-paragraph prose.
 - The user wants a short-string audit on metadata such as titles, descriptions, bios, taglines, schema descriptions, or README blurbs.
+- The user wants to co-author a shared document iteratively, with context gathering and real-reader feedback before release.
 - Another skill produced human-facing prose or copy and the remaining work is writing quality rather than code or workflow design.
 
 ## Do not use this skill when
@@ -31,7 +32,7 @@ metadata:
 
 **Required before editing**
 
-- Which mode applies: `draft`, `readability-audit`, or `metadata-audit`.
+- Which mode applies: `draft`, `co-author`, `readability-audit`, or `metadata-audit`.
 - The target document or strings.
 - The intended audience and publishing surface.
 - Any constraints on tone, length, or structure.
@@ -49,7 +50,7 @@ metadata:
 
 ## First move
 
-1. Classify the task as `draft`, `readability-audit`, or `metadata-audit`.
+1. Classify the task as `draft`, `co-author`, `readability-audit`, or `metadata-audit`.
 2. Confirm the audience and target surface before changing wording.
 3. Pick the matching reference file and stay inside that mode unless the user explicitly wants a cross-mode pass.
 
@@ -57,6 +58,7 @@ metadata:
 
 1. **Route to the right mode first.**
    - `draft`: a structured document needs to be created or substantially reshaped.
+   - `co-author`: a shared document is built with the user over several rounds, ending in reader testing.
    - `readability-audit`: the structure is mostly settled and the user wants prose-quality feedback.
    - `metadata-audit`: the task is about short audience-facing strings.
 
@@ -66,24 +68,29 @@ metadata:
    - Draft iteratively instead of front-loading the full document unless the user asks for a full first pass.
    - Run a fresh-reader pass once a complete draft exists.
 
-3. **Readability-audit mode.**
+3. **Co-author mode.**
+   - Follow `references/doc-coauthoring.md`: gather context, refine structure and content, then validate with real readers.
+   - Stage detail lives in `references/doc-coauthoring-stage-1-context-gathering.md`, `references/doc-coauthoring-stage-2-refinement-structure.md`, and `references/doc-coauthoring-stage-3-reader-testing.md`.
+   - Start from `assets/doc-coauthoring-document-scaffold-template.md` and record reader feedback in `assets/doc-coauthoring-feedback-capture-template.md`.
+
+4. **Readability-audit mode.**
    - Read the full prose before judging sentence-level issues.
    - Report concrete issues with quoted evidence and a Flesch Reading Ease score.
    - Keep domain terms that the intended audience would reasonably expect.
 
-4. **Metadata-audit mode.**
+5. **Metadata-audit mode.**
    - Review strings in batches when possible.
    - Check front-loading, concreteness, filler, duplication, and truncation fit for the target surface.
    - Provide a concrete rewrite whenever a string fails an important check.
 
-5. **Handle cross-mode work deliberately.**
+6. **Handle cross-mode work deliberately.**
    - Draft first, then run readability or metadata review only after the structure or field set is stable.
    - If the user really wants only one narrow pass, do not broaden into the other modes automatically.
 
 ## Outputs
 
 - A mode-specific deliverable: drafted document sections, a readability audit with evidence and score, or concrete metadata rewrites.
-- Audience-aware structure or grouped feedback that stays aligned to the chosen `draft`, `readability-audit`, or `metadata-audit` mode.
+- Audience-aware structure or grouped feedback that stays aligned to the chosen `draft`, `co-author`, `readability-audit`, or `metadata-audit` mode.
 - A final pass result for the selected mode without drifting into unrelated review or planning workflows.
 
 
@@ -113,6 +120,7 @@ metadata:
 ## Reference files
 
 - Read `references/doc-types-and-boundaries.md` when the task sounds like document work but may belong to another skill.
+- Read `references/doc-coauthoring.md` for the co-author mode's staged workflow.
 - Read `references/review-loop.md` when a complete draft needs a fresh-reader pass before handoff.
 - Read `references/readability-audit.md` when running a prose audit on multi-paragraph text.
 - Read `references/metadata-audit.md` when auditing titles, descriptions, bios, taglines, or similar short strings.
