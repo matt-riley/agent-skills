@@ -45,7 +45,6 @@
   "skills/git-signing-troubleshoot": "1.0.2",
   "skills/github-actions-local-repro": "1.1.1",
   "skills/github-cli-pr-workflow": "3.0.0",
-  "skills/go-build-and-test": "1.1.1",
   "skills/go-cli-development": "2.0.1",
   "skills/go-docker-builds": "1.1.1",
   "skills/go-error-patterns": "1.1.1",

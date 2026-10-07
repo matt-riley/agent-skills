@@ -459,16 +459,6 @@
         }
       ]
     },
-    "skills/go-build-and-test": {
-      "package-name": "go-build-and-test",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/go-docker-builds": {
       "package-name": "go-docker-builds",
       "skip-github-release": true,

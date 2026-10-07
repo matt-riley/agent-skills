@@ -75,10 +75,10 @@
     {
       "id": "not-trigger-build-outside-docker",
       "prompt": "go build fails outside Docker with a GOROOT mismatch — nothing to do with the Dockerfile yet.",
-      "expected_behavior": "Should NOT apply Dockerfile authoring workflow. Routes to go-build-and-test for the toolchain/GOROOT diagnosis since the failure is outside Docker.",
+      "expected_behavior": "Should NOT apply Dockerfile authoring workflow. Routes to testing-workflows for the toolchain/GOROOT diagnosis since the failure is outside Docker.",
       "assertions": [
         "Does not propose Dockerfile changes for a non-Docker toolchain failure",
-        "Routes to go-build-and-test for GOROOT/toolchain diagnosis"
+        "Routes to testing-workflows for GOROOT/toolchain diagnosis"
       ],
       "files": [],
       "category": "negative-boundary"

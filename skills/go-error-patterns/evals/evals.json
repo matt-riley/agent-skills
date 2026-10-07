@@ -51,10 +51,10 @@
     {
       "id": "route-away-build-failure",
       "prompt": "go test ./... only fails in CI after a Go version bump; local is green.",
-      "expected_behavior": "Routes to go-build-and-test for toolchain/CI-parity diagnosis rather than error-type redesign.",
+      "expected_behavior": "Routes to testing-workflows for toolchain/CI-parity diagnosis rather than error-type redesign.",
       "assertions": [
         "Does not start with constructor covariance as the primary fix",
-        "Routes toward go-build-and-test or toolchain/CI parity investigation"
+        "Routes toward testing-workflows or toolchain/CI parity investigation"
       ],
       "files": [],
       "category": "negative-boundary"

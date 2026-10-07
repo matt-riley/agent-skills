@@ -76,10 +76,10 @@
     {
       "id": "route-away-go-compile-error",
       "prompt": "The Go Lambda code fails with an undefined variable in main.go before we even get to packaging or deployment.",
-      "expected_behavior": "Recognizes the failure is a plain Go compile error prior to Lambda packaging and routes to go-build-and-test rather than treating it as a deployment/runtime issue.",
+      "expected_behavior": "Recognizes the failure is a plain Go compile error prior to Lambda packaging and routes to testing-workflows rather than treating it as a deployment/runtime issue.",
       "assertions": [
         "Does not propose Lambda runtime, GOARCH, or bootstrap-naming fixes for a plain compile error",
-        "States that the code must compile before Lambda packaging is relevant, and routes to `go-build-and-test`",
+        "States that the code must compile before Lambda packaging is relevant, and routes to `testing-workflows`",
         "Does not inspect CloudWatch logs, since the function was never built or deployed"
       ],
       "files": [],

@@ -1,14 +1,4 @@
----
-name: go-build-and-test
-description: "Diagnose Go build failures, toolchain mismatches, and CI-parity problems — GOROOT/GOTOOLDIR overrides, govulncheck stdlib findings, or TempDir race flakes. Use when go build or CI fails for environmental reasons, not when individual tests fail on logic or coverage (use testing-workflows for that)."
-license: GNU GPL v3
-metadata:
-  version: 1.1.1 # x-release-please-version
-  category: workflow
-  audience: general-coding-agent
-  maturity: draft
-  kind: task
----
+<!-- Merged from the former `go-build-and-test` skill. -->
 
 # Go build and test
 
@@ -108,6 +98,6 @@ Use this skill when a Go repository is failing to build or test and the next mov
 
 ## Reference files
 
-- [`references/toolchain-environment-checklist.md`](references/toolchain-environment-checklist.md) — `go env` key matrix, stale-override reset commands, `govulncheck` stdlib-finding triage steps, and CI fixture-file audit
+- [`references/go-build-and-test-toolchain-environment-checklist.md`](references/go-build-and-test-toolchain-environment-checklist.md) — `go env` key matrix, stale-override reset commands, `govulncheck` stdlib-finding triage steps, and CI fixture-file audit
 - [`../go-error-patterns/SKILL.md`](../go-error-patterns/SKILL.md) — adjacent Go skill for covariance and error-design questions
 - [`../systematic-debugging/SKILL.md`](../systematic-debugging/SKILL.md) — route here when the failure is too ambiguous for a Go-specific triage workflow

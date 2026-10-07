@@ -28,7 +28,7 @@ Use this skill when containerizing a Go service for production. It covers the ca
 
 - The task is running a local multi-service stack for development — use [`docker-compose-dev`](../docker-compose-dev/SKILL.md).
 - The Dockerfile is for a non-Go service (Node, Python, Ruby, etc.).
-- The Go service fails to build outside Docker — use [`go-build-and-test`](../go-build-and-test/SKILL.md).
+- The Go service fails to build outside Docker — use [`testing-workflows`](../testing-workflows/SKILL.md).
 - The main task is configuring CI workflows that happen to include a Docker step — use [`github-actions-failure-triage`](../github-actions-failure-triage/SKILL.md).
 
 ## Routing boundary
@@ -39,7 +39,7 @@ Use this skill when containerizing a Go service for production. It covers the ca
 | Go Docker build fails on `go build` inside the builder stage | Yes | — |
 | Switching from `golang:alpine` base to `scratch` for a Go binary | Yes | — |
 | Local dev with `docker compose up` for PostgreSQL + app | No | [`docker-compose-dev`](../docker-compose-dev/SKILL.md) |
-| `go build` fails locally, outside Docker | No | [`go-build-and-test`](../go-build-and-test/SKILL.md) |
+| `go build` fails locally, outside Docker | No | [`testing-workflows`](../testing-workflows/SKILL.md) |
 
 ## Inputs to gather
 
@@ -275,7 +275,7 @@ The builder only needs Go source — keep everything else out of the context.
   - should trigger: "This Go Docker build fails because of CGO linking — it needs sqlite3."
   - should trigger: "Add a health check and non-root user to this Go service's Dockerfile."
   - should not trigger: "Run `docker compose up` to start PostgreSQL and the app for local dev." (→ `docker-compose-dev`)
-  - should not trigger: "`go build` fails outside Docker with a GOROOT mismatch." (→ `go-build-and-test`)
+  - should not trigger: "`go build` fails outside Docker with a GOROOT mismatch." (→ `testing-workflows`)
 
 ## Examples
 
@@ -287,4 +287,4 @@ The builder only needs Go source — keep everything else out of the context.
 
 - [`references/health-check-patterns.md`](references/health-check-patterns.md) — Health check alternatives for scratch, alpine, and distroless images.
 - [`../docker-compose-dev/SKILL.md`](../docker-compose-dev/SKILL.md) — Adjacent skill for local multi-service development with Docker Compose.
-- [`../go-build-and-test/SKILL.md`](../go-build-and-test/SKILL.md) — Route here when the Go binary fails to build outside Docker.
+- [`../testing-workflows/SKILL.md`](../testing-workflows/SKILL.md) — Route here when the Go binary fails to build outside Docker.

@@ -28,7 +28,7 @@ Use this skill when building, extending, or releasing a Go command-line tool. It
 
 ## Do not use this skill when
 
-- The Go CLI fails to build or test and the root cause is toolchain, GOROOT, or CI-parity — use [`go-build-and-test`](../go-build-and-test/SKILL.md).
+- The Go CLI fails to build or test and the root cause is toolchain, GOROOT, or CI-parity — use [`testing-workflows`](../testing-workflows/SKILL.md).
 - Individual tests in the CLI package are failing on logic or coverage — use [`testing-workflows`](../testing-workflows/SKILL.md).
 - The task is only about error-handling design or `func(string) error` covariance — use [`go-error-patterns`](../go-error-patterns/SKILL.md).
 - The CLI does not exist yet and the user only wants a discovery pass — use [`context-map`](../context-map/SKILL.md).
@@ -41,7 +41,7 @@ Use this skill when building, extending, or releasing a Go command-line tool. It
 | Adding a `serve` subcommand with flags to an existing Go CLI | Yes | — |
 | Wiring viper config + env vars into a CLI's command tree | Yes | — |
 | Setting up goreleaser with Homebrew tap for a Go CLI | Yes | — |
-| `go build` fails on this CLI and the error is a toolchain mismatch | No | [`go-build-and-test`](../go-build-and-test/SKILL.md) |
+| `go build` fails on this CLI and the error is a toolchain mismatch | No | [`testing-workflows`](../testing-workflows/SKILL.md) |
 | A test in `cmd/` is failing on wrong output, not on build | No | [`testing-workflows`](../testing-workflows/SKILL.md) |
 | Designing Go error types for CLI error messages | No | [`go-error-patterns`](../go-error-patterns/SKILL.md) |
 
@@ -250,7 +250,7 @@ Capture stdout/stderr with `cmd.SetOut` and `cmd.SetErr`. Test one behavior per 
   - should trigger: "Create a new Go CLI called `tunnel` that takes a `--port` flag and prints a connection message."
   - should trigger: "Add a `list` subcommand to my existing Go CLI with table output and a `--format json` flag."
   - should trigger: "Wire goreleaser and Homebrew distribution for this Go CLI tool."
-  - should not trigger: "`go build` fails on this CLI with a GOROOT error." (→ `go-build-and-test`)
+  - should not trigger: "`go build` fails on this CLI with a GOROOT error." (→ `testing-workflows`)
   - should not trigger: "The table output test in `cmd/list_test.go` is failing." (→ `testing-workflows`)
 
 ## Examples
@@ -264,4 +264,4 @@ Capture stdout/stderr with `cmd.SetOut` and `cmd.SetErr`. Test one behavior per 
 - [`references/cli-framework-choice.md`](references/cli-framework-choice.md) — Decision table for stdlib `flag` vs cobra, plus project structure conventions.
 - [`references/goreleaser-homebrew.md`](references/goreleaser-homebrew.md) — Full goreleaser config reference, Homebrew tap setup, CI token wiring, and release checklist.
 - [`../goreleaser-release-pipeline/SKILL.md`](../goreleaser-release-pipeline/SKILL.md) — Adjacent skill for goreleaser-specific debugging when the release pipeline itself fails.
-- [`../go-build-and-test/SKILL.md`](../go-build-and-test/SKILL.md) — Route here when the CLI fails to build due to toolchain or CI-parity issues.
+- [`../testing-workflows/SKILL.md`](../testing-workflows/SKILL.md) — Route here when the CLI fails to build due to toolchain or CI-parity issues.

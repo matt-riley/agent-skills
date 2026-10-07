@@ -35,7 +35,7 @@ Use this skill when a Go task is really about error-type design, shared helper s
 | A helper accepts `func(string) error`, but the package constructor returns `*DomainError` | Yes | - |
 | A local alias like `type OptionalString = optional.String` is being proposed as the finished design | Yes | Stay here and use the shared owning type directly |
 | The question is whether to keep one lambda per area/category or merge binaries | Yes | Stay here and keep one lambda per area unless a merge is explicitly requested |
-| `go test ./...` is failing and the root cause may be toolchain or CI isolation | No | [`go-build-and-test`](../go-build-and-test/SKILL.md) |
+| `go test ./...` is failing and the root cause may be toolchain or CI isolation | No | [`testing-workflows`](../testing-workflows/SKILL.md) |
 | The real problem is request validation or typing untrusted API input | No | [`schema-boundary-typing`](../schema-boundary-typing/SKILL.md) |
 | No one yet understands the cause of the error or bug | No | [`systematic-debugging`](../systematic-debugging/SKILL.md) |
 
@@ -64,7 +64,7 @@ Use this skill when a Go task is really about error-type design, shared helper s
 
 1. Read the exact expected function signature or interface type instead of reasoning from memory.
 2. Identify the owning package for the shared type or error so you can remove aliases rather than multiply them.
-3. Decide whether the task is a design question here or an immediate build/test failure that belongs in [`go-build-and-test`](../go-build-and-test/SKILL.md).
+3. Decide whether the task is a design question here or an immediate build/test failure that belongs in [`testing-workflows`](../testing-workflows/SKILL.md).
 
 ## Workflow
 
@@ -79,7 +79,7 @@ Use this skill when a Go task is really about error-type design, shared helper s
 
 - A concrete decision on constructor wrapping, alias removal, interface return types, or lambda granularity.
 - The smallest code change needed to make the chosen Go contract truthful and compilable.
-- A routing note when the work should move to [`go-build-and-test`](../go-build-and-test/SKILL.md), [`schema-boundary-typing`](../schema-boundary-typing/SKILL.md), or [`systematic-debugging`](../systematic-debugging/SKILL.md).
+- A routing note when the work should move to [`testing-workflows`](../testing-workflows/SKILL.md), [`schema-boundary-typing`](../schema-boundary-typing/SKILL.md), or [`systematic-debugging`](../systematic-debugging/SKILL.md).
 
 ## Guardrails
 
@@ -95,7 +95,7 @@ Use this skill when a Go task is really about error-type design, shared helper s
 - Check that any alias removal now imports the owning package type directly.
 - Smoke test:
   - should trigger: "My Go helper takes `func(string) error`, but my constructor returns `*DomainError`; what is the right pattern?"
-  - should not trigger: "`go test ./...` only fails in CI after a Go version bump." (→ `go-build-and-test`)
+  - should not trigger: "`go test ./...` only fails in CI after a Go version bump." (→ `testing-workflows`)
 
 ## Examples
 
@@ -106,6 +106,6 @@ Use this skill when a Go task is really about error-type design, shared helper s
 ## Reference files
 
 - [`references/error-constructor-patterns.md`](references/error-constructor-patterns.md) — Go code examples for closure wrapping, alias removal, and the concrete-vs-interface decision table
-- [`../go-build-and-test/SKILL.md`](../go-build-and-test/SKILL.md) — adjacent Go skill for build, test, toolchain, and CI parity failures
+- [`../testing-workflows/SKILL.md`](../testing-workflows/SKILL.md) — adjacent Go skill for build, test, toolchain, and CI parity failures
 - [`../schema-boundary-typing/SKILL.md`](../schema-boundary-typing/SKILL.md) — route here when the real task is boundary validation rather than Go error design
 - [`../systematic-debugging/SKILL.md`](../systematic-debugging/SKILL.md) — route here when the root cause is still unknown

@@ -36,7 +36,7 @@ Use this skill when a Go Lambda fails because the binary, runtime, package layou
 | Go Lambda packaging, runtime, bootstrap, or handler problems | Yes | - |
 | SAM template YAML, CloudFormation stack rollback, or IAM resource wiring | No | [`sam-cloudformation`](../sam-cloudformation/SKILL.md) |
 | Deploy workflow fails on AssumeRole or OIDC auth | No | [`sam-cloudformation`](../sam-cloudformation/SKILL.md) |
-| Go code does not compile before packaging | No | [`go-build-and-test`](../go-build-and-test/SKILL.md) |
+| Go code does not compile before packaging | No | [`testing-workflows`](../testing-workflows/SKILL.md) |
 | CI workflow structure or runner behavior is failing | No | [`github-actions-failure-triage`](../github-actions-failure-triage/SKILL.md) |
 
 ## Inputs to gather
@@ -83,7 +83,7 @@ Use this skill when a Go Lambda fails because the binary, runtime, package layou
 
 - A clear diagnosis of whether the failure is packaging, runtime selection, artifact layout, or event wiring.
 - The corrected build/deploy assumptions for Linux architecture, executable naming, and runtime choice.
-- A clean handoff to `sam-cloudformation`, `go-build-and-test`, or `github-actions-failure-triage` when this skill is not the right owner.
+- A clean handoff to `sam-cloudformation`, `testing-workflows`, or `github-actions-failure-triage` when this skill is not the right owner.
 
 ## Guardrails
 

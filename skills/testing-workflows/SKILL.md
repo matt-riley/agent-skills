@@ -1,6 +1,6 @@
 ---
 name: testing-workflows
-description: "Write, run, and debug Go tests — unit and integration — including generator refresh when stale generated code causes failures. Use when adding test coverage or debugging test failures in domain logic, repositories, or handlers. For build failures, toolchain issues, or CI-parity problems, use go-build-and-test instead."
+description: "Write, run, and debug Go tests, unit and integration, and diagnose Go build, toolchain, and CI-parity failures (GOROOT/GOTOOLDIR overrides, govulncheck stdlib findings, TempDir race flakes, local-green CI-red). Use when adding test coverage, debugging test failures, or when go build or CI fails for environmental reasons."
 license: GNU GPL v3
 metadata:
   version: 1.3.1 # x-release-please-version
@@ -18,6 +18,7 @@ metadata:
 - Running, extending, or debugging Go unit or integration tests for this project.
 - Tests are failing unexpectedly and the cause is not obvious.
 - A feature change needs appropriate coverage across domain, repository, or handler layers.
+- `go build` or CI fails for environmental reasons: toolchain mismatch, stale `GOROOT`/`GOTOOLDIR`, `govulncheck` stdlib findings, or local-green CI-red.
 
 ## Do not use this skill when
 
@@ -60,6 +61,7 @@ go test -v -run TestName ./pkg/...  # single test, verbose
 
 Follow this sequence:
 
+0. **Build, toolchain, or CI-only failure** → follow `references/go-build-and-test.md` and work through `references/go-build-and-test-toolchain-environment-checklist.md` before touching test logic.
 1. **Compile errors in generated packages** → `make generate`, then retry.
 2. **Specific test failure** → `go test -v -run TestName ./path/to/pkg` to isolate.
 3. **DB-related failure in integration tests** → verify `DATABASE_URL` is set and migrations are applied.
@@ -97,3 +99,4 @@ Follow this sequence:
 
 - [`references/examples.md`](references/examples.md) — concrete user utterances, expected behaviour, and model answer shapes
 - [`references/edge-cases.md`](references/edge-cases.md) — near-miss requests, partial matches, and first-attempt failure patterns
+- [`references/go-build-and-test.md`](references/go-build-and-test.md) — build, toolchain, and CI-parity diagnosis

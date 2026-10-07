@@ -61,10 +61,10 @@
     {
       "id": "not-trigger-build-failure",
       "prompt": "go build fails on this CLI with a GOROOT error.",
-      "expected_behavior": "Should NOT trigger go-cli-development. Routes to go-build-and-test for toolchain diagnosis instead of applying CLI scaffolding.",
+      "expected_behavior": "Should NOT trigger go-cli-development. Routes to testing-workflows for toolchain diagnosis instead of applying CLI scaffolding.",
       "assertions": [
         "Does not apply CLI-specific scaffolding or subcommand patterns",
-        "Routes to go-build-and-test for toolchain diagnosis"
+        "Routes to testing-workflows for toolchain diagnosis"
       ],
       "files": [],
       "category": "negative-boundary"
