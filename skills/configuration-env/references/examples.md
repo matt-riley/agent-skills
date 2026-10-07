@@ -34,6 +34,6 @@ Expected behaviour:
 - It keeps migration advice out of scope unless investigation reveals actual schema-state drift.
 
 Key checks:
-- Redirects away from `cloudflare-d1-migrations`.
+- Redirects away from `database-migrations`.
 - Mentions the relevant Wrangler config file and `d1_databases` binding.
 - Frames the fix as binding/config repair rather than schema work.

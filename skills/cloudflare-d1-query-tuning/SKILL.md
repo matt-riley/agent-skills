@@ -21,7 +21,7 @@ metadata:
 
 ## Do not use this skill when
 
-- The task changes schema, indexes, constraints, or migration files; use `cloudflare-d1-migrations`.
+- The task changes schema, indexes, constraints, or migration files; use `database-migrations`.
 - The repository does not use Cloudflare D1 and the main work is a generic adapter/query change; use `repository-adapters`.
 - The problem is D1 binding setup, `preview_database_id`, or Wrangler environment drift rather than runtime query behavior; use `configuration-env`.
 - The main request is caching, HTTP contract changes, or higher-level service behavior rather than the D1 query path itself.
@@ -67,7 +67,7 @@ First confirm the problem is runtime query shape or D1 access behavior, not a mi
    - Push filtering, ordering, limiting, aggregation, and existence checks into SQL when that preserves the contract.
    - Prefer narrower projections, `EXISTS`, set-based fetches, and query consolidation over `SELECT *`, row-by-row follow-ups, or post-processing large result sets.
    - Reuse the repo's prepared statement, batch, or transaction patterns when they reduce repeated round trips without changing semantics.
-   - If the only meaningful improvement would require a new index or schema change, stop and hand off to `cloudflare-d1-migrations` instead of smuggling schema advice into this workflow.
+   - If the only meaningful improvement would require a new index or schema change, stop and hand off to `database-migrations` instead of smuggling schema advice into this workflow.
 
 4. Validate behavior and performance deltas together.
    - Re-run the same representative query path after the rewrite.

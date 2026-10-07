@@ -49,7 +49,7 @@ Keep this easy to reach for startup failures, env drift, and deployment/config d
 
 - Prefer `security-basics` when the question is primarily about auth, sensitive exposure, or request-handling safety.
 - Prefer `docker-compose-dev` when the blocker is bringing up a multi-service stack rather than validating env loading itself.
-- Prefer `cloudflare-d1-migrations` when the task changes D1 schema, migration files, or schema state rather than only fixing the Worker binding/config contract.
+- Prefer `database-migrations` when the task changes D1 schema, migration files, or schema state rather than only fixing the Worker binding/config contract.
 - Pair this with `rpi-workflow` only when configuration work is part of a larger multi-phase change.
 
 ## Loading priority (highest to lowest)

@@ -11,7 +11,7 @@
 
 ## Do not use this skill when
 
-- The repository does not use Cloudflare D1; use `database-migrations` for the general migration workflow instead.
+- The repository does not use Cloudflare D1; follow the general workflow in the parent `database-migrations` SKILL.md instead.
 - The task is only D1 binding, `preview_database_id`, or Wrangler env setup drift with no migration file, import baseline, or schema-state concern; use `configuration-env`.
 - The task is query tuning, repository logic, or runtime D1 access without migration artifacts; use `cloudflare-d1-query-tuning`.
 - The problem is a runtime prepared-statement or query bug and schema plus migration files are unchanged; say plainly that this is not a migration or schema-state task, then redirect to runtime or query debugging instead of treating the migration ledger as the main path.

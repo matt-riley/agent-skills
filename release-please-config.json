@@ -29,16 +29,6 @@
         }
       ]
     },
-    "skills/cloudflare-d1-migrations": {
-      "package-name": "cloudflare-d1-migrations",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/cloudflare-d1-query-tuning": {
       "package-name": "cloudflare-d1-query-tuning",
       "skip-github-release": true,

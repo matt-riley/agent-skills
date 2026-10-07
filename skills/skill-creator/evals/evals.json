@@ -18,8 +18,8 @@
     },
     {
       "id": "read-template-and-standard-before-drafting",
-      "prompt": "Draft frontmatter and the Use this skill when / Do not use this skill when sections for a brand-new `cloudflare-d1-migrations`-adjacent skill about D1 query tuning.",
-      "expected_behavior": "Before drafting, checks skills/README.md and nearby skills (cloudflare-d1-migrations, repository-adapters) to establish the boundary, consults assets/skill-template.md for the canonical outline and references/catalog-standard.md for the frontmatter spec, then writes trigger language (description, Use/Do-not-use) before any workflow or support-file content.",
+      "prompt": "Draft frontmatter and the Use this skill when / Do not use this skill when sections for a brand-new `database-migrations`-adjacent skill about D1 query tuning.",
+      "expected_behavior": "Before drafting, checks skills/README.md and nearby skills (database-migrations, repository-adapters) to establish the boundary, consults assets/skill-template.md for the canonical outline and references/catalog-standard.md for the frontmatter spec, then writes trigger language (description, Use/Do-not-use) before any workflow or support-file content.",
       "assertions": [
         "Checks skills/README.md or nearby skills for boundary overlap before drafting the new skill's content",
         "Uses assets/skill-template.md's canonical outline and references/catalog-standard.md's frontmatter spec rather than inventing a new structure",

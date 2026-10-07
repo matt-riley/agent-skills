@@ -95,8 +95,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Schema and persistence
 
-- `database-migrations` — general database migration workflow
-- `cloudflare-d1-migrations` — Cloudflare D1 migration workflow for Wrangler, local/preview/remote promotion, and recovery
+- `database-migrations` — database migration workflow, including Cloudflare D1 via Wrangler with local/preview/remote promotion and recovery
 - `cloudflare-d1-query-tuning` — Cloudflare D1 runtime query and repository-path tuning when schema or migration changes are out of scope
 - `repository-adapters` — repository-layer adapter changes and DB error mapping
 
@@ -189,7 +188,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | CI image or local CI parity checks | `ci-images` | Focuses on CI/publishing workflows rather than app tests |
 | a security or privacy guardrail review on auth, logging, or sensitive endpoints | `security-basics` | Cross-cutting safety review is the primary need |
 | a database migration workflow (schema change, index, constraint) | `database-migrations` | Migration create/apply/rollback is the main risk |
-| a Cloudflare D1 migration, D1 import, or local/preview/remote migration drift | `cloudflare-d1-migrations` | Wrangler and D1 environment semantics are the main risk |
+| a Cloudflare D1 migration, D1 import, or local/preview/remote migration drift | `database-migrations` | Wrangler and D1 environment semantics are the main risk |
 | a slow Cloudflare D1 query or D1-backed repository path that must improve without schema or migration changes | `cloudflare-d1-query-tuning` | Runtime D1 tuning needs binding-aware repro steps and no-schema rewrite rules |
 | database repository adapter changes or DB error mapping | `repository-adapters` | Adapter-boundary changes need repo/domain-layer care |
 | generated code that feeds builds/tests (sqlc, templ, codegen) | `code-generation` | Regeneration prerequisite overlay |
@@ -254,7 +253,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `reverse-prompt` should own prompt and execution-brief sharpening; keep it separate from `plan-review`, which owns plan artifacts and approval gates.
 - `writing-and-editing` should own reader-facing writing work; keep it separate from `github-presence`, which owns broader profile and repository-surface audits.
 - `session-store-history` should own cross-session recall and session-to-ref/file tracing; keep it separate from current-workspace repo exploration, which should stay with repo-local search tools.
-- `cloudflare-d1-query-tuning` should own runtime D1 query-shape and access-path tuning without schema changes; keep it separate from `cloudflare-d1-migrations` and from generic `repository-adapters` work when Cloudflare D1 runtime behavior is the main risk.
+- `cloudflare-d1-query-tuning` should own runtime D1 query-shape and access-path tuning without schema changes; keep it separate from `database-migrations` and from generic `repository-adapters` work when Cloudflare D1 runtime behavior is the main risk.
 - `acquire-codebase-knowledge` should own deep seven-document codebase mapping; do not conflate it with narrow file reads, quick architecture sketches, or ad-hoc questions about single modules.
 - `fallow` and `knip` are both JS/TS code-health tools but target different tools and scopes: prefer `knip` when the Knip tool is explicitly requested or the need is unused dependencies, exports, or unresolved imports; prefer `fallow` when the Fallow tool is requested or the analysis covers duplication, circular dependencies, complexity hotspots, architecture boundaries, or CI audit gates.
 - `plan-review` owns plan drafting by default and its explicit structured mode when the user requests reviewer-gated multi-round approval; require unanimous same-round verdicts and stop after three rounds.
@@ -271,7 +270,6 @@ Keep these boundaries crisp instead of broadening nearby skills:
 - `plan-review` beats `rpi-workflow` when the user only wants a plan or plan approval.
 - `reverse-prompt` can produce a contract-shaped execution brief, but it should not replace `plan-review` when the user wants a phased implementation plan.
 - `http-api` is an overlay on `testing-workflows`, not a replacement for it.
-- `cloudflare-d1-migrations` is the sharper match than `database-migrations` when Wrangler, `d1_databases`, or local/preview/remote D1 state is central to the task.
 - `cloudflare-d1-query-tuning` is the sharper match than `repository-adapters` when the main risk is Cloudflare D1 runtime query performance without schema or migration changes.
 - `code-generation` often pairs with schema, template, and API work, but usually should not be the only selected skill unless regeneration itself is the task.
 - `configuration-env` and `docker-compose-dev` are situational operational helpers, not default entry points.

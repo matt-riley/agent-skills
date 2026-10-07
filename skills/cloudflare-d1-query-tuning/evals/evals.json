@@ -52,7 +52,7 @@
     {
       "id": "schema-needed-redirect",
       "prompt": "This D1 query is slow and EXPLAIN QUERY PLAN still shows a wide scan. The only real fix looks like a new index, but I was asked not to change schema.",
-      "expected_behavior": "The response respects the no-schema constraint, says the real fix is out of scope, and redirects to cloudflare-d1-migrations instead of pretending a query-only change solved it.",
+      "expected_behavior": "The response respects the no-schema constraint, says the real fix is out of scope, and redirects to database-migrations instead of pretending a query-only change solved it.",
       "assertions": [
         "States plainly that the no-schema constraint blocks the real fix.",
         "Redirects index or schema work to cloudflare-d1-migrations.",

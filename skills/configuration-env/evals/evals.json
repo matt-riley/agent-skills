@@ -59,7 +59,7 @@
       "assertions": [
         "Treats the problem as binding/config repair rather than schema or migration work.",
         "Mentions `wrangler.toml`, `wrangler.json`, or `wrangler.jsonc` and the `d1_databases` entry.",
-        "Redirects away from `cloudflare-d1-migrations` unless schema-state drift is discovered."
+        "Redirects away from `database-migrations` unless schema-state drift is discovered."
       ],
       "files": [],
       "category": "outcome"

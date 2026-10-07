@@ -1,6 +1,6 @@
 ---
 name: database-migrations
-description: "Create, apply, inspect, and recover database schema migrations after detecting the repository's migration contract. Use when changing persistent schema, adding indexes/constraints, or troubleshooting migration state."
+description: "Create, apply, inspect, and recover database schema migrations after detecting the repository's migration contract, including Cloudflare D1 via Wrangler across local, preview, and remote. Use when changing persistent schema, adding indexes/constraints, or troubleshooting migration state or schema drift."
 license: GNU GPL v3
 metadata:
   version: 1.4.1 # x-release-please-version
@@ -11,6 +11,8 @@ metadata:
   kind: task
 ---
 
+# Database migrations
+
 ## Use this skill when
 
 - The task changes persistent schema, indexes, constraints, or migration files.
@@ -20,7 +22,7 @@ metadata:
 ## Do not use this skill when
 
 - The request is to design a brand new schema from scratch with no migration workflow yet.
-- The repository uses Cloudflare D1 and the main risk is Wrangler's local / preview / remote migration workflow; use `cloudflare-d1-migrations`.
+- The task is only D1 binding or Wrangler env setup drift with no migration or schema-state concern; use [`configuration-env`](../configuration-env/SKILL.md).
 - The change is query tuning, repository logic, or data access behavior without persistent schema changes.
 - The task is only a data backfill or one-off repair with no migration artifact to create or inspect.
 
@@ -53,7 +55,12 @@ Inspect the repo contract before suggesting commands or file edits. Determine wh
    - Confirm what is applied, pending, failed, or partially applied before attempting recovery.
    - If environments differ, note the environment-specific risk before changing anything.
 
-4. Complete the follow-on validation the repo expects.
+4. **Cloudflare D1 repos** (a `d1_databases` binding in the Wrangler config): follow `references/cloudflare-d1-migrations.md` instead of steps 1–3. D1 is forward-only, has no `down` migrations, and local, preview, and remote state diverge.
+   - Promotion order and the config contract: `references/cloudflare-d1-migrations-contract-and-promotion.md`.
+   - Baselines, imports, and stuck ledgers: `references/cloudflare-d1-migrations-recovery-and-imports.md`.
+   - Runtime query or binding bugs that only look like migrations: `references/cloudflare-d1-migrations-boundaries-and-false-positives.md`.
+
+5. Complete the follow-on validation the repo expects.
    - Regenerate downstream artifacts if schema changes feed generators such as `sqlc`.
    - Run the smallest relevant tests/checks after the migration path is correct.
 
@@ -63,10 +70,6 @@ Inspect the repo contract before suggesting commands or file edits. Determine wh
 - New or corrected migration artifacts created through the repo's expected scaffolding or generation path.
 - Migration status/history plus downstream code-generation or test evidence confirming the expected schema state.
 
-
-## Workflow
-
-See the body and references for migration create/apply/rollback steps.
 
 ## Guardrails
 
