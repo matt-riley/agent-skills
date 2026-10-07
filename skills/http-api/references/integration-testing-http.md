@@ -1,4 +1,4 @@
-<!-- Merged from the former `http-api` skill. -->
+<!-- Merged from the former `integration-testing-http` skill. -->
 
 # Integration testing (HTTP)
 

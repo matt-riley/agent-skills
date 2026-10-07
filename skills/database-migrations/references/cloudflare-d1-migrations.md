@@ -1,15 +1,4 @@
----
-name: cloudflare-d1-migrations
-description: "Create, inspect, apply, baseline, import, or recover Cloudflare D1 schema migrations across local, preview, and remote databases. Use when Wrangler D1 migration state or schema drift is the main risk."
-license: GNU GPL v3
-metadata:
-  version: 1.4.1 # x-release-please-version
-  owner: mattriley
-  category: data
-  audience: general-coding-agent
-  maturity: stable
-  kind: task
----
+<!-- Merged from the former `cloudflare-d1-migrations` skill. -->
 
 # Cloudflare D1 migrations
 
@@ -116,6 +105,6 @@ First confirm the request is actually about migration or schema state, not just 
 
 ## Reference files
 
-- Read `references/contract-and-promotion.md` when the main risk is choosing the right D1 binding, migration directory/table, persistence path, or preview/remote promotion order.
-- Read `references/recovery-and-imports.md` when the task involves remote drift, D1 recovery, SQLite import/export, or dump cleanup.
-- Read `references/boundaries-and-false-positives.md` when the request mentions D1 but may actually be binding/config drift, runtime query behavior, or a repo with no preview database.
+- Read `references/cloudflare-d1-migrations-contract-and-promotion.md` when the main risk is choosing the right D1 binding, migration directory/table, persistence path, or preview/remote promotion order.
+- Read `references/cloudflare-d1-migrations-recovery-and-imports.md` when the task involves remote drift, D1 recovery, SQLite import/export, or dump cleanup.
+- Read `references/cloudflare-d1-migrations-boundaries-and-false-positives.md` when the request mentions D1 but may actually be binding/config drift, runtime query behavior, or a repo with no preview database.

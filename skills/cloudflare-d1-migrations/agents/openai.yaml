@@ -1,7 +1,0 @@
-interface:
-  display_name: Cloudflare D1 Migrations
-  short_description: Create, inspect, apply, baseline, import, or recover Cloudflare
-    D1 schema migrations across local, preview, and remote databases. Use when Wrangler
-    D1 migration state or schema drift is the main risk.
-policy:
-  allow_implicit_invocation: true
