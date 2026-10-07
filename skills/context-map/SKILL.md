@@ -24,7 +24,7 @@ Use this skill when the next step is figuring out what to read or touch before c
 ## Do not use this skill when
 
 - The exact files are already named and the scope is narrow enough to execute directly.
-- The user wants a phased implementation plan with tasks, dependencies, rollout notes, or handoff artifacts; route to [`plan-review`](../plan-review/SKILL.md) or [`workflow-contracts`](../workflow-contracts/SKILL.md).
+- The user wants a phased implementation plan with tasks, dependencies, rollout notes, or handoff artifacts; route to [`implementation-review`](../implementation-review/SKILL.md) or [`workflow-contracts`](../workflow-contracts/SKILL.md).
 - The main problem is sharpening the user's ask rather than mapping the codebase; route to `reverse-prompt` first.
 
 ## Routing boundary
@@ -33,7 +33,7 @@ Use this skill when the next step is figuring out what to read or touch before c
 | --- | --- | --- |
 | Multi-file task, but likely files/tests/patterns are still unclear | Yes | - |
 | User asks "what files do you need to see first?" while the brief is still under-specified | No | `reverse-prompt` |
-| The code surface is known and the user wants a full execution plan | No | [`plan-review`](../plan-review/SKILL.md) |
+| The code surface is known and the user wants a full execution plan | No | [`implementation-review`](../implementation-review/SKILL.md) |
 | A narrow single-file edit is already well scoped | No | execute directly |
 
 ## Inputs to gather

@@ -41,10 +41,10 @@
     {
       "id": "boundary-plan-only-request",
       "prompt": "I just want a plan for the auth migration right now - don't implement or validate anything yet.",
-      "expected_behavior": "Routes to plan-review for the plan-only deliverable rather than running the full RPI-V cycle through implementation and validation.",
+      "expected_behavior": "Routes to implementation-review for the plan-only deliverable rather than running the full RPI-V cycle through implementation and validation.",
       "assertions": [
         "Does not proceed into implementation or validation phases when only a plan was requested",
-        "Routes toward plan-review for the plan-only deliverable instead"
+        "Routes toward implementation-review for the plan-only deliverable instead"
       ],
       "files": [],
       "category": "negative-boundary"

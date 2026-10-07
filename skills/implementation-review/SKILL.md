@@ -1,6 +1,6 @@
 ---
 name: implementation-review
-description: "Review completed code changes, diffs, and implementation revisions for merge readiness. Use for code review, named reviewer approval, validation gaps, regressions, security risk, or scope drift."
+description: "Review completed code changes, diffs, and implementation revisions for merge readiness, or draft and harden an implementation plan before work starts (plan mode). Use for code review, plan review, named reviewer approval, validation gaps, regressions, security risk, or scope drift."
 license: GNU GPL v3
 metadata:
   version: 1.5.1 # x-release-please-version
@@ -19,13 +19,21 @@ metadata:
 - The user wants named reviewer models or agents to approve a completed implementation
 - The user wants a review focused on correctness, regressions, validation gaps, security issues, rollout safety, or scope drift
 - The user wants to compare completed work against an approved plan, issue, PR description, or stated requirements
+- The user wants an implementation, rollout, or migration plan drafted or hardened, or reviewer-gated plan approval before implementation (plan mode)
 
 ## Do not use this skill when
 
-- The main task is drafting or hardening a plan; use `plan-review` instead
 - The main task is applying reviewer feedback or writing new code rather than assessing the current implementation
-- The implementation is still fluid and no stable revision, diff, or review target has been identified yet
+- The implementation is still fluid with no stable revision to review; if an approach needs shaping, use plan mode instead
 - Review is one phase inside a larger multi-step execution; use `rpi-workflow` instead
+
+## Plan mode
+
+When the deliverable is a plan rather than finished work, follow `references/plan-review.md`: draft or update the plan first, then review it for repo fit, feasibility, validation, rollout safety, and scope.
+
+- Reviewer-gated, multi-round approval uses the personas in `references/plan-review-personas/` with the verdict tokens in `references/plan-review-review-verdicts.md`, unanimous per round, three rounds at most.
+- Reviewer prompts: `references/plan-review-reviewer-prompt.md`. Worked cases: `references/plan-review-examples.md`. Near misses: `references/plan-review-edge-cases.md`.
+- A plan is never "approved" by the same agent that wrote it; prefer a different model family, as for code review.
 
 ## Inputs to gather
 

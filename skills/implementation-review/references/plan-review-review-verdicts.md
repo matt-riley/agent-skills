@@ -1,6 +1,6 @@
 # Review Contract
 
-This document defines the formal contract between `plan-review` and configured structured reviewers.
+This document defines the formal contract between `implementation-review` and configured structured reviewers.
 
 ## Verdict Tokens
 

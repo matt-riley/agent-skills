@@ -17,7 +17,7 @@ Use this file when the task sounds like writing work but the routing is ambiguou
 
 | Task | Route to | Why |
 | --- | --- | --- |
-| Implementation plan, rollout plan, or reviewer-gated plan | `plan-review` | Planning is the deliverable |
+| Implementation plan, rollout plan, or reviewer-gated plan | `implementation-review` | Planning is the deliverable |
 | Repo-grounded execution brief, rewritten prompt, or contract-shaped prompt | `reverse-prompt` | The output is for execution, not a reader-facing document |
 | GitHub profile or repo presentation audit | `github-presence` | The task is broader than the writing itself |
 | Code, config, or generated-file changes | specialist engineering skill | The output is not a writing deliverable |

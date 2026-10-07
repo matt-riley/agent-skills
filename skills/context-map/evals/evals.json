@@ -51,10 +51,10 @@
     {
       "id": "boundary-full-phased-plan",
       "prompt": "Write the full phased implementation plan for this multi-service migration, with validation commands and rollout notes.",
-      "expected_behavior": "Routes to plan-review for the phased implementation plan and rollout notes instead of stopping at a pre-edit file/test scoping map.",
+      "expected_behavior": "Routes to implementation-review for the phased implementation plan and rollout notes instead of stopping at a pre-edit file/test scoping map.",
       "assertions": [
         "Does not stop at a context map when a full phased plan with rollout notes is requested",
-        "Routes to plan-review for the phased implementation plan instead"
+        "Routes to implementation-review for the phased implementation plan instead"
       ],
       "files": [],
       "category": "negative-boundary"

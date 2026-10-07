@@ -64,10 +64,10 @@
     {
       "id": "boundary-reviewer-gated-approval",
       "prompt": "Run this completed plan through unanimous reviewer-gated approval rounds with verdict tokens.",
-      "expected_behavior": "Routes to plan-review's structured reviewer-persona mode rather than treating this as a grill-me interrogation, since reviewer-gated multi-round approval is a distinct workflow.",
+      "expected_behavior": "Routes to implementation-review's structured reviewer-persona mode rather than treating this as a grill-me interrogation, since reviewer-gated multi-round approval is a distinct workflow.",
       "assertions": [
         "Does not run the grill-me one-question-at-a-time loop for a reviewer-gated approval request",
-        "Routes toward plan-review instead"
+        "Routes toward implementation-review instead"
       ],
       "files": [],
       "category": "negative-boundary"

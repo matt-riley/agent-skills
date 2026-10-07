@@ -23,7 +23,7 @@ metadata:
 
 ## Do not use this skill when
 
-- The main deliverable is an implementation plan, rollout plan, or reviewer-gated plan artifact — use [`plan-review`](../plan-review/SKILL.md).
+- The main deliverable is an implementation plan, rollout plan, or reviewer-gated plan artifact — use [`implementation-review`](../implementation-review/SKILL.md).
 - The main task is to sharpen a rough ask into a repository-grounded execution brief or contract-shaped prompt before work starts — use [`reverse-prompt`](../reverse-prompt/SKILL.md).
 - The main task is GitHub profile or repository surface setup rather than the writing itself — use [`github-presence`](../github-presence/SKILL.md).
 - The output is primarily code, config, generated files, or a structured workflow handoff artifact rather than human-facing prose.

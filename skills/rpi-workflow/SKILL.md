@@ -22,7 +22,7 @@ metadata:
 ## Do not use this skill when
 
 - The task is a tiny fix or direct answer where the full ceremony costs more than it saves.
-- The user wants only a plan or plan revision → use `plan-review`; only implementation review → use `implementation-review`; only a contract-shaped execution brief or definition of done → use `reverse-prompt`; or a narrower specialist workflow that another skill covers better.
+- The user wants only a plan, a plan revision, or an implementation review → use `implementation-review` (plan mode for plans); only a contract-shaped execution brief or definition of done → use `reverse-prompt`; or a narrower specialist workflow that another skill covers better.
 - The repo already imposes a stricter required workflow and the job is to follow that process.
 
 ## Inputs to gather
@@ -68,7 +68,7 @@ metadata:
 ### 2. Plan
 
 - Use `plan.md` as the primary planning artifact: concrete phases, files to touch, verification commands, success criteria, and notable risks or approvals.
-- If the user wants plan approval, stop after updating `plan.md` and route through `plan-review` before editing code.
+- If the user wants plan approval, stop after updating `plan.md` and route through `implementation-review` before editing code.
 
 ### 3. Implement
 

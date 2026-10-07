@@ -20,19 +20,67 @@
     "should_trigger": true
   },
   {
-    "query": "I addressed the reviewer's requested changes — re-review the updated diff before we merge.",
+    "query": "I addressed the reviewer's requested changes \u2014 re-review the updated diff before we merge.",
     "should_trigger": true
   },
   {
     "query": "Create an implementation plan for the new billing feature.",
-    "should_trigger": false
+    "should_trigger": true
   },
   {
     "query": "Apply the reviewer's requested changes and push the fix branch.",
     "should_trigger": false
   },
   {
-    "query": "The implementation is still being sketched out — no code exists yet, just an approach.",
+    "query": "The implementation is still being sketched out \u2014 no code exists yet, just an approach.",
+    "should_trigger": true
+  },
+  {
+    "query": "Create a plan for this change and do not consider it final until the reviewers approve it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review and harden my implementation plan with named reviewer models.",
+    "should_trigger": true
+  },
+  {
+    "query": "I am in plan mode; make sure the plan is executable and approval-gated.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use Jason and Freddy to review this finished plan before implementation.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run a structured multi-reviewer approval round and require [PLAN-APPROVED] or [PLAN-REVISE-NEEDED].",
+    "should_trigger": true
+  },
+  {
+    "query": "Draft a rollout plan for this database migration and keep it read-only until I say implement.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want a hardened revision of the plan.md we already have, with explicit scope boundaries and validation commands.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use structured Jason and Freddy review with a three-round approval limit on this plan.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review the finished code diff.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement the feature now instead of planning it.",
+    "should_trigger": false
+  },
+  {
+    "query": "Stress-test this design and update CONTEXT.md as we go - no formal reviewer tokens.",
+    "should_trigger": false
+  },
+  {
+    "query": "The plan is already approved - start implementing the tasks.",
     "should_trigger": false
   }
 ]

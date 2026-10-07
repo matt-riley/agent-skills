@@ -24,7 +24,7 @@ Use this skill to relentlessly interrogate a plan or design until every branch o
 ## Do not use this skill when
 
 - The request is under-specified and needs sharpening before interrogation — route to [`reverse-prompt`](../reverse-prompt/SKILL.md).
-- A completed plan needs formal reviewer-gated, multi-round approval — route to [`plan-review`](../plan-review/SKILL.md).
+- A completed plan needs formal reviewer-gated, multi-round approval — route to [`implementation-review`](../implementation-review/SKILL.md).
 - The user wants standalone documentation (README, guide, or runbook) — route to [`writing-and-editing`](../writing-and-editing/SKILL.md).
 
 ## Routing boundary
@@ -34,7 +34,7 @@ Use this skill to relentlessly interrogate a plan or design until every branch o
 | User says "grill me" about a plan with no documentation intent | Yes | - |
 | User says "grill me" and mentions `CONTEXT.md`, ADRs, or a domain glossary | Yes — documentation mode | - |
 | User's request is too vague to interrogate | No | [`reverse-prompt`](../reverse-prompt/SKILL.md) |
-| Completed plan needs Jason/Freddy or other reviewer-gated rounds | No | [`plan-review`](../plan-review/SKILL.md) |
+| Completed plan needs Jason/Freddy or other reviewer-gated rounds | No | [`implementation-review`](../implementation-review/SKILL.md) |
 
 ## Inputs to gather
 
@@ -83,7 +83,7 @@ Use this skill to relentlessly interrogate a plan or design until every branch o
 
 - Confirm the skill activates on "grill me" prompts without domain-doc intent.
 - Confirm the same trigger enters documentation mode when the user mentions `CONTEXT.md`, ADRs, or a domain glossary.
-- Confirm vague requests route to `reverse-prompt` and reviewer-gated plan approval routes to `plan-review`.
+- Confirm vague requests route to `reverse-prompt` and reviewer-gated plan approval routes to `implementation-review`.
 - Run `node skills/skill-creator/scripts/validate-skill-library.mjs skills/grill-me/SKILL.md`.
 - Smoke test:
   - should trigger: "Grill me on my plan to refactor the notification service."

@@ -1,7 +1,5 @@
 interface:
   display_name: Implementation Review
-  short_description: Review completed code changes, diffs, and implementation revisions
-    for merge readiness. Use for code review, named reviewer approval, validation
-    gaps, regressions, security risk, or scope drift.
+  short_description: "Review completed code changes, diffs, and implementation revisions for merge readiness, or draft and harden an implementation plan before work starts (plan mode). Use for code review, plan review, named reviewer approval, validation gaps, regressions, security risk, or scope drift."
 policy:
   allow_implicit_invocation: true

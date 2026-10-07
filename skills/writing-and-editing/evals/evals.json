@@ -53,9 +53,9 @@
     {
       "id": "boundary-plan-review",
       "prompt": "Create and approval-gate an implementation plan for the migration before anyone edits code.",
-      "expected_behavior": "Routes to plan-review rather than treating the request as writing-and-editing work.",
+      "expected_behavior": "Routes to implementation-review rather than treating the request as writing-and-editing work.",
       "assertions": [
-        "Recognizes that a reviewer-gated implementation plan belongs to plan-review",
+        "Recognizes that a reviewer-gated implementation plan belongs to implementation-review",
         "Does not treat the plan request as a normal document drafting task"
       ],
       "files": [],

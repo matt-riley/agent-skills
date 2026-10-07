@@ -37,7 +37,7 @@ Escalate instead of guessing when the root cause depends on:
 
 ## When to hand off to another local workflow
 
-- Route to a dedicated migration plan (see `plan-review`) if the real problem is CI-platform migration parity, staged cutover design, or broad multi-workflow and multi-environment migration orchestration.
+- Route to a dedicated migration plan (see `implementation-review`) if the real problem is CI-platform migration parity, staged cutover design, or broad multi-workflow and multi-environment migration orchestration.
 - Route to `review-comment-resolution` if the primary task is handling review comments rather than diagnosing a failing run directly.
 - Route to `git-worktrees` if isolated parallel work is the blocker rather than diagnosis.
 

@@ -1,6 +1,6 @@
 # Reviewer Personas
 
-Persona files define the reviewers used when `plan-review` runs a structured persona-based review. Each persona is a separate markdown file that the skill loads and uses to brief reviewers.
+Persona files define the reviewers used when `implementation-review` runs a structured persona-based review. Each persona is a separate markdown file that the skill loads and uses to brief reviewers.
 
 ## Persona File Schema
 
@@ -91,7 +91,7 @@ Do not use any other format.
 
 ## Default Personas (Built-in)
 
-Two default personas come with the skill: **jason.md** and **freddy.md**. You can replace them by editing the files in `references/personas/`.
+Two default personas come with the skill: **jason.md** and **freddy.md**. You can replace them by editing the files in `references/plan-review-personas/`.
 
 ### Jason (jason.md)
 - **Role**: Implementation & Execution Reviewer
@@ -110,7 +110,7 @@ To customize the reviewers used by the skill:
 1. **Create or edit** persona files in this directory
 2. **Name each file** `<id>.md` (matching the `id` field in the frontmatter)
 3. **Reload skills if needed** — refresh skill discovery in your current harness if the persona files do not appear immediately
-4. **Invoke plan-review with personas** — ask for a structured plan review using the personas in this directory
+4. **Invoke implementation-review with personas** — ask for a structured plan review using the personas in this directory
 
 ### Example: Add a "Performance" Reviewer
 

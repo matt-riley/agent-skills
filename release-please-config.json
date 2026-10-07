@@ -539,16 +539,6 @@
         }
       ]
     },
-    "skills/plan-review": {
-      "package-name": "plan-review",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/resolve-open-loops": {
       "package-name": "resolve-open-loops",
       "skip-github-release": true,

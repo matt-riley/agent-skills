@@ -41,9 +41,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 ### Governance and process
 
 - `rpi-workflow` — full Research -> Plan -> Implement -> Validate discipline for non-trivial work
-- `plan-review` — plan drafting, hardening, approval gates, and an explicit structured reviewer-persona mode (Jason and Freddy) with unanimous approval over up to three rounds
+- `implementation-review` — post-implementation review and approval, plus plan mode: plan drafting, hardening, and a reviewer-persona approval gate (Jason and Freddy) over up to three rounds
 - `reverse-prompt` — sharpen a rough ask into a repository-grounded execution brief or contract-shaped brief before work starts
-- `implementation-review` — post-implementation review and approval
 - `verification-before-completion` — mandatory pre-done checklist that blocks task completion until evidence passes
 - `resolve-open-loops` — close or hand off deferred items, open questions, and unresolved decisions
 - `workflow-contracts` — define and enforce explicit entry/exit contracts for multi-step workflows
@@ -158,7 +157,6 @@ Load them only when the current harness exposes those tools; otherwise surface t
 - Prefer the skill whose `Use this skill when` most directly matches the requested deliverable.
 - If a skill's `Do not use this skill when` would apply, do not load it just because adjacent concepts appear.
 - Use `rpi-workflow` when the task is genuinely multi-phase and execution discipline matters, not as the first answer to every non-trivial request.
-- Use `plan-review` when planning is the deliverable; use `implementation-review` when reviewing finished work is the deliverable.
 - Use `writing-and-editing` when the main work is writing quality; use `github-presence` when the task is broader GitHub-surface setup or audit.
 - Keep specialist skills when they preserve unique operational traps, recovery knowledge, or repo-contract checks.
 - Treat `code-generation` as a prerequisite overlay unless regeneration itself is the main task.
@@ -168,8 +166,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | If the user asks for... | Start with... | Why |
 | --- | --- | --- |
 | a full research -> plan -> implement -> validate pass | `rpi-workflow` | Full lifecycle discipline is the primary need |
-| a plan, plan hardening, or reviewer-gated planning | `plan-review` | Planning is the deliverable; implementation is not yet in scope |
-| running a multi-reviewer approval loop on a completed plan | `plan-review` | Explicit structured mode with reviewer verdict tokens is the main mechanism |
+| a plan, plan hardening, or reviewer-gated planning | `implementation-review` (plan mode) | Planning is the deliverable; implementation is not yet in scope |
+| running a multi-reviewer approval loop on a completed plan | `implementation-review` (plan mode) | Explicit structured mode with reviewer verdict tokens is the main mechanism |
 | a rough prompt that should be sharpened into an executable repo-grounded brief | `reverse-prompt` | Prompt critique or rewrite is the primary need before work starts |
 | an explicit definition of done, success criteria, or a contract-shaped execution brief | `reverse-prompt` | Contract-shaped brief framing now lives with prompt sharpening |
 | what they worked on before, whether they handled a topic already, or which session linked to a file / PR / issue | `session-store-history` | Cross-session recall from `session_store` is the main task |
@@ -247,15 +245,15 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 Keep these boundaries crisp instead of broadening nearby skills:
 
-- `git-worktrees` should own worktree setup and isolation for parallel or multi-branch work, including the Worktrunk (`wt`) config, hooks, and merge-pipeline surface; do not bury worktree mechanics inside `rpi-workflow`, `plan-review`, or implementation skills.
+- `git-worktrees` should own worktree setup and isolation for parallel or multi-branch work, including the Worktrunk (`wt`) config, hooks, and merge-pipeline surface; do not bury worktree mechanics inside `rpi-workflow`, `implementation-review`, or implementation skills.
 - `review-comment-resolution` should own "apply review feedback and update the code/tests" work; keep it separate from `implementation-review`, which evaluates existing code rather than carrying feedback through to completion.
-- `reverse-prompt` should own prompt and execution-brief sharpening; keep it separate from `plan-review`, which owns plan artifacts and approval gates.
+- `reverse-prompt` should own prompt and execution-brief sharpening; keep it separate from `implementation-review` plan mode, which owns plan artifacts and approval gates.
 - `writing-and-editing` should own reader-facing writing work; keep it separate from `github-presence`, which owns broader profile and repository-surface audits.
 - `session-store-history` should own cross-session recall and session-to-ref/file tracing; keep it separate from current-workspace repo exploration, which should stay with repo-local search tools.
 - `cloudflare-d1-query-tuning` should own runtime D1 query-shape and access-path tuning without schema changes; keep it separate from `database-migrations` and from generic `repository-adapters` work when Cloudflare D1 runtime behavior is the main risk.
 - `acquire-codebase-knowledge` should own deep seven-document codebase mapping; do not conflate it with narrow file reads, quick architecture sketches, or ad-hoc questions about single modules.
 - `fallow` and `knip` are both JS/TS code-health tools but target different tools and scopes: prefer `knip` when the Knip tool is explicitly requested or the need is unused dependencies, exports, or unresolved imports; prefer `fallow` when the Fallow tool is requested or the analysis covers duplication, circular dependencies, complexity hotspots, architecture boundaries, or CI audit gates.
-- `plan-review` owns plan drafting by default and its explicit structured mode when the user requests reviewer-gated multi-round approval; require unanimous same-round verdicts and stop after three rounds.
+- `implementation-review` plan mode owns plan drafting and its explicit structured mode when the user requests reviewer-gated multi-round approval; require unanimous same-round verdicts and stop after three rounds.
 - `grill-me` owns pure plan/design interrogation by default and its explicit documentation mode only when the user names `CONTEXT.md`, ADRs, or a domain glossary; do not create domain docs silently.
 - `verification-before-completion` should block final task sign-off; keep it separate from `implementation-review`, which evaluates code quality rather than completion criteria.
 - `agent-governance` owns runtime policy and trust enforcement; keep it separate from `security-basics`, which owns static auth and data-exposure guardrails.
@@ -266,13 +264,13 @@ Keep these boundaries crisp instead of broadening nearby skills:
 
 ## Layering notes
 
-- `plan-review` beats `rpi-workflow` when the user only wants a plan or plan approval.
-- `reverse-prompt` can produce a contract-shaped execution brief, but it should not replace `plan-review` when the user wants a phased implementation plan.
+- `implementation-review` plan mode beats `rpi-workflow` when the user only wants a plan or plan approval.
+- `reverse-prompt` can produce a contract-shaped execution brief, but it should not replace `implementation-review` when the user wants a phased implementation plan.
 - `http-api` is an overlay on `testing-workflows`, not a replacement for it.
 - `cloudflare-d1-query-tuning` is the sharper match than `repository-adapters` when the main risk is Cloudflare D1 runtime query performance without schema or migration changes.
 - `code-generation` often pairs with schema, template, and API work, but usually should not be the only selected skill unless regeneration itself is the task.
 - `configuration-env` and `docker-compose-dev` are situational operational helpers, not default entry points.
-- `plan-review` structured mode runs after a plan artifact exists and only when the user requests reviewer-gated multi-round approval.
+- `implementation-review` plan mode's structured gate runs after a plan artifact exists and only when the user requests reviewer-gated multi-round approval.
 - `verification-before-completion` pairs with any implementation skill; load it last, before signing off.
 - `test-driven-development` and `systematic-debugging` layer onto `testing-workflows`; prefer the specialist when TDD discipline or structured root-cause methodology is the explicit need.
 - `agent-governance` and `agent-supply-chain` are complementary: governance controls runtime behavior; supply chain controls artifact integrity. Both often apply to the same agent project.

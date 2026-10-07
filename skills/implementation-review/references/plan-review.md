@@ -1,15 +1,4 @@
----
-name: plan-review
-description: "Use when the user wants an implementation plan, a hardened plan revision, or explicit reviewer-gated multi-round approval before implementation; not for reviewing finished code."
-license: GNU GPL v3
-metadata:
-  version: 2.0.1 # x-release-please-version
-  owner: mattriley
-  category: governance
-  audience: general-coding-agent
-  maturity: stable
-  kind: task
----
+<!-- Merged from the former `plan-review` skill. -->
 
 # Plan review
 
@@ -70,15 +59,15 @@ metadata:
 
 3. **Choose the review mode deliberately.**
    - If the user names reviewer models, agents, or personas, use exactly that reviewer set.
-   - If the user explicitly requests reviewer-gated or multi-round approval, use the Jason and Freddy personas under `references/personas/` unless the user names another reviewer set.
+   - If the user explicitly requests reviewer-gated or multi-round approval, use the Jason and Freddy personas under `references/plan-review-personas/` unless the user names another reviewer set.
    - If the user requires an approval gate, the plan is not final until every required reviewer approves.
    - If the user only asked for a plan, still pressure-test for feasibility, testing, rollout, and scope discipline.
 
 4. **Run review rounds on a single shared revision.**
    - Every reviewer must see the same current plan revision.
    - Each reviewer should return exactly one verdict token: `[PLAN-APPROVED]` or `[PLAN-REVISE-NEEDED]`, followed by required changes or approval rationale.
-   - When using the structured persona path, load `references/review-verdicts.md` so token parsing, unanimous same-round approval, and the three-round limit stay consistent.
-   - Load `references/reviewer-prompt.md` when preparing reviewer prompts.
+   - When using the structured persona path, load `references/plan-review-review-verdicts.md` so token parsing, unanimous same-round approval, and the three-round limit stay consistent.
+   - Load `references/plan-review-reviewer-prompt.md` when preparing reviewer prompts.
 
 5. **Consolidate and iterate on the plan itself.**
    - Merge duplicate comments; prioritize blockers over polish.
@@ -129,10 +118,10 @@ metadata:
 
 ## Reference files
 
-- Read `references/examples.md` when you need concrete trigger examples or a response shape to mirror.
-- Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.
-- Read `references/reviewer-prompt.md` when preparing reviewer prompts or consolidating a review round.
-- Read `references/review-verdicts.md` when you want structured Jason/Freddy-style verdict tokens and same-round approval rules.
-- Read `references/personas/README.md` when you want to use or customize the Jason and Freddy reviewer personas.
-- [`references/personas/jason.md`](references/personas/jason.md) — Jason persona (implementation/execution risk focus)
-- [`references/personas/freddy.md`](references/personas/freddy.md) — Freddy persona (architecture/structural risk focus)
+- Read `references/plan-review-examples.md` when you need concrete trigger examples or a response shape to mirror.
+- Read `references/plan-review-edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.
+- Read `references/plan-review-reviewer-prompt.md` when preparing reviewer prompts or consolidating a review round.
+- Read `references/plan-review-review-verdicts.md` when you want structured Jason/Freddy-style verdict tokens and same-round approval rules.
+- Read `references/plan-review-personas/README.md` when you want to use or customize the Jason and Freddy reviewer personas.
+- [`references/plan-review-personas/jason.md`](references/plan-review-personas/jason.md) — Jason persona (implementation/execution risk focus)
+- [`references/plan-review-personas/freddy.md`](references/plan-review-personas/freddy.md) — Freddy persona (architecture/structural risk focus)
