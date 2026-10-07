@@ -129,28 +129,8 @@
         }
       ]
     },
-    "skills/http-api-openapi": {
-      "package-name": "http-api-openapi",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
     "skills/implementation-review": {
       "package-name": "implementation-review",
-      "skip-github-release": true,
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "SKILL.md"
-        }
-      ]
-    },
-    "skills/integration-testing-http": {
-      "package-name": "integration-testing-http",
       "skip-github-release": true,
       "extra-files": [
         {
@@ -701,6 +681,16 @@
     },
     "skills/graphify": {
       "package-name": "graphify",
+      "skip-github-release": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "SKILL.md"
+        }
+      ]
+    },
+    "skills/http-api": {
+      "package-name": "http-api",
       "skip-github-release": true,
       "extra-files": [
         {

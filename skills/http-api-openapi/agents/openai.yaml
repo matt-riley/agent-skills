@@ -1,7 +1,0 @@
-interface:
-  display_name: HTTP API & OpenAPI
-  short_description: Keep OpenAPI contracts in sync with HTTP behavior. Use when
-    you need to update spec files, code annotations, or both after changing endpoints,
-    schemas, auth, or error shapes — not for writing or running integration tests.
-policy:
-  allow_implicit_invocation: true

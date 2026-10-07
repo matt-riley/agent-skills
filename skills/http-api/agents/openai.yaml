@@ -1,0 +1,5 @@
+interface:
+  display_name: "HTTP API"
+  short_description: "Keep HTTP APIs honest: sync OpenAPI contracts with handler behavior, and write or debug end-to-end HTTP integration tests for handlers, middleware, auth, and endpoint contracts. Use when endpoints, schemas, auth, or error shapes change, or HTTP integration tests need adding or fixing."
+policy:
+  allow_implicit_invocation: true

@@ -1,5 +1,5 @@
 {
-  "skill_name": "http-api-openapi",
+  "skill_name": "http-api",
   "evals": [
     {
       "id": "new-endpoint-sync",
@@ -54,7 +54,7 @@
     },
     {
       "id": "boundary-sdk-generation-only",
-      "prompt": "Generate a TypeScript client SDK from our existing openapi.yaml — nothing about the server or the spec itself is changing.",
+      "prompt": "Generate a TypeScript client SDK from our existing openapi.yaml \u2014 nothing about the server or the spec itself is changing.",
       "expected_behavior": "The response recognizes there is no server-contract change here, so the spec-sync workflow does not apply; it treats this as SDK/codegen tooling only, per the skill's own 'Do not use this skill when' list, and does not open unrelated handler or spec edits.",
       "assertions": [
         "Does not run the spec-vs-handler drift-repair workflow when no server contract is changing.",
@@ -72,6 +72,74 @@
         "Does not add, edit, or invent OpenAPI spec content for code with no HTTP surface.",
         "States plainly that no contract sync is needed for this change.",
         "Does not force this skill's workflow onto a change with no HTTP/OpenAPI surface."
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "integration-testing-http-debug-http-failure",
+      "prompt": "The integration test for my HTTP route is failing after a middleware change. How should I debug it?",
+      "expected_behavior": "Runs the targeted integration test with verbose request/response output first and reads the real output before proposing any fix, per the documented first move.",
+      "assertions": [
+        "Runs the targeted test with `-v` (or the repo's verbose flag) before proposing a fix",
+        "Reads the actual request/response output rather than guessing",
+        "Mentions middleware or auth interactions as the likely cause given the change"
+      ],
+      "files": [],
+      "category": "tool-pattern",
+      "deterministic_checks": [
+        "runs `go test -v -run TestE2E ./path/to/server/pkg/` (or equivalent targeted, verbose command) before proposing a fix"
+      ]
+    },
+    {
+      "id": "integration-testing-http-new-endpoint-full-contract-coverage",
+      "prompt": "I added POST /orders. Write the integration tests it needs.",
+      "expected_behavior": "Covers every concern the skill requires for a touched endpoint: status codes for happy path and documented errors, auth enforcement, request validation, response schema, and side effects.",
+      "assertions": [
+        "Asserts the happy-path status code and documented error status codes",
+        "Asserts unauthenticated and invalid-token requests are rejected if the endpoint requires auth",
+        "Asserts missing/invalid request fields return a 400 with an error body",
+        "Asserts response schema (required fields, correct types) and relevant side effects (DB state, events)"
+      ],
+      "files": [],
+      "category": "outcome",
+      "deterministic_checks": [
+        "asserts unauthenticated request returns 401",
+        "asserts invalid/missing required fields return 400"
+      ]
+    },
+    {
+      "id": "integration-testing-http-scoped-rerun-after-single-endpoint-change",
+      "prompt": "The whole integration suite went red after I added one new endpoint. What do I run first?",
+      "expected_behavior": "Runs the targeted test for the new endpoint first with verbose output, and only widens to the full suite if shared middleware or handlers were affected \u2014 not as the first step.",
+      "assertions": [
+        "Runs the narrow, targeted test for the new/changed endpoint before the full suite",
+        "Only widens to the broader suite after confirming shared middleware/handlers are implicated",
+        "Does not rewrite unrelated existing tests while chasing this failure"
+      ],
+      "files": [],
+      "category": "efficiency"
+    },
+    {
+      "id": "integration-testing-http-boundary-pure-unit-logic",
+      "prompt": "Write a test for this pure discount-calculation function \u2014 it doesn't touch HTTP at all.",
+      "expected_behavior": "Recognizes this is unit-level domain logic with no HTTP involvement and routes to testing-workflows rather than building an HTTP integration test.",
+      "assertions": [
+        "Does not stand up an HTTP request/response test for pure domain logic",
+        "States this belongs to testing-workflows (the unit-test layer), not http-api",
+        "Does not add auth or endpoint-contract assertions that don't apply"
+      ],
+      "files": [],
+      "category": "negative-boundary"
+    },
+    {
+      "id": "integration-testing-http-boundary-spec-only-change",
+      "prompt": "Update the OpenAPI description text for an existing field; no handler or behavior change.",
+      "expected_behavior": "Recognizes a spec-text-only change with no handler work, updates the contract, and does not start the integration-test workflow.",
+      "assertions": [
+        "Does not add or modify integration tests for a spec-text-only change",
+        "Treats it as contract work only, without the integration-test workflow",
+        "Does not treat the spec edit as an endpoint contract change requiring new test coverage"
       ],
       "files": [],
       "category": "negative-boundary"

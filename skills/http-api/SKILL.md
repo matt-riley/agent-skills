@@ -1,6 +1,6 @@
 ---
-name: http-api-openapi
-description: "Keep OpenAPI contracts in sync with HTTP behavior. Use when you need to update spec files, code annotations, or both after changing endpoints, schemas, auth, or error shapes — not for writing or running integration tests."
+name: http-api
+description: "Keep HTTP APIs honest: sync OpenAPI contracts with handler behavior, and write or debug end-to-end HTTP integration tests for handlers, middleware, auth, and endpoint contracts. Use when endpoints, schemas, auth, or error shapes change, or HTTP integration tests need adding or fixing."
 license: GNU GPL v3
 metadata:
   version: 1.4.1 # x-release-please-version
@@ -11,17 +11,21 @@ metadata:
   kind: task
 ---
 
+# HTTP API
+
 ## Use this skill when
 
 - The task adds or changes a public HTTP endpoint and the OpenAPI contract must stay aligned.
 - Request/response schemas, status codes, auth requirements, or documented errors are changing together.
 - Code and API contract have drifted and the repo needs the correct sync workflow.
+- HTTP integration tests need adding or fixing for handlers, middleware, auth enforcement, status codes, validation, or side effects.
 
 ## Do not use this skill when
 
 - The request is a generic REST/OpenAPI tutorial.
 - The task is only to generate a client SDK from an existing spec with no server-contract change.
 - The change is internal-only code with no HTTP contract or no OpenAPI surface in play.
+- The failure is clearly at the unit-test layer with no HTTP involved — use [`testing-workflows`](../testing-workflows/SKILL.md).
 
 ## Inputs to gather
 
@@ -55,16 +59,17 @@ Determine the repo's contract flow before editing anything: spec-first, code-fir
    - Validate the spec when the repo has a validator.
    - Run the relevant integration/unit/contract tests for the changed surface.
 
+5. Integration tests (when adding, fixing, or debugging HTTP-level coverage).
+   - Run the targeted test verbosely and read the real request/response before proposing fixes.
+   - Follow `references/integration-testing-http.md` for the runner, auth fixtures, DB bootstrap, and scoped reruns.
+   - Worked cases are in `references/integration-testing-http-examples.md`; flaky, stateful, or generated-code traps in `references/integration-testing-http-edge-cases.md`.
+
 ## Outputs
 
 - Updated contract-owner artifacts for the changed API surface, including spec, handler/type inputs, and any generated OpenAPI output the repo expects.
 - A documented behavior-to-contract alignment for auth requirements, request validation, response schemas, status codes, and error shapes.
 - Spec validation, generation, and/or API test evidence confirming the handler behavior and OpenAPI contract stay in sync.
 
-
-## Workflow
-
-See the body and references for OpenAPI/handler sync steps.
 
 ## Guardrails
 

@@ -1,15 +1,4 @@
----
-name: integration-testing-http
-description: "Write and run end-to-end HTTP integration tests for server behavior. Use when you need to add or fix integration test coverage for handlers, middleware, auth enforcement, or endpoint contracts — not for keeping OpenAPI specs in sync."
-license: GNU GPL v3
-metadata:
-  version: 1.3.1 # x-release-please-version
-  owner: mattriley
-  category: testing
-  audience: general-coding-agent
-  maturity: stable
-  kind: task
----
+<!-- Merged from the former `http-api` skill. -->
 
 # Integration testing (HTTP)
 
@@ -22,7 +11,7 @@ metadata:
 ## Do not use this skill when
 
 - The failure is clearly at the unit-test layer (use `testing-workflows`).
-- The change is to the OpenAPI spec only with no handler work (use `http-api-openapi`).
+- The change is to the OpenAPI spec only with no handler work (use `http-api`).
 - Compile errors come from stale generated code (run `code-generation` first).
 
 ## Inputs to gather
@@ -46,7 +35,7 @@ metadata:
 
 - Start with `testing-workflows` for the default test/debug loop.
 - Use this when the main risk is HTTP behaviour: endpoint contracts, auth enforcement, validation, or response shapes.
-- Pair with `http-api-openapi` when handler changes and spec changes must stay in sync.
+- Pair with `http-api` when handler changes and spec changes must stay in sync.
 
 ## Run
 
@@ -109,5 +98,5 @@ For every endpoint touched, verify:
 
 ## Support files
 
-- Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
-- Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.
+- Read `references/integration-testing-http-examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
+- Read `references/integration-testing-http-edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

@@ -80,8 +80,7 @@ Load them only when the current harness exposes those tools; otherwise surface t
 
 ### Testing, APIs, and delivery checks
 
-- `integration-testing-http` — specialist overlay for endpoint, auth, request/response, and HTTP contract testing
-- `http-api-openapi` — keep handler and spec changes in sync
+- `http-api` — keep handler and OpenAPI spec in sync, and own HTTP integration tests for endpoints, auth, and request/response contracts
 - `test-driven-development` — strict TDD discipline: failing test → minimal pass → refactor
 - `systematic-debugging` — structured root-cause debugging when immediate fixes are elusive
 - `api-smoke-validation` — post-deploy smoke tests that verify key API endpoints are alive and correct
@@ -184,8 +183,8 @@ Load them only when the current harness exposes those tools; otherwise surface t
 | runtime validation that should match TypeScript types | `schema-boundary-typing` | Boundary truthfulness is the main need |
 | compile-time type regression coverage | `type-test-authoring` | Protect inference and assignability contracts directly |
 | a normal Go testing/debug loop | `testing-workflows` | Default testing entry point |
-| HTTP request/response, auth, or endpoint contract testing | `testing-workflows` + `integration-testing-http` | Keep the default testing loop and layer the HTTP specialist |
-| handler changes that must stay aligned with an OpenAPI spec | `http-api-openapi` | Spec/code synchronization is the main risk |
+| HTTP request/response, auth, or endpoint contract testing | `testing-workflows` + `http-api` | Keep the default testing loop and layer the HTTP specialist |
+| handler changes that must stay aligned with an OpenAPI spec | `http-api` | Spec/code synchronization is the main risk |
 | a failing GitHub Actions run, job, or check | `github-actions-failure-triage` | Evidence-first CI diagnosis is the main task |
 | CI image or local CI parity checks | `ci-images` | Focuses on CI/publishing workflows rather than app tests |
 | a security or privacy guardrail review on auth, logging, or sensitive endpoints | `security-basics` | Cross-cutting safety review is the primary need |
@@ -271,8 +270,7 @@ Keep these boundaries crisp instead of broadening nearby skills:
 
 - `plan-review` beats `rpi-workflow` when the user only wants a plan or plan approval.
 - `reverse-prompt` can produce a contract-shaped execution brief, but it should not replace `plan-review` when the user wants a phased implementation plan.
-- `integration-testing-http` is an overlay on `testing-workflows`, not a replacement for it.
-- `http-api-openapi` is for contract synchronization, not generic HTTP testing.
+- `http-api` is an overlay on `testing-workflows`, not a replacement for it.
 - `cloudflare-d1-migrations` is the sharper match than `database-migrations` when Wrangler, `d1_databases`, or local/preview/remote D1 state is central to the task.
 - `cloudflare-d1-query-tuning` is the sharper match than `repository-adapters` when the main risk is Cloudflare D1 runtime query performance without schema or migration changes.
 - `code-generation` often pairs with schema, template, and API work, but usually should not be the only selected skill unless regeneration itself is the task.

@@ -21,7 +21,7 @@ metadata:
 
 ## Do not use this skill when
 
-- The main risk is specifically HTTP endpoint behaviour (use `integration-testing-http`).
+- The main risk is specifically HTTP endpoint behaviour (use `http-api`).
 - Failures clearly stem from stale generated code (use `code-generation` first).
 - The work is database schema change rather than test authoring (use `database-migrations`).
 
@@ -45,7 +45,7 @@ metadata:
 
 ## Workflow
 
-Use the most specific path for the task; fall through to the debugging sequence when tests fail for unclear reasons. Layer in `integration-testing-http` when the problem is specifically endpoint contracts, auth behaviour, or request/response assertions over HTTP.
+Use the most specific path for the task; fall through to the debugging sequence when tests fail for unclear reasons. Layer in `http-api` when the problem is specifically endpoint contracts, auth behaviour, or request/response assertions over HTTP.
 
 ### Fast paths
 
