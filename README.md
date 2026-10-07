@@ -105,6 +105,15 @@ The shared `~/.agents/skills` path is the recommended interoperable location.
 - Read `skills/<name>/SKILL.md` for the workflow, boundaries, and support-file references for a specific skill.
 - Use the `skill-creator` skill when adding a new catalog entry or upgrading an existing one.
 
+## Scope
+
+A skill change, or a new skill, has to clear both parts of this bar:
+
+1. **Observed failure.** It fixes something that went wrong in a real session: what ran, what the agent did, what should have happened. "It would be better if…" does not clear it.
+2. **Not already covered.** If the behaviour composes from existing skills, it does not get a new one; sharpen the existing skill instead. Check [`.out-of-scope/`](.out-of-scope/) and the description-collision report first (`node ~/.pi/agent/extensions/pi-extensions/packages/skill-select/collisions.mjs` lists skills the ranker confuses; treat each pair as a merge candidate, not a verdict).
+
+A rejected idea gets one file in `.out-of-scope/` naming the idea and why, so it is not re-litigated.
+
 ## Validate the catalog
 
 From the repo root:
