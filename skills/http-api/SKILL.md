@@ -3,7 +3,7 @@ name: http-api
 description: "Keep HTTP APIs honest: sync OpenAPI contracts with handler behavior, and write or debug end-to-end HTTP integration tests for handlers, middleware, auth, and endpoint contracts. Use when endpoints, schemas, auth, or error shapes change, or HTTP integration tests need adding or fixing."
 license: GNU GPL v3
 metadata:
-  version: 1.4.2 # x-release-please-version
+  version: 1.4.3 # x-release-please-version
   owner: mattriley
   category: testing
   audience: general-coding-agent
