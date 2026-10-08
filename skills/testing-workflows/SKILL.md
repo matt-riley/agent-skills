@@ -3,7 +3,7 @@ name: testing-workflows
 description: "Write, run, and debug Go tests, unit and integration, and diagnose Go build, toolchain, and CI-parity failures (GOROOT/GOTOOLDIR overrides, govulncheck stdlib findings, TempDir race flakes, local-green CI-red). Use when adding test coverage, debugging test failures, or when go build or CI fails for environmental reasons."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 1.3.2 # x-release-please-version
   owner: mattriley
   category: testing
   audience: general-coding-agent
@@ -42,7 +42,6 @@ metadata:
 - A narrow failing-test reproduction and diagnosis, including generator refresh when stale generated inputs are the real cause.
 - New or updated tests for the touched domain, repository, or handler behavior at the correct scope.
 - Broader test-run evidence showing the fix or feature is ready beyond the isolated case.
-
 
 ## Workflow
 

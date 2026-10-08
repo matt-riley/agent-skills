@@ -3,7 +3,7 @@ name: astro-seo
 description: "Audit and improve SEO for Astro sites, including metadata, structured data, sitemaps, indexing, Open Graph images, schema endpoints, and related search visibility setup."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 1.3.2 # x-release-please-version
   category: frontend
   audience: general-coding-agent
   maturity: stable
@@ -76,7 +76,6 @@ metadata:
 - SEO audit findings tied to the actual Astro files and routes that control metadata, canonicals, schema, sitemap, robots, and OG output.
 - Implemented or recommended Astro SEO changes such as config/component updates or an `@jdevalk/astro-seo-graph` install/upgrade path.
 - Validation evidence from representative pages or generated artifacts showing the expected canonical, metadata, schema, and crawl-surface output.
-
 
 ## Guardrails
 

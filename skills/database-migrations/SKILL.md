@@ -3,7 +3,7 @@ name: database-migrations
 description: "Create, apply, inspect, and recover database schema migrations after detecting the repository's migration contract, including Cloudflare D1 via Wrangler across local, preview, and remote. Use when changing persistent schema, adding indexes/constraints, or troubleshooting migration state or schema drift."
 license: GNU GPL v3
 metadata:
-  version: 1.4.1 # x-release-please-version
+  version: 1.4.2 # x-release-please-version
   owner: mattriley
   category: data
   audience: general-coding-agent
@@ -85,7 +85,7 @@ Inspect the repo contract before suggesting commands or file edits. Determine wh
 - Any required code generation or schema-dependent checks have been re-run.
 - Relevant tests/checks pass for the touched schema surface.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need phrasing examples for new migrations or migration-state recovery.
 - Read `references/edge-cases.md` when the repo uses generated migrations, forward-only history, or environment-specific recovery rules.

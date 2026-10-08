@@ -3,7 +3,7 @@ name: http-api
 description: "Keep HTTP APIs honest: sync OpenAPI contracts with handler behavior, and write or debug end-to-end HTTP integration tests for handlers, middleware, auth, and endpoint contracts. Use when endpoints, schemas, auth, or error shapes change, or HTTP integration tests need adding or fixing."
 license: GNU GPL v3
 metadata:
-  version: 1.4.1 # x-release-please-version
+  version: 1.4.2 # x-release-please-version
   owner: mattriley
   category: testing
   audience: general-coding-agent
@@ -85,7 +85,7 @@ Determine the repo's contract flow before editing anything: spec-first, code-fir
 - Handler behavior, tests, and contract artifacts agree on auth, schemas, and status codes.
 - Any generated contract files or checked-in specs show only the expected diff.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need examples of drift repair or endpoint changes that must keep contract and implementation aligned.
 - Read `references/edge-cases.md` when the repo lacks a spec, uses generated specs, or the request may really be SDK generation or a non-HTTP change.

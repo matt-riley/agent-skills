@@ -3,7 +3,7 @@ name: repository-adapters
 description: "Implement or modify database repository adapters. Use when adding adapter methods, changing queries, or mapping database errors while preserving domain boundaries."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 1.3.2 # x-release-please-version
   owner: mattriley
   category: data
   audience: general-coding-agent
@@ -40,7 +40,6 @@ metadata:
 - Updated repository-layer inputs such as query sources, regenerated artifacts, and adapter implementation changes at the domain boundary.
 - DB-to-domain error mapping preserved or corrected for the touched operations so adapter callers keep the expected contract.
 - Test evidence for the primary adapter path, with optional dialects skipping cleanly when unavailable.
-
 
 ## Architecture pattern
 
@@ -100,7 +99,7 @@ Map DB-level errors to domain errors **at the adapter boundary** — never let D
 make test     # SQLite (or primary DB) must pass; optional DBs skip when unavailable
 ```
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

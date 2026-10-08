@@ -4,7 +4,7 @@ description: "Search and summarize past work from the `session_store` database w
 license: GNU GPL v3
 compatibility: Requires a read-only SQL tool and access to the session_store database. Without those, state the limitation and ask for another evidence source.
 metadata:
-  version: 2.0.1 # x-release-please-version
+  version: 2.0.2 # x-release-please-version
   owner: mattriley
   category: session
   audience: general-coding-agent
@@ -82,7 +82,6 @@ metadata:
 - The `session_store` queries and evidence surfaces used for the history request, such as turns, checkpoints, refs, or edited files.
 - A short evidence-backed answer naming the most relevant sessions, timestamps, refs, and matched snippets when useful.
 - A clear uncertainty or no-match note when the available session evidence does not support a stronger claim.
-
 
 ## Guardrails
 

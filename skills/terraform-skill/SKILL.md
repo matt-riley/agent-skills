@@ -3,7 +3,7 @@ name: terraform-skill
 description: "Use when writing, reviewing, or debugging Terraform/OpenTofu — modules, tests, CI/CD, security scans, or state operations."
 license: GNU GPL v3
 metadata:
-  version: 1.1.1 # x-release-please-version
+  version: 1.1.2 # x-release-please-version
   category: terraform
   audience: general-coding-agent
   maturity: draft
@@ -28,14 +28,14 @@ Use this skill when working with Terraform or OpenTofu infrastructure code. It d
 
 - The question is basic HCL syntax already in model knowledge — answer directly
 - The question is about a cloud provider API unrelated to Terraform (link to provider docs instead)
-- The question is about CI/CD for a non-IaC project — see `circleci-to-github-actions-migration` (archived) or `github-actions-failure-triage`
+- The question is about CI/CD for a non-IaC project — see `github-actions-failure-triage` or `github-actions-local-repro`
 
 ## Routing boundary
 
 | Situation | Use this skill? | Route instead |
 | --- | --- | --- |
 | Terraform/OpenTofu module authoring, review, or debugging | Yes | — |
-| GitHub Actions workflow for a non-Terraform project | No | `circleci-to-github-actions-migration` (archived) or `github-actions-failure-triage` |
+| GitHub Actions workflow for a non-Terraform project | No | `github-actions-failure-triage` or `github-actions-local-repro` |
 | Security scan failures on non-IaC code | No | `secret-scan-triage` |
 | General code navigation or LSP usage | No | `code-intelligence` |
 | Root-cause debugging a specific Terraform failure | Yes (diagnose failure mode first) | `systematic-debugging` if the failure is not IaC-specific |

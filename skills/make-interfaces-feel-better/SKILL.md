@@ -1,9 +1,9 @@
 ---
 name: make-interfaces-feel-better
-description: "Polish existing interfaces when the UI feels off through better radius, shadows, typography, motion, and micro-interactions."
+description: "Polish existing interfaces when the UI feels off through better radius, shadows, typography, motion, and micro-interactions. Use when asked to make an existing UI feel more refined, or to tighten hover, press, and enter/exit details."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 1.3.2 # x-release-please-version
   category: frontend
   audience: general-coding-agent
   maturity: stable
@@ -56,7 +56,6 @@ metadata:
 - Component-level polish changes or review findings grouped by principle, with exact before/after deltas instead of generic taste comments.
 - Concrete UI refinements to typography, surfaces, spacing, shadows, or motion using the existing design tokens, utilities, and libraries.
 - Validation that the work stayed focused on interface feel rather than drifting into a broader redesign or new dependency footprint.
-
 
 ## Workflow
 

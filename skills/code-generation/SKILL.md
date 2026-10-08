@@ -3,7 +3,7 @@ name: code-generation
 description: "Run and troubleshoot repository code generation after detecting the generator contract. Use when schema, query, spec, or template inputs changed, or generated output may be stale."
 license: GNU GPL v3
 metadata:
-  version: 1.4.1 # x-release-please-version
+  version: 1.4.2 # x-release-please-version
   owner: mattriley
   category: generation
   audience: general-coding-agent
@@ -66,11 +66,6 @@ Inspect the repo's build docs, CI workflow, and `.gitignore` before regenerating
 - Regenerated artifacts for the affected generators only, with the resulting diff or clean status inspected against the repo contract.
 - Follow-on build, test, or generated-output checks confirming the regenerated state is valid.
 
-
-## Workflow
-
-See the body and references for regeneration prerequisite steps.
-
 ## Guardrails
 
 - Never edit generated files by hand; change the generator inputs or config instead.
@@ -87,7 +82,7 @@ See the body and references for regeneration prerequisite steps.
   - ignored/ephemeral output was verified locally without being staged accidentally.
 - Follow-on build/test/check-generated steps pass.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need examples of stale-generation diagnosis or "regenerate before test" prompts.
 - Read `references/edge-cases.md` when the repo's committed-vs-ephemeral generation contract is unclear.

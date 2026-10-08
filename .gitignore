@@ -6,3 +6,6 @@ instructions/
 copilot-instructions.md
 .skillopt-sleep/
 _shared/fixtures/.deps/
+__pycache__/
+.skillopt-sleep/
+_shared/fixtures/.deps/

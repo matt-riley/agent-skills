@@ -1,6 +1,5 @@
 interface:
   display_name: GitHub Actions Failure Triage
-  short_description: Diagnose and minimally fix failing GitHub Actions runs in repositories
-    already using GitHub Actions.
+  short_description: "Diagnose and minimally fix failing GitHub Actions runs in repositories already using GitHub Actions. Use when a workflow, job, or check fails after a workflow edit, action bump, runner, cache, or matrix change and the goal is a targeted fix or precise explanation."
 policy:
   allow_implicit_invocation: true

@@ -6,7 +6,7 @@ description: Build and query persistent Graphify knowledge graphs from code, doc
   question when graphify-out/ already exists.
 license: GNU GPL v3
 metadata:
-  version: 0.2.1 # x-release-please-version
+  version: 0.2.2 # x-release-please-version
   category: workflow
   audience: general-coding-agent
   maturity: experimental
@@ -62,7 +62,6 @@ Check whether `graphify-out/graph.json` already exists. If it does and the user'
 - Verify that graphify is installed (Step 1)
 - Confirm the graph outputs exist on disk after each step
 - Check that extraction produced nodes before proceeding to clustering
-
 
 ## Default build workflow
 

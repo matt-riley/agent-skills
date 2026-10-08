@@ -30,7 +30,6 @@
 - New or updated integration cases for changed endpoints, including OpenAPI-aligned expectations when the contract also changed.
 - Narrow test rerun results plus broader suite status when shared handlers or middleware were affected.
 
-
 ## Catalog position
 
 - Start with `testing-workflows` for the default test/debug loop.
@@ -96,7 +95,7 @@ For every endpoint touched, verify:
 - Confirm status codes, auth behavior, request validation, response shape, and error body assertions are explicit.
 - Re-run the repository's broader test target when handler or middleware changes affect shared paths.
 
-## Support files
+## Reference files
 
 - Read `references/integration-testing-http-examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/integration-testing-http-edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

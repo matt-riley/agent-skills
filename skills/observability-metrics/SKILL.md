@@ -3,7 +3,7 @@ name: observability-metrics
 description: "Validate and operate application /health, /metrics, and logging behavior. Use when adding metrics, changing observability endpoint auth, or verifying deployment telemetry — not for general production debugging where telemetry health is not the question."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 1.3.2 # x-release-please-version
   owner: mattriley
   category: ops
   audience: general-coding-agent
@@ -40,7 +40,6 @@ metadata:
 - Direct `/health` and `/metrics` check results, including any auth requirement needed to access protected metrics in the current environment.
 - New or updated metric registration and instrumentation wired at startup instead of per request.
 - Verification that health output, Prometheus metric text, and sensitive-exposure constraints match the repo's observability contract.
-
 
 ## Standard endpoints
 
@@ -106,7 +105,7 @@ curl -i -H "Authorization: Bearer $AUTH_TOKEN" http://localhost:<PORT>/metrics
 
 Run the verification commands above and confirm health status, Prometheus text format, authentication behavior, and sensitive-data constraints match the repository contract.
 
-## Support files
+## Reference files
 
 - Read `references/examples.md` when you need concrete user utterances, expected behaviour, or a model answer shape to mirror.
 - Read `references/edge-cases.md` when the request is a near miss, partially matches this skill, or the first attempt fails.

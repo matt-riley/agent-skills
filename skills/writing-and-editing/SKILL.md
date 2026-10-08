@@ -3,7 +3,7 @@ name: writing-and-editing
 description: "Draft, co-author, and edit documents, audit prose readability, and review short audience-facing metadata strings. Use when the primary task is writing quality: a new or restructured doc, iterative co-authoring with reader feedback, a readability pass, or copy review."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 1.3.2 # x-release-please-version
   owner: mattriley
   category: writing
   audience: general-coding-agent
@@ -92,7 +92,6 @@ metadata:
 - A mode-specific deliverable: drafted document sections, a readability audit with evidence and score, or concrete metadata rewrites.
 - Audience-aware structure or grouped feedback that stays aligned to the chosen `draft`, `co-author`, `readability-audit`, or `metadata-audit` mode.
 - A final pass result for the selected mode without drifting into unrelated review or planning workflows.
-
 
 ## Guardrails
 

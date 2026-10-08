@@ -3,7 +3,7 @@ name: github-presence
 description: "Audit and improve GitHub profile, organization, and repository presentation. Use for profile READMEs, pinned repositories, README quality, community health files, templates, and repo metadata."
 license: GNU GPL v3
 metadata:
-  version: 1.3.1 # x-release-please-version
+  version: 1.3.2 # x-release-please-version
   owner: mattriley
   category: writing
   audience: general-coding-agent
@@ -77,11 +77,6 @@ metadata:
 - An audit of the target profile, repository, or org-defaults surface identifying the highest-impact presentation and trust gaps.
 - Generated or improved README, community-health, or template files in the correct GitHub location for that surface.
 - A concrete list of metadata, pinned-repo, or other manual GitHub settings changes that cannot be expressed through files alone.
-
-
-## Workflow
-
-See the body and references for GitHub presence audit and improvement steps.
 
 ## Guardrails
 
