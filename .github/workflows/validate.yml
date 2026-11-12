@@ -8,24 +8,14 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-
-      - name: Set up Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
-        with:
-          python-version: "3.15"
-          cache: pip
-          cache-dependency-path: requirements-dev.txt
-
-      - name: Install Python dependencies
-        run: python -m pip install -r requirements-dev.txt
-
-      - name: Validate the skills catalog
-        run: npm run validate
-
-      - name: Check skill versions match the release manifest
-        run: python _shared/sync-skill-versions.py --check
+    permissions:
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}:${{ github.ref }}:validate
+      cancel-in-progress: true
+    uses: matt-riley/matt-riley-ci/.github/workflows/ci.yml@002d16c00bc74ebced433f0a16187c9b13451194 # v4.2.0
+    with:
+      install-tools: python node
+      install: true
+      test: true
+      timeout-minutes: 10

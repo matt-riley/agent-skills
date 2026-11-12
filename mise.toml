@@ -1,0 +1,14 @@
+[tools]
+python = "3.15"
+node = "26"
+
+[tasks.install]
+description = "Install the Python dependencies for the catalog validators"
+run = "python -m pip install --disable-pip-version-check -r requirements-dev.txt"
+
+[tasks.test]
+description = "Validate the skills catalog and check skill versions match the release manifest"
+run = """
+npm run validate
+python _shared/sync-skill-versions.py --check
+"""
