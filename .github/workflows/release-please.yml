@@ -15,7 +15,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-    uses: matt-riley/matt-riley-ci/.github/workflows/release-please.yml@002d16c00bc74ebced433f0a16187c9b13451194 # v4.2.0
+    uses: matt-riley/matt-riley-ci/.github/workflows/release-please.yml@d903a20396dce0f98960a8c9ea96848349682540 # v4.2.0
     with:
       config-file: release-please-config.json
       manifest-file: .release-please-manifest.json
@@ -189,7 +189,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    uses: matt-riley/matt-riley-ci/.github/workflows/release-publish-npm.yml@002d16c00bc74ebced433f0a16187c9b13451194 # v4.2.0
+    uses: matt-riley/matt-riley-ci/.github/workflows/release-publish-npm.yml@d903a20396dce0f98960a8c9ea96848349682540 # v4.2.0
     with:
       ref: ${{ needs.release.outputs.tag_name }}
       node-version: "26"
