@@ -13,7 +13,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}:${{ github.ref }}:validate
       cancel-in-progress: true
-    uses: matt-riley/matt-riley-ci/.github/workflows/ci.yml@d903a20396dce0f98960a8c9ea96848349682540 # v4.2.0
+    uses: matt-riley/matt-riley-ci/.github/workflows/ci.yml@f846763f763247cb0140e3dd08002280b001f6cf # v4.2.0
     with:
       install-tools: python node
       install: true
